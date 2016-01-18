@@ -13,7 +13,9 @@ func _ready():
 	set_process_input(true)
 
 func _fixed_process(delta):
-	get_node("RigidBody2D/Gun").look_at(get_viewport().get_mouse_pos())
+	var offset = -get_viewport().get_canvas_transform().o # Get the offset
+	var relative_mouse_pos = get_viewport().get_mouse_pos() + offset # And add it to the mouse position
+	get_node("RigidBody2D/Gun").look_at(relative_mouse_pos)
 	# Current velocity
 	velocity = get_node("RigidBody2D").get_linear_velocity()
 
@@ -41,7 +43,7 @@ func _input(event):
 		var bullet = bullet_scene.instance()
 		add_child(bullet)
 		bullet.set_pos(get_node("RigidBody2D").get_pos())
-		bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(300, 0).rotated(deg2rad(get_node("RigidBody2D/Gun").get_rot())))
+		bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(800, 0).rotated(get_node("RigidBody2D/Gun").get_rot() - deg2rad(90)))
 
 # Returns true if the player is pressing a movement key
 func is_move_key_pressed():
