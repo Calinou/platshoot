@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=3 format=1]
 
-[ext_resource path="res://icon.png" type="Texture" id=1]
+[ext_resource path="res://data/textures/tilesets/base/base.png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
 

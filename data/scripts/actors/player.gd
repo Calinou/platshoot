@@ -1,7 +1,7 @@
 extends Node2D
 
 const MAX_SPEED = 200 * 60
-const JUMP_SPEED = 240 * 60
+const JUMP_SPEED = 320 * 60
 const SPRINT_FACTOR = 1.5
 
 onready var velocity = Vector2(0, 0)
@@ -19,19 +19,15 @@ func _fixed_process(delta):
 
 	# Moving left
 	if Input.is_action_pressed("move_left"):
-		speed = -MAX_SPEED
+		speed = clamp(speed - MAX_SPEED * 4 * delta, -MAX_SPEED * sprinting(), MAX_SPEED * sprinting())
 
 	# Moving right
 	elif Input.is_action_pressed("move_right"):
-		speed = MAX_SPEED
+		speed = clamp(speed + MAX_SPEED * 4 * delta, -MAX_SPEED * sprinting(), MAX_SPEED * sprinting())
 	
 	# Friction
 	else:
-		speed *= 0.9
-
-	# Sprinting
-	if is_sprinting() and is_move_key_pressed():
-		speed *= 1.3
+		speed *= 0.925
 
 	# Set the new velocity
 	get_node("RigidBody2D").set_linear_velocity(Vector2(speed * delta, velocity.y))
@@ -55,11 +51,11 @@ func is_move_key_pressed():
 		return false
 
 # Returns true if the player is sprinting
-func is_sprinting():
+func sprinting():
 	if Input.is_action_pressed("move_speed"):
-		return true
+		return SPRINT_FACTOR
 	else:
-		return false
+		return 1.0
 
 # Returns true if the player is touching ground
 func is_touching_ground():
