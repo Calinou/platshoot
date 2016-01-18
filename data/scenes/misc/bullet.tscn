@@ -11,7 +11,7 @@ extents = Vector2( 4, 4 )
 [sub_resource type="ColorRamp" id=2]
 
 offsets = FloatArray( 0, 1 )
-colors = ColorArray( 1, 0.752941, 0, 1, 1, 0.752941, 0, 0 )
+colors = ColorArray( 1, 0.752941, 0, 1, 1, 1, 0.752941, 0 )
 
 [node name="Bullet" type="Node2D"]
 
@@ -34,7 +34,7 @@ gravity_scale = 0.0
 custom_integrator = false
 continuous_cd = 2
 contacts_reported = 2
-contact_monitor = false
+contact_monitor = true
 sleeping = false
 can_sleep = false
 velocity/linear = Vector2( 0, 0 )
@@ -44,14 +44,14 @@ damp_override/angular = -1.0
 
 [node name="Particles2D" type="Particles2D" parent="RigidBody2D"]
 
-config/amount = 100
+config/amount = 150
 config/lifetime = 1.0
 config/preprocess = 0.1
 config/local_space = false
 config/texture = ExtResource( 2 )
 params/direction = 0.0
 params/spread = 10.0
-params/linear_velocity = 20.0
+params/linear_velocity = 0.0
 params/spin_velocity = 0.0
 params/orbit_velocity = 0.0
 params/gravity_direction = 0.0
@@ -60,8 +60,8 @@ params/radial_accel = 0.0
 params/tangential_accel = 0.0
 params/damping = 0.0
 params/initial_angle = 0.0
-params/initial_size = 0.13
-params/final_size = 0.13
+params/initial_size = 0.03
+params/final_size = 0.0
 params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0

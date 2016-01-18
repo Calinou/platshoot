@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://data/scenes/actors/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://data/resources/tilesets/base.tres" type="TileSet" id=2]
+[ext_resource path="res://data/scenes/items/ammo.tscn" type="PackedScene" id=3]
+[ext_resource path="res://data/scenes/actors/grunt.tscn" type="PackedScene" id=4]
 
 [node name="Level" type="Node2D"]
 
@@ -11,7 +13,7 @@ __meta__ = { "__editor_plugin_screen__":"2D" }
 
 [node name="TileMap" type="TileMap" parent="."]
 
-transform/pos = Vector2( -24.4867, 0 )
+transform/pos = Vector2( 128, 0 )
 mode = 0
 tile_set = ExtResource( 2 )
 cell/size = Vector2( 64, 64 )
@@ -26,6 +28,26 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( -262133, 1, -262132, 0, -262131, 0, -262130, 0, -196598, 1, -196597, 0, -196596, 0, -196595, 0, -196594, 0, -131063, 1, -131062, 0, -131061, 0, -131060, 0, -131059, 0, -131058, 0, -65533, 2, -65532, 3, -65531, 0, -65530, 0, -65529, 0, -65528, 0, -65527, 0, -65526, 0, -65525, 0, -65524, 0, -65523, 0, -65522, 0, 65533, 0, 65534, 0, 65535, 0, 0, 0, 1, 0, 2, 0, 3, 0, 4, 0, 5, 0, 6, 0, 7, 0, 8, 0, 9, 0, 10, 0, 11, 0, 12, 0, 13, 0, 14, 0 )
+tile_data = IntArray( -524286, 0, -524285, 0, -524284, 0, -524283, 0, -524282, 0, -524281, 0, -524280, 0, -524279, 0, -524278, 0, -524277, 0, -524276, 0, -524275, 0, -524274, 0, -524273, 0, -524272, 0, -524271, 0, -524270, 0, -524269, 0, -524268, 0, -524267, 0, -524266, 0, -524265, 0, -524264, 0, -524263, 0, -524262, 0, -524261, 0, -524260, 0, -524259, 0, -524258, 0, -524257, 0, -524256, 0, -524255, 0, -524254, 0, -393217, 0, -458752, 0, -458751, 0, -458750, 0, -458718, 0, -458717, 0, -458716, 0, -458715, 0, -458714, 0, -327685, 0, -327684, 0, -327683, 0, -327682, 0, -327681, 0, -393178, 0, -262149, 0, -327642, 0, -196613, 0, -262135, 0, -262134, 0, -262133, 0, -262132, 0, -262106, 0, -131077, 0, -196601, 0, -196600, 0, -196599, 0, -196596, 0, -196595, 0, -196594, 0, -196593, 0, -196570, 0, -65541, 0, -131067, 0, -131066, 0, -131065, 0, -131057, 0, -131056, 0, -131055, 0, -131054, 0, -131053, 0, -131052, 0, -131051, 0, -131048, 0, -131047, 0, -131046, 0, -131045, 0, -131044, 0, -131043, 0, -131042, 0, -131041, 0, -131040, 0, -131034, 0, -5, 0, -4, 0, -65534, 0, -65533, 0, -65532, 0, -65531, 0, -65504, 0, -65503, 0, -65502, 0, -65501, 0, -65500, 0, -65499, 0, -65498, 0, 65532, 0, 65533, 0, 65534, 0, 65535, 0, 0, 0, 1, 0, 2, 0 )
+
+[node name="Items" type="Node2D" parent="."]
+
+[node name="Ammo" parent="Items" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 352, -96 )
+
+[node name="Ammo1" parent="Items" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 416, -96 )
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Grunt" parent="Enemies" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 736, -288 )
+
+[node name="Grunt1" parent="Enemies" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 480, -160 )
 
 

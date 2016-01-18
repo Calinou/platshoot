@@ -1,3 +1,8 @@
+- This is the license for the source code.
+- Data files, unless otherwise specified, are:
+  - Copyright (c) 2016 Calinou and contributors,
+  - CC0 1.0 Universal. See `doc/licenses/cc0_1.0_universal.md`
+
 # The MIT License (MIT)
 
 Copyright (c) 2016 Calinou and contributors

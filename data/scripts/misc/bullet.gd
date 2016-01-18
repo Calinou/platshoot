@@ -5,6 +5,15 @@ var kill = false
 func _ready():
 	set_fixed_process(true)
 
+
+func _fixed_process(delta):
+	for body in get_node("RigidBody2D").get_colliding_bodies():
+		# Bullets can't hit the player
+		if body.get_name() != "Player":
+			_on_Timer_timeout()
+		if body.has_method("die"):
+			body.die()
+
 func _on_Timer_timeout():
 	# Actually kill the particle
 	if kill:
@@ -12,6 +21,7 @@ func _on_Timer_timeout():
 	# Only make it stop emitting
 	else:
 		get_node("RigidBody2D/Particles2D").set_emitting(false)
+		get_node("RigidBody2D/Light2D").set_enabled(false)
 		get_node("Timer").set_wait_time(2)
 		get_node("Timer").start()
 		kill = true
