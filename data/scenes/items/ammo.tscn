@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://data/scripts/items/ammo.gd" type="Script" id=1]
 [ext_resource path="res://data/textures/items/ammo.png" type="Texture" id=2]
 [ext_resource path="res://data/resources/sample_libraries/game.tres" type="SampleLibrary" id=3]
+[ext_resource path="res://data/textures/light.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -19,6 +20,10 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:visibility/opacity")
 tracks/0/interp = 1
 tracks/0/keys = { "cont":true, "times":FloatArray( 0, 0.2 ), "transitions":FloatArray( 1, 1 ), "values":[ 1.0, 0.0 ] }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Particles2D:config/emitting")
+tracks/1/interp = 1
+tracks/1/keys = { "cont":false, "times":FloatArray( 0, 0.05, 0.1 ), "transitions":FloatArray( 1, 1, 1 ), "values":[ false, true, false ] }
 
 [node name="Ammo" type="Node2D"]
 
@@ -27,7 +32,7 @@ __meta__ = { "__editor_plugin_screen__":"2D" }
 
 [node name="Sprite" type="Sprite" parent="."]
 
-transform/scale = Vector2( 0.25, 0.25 )
+transform/scale = Vector2( 0.125, 0.125 )
 texture = ExtResource( 2 )
 
 [node name="SamplePlayer2D" type="SamplePlayer2D" parent="."]
@@ -40,6 +45,31 @@ params/attenuation/distance_exp = 1.0
 config/polyphony = 10
 config/samples = ExtResource( 3 )
 config/pitch_random = 0.0
+
+[node name="Particles2D" type="Particles2D" parent="."]
+
+config/amount = 64
+config/lifetime = 0.5
+config/preprocess = 0.5
+config/emitting = false
+config/local_space = false
+config/texture = ExtResource( 4 )
+params/direction = 0.0
+params/spread = 180.0
+params/linear_velocity = -256.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 9.8
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 0.1
+params/final_size = 0.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
 
 [node name="Area2D" type="Area2D" parent="."]
 

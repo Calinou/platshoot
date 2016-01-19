@@ -22,6 +22,13 @@ func _fixed_process(delta):
 	get_node("Crosshair").set_modulate(Color(1 - Game.health / 100.0, Game.health / 100.0, 0))
 	get_node("Crosshair/ProgressBar").set_value(Game.ammo)
 
+	# Flip player sprite if the crosshair is at the right of the player (player faces right),
+	# else don't flip it (player faces left)
+	if get_node("Crosshair").get_pos().x > get_node("Player").get_pos().x:
+		get_node("Player/Sprite").set_flip_h(true)
+	else:
+		get_node("Player/Sprite").set_flip_h(false)
+
 	# Health regeneration (1 per second)
 	if Game.health > 0:
 		Game.health = min(Game.health + delta, 100)
@@ -38,14 +45,17 @@ func _fixed_process(delta):
 	# Moving left
 	if Input.is_action_pressed("move_left"):
 		speed = clamp(speed - MAX_SPEED * 4 * delta, -MAX_SPEED, MAX_SPEED)
+		get_node("Player/AnimationPlayer").set_speed(1.5)
 
 	# Moving right
 	elif Input.is_action_pressed("move_right"):
 		speed = clamp(speed + MAX_SPEED * 4 * delta, -MAX_SPEED, MAX_SPEED)
+		get_node("Player/AnimationPlayer").set_speed(1.5)
 	
 	# Friction
 	else:
 		speed *= 0.925
+		get_node("Player/AnimationPlayer").set_speed(0)
 
 	# Set the new velocity
 	get_node("Player").set_linear_velocity(Vector2(speed * delta, velocity.y))

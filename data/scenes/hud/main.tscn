@@ -90,6 +90,31 @@ scale = Vector2( 1, 1 )
 script/script = ExtResource( 1 )
 __meta__ = { "__editor_plugin_screen__":"2D" }
 
+[node name="FPS" type="Panel" parent="."]
+
+visibility/self_opacity = 0.0
+margin/right = 224.0
+margin/bottom = 64.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = ExtResource( 2 )
+
+[node name="FPSLabel" type="Label" parent="FPS"]
+
+margin/left = 16.0
+margin/top = 16.0
+margin/right = 69.0
+margin/bottom = 45.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+text = "FPS:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
 [node name="Control" type="Control" parent="."]
 
 anchor/left = 3
