@@ -1,4 +1,10 @@
 id,en,fr
+PLAY,Play,Jouer
 HEALTH,Health,Santé
 ARMOR,Armor,Armure
 AMMO,Ammo,Munitions
+KILLS,Kills,Tués
+ITEMS,Items,Objets
+FIST,Fist,Poing
+PISTOL,Pistol,Pistolet
+CHAINGUN,Chaingun,Mitrailleuse

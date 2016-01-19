@@ -52,6 +52,7 @@ func die():
 	get_node("AnimationPlayer").play("Die")
 
 func _on_AnimationPlayer_finished():
+	Game.kills += 1
 	queue_free()
 
 

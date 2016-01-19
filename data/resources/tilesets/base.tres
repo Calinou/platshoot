@@ -15,12 +15,12 @@ extents = Vector2( 32, 32 )
 custom_solver_bias = 0.0
 segments = Vector2Array( 32, -32, -32, 32, -32, 32, 32, 32, 32, 32, 32, -32 )
 
-[sub_resource type="ConcavePolygonShape2D" id=5]
+[sub_resource type="ConcavePolygonShape2D" id=3]
 
 custom_solver_bias = 0.0
 segments = Vector2Array( -32, 32, 32, 0, 32, 0, 32, 32, 32, 32, -32, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=6]
+[sub_resource type="ConvexPolygonShape2D" id=4]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -32, 0, 32, -32, 32, 32, -32, 32 )
@@ -50,7 +50,7 @@ points = Vector2Array( -32, 0, 32, -32, 32, 32, -32, 32 )
 2/occluder_offset = Vector2( 32, 32 )
 2/navigation_offset = Vector2( 32, 32 )
 2/shape_offset = Vector2( 32, 32 )
-2/shapes = [ SubResource( 5 ) ]
+2/shapes = [ SubResource( 3 ) ]
 3/name = "SlopeHalfRaised"
 3/texture = ExtResource( 4 )
 3/tex_offset = Vector2( 0, 0 )
@@ -58,5 +58,5 @@ points = Vector2Array( -32, 0, 32, -32, 32, 32, -32, 32 )
 3/occluder_offset = Vector2( 32, 32 )
 3/navigation_offset = Vector2( 32, 32 )
 3/shape_offset = Vector2( 32, 32 )
-3/shapes = [ SubResource( 6 ) ]
+3/shapes = [ SubResource( 4 ) ]
 

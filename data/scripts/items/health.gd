@@ -11,6 +11,7 @@ func _on_Area2D_body_enter(body):
 
 		picked = true
 		Game.health = min(Game.health + 20, 100)
+		Game.items += 1
 		get_node("AnimationPlayer").play("Pickup")
 		get_node("SamplePlayer2D").play("pickup")
 

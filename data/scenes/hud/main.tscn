@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://data/scripts/hud/main.gd" type="Script" id=1]
 [ext_resource path="res://data/resources/themes/default.tres" type="Theme" id=2]
+[ext_resource path="res://data/fonts/noto_sans-bold.fnt" type="Font" id=3]
 
 [sub_resource type="StyleBoxFlat" id=1]
 
@@ -115,6 +116,33 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
+[node name="Stats" type="Panel" parent="."]
+
+visibility/self_opacity = 0.0
+anchor/left = 1
+anchor/right = 1
+margin/left = 256.0
+margin/bottom = 336.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = ExtResource( 2 )
+
+[node name="StatsLabel" type="RichTextLabel" parent="Stats"]
+
+margin/left = 16.0
+margin/top = 16.0
+margin/right = 240.0
+margin/bottom = 320.0
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_fonts/bold_font = ExtResource( 3 )
+bbcode/enabled = true
+bbcode/bbcode = "[right][b]KILLS[/b]\n0 / 0\n\n[b]ITEMS[/b]\n0 / 0[/right]"
+visible_characters = -1
+
 [node name="Control" type="Control" parent="."]
 
 anchor/left = 3
@@ -165,7 +193,7 @@ max_lines_visible = -1
 
 [node name="AmmoLabel" type="Label" parent="Control"]
 
-margin/left = 992.0
+margin/left = 704.0
 margin/top = 672.0
 margin/right = 1102.0
 margin/bottom = 701.0

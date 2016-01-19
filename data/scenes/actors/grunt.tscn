@@ -23,7 +23,7 @@ tracks/0/keys = { "cont":false, "times":FloatArray( 0, 0.25, 0.5, 0.75 ), "trans
 
 [sub_resource type="Animation" id=3]
 
-length = 2.0
+length = 1.5
 loop = false
 step = 0.1
 
@@ -56,7 +56,7 @@ velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
 script/script = ExtResource( 1 )
-__meta__ = { "__editor_plugin_screen__":"2D" }
+__meta__ = { "__editor_plugin_screen__":"Script" }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 

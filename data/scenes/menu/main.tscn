@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://data/resources/themes/default.tres" type="Theme" id=1]
+[ext_resource path="res://data/scripts/menu/main.gd" type="Script" id=2]
+
+[node name="Control" type="Control"]
+
+anchor/left = 3
+anchor/top = 3
+anchor/right = 3
+anchor/bottom = 3
+margin/left = 640.0
+margin/top = 360.0
+margin/right = 600.0
+margin/bottom = 320.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = ExtResource( 1 )
+script/script = ExtResource( 2 )
+__meta__ = { "__editor_plugin_screen__":"Script" }
+
+[node name="PlayButton" type="Button" parent="."]
+
+margin/left = 512.0
+margin/top = 304.0
+margin/right = 800.0
+margin/bottom = 371.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+toggle_mode = false
+text = "PLAY"
+flat = false
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
+
+

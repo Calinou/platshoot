@@ -7,13 +7,13 @@ const MAX_SPEED = 250 * 60
 const JUMP_SPEED = 350 * 60
 
 # Speed of bullets
-const BULLET_SPEED = 1000
+const BULLET_SPEED = 1250
 
 # Bullet inaccuracy (lower is more accurate)
 const BULLET_SPREAD = 8
 
 # Time in seconds between each bullet fire
-const BULLET_REFIRE = 0.2
+const BULLET_REFIRE = 0.4
 
 # Delay after dying required to wait before being allowed to respawn
 const RESPAWN_DELAY = 2.5
@@ -32,6 +32,12 @@ onready var offset = Vector2(0, 0)
 onready var relative_mouse_pos = Vector2(0, 0)
 
 func _ready():
+	# Set the number of enemies present in the level
+	Game.kills_total = get_node("/root/Level/Enemies").get_child_count()
+
+	# Set the number of items present in the level
+	Game.items_total = get_node("/root/Level/Items").get_child_count()
+
 	respawned()
 
 	set_fixed_process(true)
@@ -40,6 +46,9 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _fixed_process(delta):
+	# Increase time (shown on HUD)
+	Game.time += delta
+
 	if Game.health <= 0 and Game.status == Game.STATUS_ALIVE:
 		die()
 	# Change crosshair color depending on health, and ammo bar value depending on ammo
@@ -102,11 +111,17 @@ func _fixed_process(delta):
 			bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("Player/Gun").get_rot() - deg2rad(90 - BULLET_SPREAD / 2 + randf() * BULLET_SPREAD)))
 			get_node("Player/SamplePlayer2D").play("pistol")
 			Game.ammo -= 1
-			get_node("BulletTimer").set_wait_time(BULLET_REFIRE)
+			if Game.weapon == Game.WEAPON_PISTOL:
+				get_node("BulletTimer").set_wait_time(BULLET_REFIRE)
+			elif Game.weapon == Game.WEAPON_CHAINGUN:
+				get_node("BulletTimer").set_wait_time(BULLET_REFIRE / 3)
 			get_node("BulletTimer").start()
 		elif Input.is_action_pressed("attack") and get_node("BulletTimer").get_time_left() == 0:
 			get_node("Player/SamplePlayer2D").play("no_ammo")
-			get_node("BulletTimer").set_wait_time(BULLET_REFIRE)
+			if Game.weapon == Game.WEAPON_PISTOL:
+				get_node("BulletTimer").set_wait_time(BULLET_REFIRE)
+			elif Game.weapon == Game.WEAPON_CHAINGUN:
+				get_node("BulletTimer").set_wait_time(BULLET_REFIRE / 3)
 			get_node("BulletTimer").start()
 		
 		velocity_new = get_node("Player").get_linear_velocity()
@@ -120,9 +135,17 @@ func _input(event):
 	if event.is_action_pressed("zoom_reset"):
 		get_node("Player/Camera2D").set_zoom(Vector2(0.5, 0.5))
 	
+	# Change weapon
+	if event.is_action("weapon_prev"):
+		Game.weapon = clamp(Game.weapon - 1, 1, 2)
+	if event.is_action("weapon_next"):
+		Game.weapon = clamp(Game.weapon + 1, 1, 2)
+	
+	# Respawn when clicking, if dead, after a delay of 2.5 seconds
 	if Game.status == Game.STATUS_DEAD and event.is_action_pressed("attack") and get_node("RespawnTimer").get_time_left() == 0:
 		get_tree().change_scene("res://data/scenes/levels/1.tscn")
 	
+	# Suicide (default key: Ctrl+K)
 	if event.is_action_pressed("suicide"):
 		damage(1000)
 
@@ -157,5 +180,10 @@ func die():
 func respawned():
 	Game.health = 100
 	Game.armor = 0
-	Game.ammo = 30
+	Game.ammo = 25
+	Game.weapon = Game.WEAPON_PISTOL
+	
+	Game.time = 0.0
+	Game.kills = 0
+	Game.items = 0
 	Game.status = Game.STATUS_ALIVE
