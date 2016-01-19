@@ -46,19 +46,19 @@ content_margin/bottom = -1.0
 [node name="Player" type="Node2D"]
 
 script/script = ExtResource( 1 )
-__meta__ = { "__editor_plugin_screen__":"Script" }
+__meta__ = { "__editor_plugin_screen__":"2D" }
 
 [node name="Player" type="RigidBody2D" parent="."]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, -0, 0, 1, 0, -32 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, -32 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
 mode = 2
 mass = 1.0
-friction = 1.0
+friction = 0.0
 bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false

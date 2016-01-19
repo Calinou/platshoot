@@ -13,17 +13,17 @@ extents = Vector2( 32, 32 )
 [sub_resource type="ConcavePolygonShape2D" id=2]
 
 custom_solver_bias = 0.0
-segments = Vector2Array( 131, 64, 195, 0, 195, 0, 195, 64, 195, 64, 131, 64 )
+segments = Vector2Array( 32, -32, -32, 32, -32, 32, 32, 32, 32, 32, 32, -32 )
 
-[sub_resource type="ConcavePolygonShape2D" id=3]
-
-custom_solver_bias = 0.0
-segments = Vector2Array( 256, 64, 320, 32, 320, 32, 320, 64, 320, 64, 256, 64 )
-
-[sub_resource type="ConcavePolygonShape2D" id=4]
+[sub_resource type="ConcavePolygonShape2D" id=5]
 
 custom_solver_bias = 0.0
-segments = Vector2Array( 384, 64, 384, 32, 384, 32, 448, 0, 448, 0, 448, 64, 448, 64, 384, 64 )
+segments = Vector2Array( -32, 32, 32, 0, 32, 0, 32, 32, 32, 32, -32, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -32, 0, 32, -32, 32, 32, -32, 32 )
 
 [node name="TileSet" type="Node2D"]
 
@@ -31,6 +31,7 @@ __meta__ = { "__editor_plugin_screen__":"2D" }
 
 [node name="Full" type="Sprite" parent="."]
 
+visibility/visible = false
 transform/pos = Vector2( 32, 32 )
 texture = ExtResource( 1 )
 
@@ -55,6 +56,7 @@ _update_shape_index = 0
 
 [node name="Slope" type="Sprite" parent="."]
 
+visibility/visible = false
 transform/pos = Vector2( 32, 32 )
 texture = ExtResource( 2 )
 
@@ -62,7 +64,7 @@ texture = ExtResource( 2 )
 
 input/pickable = false
 shapes/0/shape = SubResource( 2 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, -163, -32 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -73,22 +75,22 @@ bounce = 0.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Slope/StaticBody2D"]
 
-transform/pos = Vector2( -163, -32 )
 build_mode = 1
-polygon = Vector2Array( 131, 64, 195, 0, 195, 64 )
+polygon = Vector2Array( 32, -32, -32, 32, 32, 32 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 
 [node name="SlopeHalf" type="Sprite" parent="."]
 
+visibility/visible = false
 transform/pos = Vector2( 32, 32 )
 texture = ExtResource( 3 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="SlopeHalf"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 3 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, -287.8, -32.4 )
+shapes/0/shape = SubResource( 5 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -99,9 +101,8 @@ bounce = 0.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SlopeHalf/StaticBody2D"]
 
-transform/pos = Vector2( -287.8, -32.4 )
 build_mode = 1
-polygon = Vector2Array( 256, 64, 320, 32, 320, 64 )
+polygon = Vector2Array( -32, 32, 32, 0, 32, 32 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 
@@ -113,8 +114,8 @@ texture = ExtResource( 4 )
 [node name="StaticBody2D" type="StaticBody2D" parent="SlopeHalfRaised"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 4 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, -415.8, -31.8 )
+shapes/0/shape = SubResource( 6 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -125,9 +126,8 @@ bounce = 0.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SlopeHalfRaised/StaticBody2D"]
 
-transform/pos = Vector2( -415.8, -31.8 )
-build_mode = 1
-polygon = Vector2Array( 384, 64, 384, 32, 448, 0, 448, 64 )
+build_mode = 0
+polygon = Vector2Array( -32, 0, 32, -32, 32, 32, -32, 32 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 

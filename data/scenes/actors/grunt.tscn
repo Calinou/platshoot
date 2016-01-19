@@ -10,7 +10,7 @@ custom_solver_bias = 0.0
 radius = 16.0
 height = 32.0
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 
 resource/name = "Walk"
 length = 1.0
@@ -21,14 +21,13 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/keys = { "cont":false, "times":FloatArray( 0, 0.25, 0.5, 0.75 ), "transitions":FloatArray( 1, 1, 1, 1 ), "values":[ 0, 1, 2, 3 ] }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 
-resource/name = "Die"
 length = 2.0
 loop = false
 step = 0.1
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=4]
 
 custom_solver_bias = 0.0
 radius = 28.0
@@ -37,13 +36,13 @@ radius = 28.0
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, -0, 0, 1, 0, 0 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
 mode = 2
 mass = 1.0
-friction = 1.0
+friction = 0.0
 bounce = 0.0
 gravity_scale = 1.0
 custom_integrator = false
@@ -57,7 +56,7 @@ velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
 script/script = ExtResource( 1 )
-__meta__ = { "__editor_plugin_screen__":"Script" }
+__meta__ = { "__editor_plugin_screen__":"2D" }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
@@ -76,8 +75,8 @@ frame = 3
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/Walk = SubResource( 4 )
-anims/Die = SubResource( 2 )
+anims/Walk = SubResource( 2 )
+anims/Die = SubResource( 3 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -97,8 +96,8 @@ config/pitch_random = 0.0
 [node name="Area2D" type="Area2D" parent="."]
 
 input/pickable = true
-shapes/0/shape = SubResource( 3 )
-shapes/0/transform = Matrix32( 1, -0, 0, 1, 0, 0 )
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -107,7 +106,7 @@ angular_damp = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 trigger = true
 _update_shape_index = 0
 
