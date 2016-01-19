@@ -13,6 +13,7 @@ func _fixed_process(delta):
 			_on_Timer_timeout()
 		if body.has_method("die"):
 			body.die()
+			_on_Timer_timeout()
 
 func _on_Timer_timeout():
 	# Actually kill the particle

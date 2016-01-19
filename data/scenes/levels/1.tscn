@@ -40,6 +40,14 @@ transform/pos = Vector2( 352, -96 )
 
 transform/pos = Vector2( 416, -96 )
 
+[node name="Ammo2" parent="Items" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 1184, -160 )
+
+[node name="Ammo3" parent="Items" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 2272, -96 )
+
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Grunt" parent="Enemies" instance=ExtResource( 4 )]
@@ -49,5 +57,33 @@ transform/pos = Vector2( 736, -288 )
 [node name="Grunt1" parent="Enemies" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 480, -160 )
+
+[node name="Grunt2" parent="Enemies" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 800, -288 )
+
+[node name="Grunt3" parent="Enemies" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 864, -288 )
+
+[node name="Grunt4" parent="Enemies" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 1056, -224 )
+
+[node name="Grunt5" parent="Enemies" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 1440, -160 )
+
+[node name="Grunt6" parent="Enemies" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 2016, -160 )
+
+[node name="Grunt7" parent="Enemies" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 2528, -96 )
+
+[node name="Grunt8" parent="Enemies" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 2400, -96 )
 
 

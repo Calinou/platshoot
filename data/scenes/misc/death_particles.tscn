@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://data/textures/light.png" type="Texture" id=1]
+[ext_resource path="res://data/scripts/misc/death_particles.gd" type="Script" id=2]
+
+[node name="DeathParticles" type="Particles2D"]
+
+config/amount = 64
+config/lifetime = 1.0
+config/preprocess = 1.0
+config/local_space = false
+config/explosiveness = 0.0
+config/texture = ExtResource( 1 )
+params/direction = 180.0
+params/spread = 180.0
+params/linear_velocity = 100.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 9.8
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 100.0
+params/initial_angle = 0.0
+params/initial_size = 0.1
+params/final_size = 0.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+script/script = ExtResource( 2 )
+__meta__ = { "__editor_plugin_screen__":"2D" }
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+

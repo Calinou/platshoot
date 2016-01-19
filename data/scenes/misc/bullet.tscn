@@ -11,7 +11,7 @@ extents = Vector2( 4, 4 )
 [sub_resource type="ColorRamp" id=2]
 
 offsets = FloatArray( 0, 1 )
-colors = ColorArray( 1, 0.752941, 0, 1, 1, 1, 0.752941, 0 )
+colors = ColorArray( 1, 0.752941, 0, 1, 1, 1, 1, 0.752941 )
 
 [node name="Bullet" type="Node2D"]
 
