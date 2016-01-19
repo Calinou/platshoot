@@ -100,8 +100,6 @@ transform/pos = Vector2( 1888, 544 )
 
 [node name="Enemies" type="Node2D" parent="."]
 
-__meta__ = { "_edit_lock_":true }
-
 [node name="Grunt" parent="Enemies" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 736, -288 )

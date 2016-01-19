@@ -1,6 +1,7 @@
 extends Node
 
 onready var hud_scene = preload("res://data/scenes/hud/main.tscn")
+onready var background_scene = preload("res://data/scenes/misc/background.tscn")
 
 # Game stats
 onready var health = 100.0
@@ -12,6 +13,9 @@ func _ready():
 
 	var hud = hud_scene.instance()
 	add_child(hud)
+	
+	var background = background_scene.instance()
+	add_child(background)
 	
 	set_fixed_process(true)
 	set_process_input(true)

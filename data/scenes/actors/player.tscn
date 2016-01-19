@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://data/scripts/actors/player.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
@@ -11,10 +11,30 @@ custom_solver_bias = 0.0
 radius = 16.0
 height = 40.0
 
+[sub_resource type="StyleBoxFlat" id=2]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+bg_color = Color( 1, 1, 0.25098, 0.752941 )
+light_color = Color( 0.8, 0.8, 0.8, 1 )
+dark_color = Color( 0.8, 0.8, 0.8, 1 )
+border_size = 0
+border_blend = true
+draw_bg = true
+
+[sub_resource type="StyleBoxEmpty" id=3]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+
 [node name="Player" type="Node2D"]
 
 script/script = ExtResource( 1 )
-__meta__ = { "__editor_plugin_screen__":"Script" }
+__meta__ = { "__editor_plugin_screen__":"2D" }
 
 [node name="Player" type="RigidBody2D" parent="."]
 
@@ -113,9 +133,28 @@ autostart = true
 
 [node name="Crosshair" type="Sprite" parent="."]
 
-visibility/opacity = 0.75
 transform/scale = Vector2( 0.2, 0.2 )
 z/z = 4096
 texture = ExtResource( 4 )
+
+[node name="ProgressBar" type="ProgressBar" parent="Crosshair"]
+
+margin/left = -160.0
+margin/top = 160.0
+margin/right = 160.0
+margin/bottom = 173.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = SubResource( 3 )
+range/min = 0.0
+range/max = 100.0
+range/step = 1.0
+range/page = 0.0
+range/value = 1.0
+range/exp_edit = false
+range/rounded = false
+percent/visible = false
 
 
