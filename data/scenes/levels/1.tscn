@@ -30,7 +30,7 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( -524286, 0, -524285, 0, -524284, 0, -524283, 0, -524282, 0, -524281, 0, -524280, 0, -524279, 0, -524278, 0, -524277, 0, -524276, 0, -524275, 0, -524274, 0, -524273, 0, -524272, 0, -524271, 0, -524270, 0, -524269, 0, -524268, 0, -524267, 0, -524266, 0, -524265, 0, -524264, 0, -524263, 0, -524262, 0, -524261, 0, -524260, 0, -524259, 0, -524258, 0, -524257, 0, -524256, 0, -524255, 0, -524254, 0, -393217, 0, -458752, 0, -458751, 0, -458750, 0, -458718, 0, -458717, 0, -458716, 0, -458715, 0, -458714, 0, -327685, 0, -327684, 0, -327683, 0, -327682, 0, -327681, 0, -393178, 0, -262149, 0, -327642, 0, -196613, 0, -262135, 0, -262134, 0, -262133, 0, -262132, 0, -262106, 0, -131077, 0, -196601, 0, -196600, 0, -196599, 0, -196596, 0, -196595, 0, -196594, 0, -196593, 0, -196570, 0, -65541, 0, -131067, 0, -131066, 0, -131065, 0, -131057, 0, -131056, 0, -131055, 0, -131054, 0, -131053, 0, -131052, 0, -131051, 0, -131048, 0, -131047, 0, -131046, 0, -131045, 0, -131044, 0, -131043, 0, -131042, 0, -131041, 0, -131040, 0, -131034, 0, -5, 0, -4, 0, -65534, 0, -65533, 0, -65532, 0, -65531, 0, -65504, 0, -65503, 0, -65502, 0, -65501, 0, -65500, 0, -65499, 0, -65498, 0, 65532, 0, 65533, 0, 65534, 0, 65535, 0, 0, 0, 1, 0, 2, 0 )
+tile_data = IntArray( -524286, 0, -524285, 0, -524284, 0, -524283, 0, -524282, 0, -524281, 0, -524280, 0, -524279, 0, -524278, 0, -524277, 0, -524276, 0, -524275, 0, -524274, 0, -524273, 0, -524272, 0, -524271, 0, -524270, 0, -524269, 0, -524268, 0, -524267, 0, -524266, 0, -524265, 0, -524264, 0, -524263, 0, -524262, 0, -524261, 0, -524260, 0, -524259, 0, -524258, 0, -524257, 0, -524256, 0, -524255, 0, -524254, 0, -393217, 0, -458752, 0, -458751, 0, -458750, 0, -458718, 0, -458717, 0, -458716, 0, -458715, 0, -458714, 0, -327685, 0, -327684, 0, -327683, 0, -327682, 0, -327681, 0, -393178, 0, -262149, 0, -327642, 0, -196613, 0, -262135, 0, -262134, 0, -262133, 0, -262132, 0, -262106, 0, -131077, 0, -196601, 0, -196600, 0, -196599, 0, -196596, 0, -196595, 0, -196594, 0, -196593, 0, -196570, 0, -65541, 0, -131067, 0, -131066, 0, -131065, 0, -131057, 0, -131056, 0, -131055, 0, -131054, 0, -131053, 0, -131052, 0, -131051, 0, -131048, 0, -131047, 0, -131046, 0, -131045, 0, -131044, 0, -131043, 0, -131042, 0, -131041, 0, -131040, 0, -131034, 0, -5, 0, -4, 0, -65534, 0, -65533, 0, -65532, 0, -65531, 0, -65515, 0, -65512, 0, -65504, 0, -65503, 0, -65502, 0, -65501, 0, -65500, 0, -65499, 0, -65498, 0, 65532, 0, 65533, 0, 65534, 0, 65535, 0, 0, 0, 1, 0, 2, 0, 21, 0, 24, 0, 38, 0, 131069, 0, 65557, 0, 65560, 0, 65574, 0, 196605, 0, 131093, 0, 131096, 0, 131110, 0, 262141, 0, 196632, 0, 196646, 0, 327677, 0, 327679, 0, 262168, 0, 262182, 0, 393213, 0, 393215, 0, 327680, 0, 327704, 0, 327718, 0, 458749, 0, 393216, 0, 393217, 0, 393218, 0, 393239, 0, 393240, 0, 393254, 0, 524285, 0, 458754, 0, 458755, 0, 458756, 0, 458772, 0, 458773, 0, 458774, 0, 458775, 0, 458783, 0, 458784, 0, 458785, 0, 458786, 0, 458787, 0, 458788, 0, 458789, 0, 458790, 0, 589821, 0, 524292, 0, 524293, 0, 524294, 0, 524306, 0, 524307, 0, 524308, 0, 524318, 0, 524319, 0, 655357, 0, 655358, 0, 589830, 0, 589831, 0, 589832, 0, 589837, 0, 589838, 0, 589839, 0, 589840, 0, 589841, 0, 589842, 0, 589851, 0, 589852, 0, 589853, 0, 589854, 0, 720894, 0, 655368, 0, 655369, 0, 655370, 0, 655371, 0, 655372, 0, 655373, 0, 655386, 0, 655387, 0, 786430, 0, 786431, 0, 720921, 0, 720922, 0, 851967, 0, 786456, 0, 786457, 0, 917503, 0, 851968, 0, 851969, 0, 851991, 0, 851992, 0, 917505, 0, 917507, 0, 917509, 0, 917510, 0, 917511, 0, 917512, 0, 917513, 0, 917514, 0, 917515, 0, 917516, 0, 917517, 0, 917518, 0, 917519, 0, 917520, 0, 917521, 0, 917522, 0, 917523, 0, 917524, 0, 917525, 0, 917526, 0, 917527, 0, 983041, 0, 983042, 0, 983043, 0, 983044, 0, 983045, 0 )
 
 [node name="Items" type="Node2D" parent="."]
 
@@ -57,6 +57,46 @@ transform/pos = Vector2( 224, -32 )
 [node name="Ammo 3" parent="Items" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 160, -32 )
+
+[node name="Ammo4" parent="Items" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 288, 352 )
+
+[node name="Ammo5" parent="Items" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 1632, 352 )
+
+[node name="Ammo6" parent="Items" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 1568, 864 )
+
+[node name="Ammo7" parent="Items" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 416, 928 )
+
+[node name="Ammo8" parent="Items" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 288, 928 )
+
+[node name="Ammo9" parent="Items" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 352, 864 )
+
+[node name="Ammo10" parent="Items" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 96, 224 )
+
+[node name="Ammo11" parent="Items" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 1824, -160 )
+
+[node name="Ammo12" parent="Items" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 2144, -160 )
+
+[node name="Ammo13" parent="Items" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 1888, 544 )
 
 [node name="Enemies" type="Node2D" parent="."]
 
@@ -97,5 +137,69 @@ transform/pos = Vector2( 2528, -96 )
 [node name="Grunt8" parent="Enemies" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 2400, -96 )
+
+[node name="Grunt9" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 1056, 544 )
+
+[node name="Grunt10" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 1184, 544 )
+
+[node name="Grunt11" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 800, 608 )
+
+[node name="Grunt12" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 416, 416 )
+
+[node name="Grunt13" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 160, 288 )
+
+[node name="Grunt14" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 32, 544 )
+
+[node name="Grunt15" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 96, 672 )
+
+[node name="Grunt16" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 160, 800 )
+
+[node name="Grunt17" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 736, 864 )
+
+[node name="Grunt18" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 1440, 864 )
+
+[node name="Grunt19" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 1760, 672 )
+
+[node name="Grunt20" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 1952, 544 )
+
+[node name="Grunt21" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 2208, 416 )
+
+[node name="Grunt22" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 2400, 416 )
+
+[node name="Grunt23" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 2080, 480 )
+
+[node name="Grunt24" parent="Enemies" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 608, 544 )
 
 

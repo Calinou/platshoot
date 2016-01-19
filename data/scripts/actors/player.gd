@@ -18,6 +18,9 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _fixed_process(delta):
+	# Change crosshair color depending on health
+	get_node("Crosshair").set_modulate(Color(1, Game.health / 100.0, Game.health / 100.0))
+
 	# Health regeneration (1 per second)
 	if Game.health > 0:
 		Game.health = min(Game.health + delta, 100)

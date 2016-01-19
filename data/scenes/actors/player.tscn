@@ -113,7 +113,8 @@ autostart = true
 
 [node name="Crosshair" type="Sprite" parent="."]
 
-transform/scale = Vector2( 0.25, 0.25 )
+visibility/opacity = 0.75
+transform/scale = Vector2( 0.2, 0.2 )
 z/z = 4096
 texture = ExtResource( 4 )
 

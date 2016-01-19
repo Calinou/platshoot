@@ -8,6 +8,8 @@ onready var armor = 0.0
 onready var ammo = 30
 
 func _ready():
+	print("Platshoot [0.0.1]")
+
 	var hud = hud_scene.instance()
 	add_child(hud)
 	
