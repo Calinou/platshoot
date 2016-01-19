@@ -6,6 +6,7 @@ const BULLET_SPEED = 1000
 const BULLET_REFIRE = 0.2
 
 onready var velocity = Vector2(0, 0)
+onready var velocity_new = Vector2(0, 0)
 onready var speed = 0
 onready var bullet_scene = preload("res://data/scenes/misc/bullet.tscn")
 onready var offset = Vector2(0, 0)
@@ -60,6 +61,9 @@ func _fixed_process(delta):
 	# Set the new velocity
 	get_node("Player").set_linear_velocity(Vector2(speed * delta, velocity.y))
 	
+	if velocity_new.y - velocity.y >= 600:
+		damage((velocity_new.y - velocity.y - 600) / 10)
+	
 	# Jumping
 	if Input.is_action_pressed("move_up") and is_touching_ground():
 		get_node("Player").set_linear_velocity(Vector2(velocity.x, -JUMP_SPEED * delta))
@@ -77,6 +81,8 @@ func _fixed_process(delta):
 		get_node("Player/SamplePlayer2D").play("no_ammo")
 		get_node("BulletTimer").set_wait_time(BULLET_REFIRE)
 		get_node("BulletTimer").start()
+	
+	velocity_new = get_node("Player").get_linear_velocity()
 
 # Returns true if the player is touching ground
 func is_touching_ground():
@@ -84,3 +90,12 @@ func is_touching_ground():
 		return true
 	else:
 		return false
+
+func damage(points):
+	# If player has armor, divide damage by half on health and deplete armor
+	if Game.armor > 0:
+		Game.armor = max(0, Game.armor - points / 2)
+		Game.health = max(0, Game.health - points / 2)
+	# If player has no armor, deplete health
+	else:
+		Game.health = max(0, Game.health - points)

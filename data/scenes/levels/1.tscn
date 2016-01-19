@@ -9,7 +9,7 @@
 
 [node name="Level" type="Node2D"]
 
-__meta__ = { "__editor_plugin_screen__":"2D" }
+__meta__ = { "__editor_plugin_screen__":"Script" }
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 

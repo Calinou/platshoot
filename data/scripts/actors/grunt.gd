@@ -18,7 +18,7 @@ func _fixed_process(delta):
 
 	if hurt_player:
 		if get_node("Timer").get_time_left() == 0:
-			Game.health -= 15
+			get_node("/root/Level/Player").damage(15)
 			get_node("Timer").set_wait_time(MELEE_REFIRE)
 			get_node("Timer").start()
 
