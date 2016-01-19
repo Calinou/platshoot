@@ -37,7 +37,7 @@ params/pitch_scale = 1.0
 params/attenuation/min_distance = 1.0
 params/attenuation/max_distance = 2048.0
 params/attenuation/distance_exp = 1.0
-config/polyphony = 10
+config/polyphony = 1
 config/samples = ExtResource( 3 )
 config/pitch_random = 0.05
 

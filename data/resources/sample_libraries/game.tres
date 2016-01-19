@@ -6,7 +6,7 @@
 
 [resource]
 
-samples/pickup = { "db":4.0, "pitch":1.0, "sample":ExtResource( 2 ) }
-samples/no_ammo = { "db":0.0, "pitch":1.0, "sample":ExtResource( 1 ) }
 samples/pistol = { "db":-2.0, "pitch":1.0, "sample":ExtResource( 3 ) }
+samples/no_ammo = { "db":0.0, "pitch":1.0, "sample":ExtResource( 1 ) }
+samples/pickup = { "db":8.0, "pitch":1.0, "sample":ExtResource( 2 ) }
 
