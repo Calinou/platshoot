@@ -5,7 +5,6 @@ var kill = false
 func _ready():
 	set_fixed_process(true)
 
-
 func _fixed_process(delta):
 	for body in get_node("RigidBody2D").get_colliding_bodies():
 		# Bullets can't hit the player

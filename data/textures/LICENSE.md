@@ -1,4 +1,12 @@
-`player.png` is from Freedoom. License follows:
+The following files are from Freedoom (modified or not):
+- `player.png`
+- `grunt.png`
+- `items/ammo.png`
+- `items/armor.png`
+- `items/health.png`
+- `tilesets/base/base.png`
+
+License of the Freedom assets follows:
 
 ## BSD 3-Clause
 

@@ -10,9 +10,9 @@
 
 custom_solver_bias = 0.0
 radius = 16.0
-height = 40.0
+height = 32.0
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 
 resource/name = "Walk"
 length = 1.0
@@ -23,7 +23,7 @@ tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/keys = { "cont":false, "times":FloatArray( 0, 0.25, 0.5, 0.75 ), "transitions":FloatArray( 1, 1, 1, 1 ), "values":[ 0, 1, 2, 3 ] }
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=3]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -36,7 +36,7 @@ border_size = 0
 border_blend = true
 draw_bg = true
 
-[sub_resource type="StyleBoxEmpty" id=3]
+[sub_resource type="StyleBoxEmpty" id=4]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -52,7 +52,7 @@ __meta__ = { "__editor_plugin_screen__":"Script" }
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, -40 )
+shapes/0/transform = Matrix32( 1, -0, 0, 1, 0, -32 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -74,7 +74,7 @@ damp_override/angular = -1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 
-transform/pos = Vector2( 0, -40 )
+transform/pos = Vector2( 0, -32 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
@@ -84,7 +84,7 @@ _update_shape_index = 0
 anchor_mode = 1
 rotating = false
 current = true
-zoom = Vector2( 1, 1 )
+zoom = Vector2( 0.5, 0.5 )
 limit/left = -10000000
 limit/top = -10000000
 limit/right = 10000000
@@ -137,7 +137,7 @@ config/pitch_random = 0.05
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/Walk = SubResource( 4 )
+anims/Walk = SubResource( 2 )
 playback/active = true
 playback/speed = 1.5
 blend_times = [  ]
@@ -150,9 +150,16 @@ wait_time = 0.01
 one_shot = true
 autostart = true
 
+[node name="RespawnTimer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 0.01
+one_shot = true
+autostart = false
+
 [node name="Crosshair" type="Sprite" parent="."]
 
-transform/scale = Vector2( 0.2, 0.2 )
+transform/scale = Vector2( 0.125, 0.125 )
 z/z = 4096
 texture = ExtResource( 5 )
 
@@ -165,8 +172,8 @@ margin/bottom = 173.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
-custom_styles/fg = SubResource( 2 )
-custom_styles/bg = SubResource( 3 )
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
 range/min = 0.0
 range/max = 100.0
 range/step = 1.0

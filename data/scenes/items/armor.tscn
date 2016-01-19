@@ -16,10 +16,4 @@ texture = ExtResource( 3 )
 
 config/pitch_random = 0.05
 
-[node name="Area2D" parent="."]
-
-linear_damp = 0.1
-
-[connection signal="body_enter" from="Area2D" to="." method="_on_Area2D_body_enter"]
-
 

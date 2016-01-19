@@ -1,12 +1,18 @@
-[gd_resource type="SampleLibrary" load_steps=4 format=1]
+[gd_resource type="SampleLibrary" load_steps=7 format=1]
 
-[ext_resource path="res://data/sounds/no_ammo.wav" type="Sample" id=1]
-[ext_resource path="res://data/sounds/pickup.wav" type="Sample" id=2]
-[ext_resource path="res://data/sounds/pistol.wav" type="Sample" id=3]
+[ext_resource path="res://data/sounds/grunt_death.wav" type="Sample" id=1]
+[ext_resource path="res://data/sounds/no_ammo.wav" type="Sample" id=2]
+[ext_resource path="res://data/sounds/pickup.wav" type="Sample" id=3]
+[ext_resource path="res://data/sounds/pistol.wav" type="Sample" id=4]
+[ext_resource path="res://data/sounds/player_death.wav" type="Sample" id=5]
+[ext_resource path="res://data/sounds/player_hurt.wav" type="Sample" id=6]
 
 [resource]
 
-samples/pistol = { "db":-2.0, "pitch":1.0, "sample":ExtResource( 3 ) }
-samples/no_ammo = { "db":0.0, "pitch":1.0, "sample":ExtResource( 1 ) }
-samples/pickup = { "db":8.0, "pitch":1.0, "sample":ExtResource( 2 ) }
+samples/pistol = { "db":-2.0, "pitch":1.0, "sample":ExtResource( 4 ) }
+samples/pickup = { "db":10.0, "pitch":1.0, "sample":ExtResource( 3 ) }
+samples/no_ammo = { "db":0.0, "pitch":1.0, "sample":ExtResource( 2 ) }
+samples/grunt_death = { "db":5.0, "pitch":1.01, "sample":ExtResource( 1 ) }
+samples/player_hurt = { "db":4.0, "pitch":0.93, "sample":ExtResource( 6 ) }
+samples/player_death = { "db":4.0, "pitch":1.04, "sample":ExtResource( 5 ) }
 

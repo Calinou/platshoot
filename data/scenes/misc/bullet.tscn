@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://data/scripts/misc/bullet.gd" type="Script" id=1]
-[ext_resource path="res://data/textures/light.png" type="Texture" id=2]
+[ext_resource path="res://data/textures/white.png" type="Texture" id=2]
+[ext_resource path="res://data/textures/light.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -11,12 +12,12 @@ extents = Vector2( 4, 4 )
 [sub_resource type="ColorRamp" id=2]
 
 offsets = FloatArray( 0, 1 )
-colors = ColorArray( 1, 0.752941, 0, 1, 1, 1, 1, 0.752941 )
+colors = ColorArray( 1, 0.752941, 0, 1, 1, 1, 1, 1 )
 
 [node name="Bullet" type="Node2D"]
 
 script/script = ExtResource( 1 )
-__meta__ = { "__editor_plugin_screen__":"Script" }
+__meta__ = { "__editor_plugin_screen__":"2D" }
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 
@@ -60,7 +61,7 @@ params/radial_accel = 0.0
 params/tangential_accel = 0.0
 params/damping = 0.0
 params/initial_angle = 0.0
-params/initial_size = 0.03
+params/initial_size = 0.2
 params/final_size = 0.0
 params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
@@ -70,11 +71,11 @@ color/color_ramp = SubResource( 2 )
 [node name="Light2D" type="Light2D" parent="RigidBody2D"]
 
 enabled = true
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 offset = Vector2( 0, 0 )
-scale = 1.0
-color = Color( 1, 0.752941, 0, 1 )
-energy = 1.0
+scale = 0.8
+color = Color( 1, 0.941176, 0.784314, 1 )
+energy = 2.5
 mode = 0
 range/height = 0.0
 range/z_min = -1024

@@ -3,10 +3,15 @@ extends Node
 onready var hud_scene = preload("res://data/scenes/hud/main.tscn")
 onready var background_scene = preload("res://data/scenes/misc/background.tscn")
 
+const STATUS_ALIVE = 0
+const STATUS_DEAD = 1
+
 # Game stats
 onready var health = 100.0
 onready var armor = 0.0
 onready var ammo = 30
+
+onready var status = STATUS_ALIVE
 
 func _ready():
 	print("Platshoot [0.0.1]")

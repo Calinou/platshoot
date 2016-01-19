@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=1]
 
-[ext_resource path="res://data/textures/light.png" type="Texture" id=1]
+[ext_resource path="res://data/textures/white.png" type="Texture" id=1]
 [ext_resource path="res://data/scripts/misc/death_particles.gd" type="Script" id=2]
 
 [node name="DeathParticles" type="Particles2D"]
@@ -22,7 +22,7 @@ params/radial_accel = 0.0
 params/tangential_accel = 0.0
 params/damping = 100.0
 params/initial_angle = 0.0
-params/initial_size = 0.1
+params/initial_size = 0.5
 params/final_size = 0.0
 params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
