@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://data/scripts/hud/main.gd" type="Script" id=1]
 [ext_resource path="res://data/resources/themes/default.tres" type="Theme" id=2]
@@ -29,7 +29,7 @@ border_size = 0
 border_blend = true
 draw_bg = true
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=3]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -42,7 +42,7 @@ border_size = 0
 border_blend = true
 draw_bg = true
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=4]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -55,7 +55,7 @@ border_size = 0
 border_blend = true
 draw_bg = true
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=5]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
@@ -68,39 +68,13 @@ border_size = 0
 border_blend = true
 draw_bg = true
 
-[sub_resource type="StyleBoxFlat" id=4]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-bg_color = Color( 1, 1, 0.25098, 0.25098 )
-light_color = Color( 0.8, 0.8, 0.8, 1 )
-dark_color = Color( 0.8, 0.8, 0.8, 1 )
-border_size = 0
-border_blend = true
-draw_bg = true
-
-[sub_resource type="StyleBoxFlat" id=5]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-bg_color = Color( 0.25098, 0.25098, 1, 0.752941 )
-light_color = Color( 0.8, 0.8, 0.8, 1 )
-dark_color = Color( 0.8, 0.8, 0.8, 1 )
-border_size = 0
-border_blend = true
-draw_bg = true
-
 [sub_resource type="StyleBoxFlat" id=6]
 
 content_margin/left = -1.0
 content_margin/right = -1.0
 content_margin/top = -1.0
 content_margin/bottom = -1.0
-bg_color = Color( 0.25098, 0.25098, 1, 0.25098 )
+bg_color = Color( 1, 1, 0.25098, 0.25098 )
 light_color = Color( 0.8, 0.8, 0.8, 1 )
 dark_color = Color( 0.8, 0.8, 0.8, 1 )
 border_size = 0
@@ -134,14 +108,14 @@ theme/theme = ExtResource( 2 )
 
 [node name="HealthLabel" type="Label" parent="Control"]
 
-margin/left = 352.0
-margin/top = 608.0
-margin/right = 462.0
-margin/bottom = 637.0
+margin/left = 64.0
+margin/top = 640.0
+margin/right = 174.0
+margin/bottom = 669.0
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
-text = "Health"
+text = "HEALTH"
 align = 2
 valign = 1
 percent_visible = 1.0
@@ -150,14 +124,14 @@ max_lines_visible = -1
 
 [node name="ArmorLabel" type="Label" parent="Control"]
 
-margin/left = 352.0
-margin/top = 678.0
-margin/right = 462.0
-margin/bottom = 707.0
+margin/left = 64.0
+margin/top = 672.0
+margin/right = 174.0
+margin/bottom = 701.0
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
-text = "Armor"
+text = "ARMOR"
 align = 2
 valign = 1
 percent_visible = 1.0
@@ -166,14 +140,14 @@ max_lines_visible = -1
 
 [node name="AmmoLabel" type="Label" parent="Control"]
 
-margin/left = 662.0
-margin/top = 678.0
-margin/right = 772.0
-margin/bottom = 707.0
+margin/left = 992.0
+margin/top = 672.0
+margin/right = 1102.0
+margin/bottom = 701.0
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
-text = "Ammo"
+text = "AMMO"
 align = 2
 valign = 1
 percent_visible = 1.0
@@ -182,10 +156,10 @@ max_lines_visible = -1
 
 [node name="HealthProgressBar" type="ProgressBar" parent="Control"]
 
-margin/left = 482.0
-margin/top = 608.0
-margin/right = 622.0
-margin/bottom = 637.0
+margin/left = 194.0
+margin/top = 640.0
+margin/right = 334.0
+margin/bottom = 669.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -202,30 +176,10 @@ percent/visible = true
 
 [node name="ArmorProgressBar" type="ProgressBar" parent="Control"]
 
-margin/left = 482.0
-margin/top = 678.0
-margin/right = 622.0
-margin/bottom = 707.0
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-custom_styles/fg = SubResource( 7 )
-custom_styles/bg = SubResource( 8 )
-range/min = 0.0
-range/max = 100.0
-range/step = 1.0
-range/page = 0.0
-range/value = 1.0
-range/exp_edit = false
-range/rounded = false
-percent/visible = true
-
-[node name="AmmoProgressBar" type="ProgressBar" parent="Control"]
-
-margin/left = 792.0
-margin/top = 678.0
-margin/right = 932.0
-margin/bottom = 707.0
+margin/left = 194.0
+margin/top = 672.0
+margin/right = 334.0
+margin/bottom = 701.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -240,12 +194,12 @@ range/exp_edit = false
 range/rounded = false
 percent/visible = true
 
-[node name="StaminaProgressBar" type="ProgressBar" parent="Control"]
+[node name="AmmoProgressBar" type="ProgressBar" parent="Control"]
 
-margin/left = 792.0
-margin/top = 608.0
-margin/right = 932.0
-margin/bottom = 637.0
+margin/left = 1122.0
+margin/top = 672.0
+margin/right = 1262.0
+margin/bottom = 701.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -259,21 +213,5 @@ range/value = 1.0
 range/exp_edit = false
 range/rounded = false
 percent/visible = true
-
-[node name="StaminaLabel" type="Label" parent="Control"]
-
-margin/left = 662.0
-margin/top = 608.0
-margin/right = 773.0
-margin/bottom = 637.0
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-text = "Stamina"
-align = 2
-valign = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
 
 

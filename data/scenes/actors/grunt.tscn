@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://data/scripts/actors/grunt.gd" type="Script" id=1]
 
@@ -18,6 +18,11 @@ tracks/0/type = "value"
 tracks/0/path = NodePath("Polygon2D:visibility/opacity")
 tracks/0/interp = 1
 tracks/0/keys = { "cont":true, "times":FloatArray( 0.1, 0.5 ), "transitions":FloatArray( 1, 1 ), "values":[ 1.0, 0.0 ] }
+
+[sub_resource type="CircleShape2D" id=3]
+
+custom_solver_bias = 0.0
+radius = 32.0
 
 [node name="Grunt" type="RigidBody2D"]
 
@@ -77,6 +82,34 @@ playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
 
+[node name="Area2D" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+
+shape = SubResource( 3 )
+trigger = true
+_update_shape_index = 0
+
+[node name="Timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 0.01
+one_shot = true
+autostart = false
+
 [connection signal="finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_finished"]
+
+[connection signal="body_enter" from="Area2D" to="." method="_on_Area2D_body_enter"]
+
+[connection signal="body_exit" from="Area2D" to="." method="_on_Area2D_body_exit"]
 
 

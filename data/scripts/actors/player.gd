@@ -2,9 +2,8 @@ extends Node2D
 
 const MAX_SPEED = 200 * 60
 const JUMP_SPEED = 320 * 60
-const SPRINT_FACTOR = 1.5
 const BULLET_SPEED = 1000
-const BULLET_REFIRE = 0.21
+const BULLET_REFIRE = 0.2
 
 onready var velocity = Vector2(0, 0)
 onready var speed = 0
@@ -19,6 +18,11 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _fixed_process(delta):
+	# Health regeneration (1 per second)
+	if Game.health > 0:
+		Game.health = min(Game.health + delta, 100)
+
+	# Mouse position/offset computations (for gun and crosshair)
 	offset = -get_viewport().get_canvas_transform().o # Get the offset
 	relative_mouse_pos = get_viewport().get_mouse_pos() + offset # And add it to the mouse position
 	get_node("Player/Gun").look_at(relative_mouse_pos)
@@ -29,23 +33,15 @@ func _fixed_process(delta):
 
 	# Moving left
 	if Input.is_action_pressed("move_left"):
-		speed = clamp(speed - MAX_SPEED * 4 * delta, -MAX_SPEED * sprinting(), MAX_SPEED * sprinting())
-		# If sprinting, deplete stamina
-		if sprinting() != 1.0:
-			Game.stamina -= 8.0 * delta
+		speed = clamp(speed - MAX_SPEED * 4 * delta, -MAX_SPEED, MAX_SPEED)
 
 	# Moving right
 	elif Input.is_action_pressed("move_right"):
-		speed = clamp(speed + MAX_SPEED * 4 * delta, -MAX_SPEED * sprinting(), MAX_SPEED * sprinting())
-		# If sprinting, deplete stamina
-		if sprinting() != 1.0:
-			Game.stamina -= 8.0 * delta
+		speed = clamp(speed + MAX_SPEED * 4 * delta, -MAX_SPEED, MAX_SPEED)
 	
 	# Friction
 	else:
 		speed *= 0.925
-		if is_touching_ground():
-			Game.stamina += 5.0 * delta
 
 	# Set the new velocity
 	get_node("Player").set_linear_velocity(Vector2(speed * delta, velocity.y))
@@ -68,13 +64,6 @@ func _fixed_process(delta):
 		get_node("Player/SamplePlayer2D").play("no_ammo")
 		get_node("BulletTimer").set_wait_time(BULLET_REFIRE)
 		get_node("BulletTimer").start()
-
-# Returns the sprint factor if the player is sprinting
-func sprinting():
-	if Input.is_action_pressed("move_speed") and Game.stamina > 0:
-		return SPRINT_FACTOR
-	else:
-		return 1.0
 
 # Returns true if the player is touching ground
 func is_touching_ground():

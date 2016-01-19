@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://data/scenes/items/ammo.tscn" type="PackedScene" id=1]
+[ext_resource path="res://data/scripts/items/health.gd" type="Script" id=2]
+[ext_resource path="res://data/textures/items/health.png" type="Texture" id=3]
+
+[node name="Ammo" instance=ExtResource( 1 )]
+
+script/script = ExtResource( 2 )
+
+[node name="Sprite" parent="."]
+
+texture = ExtResource( 3 )
+
+

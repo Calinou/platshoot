@@ -16,7 +16,7 @@ height = 40.0
 script/script = ExtResource( 1 )
 __meta__ = { "__editor_plugin_screen__":"Script" }
 
-[node name="Player" type="RigidBody2D" parent="." groups=[ "Unhittable" ]]
+[node name="Player" type="RigidBody2D" parent="."]
 
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
