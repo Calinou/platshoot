@@ -1,9 +1,17 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=17 format=1]
 
 [ext_resource path="res://data/textures/tilesets/base/base.png" type="Texture" id=1]
 [ext_resource path="res://data/textures/tilesets/base/base_slope.png" type="Texture" id=2]
 [ext_resource path="res://data/textures/tilesets/base/base_slope_half.png" type="Texture" id=3]
 [ext_resource path="res://data/textures/tilesets/base/base_slope_half_raised.png" type="Texture" id=4]
+[ext_resource path="res://data/textures/tilesets/base/sandstone_tile.png" type="Texture" id=5]
+[ext_resource path="res://data/textures/tilesets/base/light.png" type="Texture" id=6]
+[ext_resource path="res://data/textures/tilesets/base/tile.png" type="Texture" id=7]
+[ext_resource path="res://data/textures/tilesets/base/brown.png" type="Texture" id=8]
+[ext_resource path="res://data/textures/tilesets/base/computer.png" type="Texture" id=9]
+[ext_resource path="res://data/textures/tilesets/base/floor.png" type="Texture" id=10]
+[ext_resource path="res://data/textures/tilesets/base/grid.png" type="Texture" id=11]
+[ext_resource path="res://data/textures/tilesets/base/sand_light.png" type="Texture" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -15,12 +23,12 @@ extents = Vector2( 32, 32 )
 custom_solver_bias = 0.0
 segments = Vector2Array( 32, -32, -32, 32, -32, 32, 32, 32, 32, 32, 32, -32 )
 
-[sub_resource type="ConcavePolygonShape2D" id=5]
+[sub_resource type="ConcavePolygonShape2D" id=3]
 
 custom_solver_bias = 0.0
 segments = Vector2Array( -32, 32, 32, 0, 32, 0, 32, 32, 32, 32, -32, 32 )
 
-[sub_resource type="ConvexPolygonShape2D" id=6]
+[sub_resource type="ConvexPolygonShape2D" id=4]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -32, 0, 32, -32, 32, 32, -32, 32 )
@@ -31,9 +39,9 @@ __meta__ = { "__editor_plugin_screen__":"2D" }
 
 [node name="Full" type="Sprite" parent="."]
 
-visibility/visible = false
 transform/pos = Vector2( 32, 32 )
 texture = ExtResource( 1 )
+__meta__ = { "_editor_collapsed":true }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Full"]
 
@@ -47,6 +55,7 @@ constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
+__meta__ = { "_editor_collapsed":true }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Full/StaticBody2D"]
 
@@ -59,6 +68,7 @@ _update_shape_index = 0
 visibility/visible = false
 transform/pos = Vector2( 32, 32 )
 texture = ExtResource( 2 )
+__meta__ = { "_editor_collapsed":true }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Slope"]
 
@@ -85,11 +95,12 @@ trigger = false
 visibility/visible = false
 transform/pos = Vector2( 32, 32 )
 texture = ExtResource( 3 )
+__meta__ = { "_editor_collapsed":true }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="SlopeHalf"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 5 )
+shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -108,13 +119,15 @@ trigger = false
 
 [node name="SlopeHalfRaised" type="Sprite" parent="."]
 
+visibility/visible = false
 transform/pos = Vector2( 32, 32 )
 texture = ExtResource( 4 )
+__meta__ = { "_editor_collapsed":true }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="SlopeHalfRaised"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 6 )
+shapes/0/shape = SubResource( 4 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -130,5 +143,213 @@ build_mode = 0
 polygon = Vector2Array( -32, 0, 32, -32, 32, 32, -32, 32 )
 shape_range = Vector2( 0, 0 )
 trigger = false
+
+[node name="SandstoneTile" type="Sprite" parent="."]
+
+transform/pos = Vector2( 32, 32 )
+texture = ExtResource( 5 )
+__meta__ = { "_editor_collapsed":true }
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SandstoneTile"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+__meta__ = { "_editor_collapsed":true }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SandstoneTile/StaticBody2D"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Light" type="Sprite" parent="."]
+
+transform/pos = Vector2( 32, 32 )
+texture = ExtResource( 6 )
+__meta__ = { "_editor_collapsed":true }
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Light"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+__meta__ = { "_editor_collapsed":true }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Light/StaticBody2D"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Tile" type="Sprite" parent="."]
+
+transform/pos = Vector2( 32, 32 )
+texture = ExtResource( 7 )
+__meta__ = { "_editor_collapsed":true }
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Tile"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+__meta__ = { "_editor_collapsed":true }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tile/StaticBody2D"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Brown" type="Sprite" parent="."]
+
+transform/pos = Vector2( 32, 32 )
+texture = ExtResource( 8 )
+__meta__ = { "_editor_collapsed":true }
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Brown"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+__meta__ = { "_editor_collapsed":true }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Brown/StaticBody2D"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Computer" type="Sprite" parent="."]
+
+transform/pos = Vector2( 32, 32 )
+texture = ExtResource( 9 )
+__meta__ = { "_editor_collapsed":true }
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Computer"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+__meta__ = { "_editor_collapsed":true }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Computer/StaticBody2D"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Floor" type="Sprite" parent="."]
+
+transform/pos = Vector2( 32, 32 )
+texture = ExtResource( 10 )
+__meta__ = { "_editor_collapsed":true }
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Floor"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+__meta__ = { "_editor_collapsed":true }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor/StaticBody2D"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="Grid" type="Sprite" parent="."]
+
+transform/pos = Vector2( 32, 32 )
+texture = ExtResource( 11 )
+__meta__ = { "_editor_collapsed":true }
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Grid"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+__meta__ = { "_editor_collapsed":true }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Grid/StaticBody2D"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="SandLight" type="Sprite" parent="."]
+
+transform/pos = Vector2( 32, 32 )
+texture = ExtResource( 12 )
+__meta__ = { "_editor_collapsed":true }
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SandLight"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+__meta__ = { "_editor_collapsed":true }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SandLight/StaticBody2D"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
 
 

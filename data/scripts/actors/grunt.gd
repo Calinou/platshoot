@@ -20,6 +20,8 @@ onready var hurt_player = false
 # This variable is set to false when the monster dies, so that they can't
 # damage the player
 onready var dangerous = true
+
+# The health each grunt has
 onready var health = 75
 
 var death_particles_scene = preload("res://data/scenes/misc/death_particles.tscn")

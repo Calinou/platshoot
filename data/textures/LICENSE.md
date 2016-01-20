@@ -1,10 +1,8 @@
 The following files are from Freedoom (modified or not):
 - `player.png`
 - `grunt.png`
-- `items/ammo.png`
-- `items/armor.png`
-- `items/health.png`
-- `tilesets/base/base.png`
+- `items/*.png`
+- `tilesets/base/*.png`
 
 License of the Freedom assets follows:
 
