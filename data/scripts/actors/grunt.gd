@@ -20,6 +20,7 @@ onready var hurt_player = false
 # This variable is set to false when the monster dies, so that they can't
 # damage the player
 onready var dangerous = true
+onready var health = 75
 
 var death_particles_scene = preload("res://data/scenes/misc/death_particles.tscn")
 
@@ -29,6 +30,7 @@ func _ready():
 	set_fixed_process(true)
 
 func _fixed_process(delta):
+	get_node("ProgressBar").set_value(health)
 	velocity = get_linear_velocity()
 	var player_pos = get_node("/root/Level/Player/Player").get_pos()
 	var grunt_pos = get_pos()
@@ -53,6 +55,13 @@ func _fixed_process(delta):
 		set_linear_velocity(Vector2(MAX_SPEED * delta, velocity.y))
 		get_node("Sprite").set_flip_h(true)
 
+func damage(dmg):
+	health -= dmg
+	if health <= 0:
+		die()
+	else:
+		get_node("SamplePlayer2D").play("player_hurt")
+
 func die():
 	dangerous = false
 	var death_particles = death_particles_scene.instance()
@@ -62,11 +71,11 @@ func die():
 	get_node("SamplePlayer2D").play("grunt_death")
 	get_node("AnimationPlayer").play("Die")
 
+# Remove grunt after death animation
 func _on_AnimationPlayer_finished():
 	Game.kills += 1
 	Game.credits += GRUNT_KILL_CREDITS
 	queue_free()
-
 
 func _on_Area2D_body_enter(body):
 	if body.get_name() == "Player" and dangerous:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://data/scripts/actors/grunt.gd" type="Script" id=1]
 [ext_resource path="res://data/textures/grunt.png" type="Texture" id=2]
@@ -26,6 +26,26 @@ tracks/0/keys = { "cont":false, "times":FloatArray( 0, 0.25, 0.5, 0.75 ), "trans
 length = 1.5
 loop = false
 step = 0.1
+
+[sub_resource type="StyleBoxFlat" id=5]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+bg_color = Color( 1, 0.25098, 0.25098, 0.25098 )
+light_color = Color( 0.8, 0.8, 0.8, 1 )
+dark_color = Color( 0.8, 0.8, 0.8, 1 )
+border_size = 0
+border_blend = true
+draw_bg = true
+
+[sub_resource type="StyleBoxEmpty" id=6]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
 
 [sub_resource type="CircleShape2D" id=4]
 
@@ -56,7 +76,7 @@ velocity/angular = 0.0
 damp_override/linear = -1.0
 damp_override/angular = -1.0
 script/script = ExtResource( 1 )
-__meta__ = { "__editor_plugin_screen__":"Script" }
+__meta__ = { "__editor_plugin_screen__":"2D" }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
@@ -93,11 +113,31 @@ config/polyphony = 10
 config/samples = ExtResource( 3 )
 config/pitch_random = 0.0
 
+[node name="ProgressBar" type="ProgressBar" parent="."]
+
+margin/left = -32.0
+margin/top = -45.0
+margin/right = 32.0
+margin/bottom = -32.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 6 )
+range/min = 0.0
+range/max = 75.0
+range/step = 1.0
+range/page = 0.0
+range/value = 1.0
+range/exp_edit = false
+range/rounded = false
+percent/visible = false
+
 [node name="Area2D" type="Area2D" parent="."]
 
 input/pickable = true
 shapes/0/shape = SubResource( 4 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/transform = Matrix32( 1, -0, 0, 1, -1, -1 )
 shapes/0/trigger = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -106,6 +146,7 @@ angular_damp = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 
+transform/pos = Vector2( -1, -1 )
 shape = SubResource( 4 )
 trigger = true
 _update_shape_index = 0

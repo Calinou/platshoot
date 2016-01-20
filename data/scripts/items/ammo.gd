@@ -13,7 +13,7 @@ func _on_Area2D_body_enter(body):
 			return
 
 		picked = true
-		Game.ammo = min(Game.ammo + 10, 100)
+		Game.ammo = min(Game.ammo + 15, 100)
 		Game.items += 1
 		get_node("AnimationPlayer").play("Pickup")
 		get_node("SamplePlayer2D").play("pickup")

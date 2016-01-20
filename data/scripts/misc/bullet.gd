@@ -13,8 +13,8 @@ func _fixed_process(delta):
 		# Bullets can't hit the player
 		if body.get_name() != "Player":
 			_on_Timer_timeout()
-		if body.has_method("die"):
-			body.die()
+		if body.has_method("damage"):
+			body.damage(25)
 			_on_Timer_timeout()
 
 func _on_Timer_timeout():

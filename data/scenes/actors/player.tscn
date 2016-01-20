@@ -46,7 +46,7 @@ content_margin/bottom = -1.0
 [node name="Player" type="Node2D"]
 
 script/script = ExtResource( 1 )
-__meta__ = { "__editor_plugin_screen__":"2D" }
+__meta__ = { "__editor_plugin_screen__":"Script" }
 
 [node name="Player" type="RigidBody2D" parent="."]
 
