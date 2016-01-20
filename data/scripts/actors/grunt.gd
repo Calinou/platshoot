@@ -1,8 +1,19 @@
+# Copyright (c) 2016 Calinou and contributors
+# Licensed under the MIT license, see `LICENSE.md` for more information.
+
 extends RigidBody2D
 
+# Maximal movement speed
 const MAX_SPEED = 140 * 60
+
+# Minimum time between punches
 const MELEE_REFIRE = 0.4
+
+# Range above which grunts won't hunt the player
 const AGGRO_RANGE = 320
+
+# Number of credits given when killing a grunt
+const GRUNT_KILL_CREDITS = 5
 
 onready var velocity = Vector2(0, 0)
 onready var hurt_player = false
@@ -53,6 +64,7 @@ func die():
 
 func _on_AnimationPlayer_finished():
 	Game.kills += 1
+	Game.credits += GRUNT_KILL_CREDITS
 	queue_free()
 
 

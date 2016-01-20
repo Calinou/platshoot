@@ -1,7 +1,10 @@
+# Copyright (c) 2016 Calinou and contributors
+# Licensed under the MIT license, see `LICENSE.md` for more information.
+
 extends Node2D
 
 # Maximal running speed
-const MAX_SPEED = 250 * 60
+const MAX_SPEED = 275 * 60
 
 # Jump speed (velocity set when jumping)
 const JUMP_SPEED = 350 * 60
@@ -82,12 +85,12 @@ func _fixed_process(delta):
 		# Moving left
 		if Input.is_action_pressed("move_left"):
 			speed = clamp(speed - MAX_SPEED * 4 * delta, -MAX_SPEED, MAX_SPEED)
-			get_node("Player/AnimationPlayer").set_speed(1.6)
+			get_node("Player/AnimationPlayer").set_speed(1.75)
 	
 		# Moving right
 		elif Input.is_action_pressed("move_right"):
 			speed = clamp(speed + MAX_SPEED * 4 * delta, -MAX_SPEED, MAX_SPEED)
-			get_node("Player/AnimationPlayer").set_speed(1.6)
+			get_node("Player/AnimationPlayer").set_speed(1.75)
 		
 		# Friction
 		else:
@@ -146,7 +149,7 @@ func _input(event):
 		get_tree().change_scene("res://data/scenes/levels/1.tscn")
 	
 	# Suicide (default key: Ctrl+K)
-	if event.is_action_pressed("suicide"):
+	if event.is_action_pressed("suicide") and Game.status == Game.STATUS_ALIVE:
 		damage(1000)
 
 # Returns true if the player is touching ground
@@ -186,4 +189,5 @@ func respawned():
 	Game.time = 0.0
 	Game.kills = 0
 	Game.items = 0
+	Game.credits = 0
 	Game.status = Game.STATUS_ALIVE

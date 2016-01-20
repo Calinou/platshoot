@@ -19,14 +19,14 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 theme/theme = ExtResource( 1 )
 script/script = ExtResource( 2 )
-__meta__ = { "__editor_plugin_screen__":"Script" }
+__meta__ = { "__editor_plugin_screen__":"2D" }
 
 [node name="PlayButton" type="Button" parent="."]
 
 margin/left = 512.0
-margin/top = 304.0
+margin/top = 624.0
 margin/right = 800.0
-margin/bottom = 371.0
+margin/bottom = 691.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2

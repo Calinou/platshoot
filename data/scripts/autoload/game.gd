@@ -1,3 +1,6 @@
+# Copyright (c) 2016 Calinou and contributors
+# Licensed under the MIT license, see `LICENSE.md` for more information.
+
 extends Node
 
 onready var hud_scene = preload("res://data/scenes/hud/main.tscn")
@@ -12,6 +15,13 @@ const WEAPON_FIST = 0
 const WEAPON_PISTOL = 1
 const WEAPON_CHAINGUN = 2
 
+# Game stats (maximal)
+# TODO: Use them in other scripts
+const HEALTH_MAX = 100.0
+const ARMOR_MAX = 100.0
+const AMMO_MAX = 100
+const WEAPON_MAX = WEAPON_CHAINGUN
+
 # Game stats
 onready var health = 100.0
 onready var armor = 0.0
@@ -24,6 +34,7 @@ onready var kills = 0
 onready var kills_total = 0
 onready var items = 0
 onready var items_total = 0
+onready var credits = 0
 
 onready var status = STATUS_ALIVE
 

@@ -1,0 +1,83 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://data/scripts/buildings/shop.gd" type="Script" id=1]
+[ext_resource path="res://data/textures/items/ammo.png" type="Texture" id=2]
+[ext_resource path="res://data/textures/white.png" type="Texture" id=3]
+[ext_resource path="res://data/resources/sample_libraries/game.tres" type="SampleLibrary" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 48.0
+
+[node name="Shop" type="Node2D"]
+
+script/script = ExtResource( 1 )
+__meta__ = { "__editor_plugin_screen__":"Script" }
+
+[node name="Sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( 0, 16 )
+transform/scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+modulate = Color( 0.7, 1, 1.5, 1 )
+
+[node name="Particles2D" type="Particles2D" parent="."]
+
+config/amount = 32
+config/lifetime = 2.0
+config/half_extents = Vector2( 32, 0 )
+config/local_space = false
+config/texture = ExtResource( 3 )
+params/direction = 0.0
+params/spread = 15.0
+params/linear_velocity = -50.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 9.8
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 0.5
+params/final_size = 0.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+color/color = Color( 1, 1, 1, 0.25098 )
+
+[node name="SamplePlayer2D" type="SamplePlayer2D" parent="."]
+
+params/volume_db = 0.0
+params/pitch_scale = 1.0
+params/attenuation/min_distance = 1.0
+params/attenuation/max_distance = 2048.0
+params/attenuation/distance_exp = 1.0
+config/polyphony = 10
+config/samples = ExtResource( 4 )
+config/pitch_random = 0.05
+
+[node name="Area2D" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, -0, 0, 1, 0, -16 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+
+transform/pos = Vector2( 0, -16 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[connection signal="body_enter" from="Area2D" to="." method="_on_Area2D_body_enter"]
+
+[connection signal="body_exit" from="Area2D" to="." method="_on_Area2D_body_exit"]
+
+

@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://data/scenes/actors/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://data/resources/tilesets/base.tres" type="TileSet" id=2]
 [ext_resource path="res://data/scenes/items/ammo.tscn" type="PackedScene" id=3]
 [ext_resource path="res://data/scenes/items/armor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://data/scenes/items/health.tscn" type="PackedScene" id=5]
-[ext_resource path="res://data/scenes/actors/grunt.tscn" type="PackedScene" id=6]
+[ext_resource path="res://data/scenes/items/credit.tscn" type="PackedScene" id=6]
+[ext_resource path="res://data/scenes/actors/grunt.tscn" type="PackedScene" id=7]
+[ext_resource path="res://data/scenes/buildings/shop.tscn" type="PackedScene" id=8]
 
 [node name="Level" type="Node2D"]
 
@@ -30,11 +32,9 @@ collision/bounce = 0.0
 collision/layers = 1
 collision/mask = 1
 occluder/light_mask = 1
-tile_data = IntArray( -524286, 0, -524285, 0, -524284, 0, -524283, 0, -524282, 0, -524281, 0, -524280, 0, -524279, 0, -524278, 0, -524277, 0, -524276, 0, -524275, 0, -524274, 0, -524273, 0, -524272, 0, -524271, 0, -524270, 0, -524269, 0, -524268, 0, -524267, 0, -524266, 0, -524265, 0, -524264, 0, -524263, 0, -524262, 0, -524261, 0, -524260, 0, -524259, 0, -524258, 0, -524257, 0, -524256, 0, -524255, 0, -524254, 0, -393217, 0, -458752, 0, -458751, 0, -458750, 0, -458718, 0, -458717, 0, -458716, 0, -458715, 0, -458714, 0, -327685, 0, -327684, 0, -327683, 0, -327682, 0, -327681, 0, -393178, 0, -262149, 0, -327642, 0, -196613, 0, -262136, 1, -262135, 0, -262134, 0, -262133, 0, -262132, 0, -262106, 0, -131077, 0, -196602, 1, -196601, 0, -196600, 0, -196599, 0, -196596, 0, -196595, 0, -196594, 0, -196593, 0, -196570, 0, -65541, 0, -131067, 0, -131066, 0, -131065, 0, -131057, 0, -131056, 0, -131055, 0, -131054, 0, -131053, 0, -131052, 0, -131051, 0, -131048, 0, -131047, 0, -131046, 0, -131045, 0, -131044, 0, -131043, 0, -131042, 0, -131041, 0, -131040, 0, -131034, 0, -5, 0, -4, 0, -65534, 0, -65533, 0, -65532, 0, -65531, 0, -65515, 0, -65512, 0, -65504, 0, -65503, 0, -65502, 0, -65501, 0, -65500, 0, -65499, 0, -65498, 0, 65532, 0, 65533, 0, 65534, 0, 65535, 0, 0, 0, 1, 0, 2, 0, 21, 0, 24, 0, 38, 0, 131069, 0, 65557, 0, 65560, 0, 65574, 0, 196605, 0, 131093, 0, 131096, 0, 131110, 0, 262141, 0, 196632, 0, 196646, 0, 327677, 0, 327679, 0, 262168, 0, 393213, 0, 393215, 0, 327680, 0, 327704, 0, 458749, 0, 393216, 0, 393217, 0, 393218, 0, 393237, 2, 393238, 3, 393239, 0, 393240, 0, 393252, 2, 393253, 3, 393254, 0, 524285, 0, 458754, 0, 458755, 0, 458756, 0, 458770, 2, 458771, 3, 458772, 0, 458773, 0, 458774, 0, 458775, 0, 458783, 0, 458784, 0, 458785, 0, 458786, 0, 458787, 0, 458788, 0, 458789, 0, 458790, 0, 458791, 0, 458792, 0, 589821, 0, 524292, 0, 524293, 0, 524294, 0, 524306, 0, 524307, 0, 524308, 0, 524318, 0, 524319, 0, 524328, 0, 655357, 0, 655358, 0, 589830, 0, 589831, 0, 589832, 0, 589833, 536870915, 589834, 536870914, 589835, 2, 589836, 3, 589837, 0, 589838, 0, 589839, 0, 589840, 0, 589841, 0, 589842, 0, 589851, 0, 589852, 0, 589853, 0, 589854, 0, 589864, 0, 720894, 0, 655368, 0, 655369, 0, 655370, 0, 655371, 0, 655372, 0, 655373, 0, 655386, 0, 655387, 0, 655400, 0, 786430, 0, 786431, 0, 720921, 0, 720922, 0, 720936, 0, 851967, 0, 786456, 0, 786457, 0, 786472, 0, 786508, 0, 786509, 0, 786510, 0, 786511, 0, 786512, 0, 786513, 0, 786514, 0, 786515, 0, 917503, 0, 851968, 0, 851969, 0, 851978, 2, 851979, 536870914, 851984, 2, 851985, 536870914, 851991, 0, 851992, 0, 852008, 0, 852043, 0, 852044, 0, 852045, 1610612737, 852050, 1073741825, 852051, 0, 917505, 0, 917507, 0, 917509, 0, 917510, 0, 917511, 0, 917512, 0, 917513, 0, 917514, 0, 917515, 0, 917516, 0, 917517, 0, 917518, 0, 917519, 0, 917520, 0, 917521, 0, 917522, 0, 917523, 0, 917524, 0, 917525, 0, 917526, 0, 917527, 0, 917544, 0, 917545, 0, 917577, 0, 917578, 0, 917579, 0, 917580, 1610612737, 917587, 0, 983041, 0, 983042, 0, 983043, 0, 983044, 0, 983045, 0, 983081, 0, 983100, 1073741825, 983101, 0, 983102, 0, 983103, 0, 983104, 0, 983105, 0, 983106, 0, 983107, 0, 983108, 0, 983109, 0, 983110, 0, 983111, 0, 983112, 0, 983113, 0, 983114, 1610612737, 983123, 0, 1048617, 0, 1048618, 0, 1048659, 0, 1114154, 0, 1114194, 1, 1114195, 0, 1179690, 0, 1179691, 0, 1179700, 1, 1179701, 0, 1179702, 0, 1179703, 0, 1179704, 0, 1179705, 0, 1179709, 0, 1179710, 0, 1179711, 0, 1179712, 0, 1179713, 0, 1179714, 0, 1179715, 0, 1179716, 0, 1179717, 0, 1179718, 0, 1179719, 0, 1179720, 0, 1179722, 0, 1179724, 0, 1179726, 0, 1179727, 0, 1179728, 0, 1179729, 0, 1179730, 0, 1179731, 0, 1245227, 0, 1245235, 1, 1245236, 0, 1245237, 0, 1245241, 0, 1245242, 0, 1245258, 0, 1245260, 0, 1245262, 0, 1310763, 0, 1310764, 0, 1310770, 1, 1310771, 0, 1310772, 0, 1310778, 0, 1310779, 0, 1310798, 0, 1376300, 0, 1376306, 0, 1376307, 0, 1376315, 0, 1376316, 0, 1376317, 0, 1376334, 0, 1441836, 0, 1441837, 0, 1441838, 0, 1441839, 0, 1441840, 0, 1441841, 0, 1441842, 0, 1441853, 0, 1441854, 0, 1441855, 0, 1441856, 0, 1441857, 0, 1441858, 0, 1441859, 0, 1441860, 0, 1441861, 0, 1441862, 0, 1441863, 0, 1441864, 0, 1441865, 0, 1441866, 0, 1441867, 0, 1441868, 0, 1441869, 0, 1441870, 0 )
+tile_data = IntArray( -524286, 0, -524285, 0, -524284, 0, -524283, 0, -524282, 0, -524281, 0, -524280, 0, -524279, 0, -524278, 0, -524277, 0, -524276, 0, -524275, 0, -524274, 0, -524273, 0, -524272, 0, -524271, 0, -524270, 0, -524269, 0, -524268, 0, -524267, 0, -524266, 0, -524265, 0, -524264, 0, -524263, 0, -524262, 0, -524261, 0, -524260, 0, -524259, 0, -524258, 0, -524257, 0, -524256, 0, -524255, 0, -524254, 0, -393217, 0, -458752, 0, -458751, 0, -458750, 0, -458718, 0, -458717, 0, -458716, 0, -458715, 0, -458714, 0, -327685, 0, -327684, 0, -327683, 0, -327682, 0, -327681, 0, -393178, 0, -262149, 0, -327642, 0, -327641, 0, -327640, 0, -196613, 0, -262136, 1, -262135, 0, -262134, 0, -262133, 0, -262132, 0, -131077, 0, -196602, 1, -196601, 0, -196600, 0, -196599, 0, -196596, 0, -196595, 0, -196594, 0, -196593, 0, -65541, 0, -131067, 0, -131066, 0, -131065, 0, -131057, 0, -131056, 0, -131055, 0, -131053, 0, -131052, 0, -131051, 0, -131048, 0, -131047, 0, -131046, 0, -131045, 0, -131044, 0, -131043, 0, -131042, 0, -131041, 0, -131040, 0, -131034, 1, -131033, 0, -131032, 0, -5, 0, -4, 0, -65534, 0, -65533, 0, -65532, 0, -65531, 0, -65515, 0, -65512, 0, -65504, 0, -65503, 0, -65502, 0, -65501, 0, -65500, 0, -65499, 0, -65498, 0, -65497, 1610612737, 65532, 0, 65533, 0, 65534, 0, 65535, 0, 0, 0, 1, 0, 2, 0, 21, 0, 24, 0, 38, 0, 131069, 0, 65557, 0, 65560, 0, 65574, 0, 196605, 0, 131091, 0, 131092, 0, 131093, 0, 131096, 0, 131110, 0, 262141, 0, 196627, 0, 196632, 0, 196646, 0, 327677, 0, 327679, 0, 262158, 0, 262159, 0, 262160, 0, 262161, 0, 262162, 0, 262163, 0, 262168, 0, 393213, 0, 393215, 0, 327680, 0, 327704, 0, 458749, 0, 393216, 0, 393217, 0, 393218, 0, 393237, 2, 393238, 3, 393239, 0, 393240, 0, 393252, 2, 393253, 3, 393254, 0, 524285, 0, 458754, 0, 458755, 0, 458756, 0, 458770, 2, 458771, 3, 458772, 0, 458773, 0, 458774, 0, 458775, 0, 458783, 0, 458784, 0, 458785, 0, 458786, 0, 458787, 0, 458788, 0, 458789, 0, 458790, 0, 458791, 0, 458792, 0, 589821, 0, 524292, 0, 524293, 0, 524294, 0, 524306, 0, 524307, 0, 524308, 0, 524318, 0, 524319, 0, 524328, 0, 655357, 0, 655358, 0, 589830, 0, 589831, 0, 589832, 0, 589833, 536870915, 589834, 536870914, 589835, 2, 589836, 3, 589837, 0, 589838, 0, 589839, 0, 589840, 0, 589841, 0, 589842, 0, 589851, 0, 589852, 0, 589853, 0, 589854, 0, 589864, 0, 720894, 0, 655368, 0, 655369, 0, 655370, 0, 655371, 0, 655372, 0, 655373, 0, 655386, 0, 655387, 0, 655400, 0, 786430, 0, 786431, 0, 720921, 0, 720922, 0, 851967, 0, 786456, 0, 786457, 0, 786508, 0, 786509, 0, 786510, 0, 786511, 0, 786512, 0, 786513, 0, 786514, 0, 786515, 0, 917503, 0, 851968, 0, 851969, 0, 851978, 2, 851979, 536870914, 851984, 2, 851985, 536870914, 851991, 0, 851992, 0, 851993, 536870912, 851994, 536870912, 851995, 536870912, 851996, 536870912, 851997, 536870912, 851998, 536870912, 851999, 536870912, 852000, 536870912, 852001, 536870912, 852002, 536870912, 852003, 536870912, 852004, 536870912, 852005, 536870912, 852006, 536870912, 852007, 536870912, 852008, 0, 852043, 0, 852044, 0, 852045, 1610612737, 852050, 1073741825, 852051, 0, 917505, 0, 917507, 0, 917509, 0, 917510, 0, 917511, 0, 917512, 0, 917513, 0, 917514, 0, 917515, 0, 917516, 0, 917517, 0, 917518, 0, 917519, 0, 917520, 0, 917521, 0, 917522, 0, 917523, 0, 917524, 0, 917525, 0, 917526, 0, 917527, 0, 917544, 0, 917545, 0, 917577, 0, 917578, 0, 917579, 0, 917580, 1610612737, 917587, 0, 983041, 0, 983042, 0, 983043, 0, 983044, 0, 983045, 0, 983081, 0, 983100, 1073741825, 983101, 0, 983102, 0, 983103, 0, 983104, 0, 983105, 0, 983106, 0, 983107, 0, 983108, 0, 983109, 0, 983110, 0, 983111, 0, 983112, 0, 983113, 0, 983114, 1610612737, 983123, 0, 1048617, 0, 1048618, 0, 1048659, 0, 1114154, 0, 1114194, 1, 1114195, 0, 1179690, 0, 1179691, 0, 1179700, 1, 1179701, 0, 1179702, 0, 1179703, 0, 1179704, 0, 1179705, 0, 1179709, 0, 1179710, 0, 1179711, 0, 1179712, 0, 1179713, 0, 1179714, 0, 1179715, 0, 1179716, 0, 1179717, 0, 1179718, 0, 1179719, 0, 1179720, 0, 1179722, 0, 1179724, 0, 1179726, 0, 1179727, 0, 1179728, 0, 1179729, 0, 1179730, 0, 1179731, 0, 1245227, 0, 1245235, 1, 1245236, 0, 1245237, 0, 1245241, 0, 1245242, 0, 1245258, 0, 1245260, 0, 1245262, 0, 1310763, 0, 1310764, 0, 1310770, 1, 1310771, 0, 1310772, 0, 1310778, 0, 1310779, 0, 1310798, 0, 1376300, 0, 1376306, 0, 1376307, 0, 1376315, 0, 1376316, 0, 1376317, 0, 1376334, 0, 1441836, 0, 1441837, 0, 1441838, 0, 1441839, 0, 1441840, 0, 1441841, 0, 1441842, 0, 1441853, 0, 1441854, 0, 1441855, 0, 1441856, 0, 1441857, 0, 1441858, 0, 1441859, 0, 1441860, 0, 1441861, 0, 1441862, 0, 1441863, 0, 1441864, 0, 1441865, 0, 1441866, 0, 1441867, 0, 1441868, 0, 1441869, 0, 1441870, 0 )
 
 [node name="Items" type="Node2D" parent="."]
-
-__meta__ = { "_editor_collapsed":true }
 
 [node name="Ammo" parent="Items" instance=ExtResource( 3 )]
 
@@ -148,214 +148,276 @@ transform/pos = Vector2( 992, 864 )
 
 transform/pos = Vector2( 2656, 416 )
 
+[node name="Ammo 4" parent="Items" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( -96, -96 )
+
+[node name="Ammo3 2" parent="Items" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 1120, 224 )
+
+[node name="Ammo110" parent="Items" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 1440, 96 )
+
+[node name="Ammo111" parent="Items" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 2336, -96 )
+
+[node name="Ammo112" parent="Items" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 2464, -96 )
+
+[node name="Ammo113" parent="Items" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 2656, -160 )
+
+[node name="Ammo26" parent="Items" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 1952, 800 )
+
+[node name="Ammo27" parent="Items" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 2080, 800 )
+
+[node name="Ammo114" parent="Items" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 2208, 800 )
+
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="Grunt" parent="Enemies" instance=ExtResource( 6 )]
+__meta__ = { "_editor_collapsed":true }
+
+[node name="Grunt" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 736, -288 )
 
-[node name="Grunt1" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt1" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 480, -160 )
 
-[node name="Grunt2" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt2" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 800, -288 )
 
-[node name="Grunt3" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt3" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 864, -288 )
 
-[node name="Grunt4" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt4" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 1056, -224 )
 
-[node name="Grunt5" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt5" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 1440, -160 )
 
-[node name="Grunt6" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt6" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 2016, -160 )
 
-[node name="Grunt7" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt7" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 2528, -96 )
 
-[node name="Grunt8" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt8" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 2400, -96 )
 
-[node name="Grunt9" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt9" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 1056, 544 )
 
-[node name="Grunt10" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt10" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 1184, 544 )
 
-[node name="Grunt11" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt11" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 800, 608 )
 
-[node name="Grunt12" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt12" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 416, 416 )
 
-[node name="Grunt13" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt13" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 160, 288 )
 
-[node name="Grunt14" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt14" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 32, 544 )
 
-[node name="Grunt15" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt15" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 96, 672 )
 
-[node name="Grunt16" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt16" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 160, 800 )
 
-[node name="Grunt17" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt17" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 736, 864 )
 
-[node name="Grunt18" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt18" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 1440, 864 )
 
-[node name="Grunt19" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt19" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 1760, 672 )
 
-[node name="Grunt20" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt20" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 1952, 544 )
 
-[node name="Grunt21" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt21" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 2208, 416 )
 
-[node name="Grunt22" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt22" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 2400, 416 )
 
-[node name="Grunt23" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt23" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 2080, 480 )
 
-[node name="Grunt24" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt24" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 608, 544 )
 
-[node name="Grunt25" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt25" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 2720, 416 )
 
-[node name="Grunt26" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt26" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 2848, 992 )
 
-[node name="Grunt27" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt27" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 2976, 1248 )
 
-[node name="Grunt28" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt28" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 2912, 1120 )
 
-[node name="Grunt29" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt29" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 2784, 864 )
 
-[node name="Grunt30" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt30" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 3296, 1376 )
 
-[node name="Grunt31" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt31" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 3680, 1120 )
 
-[node name="Grunt32" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt32" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 3744, 1120 )
 
-[node name="Grunt33" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt33" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 3808, 1120 )
 
-[node name="Grunt34" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt34" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 3616, 1120 )
 
-[node name="Grunt35" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt35" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 3552, 1120 )
 
-[node name="Grunt36" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt36" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 4128, 1120 )
 
-[node name="Grunt37" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt37" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 4192, 1376 )
 
-[node name="Grunt38" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt38" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 4256, 1120 )
 
-[node name="Grunt39" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt39" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 4320, 1376 )
 
-[node name="Grunt40" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt40" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 4384, 1120 )
 
-[node name="Grunt41" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt41" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 4448, 1376 )
 
-[node name="Grunt42" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt42" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 4512, 1120 )
 
-[node name="Grunt43" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt43" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 4576, 1376 )
 
-[node name="Grunt44" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt44" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 4640, 1120 )
 
-[node name="Grunt45" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt45" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 4704, 1376 )
 
-[node name="Grunt46" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt46" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 4768, 1120 )
 
-[node name="Grunt47" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt47" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 4832, 1376 )
 
-[node name="Grunt48" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt48" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 4896, 1120 )
 
-[node name="Grunt49" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt49" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 4960, 1376 )
 
-[node name="Grunt50" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt50" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 5024, 1120 )
 
-[node name="Grunt51" parent="Enemies" instance=ExtResource( 6 )]
+[node name="Grunt51" parent="Enemies" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 5088, 1376 )
+
+[node name="Grunt52" parent="Enemies" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 1888, 800 )
+
+[node name="Grunt53" parent="Enemies" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 2016, 800 )
+
+[node name="Grunt54" parent="Enemies" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 2144, 800 )
+
+[node name="Grunt55" parent="Enemies" instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 2272, 800 )
+
+[node name="Buildings" type="Node2D" parent="."]
+
+__meta__ = { "_editor_collapsed":true }
+
+[node name="Shop" parent="Buildings" instance=ExtResource( 8 )]
+
+transform/pos = Vector2( 2080, -160 )
 
 
