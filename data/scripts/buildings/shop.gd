@@ -29,7 +29,7 @@ func _on_Area2D_body_enter(body):
 		close_to_shop = true
 		# Show a message to display availability of ammo according to credits
 		if Game.credits >= AMMO_COST and Game.ammo < 100:
-			get_node("/root/Game/HUD").notice("Press [b]MOUSE2[/b] or [b]E[/b] to buy 10 ammo (70 credits)")
+			get_node("/root/Game/HUD").notice("Press [b]MOUSE2[/b] or [b]E[/b] to buy " + str(AMMO_PACKAGE) + " ammo (" + str(AMMO_COST) + " credits)")
 		elif Game.ammo >= 100:
 			get_node("/root/Game/HUD").notice("Ammo supplies already full")
 		else:

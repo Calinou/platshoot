@@ -19,7 +19,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 2
 theme/theme = ExtResource( 1 )
 script/script = ExtResource( 2 )
-__meta__ = { "__editor_plugin_screen__":"2D" }
+__meta__ = { "__editor_plugin_screen__":"Script" }
 
 [node name="PlayButton" type="Button" parent="."]
 
@@ -35,6 +35,29 @@ toggle_mode = false
 text = "PLAY"
 flat = false
 
+[node name="SpinBox" type="SpinBox" parent="."]
+
+margin/left = 384.0
+margin/top = 640.0
+margin/right = 496.0
+margin/bottom = 679.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+range/min = 1.0
+range/max = 2.0
+range/step = 1.0
+range/page = 0.0
+range/value = 1.0
+range/exp_edit = false
+range/rounded = false
+editable = true
+prefix = ""
+suffix = ""
+
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
+
+[connection signal="value_changed" from="SpinBox" to="." method="_on_SpinBox_value_changed"]
 
 

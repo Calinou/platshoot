@@ -11,6 +11,7 @@ func _fixed_process(delta):
 	get_node("Control/HealthProgressBar").set_value(Game.health)
 	get_node("Control/ArmorProgressBar").set_value(Game.armor)
 	get_node("Control/AmmoProgressBar").set_value(Game.ammo)
+	get_node("Control/FuelProgressBar").set_value(Game.fuel)
 	get_node("Control/AmmoLabel").set_text(tr(Game.get_weapon_name(Game.weapon)))
 	
 	# Stats

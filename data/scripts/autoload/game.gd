@@ -28,6 +28,7 @@ onready var health = 100.0
 onready var armor = 0.0
 onready var ammo = 25
 onready var weapon = WEAPON_PISTOL
+onready var fuel = 100.0
 
 # Level stats
 onready var time = 0.0
@@ -36,6 +37,9 @@ onready var kills_total = 0
 onready var items = 0
 onready var items_total = 0
 onready var credits = 0
+
+# For menus and respawning
+onready var level_to_play = 1
 
 onready var status = STATUS_ALIVE
 

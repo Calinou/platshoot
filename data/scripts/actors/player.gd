@@ -9,6 +9,12 @@ const MAX_SPEED = 275 * 60
 # Jump speed (velocity set when jumping)
 const JUMP_SPEED = 350 * 60
 
+# Jetpack speed
+const JETPACK_SPEED = 17.5 * 60
+
+## Horizontal speed bonus when using jetpack (factor)
+const JETPACK_BONUS = 1.15
+
 # Speed of bullets
 const BULLET_SPEED = 1250
 
@@ -92,7 +98,7 @@ func _fixed_process(delta):
 			speed = clamp(speed + MAX_SPEED * 4 * delta, -MAX_SPEED, MAX_SPEED)
 			get_node("Player/AnimationPlayer").set_speed(1.75)
 		
-		# Friction
+		# Friction (when the player doesn't press any movement key)
 		else:
 			speed *= 0.925
 			get_node("Player/AnimationPlayer").set_speed(0)
@@ -100,13 +106,21 @@ func _fixed_process(delta):
 		# Set the new velocity
 		get_node("Player").set_linear_velocity(Vector2(speed * delta, velocity.y))
 		
+		# Falling damage
 		if velocity_new.y - velocity.y >= FALL_DAMAGE_THRESHOLD:
 			damage((velocity_new.y - velocity.y - FALL_DAMAGE_THRESHOLD) / FALL_DAMAGE_FACTOR)
 		
 		# Jumping
 		if Input.is_action_pressed("move_up") and is_touching_ground():
 			get_node("Player").set_linear_velocity(Vector2(velocity.x, -JUMP_SPEED * delta))
+		
+		# Jetpack (uses fuel)
+		if Input.is_action_pressed("jetpack") and Game.fuel > 0:
+			get_node("Player").set_linear_velocity(Vector2(JETPACK_BONUS * speed * delta, velocity.y - JETPACK_SPEED * delta))
+			Game.fuel = max(0, Game.fuel - 20 * delta)
+			get_node("Player/Particles2D").set_emitting(true)
 	
+		# Firing weapons
 		if Input.is_action_pressed("attack") and Game.ammo >= 1 and get_node("BulletTimer").get_time_left() == 0:
 			var bullet = bullet_scene.instance()
 			bullet.set_pos(get_node("Player/Gun").get_global_pos())
@@ -126,7 +140,21 @@ func _fixed_process(delta):
 			elif Game.weapon == Game.WEAPON_CHAINGUN:
 				get_node("BulletTimer").set_wait_time(BULLET_REFIRE / 3)
 			get_node("BulletTimer").start()
+
+		# Fuel regeneration
+		if not Input.is_action_pressed("jetpack"):
+			Game.fuel = min(100, Game.fuel + 6 * delta)
+			# Disable jetpack particles
+			get_node("Player/Particles2D").set_emitting(false)
 		
+		# Disable jetpack particles if having no fuel (even when pressing the key)
+		if Game.fuel <= 1:
+			get_node("Player/Particles2D").set_emitting(false)
+
+		# Falling very fast kills the player
+		if velocity.y >= 2000:
+			damage(1000)
+
 		velocity_new = get_node("Player").get_linear_velocity()
 
 func _input(event):
@@ -146,7 +174,7 @@ func _input(event):
 	
 	# Respawn when clicking, if dead, after a delay of 2.5 seconds
 	if Game.status == Game.STATUS_DEAD and event.is_action_pressed("attack") and get_node("RespawnTimer").get_time_left() == 0:
-		get_tree().change_scene("res://data/scenes/levels/1.tscn")
+		get_tree().change_scene("res://data/scenes/levels/" + str(Game.level_to_play) + ".tscn")
 	
 	# Suicide (default key: Ctrl+K)
 	if event.is_action_pressed("suicide") and Game.status == Game.STATUS_ALIVE:
@@ -181,10 +209,11 @@ func die():
 
 # Called when the player respawns
 func respawned():
-	Game.health = 100
+	Game.health = 100.0
 	Game.armor = 0
 	Game.ammo = 25
 	Game.weapon = Game.WEAPON_PISTOL
+	Game.fuel = 100.0
 	
 	Game.time = 0.0
 	Game.kills = 0

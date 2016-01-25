@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=11 format=1]
 
 [ext_resource path="res://data/scripts/actors/player.gd" type="Script" id=1]
 [ext_resource path="res://data/textures/player.png" type="Texture" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://data/resources/sample_libraries/game.tres" type="SampleLibrary" id=4]
-[ext_resource path="res://data/textures/crosshair.png" type="Texture" id=5]
+[ext_resource path="res://data/textures/white.png" type="Texture" id=5]
+[ext_resource path="res://data/textures/crosshair.png" type="Texture" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -47,7 +48,7 @@ content_margin/bottom = -1.0
 
 z/z = 2
 script/script = ExtResource( 1 )
-__meta__ = { "__editor_plugin_screen__":"2D" }
+__meta__ = { "__editor_plugin_screen__":"Script" }
 
 [node name="Player" type="RigidBody2D" parent="."]
 
@@ -93,7 +94,7 @@ limit/bottom = 10000000
 drag_margin/h_enabled = true
 drag_margin/v_enabled = true
 smoothing/enable = true
-smoothing/speed = 6.0
+smoothing/speed = 8.0
 drag_margin/left = 0.0
 drag_margin/top = 0.0
 drag_margin/right = 0.0
@@ -133,6 +134,32 @@ config/polyphony = 10
 config/samples = ExtResource( 4 )
 config/pitch_random = 0.05
 
+[node name="Particles2D" type="Particles2D" parent="Player"]
+
+config/amount = 64
+config/lifetime = 2.0
+config/emitting = false
+config/half_extents = Vector2( 12, 0 )
+config/local_space = false
+config/texture = ExtResource( 5 )
+params/direction = 0.0
+params/spread = 15.0
+params/linear_velocity = 50.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 9.8
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 0.5
+params/final_size = 0.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+color/color = Color( 0.25098, 0.752941, 1, 0.501961 )
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 
 playback/process_mode = 1
@@ -162,7 +189,7 @@ autostart = false
 
 transform/scale = Vector2( 0.125, 0.125 )
 z/z = 4096
-texture = ExtResource( 5 )
+texture = ExtResource( 6 )
 
 [node name="ProgressBar" type="ProgressBar" parent="Crosshair"]
 
