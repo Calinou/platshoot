@@ -44,7 +44,7 @@ onready var level_to_play = 1
 onready var status = STATUS_ALIVE
 
 func _ready():
-	print("Platshoot [0.0.1]")
+	print("Platshoot [0.1.0]")
 
 	var hud = hud_scene.instance()
 	add_child(hud)
