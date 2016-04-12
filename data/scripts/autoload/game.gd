@@ -63,6 +63,12 @@ func _fixed_process(delta):
 func _input(event):
 	if event.is_action_pressed("toggle_fullscreen"):
 		OS.set_window_fullscreen(!OS.is_window_fullscreen())
+	
+	if event.is_action_pressed("toggle_hud"):
+		if get_node("/root/Game/HUD/Control").is_hidden():
+			show_hud()
+		else:
+			hide_hud()
 
 # Makes a number (like 80) into a string like "1:20"
 func time_string(game_time):
@@ -75,4 +81,19 @@ func get_weapon_name(weap):
 		return "PISTOL"
 	elif weap == WEAPON_CHAINGUN:
 		return "CHAINGUN"
-		
+
+# Hides the HUD (for menu, and the "hide HUD" key)
+# The HUD elements are hidden individually because CanvasLayer can't be hidden
+func hide_hud():
+	get_node("/root/Game/HUD/Notices").hide()
+	get_node("/root/Game/HUD/FPS").hide()
+	get_node("/root/Game/HUD/Stats").hide()
+	get_node("/root/Game/HUD/Control").hide()
+
+# Shows the HUD (when the player enters game, or uses the "hide HUD" key while
+# the HUD is hidden
+func show_hud():
+	get_node("/root/Game/HUD/Notices").show()
+	get_node("/root/Game/HUD/FPS").show()
+	get_node("/root/Game/HUD/Stats").show()
+	get_node("/root/Game/HUD/Control").show()

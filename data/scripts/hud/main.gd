@@ -23,5 +23,6 @@ func _fixed_process(delta):
 func notice(bbcode):
 	get_node("Notices/NoticesLabel").set_bbcode("[center]" + bbcode + "[/center]")
 
+# Clears the notice by setting empty text to it
 func clear_notice():
 	get_node("Notices/NoticesLabel").set_bbcode("")

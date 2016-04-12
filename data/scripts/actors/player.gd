@@ -52,6 +52,9 @@ func _ready():
 	set_fixed_process(true)
 	set_process_input(true)
 	
+	# Show HUD when player is in scene
+	Game.show_hud()
+	
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _fixed_process(delta):
@@ -167,7 +170,7 @@ func _input(event):
 		get_node("Player/Camera2D").set_zoom(Vector2(0.5, 0.5))
 	
 	# Change weapon
-	if event.is_action("weapon_prev"):
+	if event.is_action("weapon_previous"):
 		Game.weapon = clamp(Game.weapon - 1, 1, 2)
 	if event.is_action("weapon_next"):
 		Game.weapon = clamp(Game.weapon + 1, 1, 2)

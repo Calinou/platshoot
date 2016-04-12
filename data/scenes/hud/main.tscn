@@ -124,25 +124,26 @@ anchor/left = 3
 anchor/top = 3
 anchor/right = 3
 anchor/bottom = 3
-margin/left = 640.0
-margin/top = 360.0
-margin/right = 608.0
-margin/bottom = 328.0
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 theme/theme = ExtResource( 2 )
+margin/left = 640.0
+margin/top = 360.0
+margin/right = 608.0
+margin/bottom = 328.0
 
 [node name="NoticesLabel" type="RichTextLabel" parent="Notices"]
 
-margin/top = 112.0
-margin/right = 1280.0
-margin/bottom = 432.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 112.0
+margin/right = 1280.0
+margin/bottom = 432.0
 bbcode/enabled = true
 bbcode/bbcode = ""
 visible_characters = -1
@@ -150,23 +151,25 @@ visible_characters = -1
 [node name="FPS" type="Control" parent="."]
 
 visibility/self_opacity = 0.0
-margin/right = 224.0
-margin/bottom = 64.0
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 theme/theme = ExtResource( 2 )
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 224.0
+margin/bottom = 64.0
 
 [node name="FPSLabel" type="Label" parent="FPS"]
 
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
 margin/left = 16.0
 margin/top = 16.0
 margin/right = 69.0
 margin/bottom = 45.0
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
 text = "FPS:"
 percent_visible = 1.0
 lines_skipped = 0
@@ -177,24 +180,26 @@ max_lines_visible = -1
 visibility/self_opacity = 0.0
 anchor/left = 1
 anchor/right = 1
-margin/left = 256.0
-margin/bottom = 336.0
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 theme/theme = ExtResource( 2 )
+margin/left = 256.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 336.0
 
 [node name="StatsLabel" type="RichTextLabel" parent="Stats"]
 
-margin/left = 16.0
-margin/top = 16.0
-margin/right = 240.0
-margin/bottom = 320.0
 focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
+margin/left = 16.0
+margin/top = 16.0
+margin/right = 240.0
+margin/bottom = 320.0
 custom_fonts/bold_font = ExtResource( 3 )
 bbcode/enabled = true
 bbcode/bbcode = "[right][b]KILLS[/b]\n0 / 0\n\n[b]ITEMS[/b]\n0 / 0\n\n[b]CREDITS[/b]\n0[/right]"
@@ -206,25 +211,25 @@ anchor/left = 3
 anchor/top = 1
 anchor/right = 3
 anchor/bottom = 1
-margin/left = 640.0
-margin/top = 720.0
-margin/right = 640.0
-margin/bottom = 720.0
 focus/ignore_mouse = false
 focus/stop_mouse = false
 size_flags/horizontal = 2
 size_flags/vertical = 2
 theme/theme = ExtResource( 2 )
+margin/left = 640.0
+margin/top = 720.0
+margin/right = 640.0
+margin/bottom = 720.0
 
 [node name="HealthLabel" type="Label" parent="Control"]
 
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
 margin/left = 64.0
 margin/top = 640.0
 margin/right = 174.0
 margin/bottom = 669.0
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
 text = "HEALTH"
 align = 2
 valign = 1
@@ -234,13 +239,13 @@ max_lines_visible = -1
 
 [node name="ArmorLabel" type="Label" parent="Control"]
 
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
 margin/left = 64.0
 margin/top = 672.0
 margin/right = 174.0
 margin/bottom = 701.0
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
 text = "ARMOR"
 align = 2
 valign = 1
@@ -250,13 +255,13 @@ max_lines_visible = -1
 
 [node name="AmmoLabel" type="Label" parent="Control"]
 
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
 margin/left = 704.0
 margin/top = 672.0
 margin/right = 1102.0
 margin/bottom = 701.0
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
 text = "AMMO"
 align = 2
 valign = 1
@@ -266,13 +271,13 @@ max_lines_visible = -1
 
 [node name="FuelLabel" type="Label" parent="Control"]
 
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
 margin/left = 704.0
 margin/top = 640.0
 margin/right = 1102.0
 margin/bottom = 669.0
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
 text = "FUEL"
 align = 2
 valign = 1
@@ -282,13 +287,13 @@ max_lines_visible = -1
 
 [node name="HealthProgressBar" type="ProgressBar" parent="Control"]
 
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
 margin/left = 194.0
 margin/top = 640.0
 margin/right = 334.0
 margin/bottom = 669.0
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 range/min = 0.0
@@ -302,13 +307,13 @@ percent/visible = true
 
 [node name="ArmorProgressBar" type="ProgressBar" parent="Control"]
 
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
 margin/left = 194.0
 margin/top = 672.0
 margin/right = 334.0
 margin/bottom = 701.0
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
 custom_styles/fg = SubResource( 3 )
 custom_styles/bg = SubResource( 4 )
 range/min = 0.0
@@ -322,13 +327,13 @@ percent/visible = true
 
 [node name="AmmoProgressBar" type="ProgressBar" parent="Control"]
 
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
 margin/left = 1122.0
 margin/top = 672.0
 margin/right = 1262.0
 margin/bottom = 701.0
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
 custom_styles/fg = SubResource( 5 )
 custom_styles/bg = SubResource( 6 )
 range/min = 0.0
@@ -342,13 +347,13 @@ percent/visible = true
 
 [node name="FuelProgressBar" type="ProgressBar" parent="Control"]
 
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
 margin/left = 1122.0
 margin/top = 640.0
 margin/right = 1262.0
 margin/bottom = 669.0
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
 custom_styles/fg = SubResource( 7 )
 custom_styles/bg = SubResource( 8 )
 range/min = 0.0

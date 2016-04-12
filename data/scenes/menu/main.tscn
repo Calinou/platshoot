@@ -9,42 +9,42 @@ anchor/left = 3
 anchor/top = 3
 anchor/right = 3
 anchor/bottom = 3
-margin/left = 640.0
-margin/top = 360.0
-margin/right = 600.0
-margin/bottom = 320.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 theme/theme = ExtResource( 1 )
+margin/left = 640.0
+margin/top = 360.0
+margin/right = 600.0
+margin/bottom = 320.0
 script/script = ExtResource( 2 )
 __meta__ = { "__editor_plugin_screen__":"2D" }
 
 [node name="PlayButton" type="Button" parent="."]
 
-margin/left = 512.0
-margin/top = 624.0
-margin/right = 800.0
-margin/bottom = 691.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
+margin/left = 512.0
+margin/top = 624.0
+margin/right = 800.0
+margin/bottom = 691.0
 toggle_mode = false
 text = "PLAY"
 flat = false
 
 [node name="SpinBox" type="SpinBox" parent="."]
 
-margin/left = 384.0
-margin/top = 640.0
-margin/right = 496.0
-margin/bottom = 679.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
+margin/left = 384.0
+margin/top = 640.0
+margin/right = 496.0
+margin/bottom = 679.0
 range/min = 1.0
 range/max = 2.0
 range/step = 1.0
