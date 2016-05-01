@@ -12,3 +12,7 @@ func _on_PlayButton_pressed():
 
 func _on_SpinBox_value_changed(value):
 	Game.level_to_play = int(value)
+
+# Change the sound volume when the slider value is changed
+func _on_VolumeSlider_value_changed(value):
+	AudioServer.set_fx_global_volume_scale(float(value))

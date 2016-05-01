@@ -27,10 +27,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 512.0
-margin/top = 624.0
-margin/right = 800.0
-margin/bottom = 691.0
+margin/left = 640.0
+margin/top = 480.0
+margin/right = 840.0
+margin/bottom = 560.0
 toggle_mode = false
 text = "PLAY"
 flat = false
@@ -41,10 +41,10 @@ focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 384.0
-margin/top = 640.0
-margin/right = 496.0
-margin/bottom = 679.0
+margin/left = 480.0
+margin/top = 520.0
+margin/right = 600.0
+margin/bottom = 559.0
 range/min = 1.0
 range/max = 2.0
 range/step = 1.0
@@ -53,11 +53,47 @@ range/value = 1.0
 range/exp_edit = false
 range/rounded = false
 editable = true
-prefix = ""
+prefix = "Level"
 suffix = ""
+
+[node name="VolumeSlider" type="HSlider" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+margin/left = 680.0
+margin/top = 320.0
+margin/right = 840.0
+margin/bottom = 336.0
+range/min = 0.0
+range/max = 2.0
+range/step = 1.0
+range/page = 0.0
+range/value = 1.0
+range/exp_edit = false
+range/rounded = false
+tick_count = 0
+ticks_on_borders = false
+
+[node name="Label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+margin/left = 360.0
+margin/top = 320.0
+margin/right = 645.0
+margin/bottom = 360.0
+text = "Sound Volume"
+align = 2
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
 
 [connection signal="value_changed" from="SpinBox" to="." method="_on_SpinBox_value_changed"]
+
+[connection signal="value_changed" from="VolumeSlider" to="." method="_on_VolumeSlider_value_changed"]
 
 
