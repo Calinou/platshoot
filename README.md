@@ -1,5 +1,12 @@
 # Platshoot
 
+___
+
+**This repository is no longer maintained. The project is only compatible with
+Godot 2.x, not Godot 3.x or later.**
+
+___
+
 A 2D shooter game. Kill enemies and move through levels! And collect and spend
 credits while you're at it.
 
@@ -16,5 +23,5 @@ credits while you're at it.
 
 ## License
 
-Copyright (c) 2016 Calinou and contributors  
+Copyright (c) 2016 Calinou and contributors
 Licensed under the MIT license, see `LICENSE.md` for more information.
