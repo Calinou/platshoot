@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://data/scripts/actors/player.gd" type="Script" id=1]
 [ext_resource path="res://data/textures/player.png" type="Texture" id=2]
@@ -12,6 +12,13 @@ friction = 0.0
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 16.0
 height = 32.0
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
+
+[sub_resource type="Gradient" id=6]
+offsets = PoolRealArray( 0, 0.0794702, 1 )
+colors = PoolColorArray( 0, 1, 1, 0, 0, 1, 1, 1, 0.03125, 0, 1, 0 )
 
 [sub_resource type="Animation" id=3]
 loop = true
@@ -54,6 +61,7 @@ shape = SubResource( 2 )
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
 zoom = Vector2( 0.5, 0.5 )
+process_mode = 0
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
@@ -83,11 +91,15 @@ texture = ExtResource( 3 )
 
 [node name="SamplePlayer2D" type="AudioStreamPlayer2D" parent="Player"]
 
-[node name="Particles2D" type="Particles2D" parent="Player"]
+[node name="JetpackParticles" type="CPUParticles2D" parent="Player"]
 amount = 64
 lifetime = 2.0
 local_coords = false
 texture = ExtResource( 5 )
+emission_shape = 2
+emission_rect_extents = Vector2( 10, 1 )
+scale_amount_curve = SubResource( 7 )
+color_ramp = SubResource( 6 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 autoplay = "Walk"

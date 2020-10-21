@@ -49,9 +49,6 @@ func _ready():
 
 	respawned()
 
-	set_physics_process(true)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-	set_process_input(true)
-
 	# Show HUD when player is in scene
 	Game.show_hud()
 
@@ -67,7 +64,7 @@ func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3
 	if Game.health > 0:
 		get_node("Crosshair").set_modulate(Color(1 - Game.health / 100.0, Game.health / 100.0, 0))
 	else:
-		get_node("Crosshair").set_modulate(Color(0, 0, 0))
+		get_node("Crosshair").set_visible(false)
 	get_node("Crosshair/ProgressBar").set_value(Game.ammo)
 
 	# Flip player sprite if the crosshair is at the right of the player (player faces right),
@@ -94,12 +91,12 @@ func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3
 		# Moving left
 		if Input.is_action_pressed("move_left"):
 			speed = clamp(speed - MAX_SPEED * 4 * delta, -MAX_SPEED, MAX_SPEED)
-			get_node("Player/AnimationPlayer").set_speed_scale(1.75)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+			get_node("Player/AnimationPlayer").set_speed_scale(2)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 
 		# Moving right
 		elif Input.is_action_pressed("move_right"):
 			speed = clamp(speed + MAX_SPEED * 4 * delta, -MAX_SPEED, MAX_SPEED)
-			get_node("Player/AnimationPlayer").set_speed_scale(1.75)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+			get_node("Player/AnimationPlayer").set_speed_scale(2)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 
 		# Friction (when the player doesn't press any movement key)
 		else:
@@ -121,14 +118,14 @@ func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3
 		if Input.is_action_pressed("jetpack") and Game.fuel > 0:
 			get_node("Player").set_linear_velocity(Vector2(JETPACK_BONUS * speed * delta, velocity.y - JETPACK_SPEED * delta))
 			Game.fuel = max(0, Game.fuel - 20 * delta)
-			get_node("Player/Particles2D").set_emitting(true)
+			get_node("Player/JetpackParticles").set_emitting(true)
 
 		# Firing weapons
 		if Input.is_action_pressed("attack") and Game.ammo >= 1 and get_node("BulletTimer").get_time_left() == 0:
 			var bullet = bullet_scene.instance()
 			bullet.set_position(get_node("Player/Gun").get_global_position())  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 			add_child(bullet)
-			bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("Player/Gun").get_rotation() - deg2rad(90 - BULLET_SPREAD / 2 + randf() * BULLET_SPREAD)))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+			bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("Player/Gun").get_rotation() - deg2rad(BULLET_SPREAD / 2 + randf() * BULLET_SPREAD)))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 			#get_node("Player/AudioStreamPlayer2D").play("pistol")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 			Game.ammo -= 1
 			if Game.weapon == Game.WEAPON_PISTOL:
@@ -148,11 +145,11 @@ func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3
 		if not Input.is_action_pressed("jetpack"):
 			Game.fuel = min(100, Game.fuel + 6 * delta)
 			# Disable jetpack particles
-			get_node("Player/Particles2D").set_emitting(false)
+			get_node("Player/JetpackParticles").set_emitting(false)
 
 		# Disable jetpack particles if having no fuel (even when pressing the key)
 		if Game.fuel <= 1:
-			get_node("Player/Particles2D").set_emitting(false)
+			get_node("Player/JetpackParticles").set_emitting(false)
 
 		# Falling very fast kills the player
 		if velocity.y >= 2000:
@@ -170,10 +167,10 @@ func _input(event):
 		get_node("Player/Camera2D").set_zoom(Vector2(0.5, 0.5))
 
 	# Change weapon
-	if event.is_action("weapon_previous"):
-		Game.weapon = clamp(Game.weapon - 1, 1, 2)
-	if event.is_action("weapon_next"):
-		Game.weapon = clamp(Game.weapon + 1, 1, 2)
+	if event.is_action_pressed("weapon_previous"):
+		Game.weapon = wrapi(Game.weapon - 1, 1, 3)
+	if event.is_action_pressed("weapon_next"):
+		Game.weapon = wrapi(Game.weapon + 1, 1, 3)
 
 	# Respawn when clicking, if dead, after a delay of 2.5 seconds
 	if Game.status == Game.STATUS_DEAD and event.is_action_pressed("attack") and get_node("RespawnTimer").get_time_left() == 0:
@@ -185,10 +182,7 @@ func _input(event):
 
 # Returns true if the player is touching ground
 func is_touching_ground():
-	if get_node("Player/RayCast2D").is_colliding():
-		return true
-	else:
-		return false
+	return get_node("Player/RayCast2D").is_colliding()
 
 func damage(points):
 	# If player has armor, divide damage by half on health and deplete armor

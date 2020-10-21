@@ -2,25 +2,14 @@
 
 [ext_resource path="res://data/textures/tilesets/base/base.png" type="Texture" id=1]
 
-[node name="CanvasLayer" type="CanvasLayer"]
-
+[node name="ParallaxBackground" type="ParallaxBackground"]
 layer = -1
-offset = Vector2( 0, 0 )
-rotation = 0.0
-scale = Vector2( 1, 1 )
-__meta__ = {
-"__editor_plugin_screen__": "2D"
-}
+scroll_ignore_camera_zoom = true
 
-[node name="Sprite" type="Polygon2D" parent="."]
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
 
-polygon = PoolVector2Array( 0, 0, 4736, 0, 4736, 3712, 0, 3712 )
-uv = PoolVector2Array(  )
-color = Color( 0.696337, 0.525536, 0.24587, 1 )
-offset = Vector2( 0, 0 )
+[node name="Sprite" type="Sprite" parent="ParallaxLayer"]
+modulate = Color( 0.75, 0.75, 0.75, 1 )
 texture = ExtResource( 1 )
-texture_offset = Vector2( 0, 0 )
-texture_scale = Vector2( 1, 1 )
-texture_rotation_degrees = 0.0
-invert_enable = false
-invert_border = 100.0
+region_enabled = true
+region_rect = Rect2( 0, 0, 65536, 65536 )
