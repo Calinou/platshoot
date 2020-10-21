@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://data/scripts/misc/bullet.gd" type="Script" id=1]
 [ext_resource path="res://data/textures/white.png" type="Texture" id=2]
@@ -9,24 +9,26 @@
 custom_solver_bias = 0.0
 extents = Vector2( 4, 4 )
 
-[sub_resource type="ColorRamp" id=2]
+[sub_resource type="Gradient" id=2]
 
-offsets = FloatArray( 0, 1 )
-colors = ColorArray( 1, 0.752941, 0, 1, 1, 1, 1, 1 )
+offsets = PoolRealArray( 0, 1 )
+colors = PoolColorArray( 1, 0.752941, 0, 1, 1, 1, 1, 1 )
 
 [node name="Bullet" type="Node2D"]
 
-script/script = ExtResource( 1 )
-__meta__ = { "__editor_plugin_screen__":"2D" }
+script = ExtResource( 1 )
+__meta__ = {
+"__editor_plugin_screen__": "2D"
+}
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 
-input/pickable = false
+input_pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = true
-collision/layers = 1
-collision/mask = 1
+collision_layer = 1
+collision_mask = 1
 mode = 0
 mass = 1.0
 friction = 1.0
@@ -38,18 +40,18 @@ contacts_reported = 2
 contact_monitor = true
 sleeping = false
 can_sleep = false
-velocity/linear = Vector2( 0, 0 )
-velocity/angular = 0.0
-damp_override/linear = -1.0
-damp_override/angular = -1.0
+linear_velocity = Vector2( 0, 0 )
+angular_velocity = 0.0
+linear_damp = -1.0
+angular_damp = -1.0
 
 [node name="Particles2D" type="Particles2D" parent="RigidBody2D"]
 
-config/amount = 150
-config/lifetime = 1.0
-config/preprocess = 0.1
-config/local_space = false
-config/texture = ExtResource( 2 )
+amount = 150
+lifetime = 1.0
+preprocess = 0.1
+local_coords = false
+texture = ExtResource( 2 )
 params/direction = 0.0
 params/spread = 10.0
 params/linear_velocity = 0.0
@@ -77,17 +79,17 @@ scale = 0.8
 color = Color( 1, 0.941176, 0.784314, 1 )
 energy = 2.5
 mode = 0
-range/height = 0.0
-range/z_min = -1024
-range/z_max = 1024
-range/layer_min = 0
-range/layer_max = 0
-range/item_mask = 1
-shadow/enabled = false
-shadow/color = Color( 0, 0, 0, 0 )
-shadow/buffer_size = 2048
+range_height = 0.0
+range_z_min = -1024
+range_z_max = 1024
+range_layer_min = 0
+range_layer_max = 0
+range_item_cull_mask = 1
+shadow_enabled = false
+shadow_color = Color( 0, 0, 0, 0 )
+shadow_buffer_size = 2048
 shadow/esm_multiplier = 80.0
-shadow/item_mask = 1
+shadow_item_cull_mask = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 
@@ -102,6 +104,4 @@ wait_time = 3.0
 one_shot = true
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
-
-
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout" binds=[  ]]

@@ -6,9 +6,9 @@ extends Node2D
 var kill = false
 
 func _ready():
-	set_fixed_process(true)
+	set_physics_process(true)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 
-func _fixed_process(delta):
+func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	for body in get_node("RigidBody2D").get_colliding_bodies():
 		# Bullets can't hit the player
 		if body.get_name() != "Player":

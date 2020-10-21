@@ -48,14 +48,14 @@ func _ready():
 
 	var hud = hud_scene.instance()
 	add_child(hud)
-	
+
 	var background = background_scene.instance()
 	add_child(background)
-	
-	set_fixed_process(true)
+
+	set_physics_process(true)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	set_process_input(true)
 
-func _fixed_process(delta):
+func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	# Prevent health from going below 0
 	if Game.health <= 0:
 		Game.health = 0
@@ -63,7 +63,7 @@ func _fixed_process(delta):
 func _input(event):
 	if event.is_action_pressed("toggle_fullscreen"):
 		OS.set_window_fullscreen(!OS.is_window_fullscreen())
-	
+
 	if event.is_action_pressed("toggle_hud"):
 		if get_node("/root/Game/HUD/Control").is_hidden():
 			show_hud()

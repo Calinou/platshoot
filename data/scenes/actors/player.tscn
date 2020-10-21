@@ -1,217 +1,121 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://data/scripts/actors/player.gd" type="Script" id=1]
 [ext_resource path="res://data/textures/player.png" type="Texture" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
-[ext_resource path="res://data/resources/sample_libraries/game.tres" type="SampleLibrary" id=4]
 [ext_resource path="res://data/textures/white.png" type="Texture" id=5]
 [ext_resource path="res://data/textures/crosshair.png" type="Texture" id=6]
 
-[sub_resource type="CapsuleShape2D" id=1]
+[sub_resource type="PhysicsMaterial" id=1]
+friction = 0.0
 
-custom_solver_bias = 0.0
+[sub_resource type="CapsuleShape2D" id=2]
 radius = 16.0
 height = 32.0
 
-[sub_resource type="ColorRamp" id=2]
-
-offsets = FloatArray( 0, 1 )
-colors = ColorArray( 0, 0.789063, 1, 0.811339, 0, 0.015625, 1, 0 )
-
 [sub_resource type="Animation" id=3]
-
-length = 1.0
 loop = true
 step = 0.25
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
-tracks/0/keys = { "cont":false, "times":FloatArray( 0, 0.25, 0.5, 0.75 ), "transitions":FloatArray( 1, 1, 1, 1 ), "values":[ 0, 1, 2, 3 ] }
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
 
 [sub_resource type="StyleBoxFlat" id=4]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
 bg_color = Color( 1, 1, 0.25098, 0.752941 )
-light_color = Color( 0.8, 0.8, 0.8, 1 )
-dark_color = Color( 0.8, 0.8, 0.8, 1 )
-border_size = 0
 border_blend = true
-draw_bg = true
 
 [sub_resource type="StyleBoxEmpty" id=5]
 
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-
 [node name="Player" type="Node2D"]
-
-z/z = 2
-script/script = ExtResource( 1 )
-__meta__ = { "__editor_plugin_screen__":"Script" }
+z_index = 2
+script = ExtResource( 1 )
+__meta__ = {
+"__editor_plugin_screen__": "Script"
+}
 
 [node name="Player" type="RigidBody2D" parent="."]
-
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, -32 )
-shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
 mode = 2
-mass = 1.0
-friction = 0.0
-bounce = 0.0
-gravity_scale = 1.0
-custom_integrator = false
-continuous_cd = 0
-contacts_reported = 0
-contact_monitor = false
-sleeping = false
+physics_material_override = SubResource( 1 )
 can_sleep = false
-velocity/linear = Vector2( 0, 0 )
-velocity/angular = 0.0
-damp_override/linear = -1.0
-damp_override/angular = -1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-
-transform/pos = Vector2( 0, -32 )
-shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
+position = Vector2( 0, -32 )
+shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-
-anchor_mode = 1
-rotating = false
 current = true
 zoom = Vector2( 0.5, 0.5 )
-limit/left = -10000000
-limit/top = -10000000
-limit/right = 10000000
-limit/bottom = 10000000
-drag_margin/h_enabled = true
-drag_margin/v_enabled = true
-smoothing/enable = true
-smoothing/speed = 8.0
-drag_margin/left = 0.0
-drag_margin/top = 0.0
-drag_margin/right = 0.0
-drag_margin/bottom = 0.0
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+smoothing_speed = 8.0
+drag_margin_left = 0.0
+drag_margin_top = 0.0
+drag_margin_right = 0.0
+drag_margin_bottom = 0.0
 
 [node name="Sprite" type="Sprite" parent="Player"]
-
-transform/pos = Vector2( 0, -32 )
+position = Vector2( 0, -32 )
 texture = ExtResource( 2 )
 flip_h = true
 hframes = 4
 frame = 3
 
 [node name="RayCast2D" type="RayCast2D" parent="Player"]
-
-transform/pos = Vector2( 0, 2 )
+position = Vector2( 0, 2 )
 enabled = true
 cast_to = Vector2( 0, 5 )
-layer_mask = 1
-type_mask = 15
 
 [node name="Gun" type="Sprite" parent="Player"]
-
-transform/pos = Vector2( 18, -42 )
-transform/scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
 modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 18, -42 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
 
-[node name="SamplePlayer2D" type="SamplePlayer2D" parent="Player"]
-
-params/volume_db = 0.0
-params/pitch_scale = 1.0
-params/attenuation/min_distance = 1.0
-params/attenuation/max_distance = 2048.0
-params/attenuation/distance_exp = 1.0
-config/polyphony = 10
-config/samples = ExtResource( 4 )
-config/pitch_random = 0.05
+[node name="SamplePlayer2D" type="AudioStreamPlayer2D" parent="Player"]
 
 [node name="Particles2D" type="Particles2D" parent="Player"]
-
-config/amount = 64
-config/lifetime = 2.0
-config/half_extents = Vector2( 12, 0 )
-config/local_space = false
-config/texture = ExtResource( 5 )
-params/direction = 0.0
-params/spread = 15.0
-params/linear_velocity = 50.0
-params/spin_velocity = 0.0
-params/orbit_velocity = 0.0
-params/gravity_direction = 0.0
-params/gravity_strength = 9.8
-params/radial_accel = 0.0
-params/tangential_accel = 0.0
-params/damping = 0.0
-params/initial_angle = 0.0
-params/initial_size = 0.5
-params/final_size = 0.0
-params/hue_variation = 0.0
-params/anim_speed_scale = 1.0
-params/anim_initial_pos = 0.0
-color/color_ramp = SubResource( 2 )
+amount = 64
+lifetime = 2.0
+local_coords = false
+texture = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
-
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
-anims/Walk = SubResource( 3 )
-playback/active = true
-playback/speed = 1.5
-blend_times = [  ]
 autoplay = "Walk"
+playback_speed = 1.5
+anims/Walk = SubResource( 3 )
 
 [node name="BulletTimer" type="Timer" parent="."]
-
 process_mode = 0
 wait_time = 0.01
 one_shot = true
 autostart = true
 
 [node name="RespawnTimer" type="Timer" parent="."]
-
-process_mode = 1
 wait_time = 0.01
 one_shot = true
-autostart = false
 
 [node name="Crosshair" type="Sprite" parent="."]
-
-transform/scale = Vector2( 0.125, 0.125 )
-z/z = 4096
+scale = Vector2( 0.125, 0.125 )
+z_index = 4096
 texture = ExtResource( 6 )
 
 [node name="ProgressBar" type="ProgressBar" parent="Crosshair"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-margin/left = -160.0
-margin/top = 160.0
-margin/right = 160.0
-margin/bottom = 173.0
+margin_left = -160.0
+margin_top = 160.0
+margin_right = 160.0
+margin_bottom = 173.0
 custom_styles/fg = SubResource( 4 )
 custom_styles/bg = SubResource( 5 )
-range/min = 0.0
-range/max = 100.0
-range/step = 1.0
-range/page = 0.0
-range/value = 1.0
-range/exp_edit = false
-range/rounded = false
-percent/visible = false
-
-
+step = 1.0
+value = 1.0
+percent_visible = false

@@ -49,15 +49,15 @@ func _ready():
 
 	respawned()
 
-	set_fixed_process(true)
+	set_physics_process(true)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	set_process_input(true)
-	
+
 	# Show HUD when player is in scene
 	Game.show_hud()
-	
+
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
-func _fixed_process(delta):
+func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	# Increase time (shown on HUD)
 	Game.time += delta
 
@@ -72,7 +72,7 @@ func _fixed_process(delta):
 
 	# Flip player sprite if the crosshair is at the right of the player (player faces right),
 	# else don't flip it (player faces left)
-	if get_node("Crosshair").get_pos().x > get_node("Player").get_pos().x:
+	if get_node("Crosshair").get_position().x > get_node("Player").get_position().x:  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 		get_node("Player/Sprite").set_flip_h(true)
 	else:
 		get_node("Player/Sprite").set_flip_h(false)
@@ -81,55 +81,55 @@ func _fixed_process(delta):
 		# Health regeneration (1 per second)
 		if Game.health > 0:
 			Game.health = min(Game.health + delta, 100)
-	
+
 		# Mouse position/offset computations (for gun and crosshair)
-		offset = -get_viewport().get_canvas_transform().o * get_node("Player/Camera2D").get_zoom() # Get the offset
-		relative_mouse_pos = get_viewport().get_mouse_pos() * get_node("Player/Camera2D").get_zoom() + offset # And add it to the mouse position
+		offset = -get_viewport().get_canvas_transform().origin * get_node("Player/Camera2D").get_zoom() # Get the offset
+		relative_mouse_pos = get_viewport().get_mouse_position() * get_node("Player/Camera2D").get_zoom() + offset # And add it to the mouse position  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 		get_node("Player/Gun").look_at(relative_mouse_pos)
 		# Move crosshair at mouse position
-		get_node("Crosshair").set_pos(relative_mouse_pos)
+		get_node("Crosshair").set_position(relative_mouse_pos)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 		# Current velocity
 		velocity = get_node("Player").get_linear_velocity()
-	
+
 		# Moving left
 		if Input.is_action_pressed("move_left"):
 			speed = clamp(speed - MAX_SPEED * 4 * delta, -MAX_SPEED, MAX_SPEED)
-			get_node("Player/AnimationPlayer").set_speed(1.75)
-	
+			get_node("Player/AnimationPlayer").set_speed_scale(1.75)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+
 		# Moving right
 		elif Input.is_action_pressed("move_right"):
 			speed = clamp(speed + MAX_SPEED * 4 * delta, -MAX_SPEED, MAX_SPEED)
-			get_node("Player/AnimationPlayer").set_speed(1.75)
-		
+			get_node("Player/AnimationPlayer").set_speed_scale(1.75)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+
 		# Friction (when the player doesn't press any movement key)
 		else:
 			speed *= 0.925
-			get_node("Player/AnimationPlayer").set_speed(0)
-	
+			get_node("Player/AnimationPlayer").set_speed_scale(0)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+
 		# Set the new velocity
 		get_node("Player").set_linear_velocity(Vector2(speed * delta, velocity.y))
-		
+
 		# Falling damage
 		if velocity_new.y - velocity.y >= FALL_DAMAGE_THRESHOLD:
 			damage((velocity_new.y - velocity.y - FALL_DAMAGE_THRESHOLD) / FALL_DAMAGE_FACTOR)
-		
+
 		# Jumping
 		if Input.is_action_pressed("move_up") and is_touching_ground():
 			get_node("Player").set_linear_velocity(Vector2(velocity.x, -JUMP_SPEED * delta))
-		
+
 		# Jetpack (uses fuel)
 		if Input.is_action_pressed("jetpack") and Game.fuel > 0:
 			get_node("Player").set_linear_velocity(Vector2(JETPACK_BONUS * speed * delta, velocity.y - JETPACK_SPEED * delta))
 			Game.fuel = max(0, Game.fuel - 20 * delta)
 			get_node("Player/Particles2D").set_emitting(true)
-	
+
 		# Firing weapons
 		if Input.is_action_pressed("attack") and Game.ammo >= 1 and get_node("BulletTimer").get_time_left() == 0:
 			var bullet = bullet_scene.instance()
-			bullet.set_pos(get_node("Player/Gun").get_global_pos())
+			bullet.set_position(get_node("Player/Gun").get_global_position())  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 			add_child(bullet)
-			bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("Player/Gun").get_rot() - deg2rad(90 - BULLET_SPREAD / 2 + randf() * BULLET_SPREAD)))
-			get_node("Player/SamplePlayer2D").play("pistol")
+			bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("Player/Gun").get_rotation() - deg2rad(90 - BULLET_SPREAD / 2 + randf() * BULLET_SPREAD)))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+			#get_node("Player/AudioStreamPlayer2D").play("pistol")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 			Game.ammo -= 1
 			if Game.weapon == Game.WEAPON_PISTOL:
 				get_node("BulletTimer").set_wait_time(BULLET_REFIRE)
@@ -137,7 +137,7 @@ func _fixed_process(delta):
 				get_node("BulletTimer").set_wait_time(BULLET_REFIRE / 3)
 			get_node("BulletTimer").start()
 		elif Input.is_action_pressed("attack") and get_node("BulletTimer").get_time_left() == 0:
-			get_node("Player/SamplePlayer2D").play("no_ammo")
+			#get_node("Player/AudioStreamPlayer2D").play("no_ammo")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 			if Game.weapon == Game.WEAPON_PISTOL:
 				get_node("BulletTimer").set_wait_time(BULLET_REFIRE)
 			elif Game.weapon == Game.WEAPON_CHAINGUN:
@@ -149,7 +149,7 @@ func _fixed_process(delta):
 			Game.fuel = min(100, Game.fuel + 6 * delta)
 			# Disable jetpack particles
 			get_node("Player/Particles2D").set_emitting(false)
-		
+
 		# Disable jetpack particles if having no fuel (even when pressing the key)
 		if Game.fuel <= 1:
 			get_node("Player/Particles2D").set_emitting(false)
@@ -168,17 +168,17 @@ func _input(event):
 		get_node("Player/Camera2D").set_zoom(Vector2(min(2, zoom + 0.125), min(2, zoom + 0.125)))
 	if event.is_action_pressed("zoom_reset"):
 		get_node("Player/Camera2D").set_zoom(Vector2(0.5, 0.5))
-	
+
 	# Change weapon
 	if event.is_action("weapon_previous"):
 		Game.weapon = clamp(Game.weapon - 1, 1, 2)
 	if event.is_action("weapon_next"):
 		Game.weapon = clamp(Game.weapon + 1, 1, 2)
-	
+
 	# Respawn when clicking, if dead, after a delay of 2.5 seconds
 	if Game.status == Game.STATUS_DEAD and event.is_action_pressed("attack") and get_node("RespawnTimer").get_time_left() == 0:
 		get_tree().change_scene("res://data/scenes/levels/" + str(Game.level_to_play) + ".tscn")
-	
+
 	# Suicide (default key: Ctrl+K)
 	if event.is_action_pressed("suicide") and Game.status == Game.STATUS_ALIVE:
 		damage(1000)
@@ -198,11 +198,13 @@ func damage(points):
 	# If player has no armor, deplete health
 	else:
 		Game.health = max(0, Game.health - points)
-	
+
 	if Game.health <= 0:
-		get_node("Player/SamplePlayer2D").play("player_death")
+		pass
+		#get_node("Player/AudioStreamPlayer2D").play("player_death")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	else:
-		get_node("Player/SamplePlayer2D").play("player_hurt")
+		pass
+		#get_node("Player/AudioStreamPlayer2D").play("player_hurt")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 
 # Called when the player dies
 func die():
@@ -217,7 +219,7 @@ func respawned():
 	Game.ammo = 25
 	Game.weapon = Game.WEAPON_PISTOL
 	Game.fuel = 100.0
-	
+
 	Game.time = 0.0
 	Game.kills = 0
 	Game.items = 0

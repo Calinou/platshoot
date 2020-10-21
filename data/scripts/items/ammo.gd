@@ -16,7 +16,8 @@ func _on_Area2D_body_enter(body):
 		Game.ammo = min(Game.ammo + 15, 100)
 		Game.items += 1
 		get_node("AnimationPlayer").play("Pickup")
-		get_node("SamplePlayer2D").play("pickup")
+		#get_node("AudioStreamPlayer2D").play("pickup")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 
 func _on_AnimationPlayer_finished():
 	queue_free()
+

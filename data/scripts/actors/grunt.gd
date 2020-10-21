@@ -29,13 +29,13 @@ var death_particles_scene = preload("res://data/scenes/misc/death_particles.tscn
 func _ready():
 	# Desynchronize the animation of each grunt
 	get_node("AnimationPlayer").seek(randf())
-	set_fixed_process(true)
+	set_physics_process(true)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 
-func _fixed_process(delta):
+func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	get_node("ProgressBar").set_value(health)
 	velocity = get_linear_velocity()
-	var player_pos = get_node("/root/Level/Player/Player").get_pos()
-	var grunt_pos = get_pos()
+	var player_pos = get_node("/root/Level/Player/Player").get_position()  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+	var grunt_pos = get_position()  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 
 	if hurt_player:
 		if get_node("Timer").get_time_left() == 0 and Game.health > 0:
@@ -62,15 +62,16 @@ func damage(dmg):
 	if health <= 0:
 		die()
 	else:
-		get_node("SamplePlayer2D").play("player_hurt")
+		pass
+		#get_node("AudioStreamPlayer2D").play("player_hurt")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 
 func die():
 	dangerous = false
 	var death_particles = death_particles_scene.instance()
-	death_particles.set_global_pos(get_node("CollisionShape2D").get_pos())
+	death_particles.set_global_position(get_node("CollisionShape2D").get_position())  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	add_child(death_particles)
-	get_node("CollisionShape2D").set_trigger(true)
-	get_node("SamplePlayer2D").play("grunt_death")
+	get_node("CollisionShape2D").queue_free()
+	#get_node("AudioStreamPlayer2D").play("grunt_death")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	get_node("AnimationPlayer").play("Die")
 
 # Remove grunt after death animation
@@ -87,3 +88,4 @@ func _on_Area2D_body_enter(body):
 func _on_Area2D_body_exit(body):
 	if body.get_name() == "Player":
 		hurt_player = false
+
