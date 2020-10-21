@@ -2,8 +2,7 @@
 
 ___
 
-**This repository is no longer maintained. The project is only compatible with
-Godot 2.x, not Godot 3.x or later.**
+**This project is currently being ported to Godot 3.2. Not everything will work or look as expected.**
 
 ___
 
