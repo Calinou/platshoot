@@ -22,5 +22,7 @@ credits while you're at it.
 
 ## License
 
-Copyright (c) 2016 Calinou and contributors
-Licensed under the MIT license, see `LICENSE.md` for more information.
+Copyright © 2016-2020 Hugo Locurcio and contributors
+
+- Unless otherwise specified, files in this repository are licensed under the
+  MIT license. See [LICENSE.md](LICENSE.md) for more information.

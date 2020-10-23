@@ -1,5 +1,5 @@
-# Copyright (c) 2016 Calinou and contributors
-# Licensed under the MIT license, see `LICENSE.md` for more information.
+# Copyright © 2016-2020 Hugo Locurcio and contributors - MIT License
+# See `LICENSE.md` included in the source distribution for details.
 
 extends Node2D
 

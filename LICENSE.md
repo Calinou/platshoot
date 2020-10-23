@@ -1,11 +1,11 @@
 - This is the license for the source code.
 - Data files, unless otherwise specified, are:
-  - Copyright (c) 2016 Calinou and contributors,
+  - Copyright © 2016-2020 Hugo Locurcio and contributors,
   - CC0 1.0 Universal. See `doc/licenses/cc0_1.0_universal.md`
 
 # The MIT License (MIT)
 
-Copyright (c) 2016 Calinou and contributors
+Copyright © 2016-2020 Hugo Locurcio and contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
