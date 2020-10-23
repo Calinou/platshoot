@@ -54,7 +54,7 @@ func _ready():
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
-func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+func _physics_process(delta):
 	# Increase time (shown on HUD)
 	Game.time += delta
 
@@ -69,7 +69,7 @@ func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3
 
 	# Flip player sprite if the crosshair is at the right of the player (player faces right),
 	# else don't flip it (player faces left)
-	if get_node("Crosshair").get_position().x > get_node("Player").get_position().x:  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+	if get_node("Crosshair").get_position().x > get_node("Player").get_position().x:
 		get_node("Player/Sprite").set_flip_h(true)
 	else:
 		get_node("Player/Sprite").set_flip_h(false)
@@ -81,27 +81,27 @@ func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3
 
 		# Mouse position/offset computations (for gun and crosshair)
 		offset = -get_viewport().get_canvas_transform().origin * get_node("Player/Camera2D").get_zoom() # Get the offset
-		relative_mouse_pos = get_viewport().get_mouse_position() * get_node("Player/Camera2D").get_zoom() + offset # And add it to the mouse position  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+		relative_mouse_pos = get_viewport().get_mouse_position() * get_node("Player/Camera2D").get_zoom() + offset # And add it to the mouse position
 		get_node("Player/Gun").look_at(relative_mouse_pos)
 		# Move crosshair at mouse position
-		get_node("Crosshair").set_position(relative_mouse_pos)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+		get_node("Crosshair").set_position(relative_mouse_pos)
 		# Current velocity
 		velocity = get_node("Player").get_linear_velocity()
 
 		# Moving left
 		if Input.is_action_pressed("move_left"):
 			speed = clamp(speed - MAX_SPEED * 4 * delta, -MAX_SPEED, MAX_SPEED)
-			get_node("Player/AnimationPlayer").set_speed_scale(2)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+			get_node("Player/AnimationPlayer").set_speed_scale(2)
 
 		# Moving right
 		elif Input.is_action_pressed("move_right"):
 			speed = clamp(speed + MAX_SPEED * 4 * delta, -MAX_SPEED, MAX_SPEED)
-			get_node("Player/AnimationPlayer").set_speed_scale(2)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+			get_node("Player/AnimationPlayer").set_speed_scale(2)
 
 		# Friction (when the player doesn't press any movement key)
 		else:
 			speed *= 0.925
-			get_node("Player/AnimationPlayer").set_speed_scale(0)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+			get_node("Player/AnimationPlayer").set_speed_scale(0)
 
 		# Set the new velocity
 		get_node("Player").set_linear_velocity(Vector2(speed * delta, velocity.y))
@@ -123,9 +123,9 @@ func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3
 		# Firing weapons
 		if Input.is_action_pressed("attack") and Game.ammo >= 1 and get_node("BulletTimer").get_time_left() == 0:
 			var bullet = bullet_scene.instance()
-			bullet.set_position(get_node("Player/Gun").get_global_position())  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+			bullet.set_position(get_node("Player/Gun").get_global_position())
 			add_child(bullet)
-			bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("Player/Gun").get_rotation() - deg2rad(BULLET_SPREAD / 2.0 + randf() * BULLET_SPREAD)))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+			bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("Player/Gun").get_rotation() - deg2rad(BULLET_SPREAD / 2.0 + randf() * BULLET_SPREAD)))
 			Sound.play(Sound.Type.NON_POSITIONAL, self, preload("res://data/sounds/pistol.wav"), -12, rand_range(0.95, 1.05))
 			Game.ammo -= 1
 			if Game.weapon == Game.WEAPON_PISTOL:

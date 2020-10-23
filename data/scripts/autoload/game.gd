@@ -53,7 +53,7 @@ func _ready():
 	var background = background_scene.instance()
 	add_child(background)
 
-func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+func _physics_process(delta):
 	# Prevent health from going below 0
 	if Game.health <= 0:
 		Game.health = 0

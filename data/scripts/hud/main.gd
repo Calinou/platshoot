@@ -3,7 +3,7 @@
 
 extends CanvasLayer
 
-func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+func _physics_process(delta):
 	# Inventory
 	get_node("Control/HealthProgressBar").set_value(Game.health)
 	get_node("Control/ArmorProgressBar").set_value(Game.armor)

@@ -30,11 +30,11 @@ func _ready():
 	# Desynchronize the animation of each grunt
 	get_node("AnimationPlayer").seek(randf())
 
-func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+func _physics_process(delta):
 	get_node("ProgressBar").set_value(health)
 	velocity = get_linear_velocity()
-	var player_pos = get_node("/root/Level/Player/Player").get_position()  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-	var grunt_pos = get_position()  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+	var player_pos = get_node("/root/Level/Player/Player").get_position()
+	var grunt_pos = get_position()
 
 	if hurt_player:
 		if get_node("Timer").get_time_left() == 0 and Game.health > 0:
@@ -62,12 +62,12 @@ func damage(dmg):
 		die()
 	else:
 		pass
-		#get_node("AudioStreamPlayer2D").play("player_hurt")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+		Sound.play(Sound.Type.POSITIONAL_2D, self, preload("res://data/sounds/player_hurt.wav"), 3, rand_range(0.9, 1.05))
 
 func die():
 	dangerous = false
 	var death_particles = death_particles_scene.instance()
-	death_particles.set_global_position(get_node("CollisionShape2D").get_position())  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+	death_particles.set_global_position(get_node("CollisionShape2D").get_position())
 	add_child(death_particles)
 	get_node("CollisionShape2D").queue_free()
 	Sound.play(Sound.Type.POSITIONAL_2D, self, preload("res://data/sounds/grunt_death.wav"), 3, rand_range(0.9, 1.05))
