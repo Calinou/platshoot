@@ -39,9 +39,11 @@ onready var speed = 0
 onready var bullet_scene = preload("res://data/scenes/misc/bullet.tscn")
 onready var offset = Vector2(0, 0)
 onready var relative_mouse_pos = Vector2(0, 0)
-onready var player = $Player as RigidBody2D
-onready var camera = $Player/Camera2D as Camera2D
-onready var crosshair = $Crosshair as Sprite
+onready var player := $Player as RigidBody2D
+onready var camera := $Player/Camera2D as Camera2D
+onready var crosshair := $Crosshair as Sprite
+onready var preloader := $ResourcePreloader as ResourcePreloader
+onready var crosshair_color_gradient := preloader.get_resource("crosshair_color_gradient") as Gradient
 
 func _ready():
 	# Set the number of enemies present in the level
@@ -77,7 +79,7 @@ func _physics_process(delta):
 		die()
 	# Change crosshair color depending on health, and ammo bar value depending on ammo
 	if Game.health > 0:
-		get_node("Crosshair").set_modulate(Color(1 - Game.health / 100.0, Game.health / 100.0, 0))
+		get_node("Crosshair").set_modulate(crosshair_color_gradient.interpolate(Game.health / 100.0))
 	else:
 		get_node("Crosshair").set_visible(false)
 	get_node("Crosshair/ProgressBar").set_value(Game.ammo)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://data/scripts/actors/player.gd" type="Script" id=1]
 [ext_resource path="res://data/textures/player.png" type="Texture" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://data/textures/circle.png" type="Texture" id=4]
 [ext_resource path="res://addons/smoothing/smoothing_2d.gd" type="Script" id=5]
 [ext_resource path="res://data/textures/crosshair.png" type="Texture" id=6]
+[ext_resource path="res://data/scenes/actors/player_crosshair_color_gradient.tres" type="Gradient" id=7]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -136,3 +137,6 @@ custom_styles/bg = SubResource( 7 )
 step = 1.0
 value = 1.0
 percent_visible = false
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
+resources = [ PoolStringArray( "crosshair_color_gradient" ), [ ExtResource( 7 ) ] ]
