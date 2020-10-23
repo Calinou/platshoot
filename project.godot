@@ -169,6 +169,7 @@ translations=[ "res://data/locale/locale.en.translation", "res://data/locale/loc
 
 [rendering]
 
+quality/driver/driver_name="GLES2"
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
 environment/default_clear_color=Color( 0, 0, 0, 1 )
