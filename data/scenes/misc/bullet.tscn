@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://data/scripts/misc/bullet.gd" type="Script" id=1]
-[ext_resource path="res://data/textures/white.png" type="Texture" id=2]
+[ext_resource path="res://data/textures/circle.png" type="Texture" id=2]
 [ext_resource path="res://data/textures/light.png" type="Texture" id=3]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 4, 4 )
@@ -21,7 +24,11 @@ contact_monitor = true
 can_sleep = false
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="RigidBody2D"]
+amount = 50
+local_coords = false
 texture = ExtResource( 2 )
+scale_amount = 0.02
+scale_amount_curve = SubResource( 2 )
 
 [node name="Light2D" type="Light2D" parent="RigidBody2D"]
 texture = ExtResource( 3 )

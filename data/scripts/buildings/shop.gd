@@ -8,9 +8,6 @@ const AMMO_PACKAGE = 15
 
 var close_to_shop = false
 
-func _ready():
-	set_process_input(true)
-
 func _input(event):
 	if event.is_action_pressed("use") and close_to_shop:
 		if Game.credits >= AMMO_COST and Game.ammo < 100:

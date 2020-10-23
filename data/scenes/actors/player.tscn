@@ -13,14 +13,14 @@ friction = 0.0
 radius = 16.0
 height = 32.0
 
-[sub_resource type="Curve" id=7]
+[sub_resource type="Curve" id=3]
 _data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
 
-[sub_resource type="Gradient" id=6]
+[sub_resource type="Gradient" id=4]
 offsets = PoolRealArray( 0, 0.0794702, 1 )
 colors = PoolColorArray( 0, 1, 1, 0, 0, 1, 1, 1, 0.03125, 0, 1, 0 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=5]
 loop = true
 step = 0.25
 tracks/0/type = "value"
@@ -36,11 +36,11 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 1, 1, 0.25098, 0.752941 )
 border_blend = true
 
-[sub_resource type="StyleBoxEmpty" id=5]
+[sub_resource type="StyleBoxEmpty" id=7]
 
 [node name="Player" type="Node2D"]
 z_index = 2
@@ -98,13 +98,13 @@ local_coords = false
 texture = ExtResource( 5 )
 emission_shape = 2
 emission_rect_extents = Vector2( 10, 1 )
-scale_amount_curve = SubResource( 7 )
-color_ramp = SubResource( 6 )
+scale_amount_curve = SubResource( 3 )
+color_ramp = SubResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 autoplay = "Walk"
 playback_speed = 1.5
-anims/Walk = SubResource( 3 )
+anims/Walk = SubResource( 5 )
 
 [node name="BulletTimer" type="Timer" parent="."]
 process_mode = 0
@@ -126,8 +126,8 @@ margin_left = -160.0
 margin_top = 160.0
 margin_right = 160.0
 margin_bottom = 173.0
-custom_styles/fg = SubResource( 4 )
-custom_styles/bg = SubResource( 5 )
+custom_styles/fg = SubResource( 6 )
+custom_styles/bg = SubResource( 7 )
 step = 1.0
 value = 1.0
 percent_visible = false

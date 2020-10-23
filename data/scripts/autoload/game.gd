@@ -44,6 +44,7 @@ onready var level_to_play = 1
 onready var status = STATUS_ALIVE
 
 func _ready():
+	randomize()
 	print("Platshoot [0.1.0]")
 
 	var hud = hud_scene.instance()
@@ -51,9 +52,6 @@ func _ready():
 
 	var background = background_scene.instance()
 	add_child(background)
-
-	set_physics_process(true)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-	set_process_input(true)
 
 func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	# Prevent health from going below 0

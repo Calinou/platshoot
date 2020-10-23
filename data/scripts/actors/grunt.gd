@@ -29,7 +29,6 @@ var death_particles_scene = preload("res://data/scenes/misc/death_particles.tscn
 func _ready():
 	# Desynchronize the animation of each grunt
 	get_node("AnimationPlayer").seek(randf())
-	set_physics_process(true)  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 
 func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	get_node("ProgressBar").set_value(health)
