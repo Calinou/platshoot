@@ -172,4 +172,7 @@ translations=[ "res://data/locale/locale.en.translation", "res://data/locale/loc
 quality/driver/driver_name="GLES2"
 quality/intended_usage/framebuffer_allocation=0
 quality/intended_usage/framebuffer_allocation.mobile=0
+vram_compression/import_s3tc=false
+vram_compression/import_etc=true
+vram_compression/import_etc2=false
 environment/default_clear_color=Color( 0, 0, 0, 1 )

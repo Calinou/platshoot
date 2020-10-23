@@ -48,6 +48,7 @@ onready var camera := $Player/Camera2D as Camera2D
 onready var crosshair := $Crosshair as Sprite
 onready var player_sprite := $Smoothing2D/Sprite as Sprite
 onready var preloader := $ResourcePreloader as ResourcePreloader
+onready var animation_player := $Player/AnimationPlayer as AnimationPlayer
 onready var crosshair_color_gradient := preloader.get_resource("crosshair_color_gradient") as Gradient
 onready var sprite_base_offset := player_sprite.position.y
 
@@ -131,17 +132,21 @@ func _physics_process(delta):
 		# Moving left
 		if Input.is_action_pressed("move_left"):
 			speed = clamp(speed - MAX_SPEED * 6 * delta, -MAX_SPEED, MAX_SPEED)
-			get_node("Player/AnimationPlayer").set_speed_scale(2)
+			# Don't change the animation speed if currently displaying a shoot or pain animation.
+			if animation_player.current_animation == "walk":
+				animation_player.set_speed_scale(2)
 
 		# Moving right
 		elif Input.is_action_pressed("move_right"):
 			speed = clamp(speed + MAX_SPEED * 6 * delta, -MAX_SPEED, MAX_SPEED)
-			get_node("Player/AnimationPlayer").set_speed_scale(2)
+			if animation_player.current_animation == "walk":
+				animation_player.set_speed_scale(2)
 
 		# Friction (when the player doesn't press any movement key)
 		else:
 			speed *= 0.85
-			get_node("Player/AnimationPlayer").set_speed_scale(0)
+			if animation_player.current_animation == "walk":
+				animation_player.set_speed_scale(0)
 
 		# Set the new velocity
 		get_node("Player").set_linear_velocity(Vector2(speed * delta, velocity.y))
@@ -177,6 +182,9 @@ func _physics_process(delta):
 
 		# Firing weapons
 		if Input.is_action_pressed("attack") and Game.ammo >= 1 and get_node("BulletTimer").get_time_left() == 0:
+			animation_player.play("shoot")
+			animation_player.playback_speed = 1.0
+
 			var bullet = bullet_scene.instance()
 			bullet.set_position(get_node("Player/Gun").get_global_position())
 			add_child(bullet)
@@ -247,6 +255,9 @@ func is_touching_ground():
 
 
 func damage(points):
+	animation_player.play("pain")
+	animation_player.playback_speed = 1
+
 	# If player has armor, divide damage by half on health and deplete armor
 	if Game.armor > 0:
 		Game.armor = max(0, Game.armor - points / 2)
@@ -281,3 +292,10 @@ func respawned():
 	Game.items = 0
 	Game.credits = 0
 	Game.status = Game.STATUS_ALIVE
+
+
+func _animation_finished(anim_name: String) -> void:
+	match anim_name:
+		"pain", "shoot":
+			# Go back to the previous walk animation.
+			animation_player.play("walk")

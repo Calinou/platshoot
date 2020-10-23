@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://data/scripts/actors/player.gd" type="Script" id=1]
 [ext_resource path="res://data/textures/player.png" type="Texture" id=2]
@@ -22,7 +22,41 @@ _data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
 offsets = PoolRealArray( 0, 0.0397351, 1 )
 colors = PoolColorArray( 0, 1, 1, 0, 0, 1, 1, 1, 0.03125, 0, 1, 0 )
 
+[sub_resource type="Animation" id=8]
+resource_name = "pain"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Smoothing2D/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 6 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "shoot"
+length = 0.25
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("../Smoothing2D/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 4, 5 ]
+}
+
 [sub_resource type="Animation" id=5]
+resource_name = "walk"
 loop = true
 step = 0.25
 tracks/0/type = "value"
@@ -59,7 +93,8 @@ target = NodePath("../Player")
 position = Vector2( 0, -32 )
 texture = ExtResource( 2 )
 flip_h = true
-hframes = 4
+hframes = 7
+frame = 4
 
 [node name="Player" type="RigidBody2D" parent="."]
 collision_layer = 2
@@ -110,9 +145,11 @@ scale_amount_curve = SubResource( 3 )
 color_ramp = SubResource( 4 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
-autoplay = "Walk"
+autoplay = "walk"
 playback_speed = 1.5
-anims/Walk = SubResource( 5 )
+anims/pain = SubResource( 8 )
+anims/shoot = SubResource( 9 )
+anims/walk = SubResource( 5 )
 
 [node name="BulletTimer" type="Timer" parent="."]
 process_mode = 0
@@ -145,3 +182,4 @@ __meta__ = {
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
 resources = [ PoolStringArray( "crosshair_color_gradient" ), [ ExtResource( 7 ) ] ]
+[connection signal="animation_finished" from="Player/AnimationPlayer" to="." method="_animation_finished"]
