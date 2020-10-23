@@ -33,6 +33,10 @@ const FALL_DAMAGE_THRESHOLD = 700
 # Lower factors deal more damage
 const FALL_DAMAGE_FACTOR = 6
 
+# Using a timer for double-tap shooting fixes issues related to "lingering" input
+# while allowing full-auto shooting. I don't know why.
+var double_tap_shoot_timer := 0.0
+
 onready var velocity = Vector2(0, 0)
 onready var velocity_new = Vector2(0, 0)
 onready var speed = 0
@@ -79,6 +83,8 @@ func hide_hardware_mouse_cursor() -> void:
 
 
 func _process(delta):
+	double_tap_shoot_timer += delta
+
 	# Add bobbing to the player sprite when moving and not airborne.
 	if is_touching_ground():
 		player_sprite.position.y = sprite_base_offset - abs(sin(OS.get_ticks_msec() * 0.01) * player.linear_velocity.x * 0.024)
@@ -198,6 +204,20 @@ func _physics_process(delta):
 
 
 func _input(event):
+	if OS.has_touchscreen_ui_hint() and event is InputEventMouseButton:
+		var mb := event as InputEventMouseButton
+		if mb.doubleclick:
+			var action := InputEventAction.new()
+			action.action = "attack"
+			action.pressed = true
+			Input.parse_input_event(action)
+			double_tap_shoot_timer = 0.0
+
+		if not mb.pressed and double_tap_shoot_timer > 0.0:
+			var action := InputEventAction.new()
+			action.action = "attack"
+			Input.parse_input_event(action)
+
 	var zoom = get_node("Player/Camera2D").get_zoom().x
 	if event.is_action_pressed("zoom_in"):
 		get_node("Player/Camera2D").set_zoom(Vector2(max(0.25, zoom - 0.125), max(0.25, zoom - 0.125)))

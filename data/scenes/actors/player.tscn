@@ -60,7 +60,6 @@ position = Vector2( 0, -32 )
 texture = ExtResource( 2 )
 flip_h = true
 hframes = 4
-frame = 3
 
 [node name="Player" type="RigidBody2D" parent="."]
 collision_layer = 2
@@ -140,6 +139,9 @@ custom_styles/bg = SubResource( 7 )
 step = 1.0
 value = 1.0
 percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
 resources = [ PoolStringArray( "crosshair_color_gradient" ), [ ExtResource( 7 ) ] ]
