@@ -99,6 +99,7 @@ texture = ExtResource( 3 )
 [node name="SamplePlayer2D" type="AudioStreamPlayer2D" parent="Player"]
 
 [node name="JetpackParticles" type="CPUParticles2D" parent="Player"]
+emitting = false
 amount = 64
 lifetime = 2.0
 local_coords = false
