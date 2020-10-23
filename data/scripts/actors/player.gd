@@ -42,8 +42,10 @@ onready var relative_mouse_pos = Vector2(0, 0)
 onready var player := $Player as RigidBody2D
 onready var camera := $Player/Camera2D as Camera2D
 onready var crosshair := $Crosshair as Sprite
+onready var player_sprite := $Smoothing2D/Sprite as Sprite
 onready var preloader := $ResourcePreloader as ResourcePreloader
 onready var crosshair_color_gradient := preloader.get_resource("crosshair_color_gradient") as Gradient
+onready var sprite_base_offset := player_sprite.position.y
 
 
 func _ready():
@@ -77,6 +79,9 @@ func hide_hardware_mouse_cursor() -> void:
 
 
 func _process(delta):
+	# Add bobbing to the player sprite when moving and not airborne.
+	if is_touching_ground():
+		player_sprite.position.y = sprite_base_offset - abs(sin(OS.get_ticks_msec() * 0.01) * player.linear_velocity.x * 0.024)
 	# Mouse position/offset computations (for gun and crosshair)
 	offset = -get_viewport().get_canvas_transform().origin * get_node("Player/Camera2D").get_zoom()  # Get the offset
 	relative_mouse_pos = get_viewport().get_mouse_position() * get_node("Player/Camera2D").get_zoom() + offset  # And add it to the mouse position
