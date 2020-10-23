@@ -1,6 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://data/scripts/hud/main.gd" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://data/textures/circle.png" type="Texture" id=3]
+[ext_resource path="res://data/scenes/hud/movement_stick.gd" type="Script" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 0.25098, 0.25098, 0.752941 )
@@ -193,3 +196,49 @@ custom_styles/fg = SubResource( 7 )
 custom_styles/bg = SubResource( 8 )
 step = 1.0
 value = 1.0
+
+[node name="TouchScreenButtons" type="Control" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 1.0
+margin_right = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MoveUp" type="TouchScreenButton" parent="TouchScreenButtons"]
+position = Vector2( 144, -192 )
+normal = ExtResource( 2 )
+action = "move_up"
+visibility_mode = 1
+
+[node name="MovementStickBackground" type="TextureRect" parent="TouchScreenButtons"]
+self_modulate = Color( 0, 0, 0, 0.25098 )
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 48.0
+margin_top = -128.0
+margin_right = 304.0
+margin_bottom = 128.0
+texture = ExtResource( 3 )
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MovementStick" type="TextureRect" parent="TouchScreenButtons/MovementStickBackground"]
+self_modulate = Color( 1, 1, 1, 0.752941 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -32.0
+margin_top = -32.0
+margin_right = 224.0
+margin_bottom = 224.0
+rect_scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="gui_input" from="TouchScreenButtons/MovementStickBackground/MovementStick" to="TouchScreenButtons/MovementStickBackground/MovementStick" method="_gui_input"]
