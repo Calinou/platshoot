@@ -165,7 +165,7 @@ translations=[ "res://data/locale/locale.en.translation", "res://data/locale/loc
 
 [physics]
 
-2d/default_gravity=750
+2d/default_gravity=800
 
 [rendering]
 

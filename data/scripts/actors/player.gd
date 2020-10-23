@@ -130,17 +130,17 @@ func _physics_process(delta):
 
 		# Moving left
 		if Input.is_action_pressed("move_left"):
-			speed = clamp(speed - MAX_SPEED * 4 * delta, -MAX_SPEED, MAX_SPEED)
+			speed = clamp(speed - MAX_SPEED * 6 * delta, -MAX_SPEED, MAX_SPEED)
 			get_node("Player/AnimationPlayer").set_speed_scale(2)
 
 		# Moving right
 		elif Input.is_action_pressed("move_right"):
-			speed = clamp(speed + MAX_SPEED * 4 * delta, -MAX_SPEED, MAX_SPEED)
+			speed = clamp(speed + MAX_SPEED * 6 * delta, -MAX_SPEED, MAX_SPEED)
 			get_node("Player/AnimationPlayer").set_speed_scale(2)
 
 		# Friction (when the player doesn't press any movement key)
 		else:
-			speed *= 0.925
+			speed *= 0.85
 			get_node("Player/AnimationPlayer").set_speed_scale(0)
 
 		# Set the new velocity
