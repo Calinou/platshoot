@@ -63,13 +63,10 @@ func _physics_process(delta):
 
 func _input(event):
 	if event.is_action_pressed("toggle_fullscreen"):
-		OS.set_window_fullscreen(! OS.is_window_fullscreen())
+		OS.window_fullscreen = not OS.is_window_fullscreen()
 
 	if event.is_action_pressed("toggle_hud"):
-		if get_node("/root/Game/HUD/Control").is_hidden():
-			show_hud()
-		else:
-			hide_hud()
+		get_node("/root/Game/HUD/Control").visible = not get_node("/root/Game/HUD/Control").visible
 
 
 # Makes a number (like 80) into a string like "1:20"
