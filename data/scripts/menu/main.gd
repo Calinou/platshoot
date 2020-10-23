@@ -8,7 +8,7 @@ func _ready():
 	Game.hide_hud()
 
 func _on_PlayButton_pressed():
-	get_tree().change_scene("res://data/scenes/levels/" + str(Game.level_to_play) + ".tscn")
+	get_tree().change_scene_to(load("res://data/scenes/levels/%d.tscn" % Game.level_to_play))
 
 func _on_SpinBox_value_changed(value):
 	Game.level_to_play = int(value)

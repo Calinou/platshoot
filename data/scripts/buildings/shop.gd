@@ -13,7 +13,7 @@ func _input(event):
 		if Game.credits >= AMMO_COST and Game.ammo < 100:
 			Game.ammo = min(Game.ammo + AMMO_PACKAGE, 100)
 			Game.credits = max(0, Game.credits - AMMO_COST)
-			#get_node("AudioStreamPlayer2D").play("pickup")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+			Sound.play(Sound.Type.NON_POSITIONAL, self, preload("res://data/sounds/pickup.wav"), 0.0, 1.1)
 		# Bought ammo? Re-check if player has non-full ammo supplies, if they do, show a notice
 		elif Game.ammo >= 100:
 			get_node("/root/Game/HUD").notice("Ammo supplies already full")

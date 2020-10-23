@@ -24,6 +24,7 @@ target_fps=60
 
 Game="*res://data/scenes/autoload/game.tscn"
 Screenshot="*res://data/scripts/autoload/screenshot.gd"
+Sound="*res://data/scripts/autoload/sound.gd"
 
 [display]
 

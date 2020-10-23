@@ -126,7 +126,7 @@ func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3
 			bullet.set_position(get_node("Player/Gun").get_global_position())  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 			add_child(bullet)
 			bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("Player/Gun").get_rotation() - deg2rad(BULLET_SPREAD / 2.0 + randf() * BULLET_SPREAD)))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
-			#get_node("Player/AudioStreamPlayer2D").play("pistol")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+			Sound.play(Sound.Type.NON_POSITIONAL, self, preload("res://data/sounds/pistol.wav"), -12, rand_range(0.95, 1.05))
 			Game.ammo -= 1
 			if Game.weapon == Game.WEAPON_PISTOL:
 				get_node("BulletTimer").set_wait_time(BULLET_REFIRE)
@@ -134,7 +134,7 @@ func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3
 				get_node("BulletTimer").set_wait_time(BULLET_REFIRE / 3)
 			get_node("BulletTimer").start()
 		elif Input.is_action_pressed("attack") and get_node("BulletTimer").get_time_left() == 0:
-			#get_node("Player/AudioStreamPlayer2D").play("no_ammo")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+			Sound.play(Sound.Type.NON_POSITIONAL, self, preload("res://data/sounds/no_ammo.wav"), -12, rand_range(0.95, 1.05))
 			if Game.weapon == Game.WEAPON_PISTOL:
 				get_node("BulletTimer").set_wait_time(BULLET_REFIRE)
 			elif Game.weapon == Game.WEAPON_CHAINGUN:
@@ -194,11 +194,9 @@ func damage(points):
 		Game.health = max(0, Game.health - points)
 
 	if Game.health <= 0:
-		pass
-		#get_node("Player/AudioStreamPlayer2D").play("player_death")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+		Sound.play(Sound.Type.NON_POSITIONAL, self, preload("res://data/sounds/player_death.wav"), 0.5, 1.15)
 	else:
-		pass
-		#get_node("Player/AudioStreamPlayer2D").play("player_hurt")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+		Sound.play(Sound.Type.NON_POSITIONAL, self, preload("res://data/sounds/player_hurt.wav"), 0, rand_range(0.95, 1.05))
 
 # Called when the player dies
 func die():

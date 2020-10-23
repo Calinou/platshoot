@@ -16,7 +16,7 @@ func _on_Area2D_body_enter(body):
 		Game.health = min(Game.health + 20, 100)
 		Game.items += 1
 		get_node("AnimationPlayer").play("Pickup")
-		#get_node("AudioStreamPlayer2D").play("pickup")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+		Sound.play(Sound.Type.NON_POSITIONAL, self, preload("res://data/sounds/pickup.wav"), 0.0, 1.1)
 
 func _on_AnimationPlayer_finished():
 	queue_free()

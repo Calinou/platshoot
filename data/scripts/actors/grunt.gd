@@ -70,7 +70,7 @@ func die():
 	death_particles.set_global_position(get_node("CollisionShape2D").get_position())  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 	add_child(death_particles)
 	get_node("CollisionShape2D").queue_free()
-	#get_node("AudioStreamPlayer2D").play("grunt_death")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+	Sound.play(Sound.Type.POSITIONAL_2D, self, preload("res://data/sounds/grunt_death.wav"), 3, rand_range(0.9, 1.05))
 	get_node("AnimationPlayer").play("Die")
 
 # Remove grunt after death animation
