@@ -147,6 +147,13 @@ take_screenshot={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Level"
+2d_physics/layer_2="Player"
+2d_physics/layer_3="Enemies"
+2d_physics/layer_4="Projectiles"
+
 [locale]
 
 translations=[ "res://data/locale/locale.en.translation", "res://data/locale/locale.fr.translation" ]

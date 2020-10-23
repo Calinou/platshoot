@@ -63,6 +63,8 @@ hframes = 4
 frame = 3
 
 [node name="Player" type="RigidBody2D" parent="."]
+collision_layer = 2
+collision_mask = 7
 mode = 2
 physics_material_override = SubResource( 1 )
 can_sleep = false

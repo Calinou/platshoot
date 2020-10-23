@@ -34,6 +34,8 @@ color = Color( 1, 0.941176, 0.784314, 1 )
 energy = 2.5
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 8
+collision_mask = 5
 gravity_scale = 0.0
 continuous_cd = 2
 contacts_reported = 2

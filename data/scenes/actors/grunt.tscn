@@ -40,6 +40,8 @@ border_blend = true
 radius = 28.0
 
 [node name="Grunt" type="RigidBody2D"]
+collision_layer = 4
+collision_mask = 15
 mode = 2
 physics_material_override = SubResource( 1 )
 script = ExtResource( 1 )
