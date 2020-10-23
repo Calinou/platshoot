@@ -123,9 +123,14 @@ func _physics_process(delta):
 
 		# Jetpack (uses fuel)
 		if Input.is_action_pressed("jetpack") and Game.fuel > 0:
-			get_node("Player").set_linear_velocity(Vector2(JETPACK_BONUS * speed * delta, velocity.y - JETPACK_SPEED * delta))
-			Game.fuel = max(0, Game.fuel - 20 * delta)
-			get_node("Player/JetpackParticles").set_emitting(true)
+			# Jump automatically if the player can jump.
+			# This way, the player can benefit from the jetpack more.
+			if is_touching_ground():
+				get_node("Player").set_linear_velocity(Vector2(velocity.x, -JUMP_SPEED * delta))
+			else:
+				get_node("Player").set_linear_velocity(Vector2(JETPACK_BONUS * speed * delta, velocity.y - JETPACK_SPEED * delta))
+				Game.fuel = max(0, Game.fuel - 20 * delta)
+				get_node("Player/JetpackParticles").set_emitting(true)
 
 		# Firing weapons
 		if Input.is_action_pressed("attack") and Game.ammo >= 1 and get_node("BulletTimer").get_time_left() == 0:
