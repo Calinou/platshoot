@@ -165,6 +165,16 @@ func _physics_process(delta):
 				Game.fuel = max(0, Game.fuel - 50 * delta)
 				get_node("Player/JetpackParticles").set_emitting(true)
 
+		# Fuel regeneration
+		if not Input.is_action_pressed("jetpack"):
+			Game.fuel = min(100, Game.fuel + 6 * delta)
+			# Disable jetpack particles
+			get_node("Player/JetpackParticles").set_emitting(false)
+
+		# Disable jetpack particles if having no fuel (even when pressing the key)
+		if Game.fuel <= 1:
+			get_node("Player/JetpackParticles").set_emitting(false)
+
 		# Firing weapons
 		if Input.is_action_pressed("attack") and Game.ammo >= 1 and get_node("BulletTimer").get_time_left() == 0:
 			var bullet = bullet_scene.instance()
@@ -185,16 +195,6 @@ func _physics_process(delta):
 			elif Game.weapon == Game.WEAPON_CHAINGUN:
 				get_node("BulletTimer").set_wait_time(BULLET_REFIRE / 3)
 			get_node("BulletTimer").start()
-
-		# Fuel regeneration
-		if not Input.is_action_pressed("jetpack"):
-			Game.fuel = min(100, Game.fuel + 6 * delta)
-			# Disable jetpack particles
-			get_node("Player/JetpackParticles").set_emitting(false)
-
-		# Disable jetpack particles if having no fuel (even when pressing the key)
-		if Game.fuel <= 1:
-			get_node("Player/JetpackParticles").set_emitting(false)
 
 		# Falling very fast kills the player
 		if velocity.y >= 2000:
