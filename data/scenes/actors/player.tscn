@@ -3,7 +3,7 @@
 [ext_resource path="res://data/scripts/actors/player.gd" type="Script" id=1]
 [ext_resource path="res://data/textures/player.png" type="Texture" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
-[ext_resource path="res://data/textures/white.png" type="Texture" id=5]
+[ext_resource path="res://data/textures/circle.png" type="Texture" id=4]
 [ext_resource path="res://data/textures/crosshair.png" type="Texture" id=6]
 
 [sub_resource type="PhysicsMaterial" id=1]
@@ -17,7 +17,7 @@ height = 32.0
 _data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
 
 [sub_resource type="Gradient" id=4]
-offsets = PoolRealArray( 0, 0.0794702, 1 )
+offsets = PoolRealArray( 0, 0.0397351, 1 )
 colors = PoolColorArray( 0, 1, 1, 0, 0, 1, 1, 1, 0.03125, 0, 1, 0 )
 
 [sub_resource type="Animation" id=5]
@@ -95,9 +95,10 @@ texture = ExtResource( 3 )
 amount = 64
 lifetime = 2.0
 local_coords = false
-texture = ExtResource( 5 )
+texture = ExtResource( 4 )
 emission_shape = 2
 emission_rect_extents = Vector2( 10, 1 )
+scale_amount = 0.03
 scale_amount_curve = SubResource( 3 )
 color_ramp = SubResource( 4 )
 

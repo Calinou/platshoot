@@ -4,10 +4,10 @@
 [ext_resource path="res://data/textures/circle.png" type="Texture" id=2]
 [ext_resource path="res://data/textures/light.png" type="Texture" id=3]
 
-[sub_resource type="Curve" id=2]
+[sub_resource type="Curve" id=1]
 _data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4, 4 )
 
 [node name="Bullet" type="Node2D"]
@@ -28,7 +28,7 @@ amount = 50
 local_coords = false
 texture = ExtResource( 2 )
 scale_amount = 0.02
-scale_amount_curve = SubResource( 2 )
+scale_amount_curve = SubResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="RigidBody2D"]
 texture = ExtResource( 3 )
@@ -36,7 +36,7 @@ color = Color( 1, 0.941176, 0.784314, 1 )
 energy = 2.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0

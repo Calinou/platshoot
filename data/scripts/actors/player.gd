@@ -125,7 +125,7 @@ func _physics_process(delta):  #-- NOTE: Automatically converted by Godot 2 to 3
 			var bullet = bullet_scene.instance()
 			bullet.set_position(get_node("Player/Gun").get_global_position())  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 			add_child(bullet)
-			bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("Player/Gun").get_rotation() - deg2rad(BULLET_SPREAD / 2 + randf() * BULLET_SPREAD)))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
+			bullet.get_node("RigidBody2D").set_linear_velocity(Vector2(BULLET_SPEED, 0).rotated(get_node("Player/Gun").get_rotation() - deg2rad(BULLET_SPREAD / 2.0 + randf() * BULLET_SPREAD)))  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 			#get_node("Player/AudioStreamPlayer2D").play("pistol")  #-- NOTE: Automatically converted by Godot 2 to 3 converter, please review
 			Game.ammo -= 1
 			if Game.weapon == Game.WEAPON_PISTOL:
