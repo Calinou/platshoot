@@ -39,6 +39,9 @@ onready var speed = 0
 onready var bullet_scene = preload("res://data/scenes/misc/bullet.tscn")
 onready var offset = Vector2(0, 0)
 onready var relative_mouse_pos = Vector2(0, 0)
+onready var player = $Player as RigidBody2D
+onready var camera = $Player/Camera2D as Camera2D
+onready var crosshair = $Crosshair as Sprite
 
 func _ready():
 	# Set the number of enemies present in the level
@@ -55,6 +58,10 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
 func _physics_process(delta):
+	# Move the camera to partially follow the crosshair.
+	# This helps the player get a better view on their surroundings.
+	camera.global_position = lerp(player.global_position, crosshair.global_position, 0.25)
+
 	# Increase time (shown on HUD)
 	Game.time += delta
 
