@@ -5,6 +5,7 @@ extends Node2D
 
 var kill = false
 
+
 func _physics_process(delta):
 	for body in get_node("RigidBody2D").get_colliding_bodies():
 		# Bullets can't hit the player
@@ -13,6 +14,7 @@ func _physics_process(delta):
 		if body.has_method("damage"):
 			body.damage(25)
 			_on_Timer_timeout()
+
 
 func _on_Timer_timeout():
 	# Actually kill the particle

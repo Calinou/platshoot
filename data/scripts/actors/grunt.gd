@@ -26,9 +26,11 @@ onready var health = 75
 
 var death_particles_scene = preload("res://data/scenes/misc/death_particles.tscn")
 
+
 func _ready():
 	# Desynchronize the animation of each grunt
 	get_node("AnimationPlayer").seek(randf())
+
 
 func _physics_process(delta):
 	get_node("ProgressBar").set_value(health)
@@ -56,6 +58,7 @@ func _physics_process(delta):
 		set_linear_velocity(Vector2(MAX_SPEED * delta, velocity.y))
 		get_node("Smoothing2D/Sprite").set_flip_h(true)
 
+
 func damage(dmg):
 	health -= dmg
 	if health <= 0:
@@ -63,6 +66,7 @@ func damage(dmg):
 	else:
 		pass
 		Sound.play(Sound.Type.POSITIONAL_2D, self, preload("res://data/sounds/player_hurt.wav"), 3, rand_range(0.9, 1.05))
+
 
 func die():
 	dangerous = false
@@ -73,11 +77,13 @@ func die():
 	Sound.play(Sound.Type.POSITIONAL_2D, self, preload("res://data/sounds/grunt_death.wav"), 3, rand_range(0.9, 1.05))
 	get_node("AnimationPlayer").play("Die")
 
+
 # Remove grunt after death animation
 func _on_AnimationPlayer_finished():
 	Game.kills += 1
 	Game.credits += GRUNT_KILL_CREDITS
 	queue_free()
+
 
 func _on_Area2D_body_enter(body):
 	if body.get_name() == "Player" and dangerous:
@@ -87,4 +93,3 @@ func _on_Area2D_body_enter(body):
 func _on_Area2D_body_exit(body):
 	if body.get_name() == "Player":
 		hurt_player = false
-

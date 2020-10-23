@@ -43,6 +43,7 @@ onready var level_to_play = 1
 
 onready var status = STATUS_ALIVE
 
+
 func _ready():
 	randomize()
 	print("Platshoot [0.1.0]")
@@ -53,14 +54,16 @@ func _ready():
 	var background = background_scene.instance()
 	add_child(background)
 
+
 func _physics_process(delta):
 	# Prevent health from going below 0
 	if Game.health <= 0:
 		Game.health = 0
 
+
 func _input(event):
 	if event.is_action_pressed("toggle_fullscreen"):
-		OS.set_window_fullscreen(!OS.is_window_fullscreen())
+		OS.set_window_fullscreen(! OS.is_window_fullscreen())
 
 	if event.is_action_pressed("toggle_hud"):
 		if get_node("/root/Game/HUD/Control").is_hidden():
@@ -68,9 +71,11 @@ func _input(event):
 		else:
 			hide_hud()
 
+
 # Makes a number (like 80) into a string like "1:20"
 func time_string(game_time):
 	return str(floor(game_time / 60)) + ":" + str(int(game_time) % 60).pad_zeros(2)
+
 
 func get_weapon_name(weap):
 	if weap == WEAPON_FIST:
@@ -80,6 +85,7 @@ func get_weapon_name(weap):
 	elif weap == WEAPON_CHAINGUN:
 		return "CHAINGUN"
 
+
 # Hides the HUD (for menu, and the "hide HUD" key)
 # The HUD elements are hidden individually because CanvasLayer can't be hidden
 func hide_hud():
@@ -87,6 +93,7 @@ func hide_hud():
 	get_node("/root/Game/HUD/FPS").hide()
 	get_node("/root/Game/HUD/Stats").hide()
 	get_node("/root/Game/HUD/Control").hide()
+
 
 # Shows the HUD (when the player enters game, or uses the "hide HUD" key while
 # the HUD is hidden

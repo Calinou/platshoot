@@ -45,6 +45,7 @@ onready var crosshair := $Crosshair as Sprite
 onready var preloader := $ResourcePreloader as ResourcePreloader
 onready var crosshair_color_gradient := preloader.get_resource("crosshair_color_gradient") as Gradient
 
+
 func _ready():
 	# Set the number of enemies present in the level
 	Game.kills_total = get_node("/root/Level/Enemies").get_child_count()
@@ -59,13 +60,15 @@ func _ready():
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
+
 func _process(delta):
 	# Mouse position/offset computations (for gun and crosshair)
-	offset = -get_viewport().get_canvas_transform().origin * get_node("Player/Camera2D").get_zoom() # Get the offset
-	relative_mouse_pos = get_viewport().get_mouse_position() * get_node("Player/Camera2D").get_zoom() + offset # And add it to the mouse position
+	offset = -get_viewport().get_canvas_transform().origin * get_node("Player/Camera2D").get_zoom()  # Get the offset
+	relative_mouse_pos = get_viewport().get_mouse_position() * get_node("Player/Camera2D").get_zoom() + offset  # And add it to the mouse position
 	get_node("Player/Gun").look_at(relative_mouse_pos)
 	# Move crosshair at mouse position
 	get_node("Crosshair").set_position(relative_mouse_pos)
+
 
 func _physics_process(delta):
 	# Move the camera to partially follow the crosshair.
@@ -173,6 +176,7 @@ func _physics_process(delta):
 
 		velocity_new = get_node("Player").get_linear_velocity()
 
+
 func _input(event):
 	var zoom = get_node("Player/Camera2D").get_zoom().x
 	if event.is_action_pressed("zoom_in"):
@@ -196,9 +200,11 @@ func _input(event):
 	if event.is_action_pressed("suicide") and Game.status == Game.STATUS_ALIVE:
 		damage(1000)
 
+
 # Returns true if the player is touching ground
 func is_touching_ground():
 	return get_node("Player/RayCast2D").is_colliding()
+
 
 func damage(points):
 	# If player has armor, divide damage by half on health and deplete armor
@@ -214,11 +220,13 @@ func damage(points):
 	else:
 		Sound.play(Sound.Type.NON_POSITIONAL, self, preload("res://data/sounds/player_hurt.wav"), 0, rand_range(0.95, 1.05))
 
+
 # Called when the player dies
 func die():
 	Game.status = Game.STATUS_DEAD
 	get_node("RespawnTimer").set_wait_time(RESPAWN_DELAY)
 	get_node("RespawnTimer").start()
+
 
 # Called when the player respawns
 func respawned():

@@ -3,11 +3,7 @@
 
 extends Node
 
-var screenshots_dir := (
-		OS.get_system_dir(OS.SYSTEM_DIR_PICTURES) +
-		"/" +
-		ProjectSettings.get_setting("application/config/name") as String
-)
+var screenshots_dir := OS.get_system_dir(OS.SYSTEM_DIR_PICTURES) + "/" + ProjectSettings.get_setting("application/config/name") as String
 
 
 func _ready() -> void:
@@ -33,15 +29,9 @@ func _input(event: InputEvent) -> void:
 		for key in datetime:
 			datetime[key] = str(datetime[key]).pad_zeros(2)
 
-		var screenshot_name := "/escape-space_{year}-{month}-{day}_{hour}.{minute}.{second}" \
-				.format(datetime)
+		var screenshot_name := "/escape-space_{year}-{month}-{day}_{hour}.{minute}.{second}".format(datetime)
 
-		var error := image.save_png(
-				screenshots_dir +
-				"/" +
-				screenshot_name +
-				".png"
-		)
+		var error := image.save_png(screenshots_dir + "/" + screenshot_name + ".png")
 
 		if error != OK:
 			push_error("Couldn't save screenshot.")

@@ -6,6 +6,7 @@ extends TileMap
 # Higher number of iterations looks better, but is slower.
 const ITERATIONS = 10
 
+
 func _ready() -> void:
 	# Create duplicate tilemap layers for a pseudo-3D look.
 	for i in ITERATIONS:

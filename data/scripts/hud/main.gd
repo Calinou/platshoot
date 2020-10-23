@@ -3,6 +3,7 @@
 
 extends CanvasLayer
 
+
 func _physics_process(delta):
 	# Inventory
 	get_node("Control/HealthProgressBar").set_value(Game.health)
@@ -15,10 +16,12 @@ func _physics_process(delta):
 	get_node("FPS/FPSLabel").set_text("FPS: " + str(Engine.get_frames_per_second()))
 	get_node("Stats/StatsLabel").set_bbcode("[right][b]" + str(Game.time_string(Game.time)) + "\n\n" + tr("KILLS") + "[/b]\n" + str(Game.kills) + " / " + str(Game.kills_total) + "\n\n[b]" + tr("ITEMS") + "[/b]\n" + str(Game.items) + " / " + str(Game.items_total) + "\n\n[b]" + tr("CREDITS") + "[/b]\n" + str(Game.credits) + "[/right]")
 
+
 # Spawn a notice at center of screen
 # Currently used by shops
 func notice(bbcode):
 	get_node("Notices/NoticesLabel").set_bbcode("[center]" + bbcode + "[/center]")
+
 
 # Clears the notice by setting empty text to it
 func clear_notice():

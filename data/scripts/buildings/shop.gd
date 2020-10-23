@@ -8,6 +8,7 @@ const AMMO_PACKAGE = 15
 
 var close_to_shop = false
 
+
 func _input(event):
 	if event.is_action_pressed("use") and close_to_shop:
 		if Game.credits >= AMMO_COST and Game.ammo < 100:
@@ -21,6 +22,7 @@ func _input(event):
 		else:
 			get_node("/root/Game/HUD").notice("Not enough credits to buy ammo")
 
+
 func _on_Area2D_body_enter(body):
 	if body.get_name() == "Player":
 		close_to_shop = true
@@ -32,8 +34,8 @@ func _on_Area2D_body_enter(body):
 		else:
 			get_node("/root/Game/HUD").notice("Not enough credits to buy ammo")
 
+
 func _on_Area2D_body_exit(body):
 	if body.get_name() == "Player":
 		close_to_shop = false
 		get_node("/root/Game/HUD").clear_notice()
-
