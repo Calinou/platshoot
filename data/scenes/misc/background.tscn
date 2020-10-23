@@ -9,7 +9,7 @@ scroll_ignore_camera_zoom = true
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
 
 [node name="Sprite" type="Sprite" parent="ParallaxLayer"]
-modulate = Color( 0.75, 0.75, 0.75, 1 )
+modulate = Color( 0.6, 0.6, 0.6, 1 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 65536, 65536 )

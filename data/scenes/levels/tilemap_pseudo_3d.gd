@@ -9,10 +9,14 @@ const ITERATIONS = 10
 func _ready() -> void:
 	# Create duplicate tilemap layers for a pseudo-3D look.
 	for i in ITERATIONS:
-		var canvas_layer = CanvasLayer.new()
+		var canvas_layer := CanvasLayer.new()
 		# Make the TileMap draw in front of the background but behind the HUD and entities.
 		canvas_layer.layer = -1
 		canvas_layer.follow_viewport_enable = 1
-		canvas_layer.follow_viewport_scale = 0.875 + i * 0.0125
-		canvas_layer.add_child(duplicate(0))
+		canvas_layer.follow_viewport_scale = 0.875 + int(i) * 0.0125
+		var tilemap := duplicate(0)
+		# Fade distant tilemaps to add a basic shading/fake contrast effect.
+		var brightness := 0.5 + int(i) * 0.03
+		tilemap.modulate = Color(brightness, brightness, brightness)
+		canvas_layer.add_child(tilemap)
 		get_parent().call_deferred("add_child", canvas_layer)
