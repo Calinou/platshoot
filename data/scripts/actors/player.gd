@@ -151,7 +151,7 @@ func _physics_process(delta):
 				get_node("Player").set_linear_velocity(Vector2(velocity.x, -JUMP_SPEED * delta))
 			else:
 				get_node("Player").set_linear_velocity(Vector2(JETPACK_BONUS * speed * delta, velocity.y - JETPACK_SPEED * delta))
-				Game.fuel = max(0, Game.fuel - 20 * delta)
+				Game.fuel = max(0, Game.fuel - 50 * delta)
 				get_node("Player/JetpackParticles").set_emitting(true)
 
 		# Firing weapons
