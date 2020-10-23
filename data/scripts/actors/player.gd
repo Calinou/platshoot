@@ -58,7 +58,22 @@ func _ready():
 	# Show HUD when player is in scene
 	Game.show_hud()
 
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CONFINED)
+	hide_hardware_mouse_cursor()
+
+
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_WM_FOCUS_IN:
+			call_deferred("hide_hardware_mouse_cursor")
+
+
+func hide_hardware_mouse_cursor() -> void:
+	# Revert back to the default cursor. This is required; otherwise, the cursor will only change once.
+	# (Only tested on Linux.)
+	Input.set_custom_mouse_cursor(null)
+	# Use a transparent cursor texture to hide the hardware cursor.
+	Input.set_custom_mouse_cursor(preload("res://data/textures/transparent.png"))
 
 
 func _process(delta):
