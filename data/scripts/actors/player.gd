@@ -57,6 +57,14 @@ func _ready():
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 
+func _process(delta):
+	# Mouse position/offset computations (for gun and crosshair)
+	offset = -get_viewport().get_canvas_transform().origin * get_node("Player/Camera2D").get_zoom() # Get the offset
+	relative_mouse_pos = get_viewport().get_mouse_position() * get_node("Player/Camera2D").get_zoom() + offset # And add it to the mouse position
+	get_node("Player/Gun").look_at(relative_mouse_pos)
+	# Move crosshair at mouse position
+	get_node("Crosshair").set_position(relative_mouse_pos)
+
 func _physics_process(delta):
 	# Move the camera to partially follow the crosshair.
 	# This helps the player get a better view on their surroundings.
@@ -77,21 +85,15 @@ func _physics_process(delta):
 	# Flip player sprite if the crosshair is at the right of the player (player faces right),
 	# else don't flip it (player faces left)
 	if get_node("Crosshair").get_position().x > get_node("Player").get_position().x:
-		get_node("Player/Sprite").set_flip_h(true)
+		get_node("Smoothing2D/Sprite").set_flip_h(true)
 	else:
-		get_node("Player/Sprite").set_flip_h(false)
+		get_node("Smoothing2D/Sprite").set_flip_h(false)
 
 	if Game.status == Game.STATUS_ALIVE:
 		# Health regeneration (1 per second)
 		if Game.health > 0:
 			Game.health = min(Game.health + delta, 100)
 
-		# Mouse position/offset computations (for gun and crosshair)
-		offset = -get_viewport().get_canvas_transform().origin * get_node("Player/Camera2D").get_zoom() # Get the offset
-		relative_mouse_pos = get_viewport().get_mouse_position() * get_node("Player/Camera2D").get_zoom() + offset # And add it to the mouse position
-		get_node("Player/Gun").look_at(relative_mouse_pos)
-		# Move crosshair at mouse position
-		get_node("Crosshair").set_position(relative_mouse_pos)
 		# Current velocity
 		velocity = get_node("Player").get_linear_velocity()
 

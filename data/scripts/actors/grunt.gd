@@ -51,10 +51,10 @@ func _physics_process(delta):
 		return
 	if difference > 0:
 		set_linear_velocity(Vector2(-MAX_SPEED * delta, velocity.y))
-		get_node("Sprite").set_flip_h(false)
+		get_node("Smoothing2D/Sprite").set_flip_h(false)
 	else:
 		set_linear_velocity(Vector2(MAX_SPEED * delta, velocity.y))
-		get_node("Sprite").set_flip_h(true)
+		get_node("Smoothing2D/Sprite").set_flip_h(true)
 
 func damage(dmg):
 	health -= dmg

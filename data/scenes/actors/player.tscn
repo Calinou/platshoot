@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://data/scripts/actors/player.gd" type="Script" id=1]
 [ext_resource path="res://data/textures/player.png" type="Texture" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://data/textures/circle.png" type="Texture" id=4]
+[ext_resource path="res://addons/smoothing/smoothing_2d.gd" type="Script" id=5]
 [ext_resource path="res://data/textures/crosshair.png" type="Texture" id=6]
 
 [sub_resource type="PhysicsMaterial" id=1]
@@ -24,7 +25,7 @@ colors = PoolColorArray( 0, 1, 1, 0, 0, 1, 1, 1, 0.03125, 0, 1, 0 )
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:frame")
+tracks/0/path = NodePath("../Smoothing2D/Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -49,6 +50,17 @@ __meta__ = {
 "__editor_plugin_screen__": "Script"
 }
 
+[node name="Smoothing2D" type="Node2D" parent="."]
+script = ExtResource( 5 )
+target = NodePath("../Player")
+
+[node name="Sprite" type="Sprite" parent="Smoothing2D"]
+position = Vector2( 0, -32 )
+texture = ExtResource( 2 )
+flip_h = true
+hframes = 4
+frame = 3
+
 [node name="Player" type="RigidBody2D" parent="."]
 mode = 2
 physics_material_override = SubResource( 1 )
@@ -61,7 +73,6 @@ shape = SubResource( 2 )
 [node name="Camera2D" type="Camera2D" parent="Player"]
 current = true
 zoom = Vector2( 0.5, 0.5 )
-process_mode = 0
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
 smoothing_enabled = true
@@ -70,13 +81,6 @@ drag_margin_left = 0.0
 drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
-
-[node name="Sprite" type="Sprite" parent="Player"]
-position = Vector2( 0, -32 )
-texture = ExtResource( 2 )
-flip_h = true
-hframes = 4
-frame = 3
 
 [node name="RayCast2D" type="RayCast2D" parent="Player"]
 position = Vector2( 0, 2 )

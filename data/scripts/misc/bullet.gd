@@ -20,8 +20,8 @@ func _on_Timer_timeout():
 		queue_free()
 	# Only make it stop emitting
 	else:
-		get_node("RigidBody2D/CPUParticles2D").set_emitting(false)
-		get_node("RigidBody2D/Light2D").set_enabled(false)
+		get_node("Smoothing2D/CPUParticles2D").set_emitting(false)
+		get_node("Smoothing2D/Light2D").set_enabled(false)
 		get_node("Timer").set_wait_time(2)
 		get_node("Timer").start()
 		kill = true
