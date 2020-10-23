@@ -39,7 +39,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 1, 1, 0.25098, 0.752941 )
+bg_color = Color( 1, 1, 1, 0.752941 )
 border_blend = true
 
 [sub_resource type="StyleBoxEmpty" id=7]
