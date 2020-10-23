@@ -23,6 +23,7 @@ target_fps=60
 [autoload]
 
 Game="*res://data/scenes/autoload/game.tscn"
+Screenshot="*res://data/scripts/autoload/screenshot.gd"
 
 [display]
 
@@ -133,6 +134,11 @@ zoom_out={
 zoom_reset={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777350,"unicode":0,"echo":false,"script":null)
+ ]
+}
+take_screenshot={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777255,"unicode":0,"echo":false,"script":null)
  ]
 }
 
