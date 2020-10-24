@@ -60,12 +60,14 @@ onready var sprite_base_offset := player_sprite.position.y
 
 func _ready() -> void:
 	set_process_input(is_network_master())
+	puppet_position = player.position
 
 	# Make our camera active, but not other players'
 	camera.current = is_network_master()
 
-
-	puppet_position = player.position
+	if not is_network_master():
+		# Distinguish other players to avoid confusing them with our player.
+		player_sprite.modulate = Color(0.8, 1.2, 1.4)
 
 	# Set the number of enemies present in the level
 	Game.kills_total = get_node("/root/Level/Enemies").get_child_count()
