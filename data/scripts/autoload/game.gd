@@ -76,13 +76,13 @@ func time_string(game_time: float) -> String:
 
 func get_weapon_name(weap: int) -> String:
 	if weap == WEAPON_FIST:
-		return "FIST"
+		return tr("Fist")
 	elif weap == WEAPON_PISTOL:
-		return "PISTOL"
+		return tr("Pistol")
 	elif weap == WEAPON_CHAINGUN:
-		return "CHAINGUN"
+		return tr("Chaingun")
 
-	return "UNKNOWN"
+	return tr("Unknown")
 
 
 # Hides the HUD (for menu, and the "hide HUD" key)

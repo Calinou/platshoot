@@ -1,0 +1,88 @@
+# French translation for Platshoot.
+# Copyright (C) 2020 Hugo Locurcio and contributors
+# This file is distributed under the same license as the Platshoot project.
+# Hugo Locurcio <hugo.locurcio@hugo.pro>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: platshoot\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2020-10-24 22:57+0200\n"
+"PO-Revision-Date: 2020-10-24 22:57+0200\n"
+"Last-Translator: Hugo Locurcio <hugo.locurcio@hugo.pro>\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Generated-By: Babel 2.8.0\n"
+
+#: data/scenes/hud/main.tscn:123
+msgid "Health"
+msgstr "Santé"
+
+#: data/scenes/hud/main.tscn:133
+msgid "Armor"
+msgstr "Armure"
+
+#: data/scenes/hud/main.tscn:143
+msgid "Ammo"
+msgstr "Munitions"
+
+#: data/scenes/hud/main.tscn:153
+msgid "Fuel"
+msgstr "Carburant"
+
+#: data/scenes/menu/lobby.gd:92 data/scenes/menu/lobby.tscn:38
+#, python-format
+msgid "%d players"
+msgstr "%d joueurs"
+
+#: data/scenes/menu/lobby.tscn:30
+msgid "Waiting for players…"
+msgstr "En attente de joueurs…"
+
+#: data/scenes/menu/lobby.tscn:49
+msgid "Start Game"
+msgstr "Démarrer la partie"
+
+#: data/scenes/menu/main.tscn:19
+msgid "Join Server"
+msgstr "Rejoindre un serveur"
+
+#: data/scenes/menu/main.tscn:29
+msgid "Host Server"
+msgstr "Héberger un serveur"
+
+#: data/scenes/menu/main.tscn:58
+msgid "Sound Volume"
+msgstr "Volume du son"
+
+#: data/scripts/autoload/game.gd:79
+msgid "Fist"
+msgstr "Poing"
+
+#: data/scripts/autoload/game.gd:81
+msgid "Pistol"
+msgstr "Pistolet"
+
+#: data/scripts/autoload/game.gd:83
+msgid "Chaingun"
+msgstr "Mitrailleuse"
+
+#: data/scripts/autoload/game.gd:85
+msgid "Unknown"
+msgstr "Inconnu"
+
+#: data/scripts/hud/main.gd:17
+msgid "Kills"
+msgstr "Tués"
+
+#: data/scripts/hud/main.gd:17
+msgid "Items"
+msgstr "Objets"
+
+#: data/scripts/hud/main.gd:17
+msgid "Credits"
+msgstr "Crédits"

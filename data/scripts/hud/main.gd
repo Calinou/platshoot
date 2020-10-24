@@ -13,8 +13,8 @@ func _physics_process(_delta: float) -> void:
 	get_node("Control/AmmoLabel").set_text(tr(Game.get_weapon_name(Game.weapon)))
 
 	# Stats
-	get_node("FPS/FPSLabel").set_text("FPS: " + str(Engine.get_frames_per_second()))
-	get_node("Stats/StatsLabel").set_bbcode("[right][b]" + str(Game.time_string(Game.time)) + "\n\n" + tr("KILLS") + "[/b]\n" + str(Game.kills) + " / " + str(Game.kills_total) + "\n\n[b]" + tr("ITEMS") + "[/b]\n" + str(Game.items) + " / " + str(Game.items_total) + "\n\n[b]" + tr("CREDITS") + "[/b]\n" + str(Game.credits) + "[/right]")
+	get_node("FPS/FPSLabel").set_text("FPS: %d" % Engine.get_frames_per_second())
+	get_node("Stats/StatsLabel").set_bbcode("[right][b]" + str(Game.time_string(Game.time)) + "\n\n" + tr("Kills") + "[/b]\n" + str(Game.kills) + " / " + str(Game.kills_total) + "\n\n[b]" + tr("Items") + "[/b]\n" + str(Game.items) + " / " + str(Game.items_total) + "\n\n[b]" + tr("Credits") + "[/b]\n" + str(Game.credits) + "[/right]")
 
 
 # Spawn a notice at center of screen

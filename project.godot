@@ -166,7 +166,8 @@ take_screenshot={
 
 [locale]
 
-translations=[ "res://data/locale/locale.en.translation", "res://data/locale/locale.fr.translation" ]
+translations=PoolStringArray( "res://locale/fr.po" )
+locale_filter=[ 0, [  ] ]
 
 [physics]
 

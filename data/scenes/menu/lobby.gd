@@ -44,6 +44,8 @@ func _ready() -> void:
 	# Hide the lobby until we request it.
 	visible = false
 
+	player_count_label.text = tr("%d players") % player_count
+
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
 	get_tree().connect("connected_to_server", self, "_connected_ok")
@@ -89,7 +91,7 @@ remote func register_player(info: Dictionary) -> void:
 
 	# Update the lobby UI here.
 	player_count += 1
-	player_count_label.text = "%d players" % player_count
+	player_count_label.text = tr("%d players") % player_count
 
 
 remote func pre_configure_game() -> void:

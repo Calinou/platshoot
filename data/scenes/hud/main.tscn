@@ -62,6 +62,9 @@ margin_top = 112.0
 margin_right = 1280.0
 margin_bottom = 432.0
 bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="FPS" type="Control" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
@@ -74,7 +77,9 @@ margin_top = 16.0
 margin_right = 69.0
 margin_bottom = 45.0
 mouse_filter = 1
-text = "FPS:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Stats" type="Control" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
@@ -98,14 +103,6 @@ bbcode_text = "[right][b]KILLS[/b]
 
 [b]CREDITS[/b]
 0[/right]"
-text = "KILLS
-0 / 0
-
-ITEMS
-0 / 0
-
-CREDITS
-0"
 
 [node name="Control" type="Control" parent="."]
 anchor_left = 0.5
@@ -123,7 +120,7 @@ margin_top = 640.0
 margin_right = 174.0
 margin_bottom = 669.0
 mouse_filter = 1
-text = "HEALTH"
+text = "Health"
 align = 2
 valign = 1
 
@@ -133,7 +130,7 @@ margin_top = 672.0
 margin_right = 174.0
 margin_bottom = 701.0
 mouse_filter = 1
-text = "ARMOR"
+text = "Armor"
 align = 2
 valign = 1
 
@@ -143,7 +140,7 @@ margin_top = 672.0
 margin_right = 1102.0
 margin_bottom = 701.0
 mouse_filter = 1
-text = "AMMO"
+text = "Ammo"
 align = 2
 valign = 1
 
@@ -153,7 +150,7 @@ margin_top = 640.0
 margin_right = 1102.0
 margin_bottom = 669.0
 mouse_filter = 1
-text = "FUEL"
+text = "Fuel"
 align = 2
 valign = 1
 
