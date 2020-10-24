@@ -95,14 +95,6 @@ margin_right = 240.0
 margin_bottom = 320.0
 mouse_filter = 1
 bbcode_enabled = true
-bbcode_text = "[right][b]KILLS[/b]
-0 / 0
-
-[b]ITEMS[/b]
-0 / 0
-
-[b]CREDITS[/b]
-0[/right]"
 
 [node name="Control" type="Control" parent="."]
 anchor_left = 0.5
