@@ -161,7 +161,7 @@ func _physics_process(delta):
 
 			# Falling damage
 			if velocity_new.y - velocity.y >= FALL_DAMAGE_THRESHOLD:
-				damage((velocity_new.y - velocity.y - FALL_DAMAGE_THRESHOLD) / FALL_DAMAGE_FACTOR)
+				rpc("damage", get_tree().get_network_unique_id(), (velocity_new.y - velocity.y - FALL_DAMAGE_THRESHOLD) / FALL_DAMAGE_FACTOR)
 
 			# Jumping
 			if Input.is_action_pressed("move_up") and is_touching_ground():
@@ -210,7 +210,7 @@ func _physics_process(delta):
 
 			# Falling very fast kills the player
 			if velocity.y >= 2000:
-				damage(1000)
+				rpc("damage", get_tree().get_network_unique_id(), 1000)
 
 			velocity_new = get_node("Player").get_linear_velocity()
 
@@ -222,7 +222,7 @@ func _physics_process(delta):
 		player.position = puppet_position
 		get_node("Player/JetpackParticles").set_emitting(puppet_using_jetpack)
 
-remotesync func fire_bullet(player_id: int, pos: Vector2, velocity: Vector2):
+remotesync func fire_bullet(player_id: int, pos: Vector2, velocity: Vector2) -> void:
 	# Bullet will be owned by the server.
 	var bullet = bullet_scene.instance()
 	bullet.set_position(pos)
@@ -285,7 +285,7 @@ func _input(event):
 
 	# Suicide (default key: Ctrl+K)
 	if event.is_action_pressed("suicide") and Game.status == Game.STATUS_ALIVE:
-		damage(1000)
+		rpc("damage", get_tree().get_network_unique_id(), 1000)
 
 
 # Returns true if the player is touching ground
@@ -293,29 +293,33 @@ func is_touching_ground():
 	return get_node("Player/RayCast2D").is_colliding()
 
 
-func damage(points):
-	animation_player.play("pain")
-	animation_player.playback_speed = 1
+remotesync func damage(player_id: int, points: int):
+	var ap := get_node("/root/Level/Players/%d/Player/AnimationPlayer" % player_id)
+	ap.play("pain")
+	ap.playback_speed = 1
 
-	# If player has armor, divide damage by half on health and deplete armor
-	if Game.armor > 0:
-		Game.armor = max(0, Game.armor - points / 2)
-		Game.health = max(0, Game.health - points / 2)
-	# If player has no armor, deplete health
-	else:
-		Game.health = max(0, Game.health - points)
-
+	var positional: int = Sound.Type.NON_POSITIONAL if is_network_master() else Sound.Type.POSITIONAL_2D
 	if Game.health <= 0:
-		Sound.play(Sound.Type.NON_POSITIONAL, self, preload("res://data/sounds/player_death.wav"), 0.5, 1.15)
+		Sound.play(positional, self, preload("res://data/sounds/player_death.wav"), 0.5, 1.15)
 	else:
-		Sound.play(Sound.Type.NON_POSITIONAL, self, preload("res://data/sounds/player_hurt.wav"), 0, rand_range(0.95, 1.05))
+		Sound.play(positional, self, preload("res://data/sounds/player_hurt.wav"), 0, rand_range(0.95, 1.05))
+
+	if is_network_master():
+		# If player has armor, divide damage by half on health and deplete armor
+		if Game.armor > 0:
+			Game.armor = max(0, Game.armor - points / 2)
+			Game.health = max(0, Game.health - points / 2)
+		# If player has no armor, deplete health
+		else:
+			Game.health = max(0, Game.health - points)
 
 
 # Called when the player dies
 func die():
-	Game.status = Game.STATUS_DEAD
-	get_node("RespawnTimer").set_wait_time(RESPAWN_DELAY)
-	get_node("RespawnTimer").start()
+	if is_network_master():
+		Game.status = Game.STATUS_DEAD
+		get_node("RespawnTimer").set_wait_time(RESPAWN_DELAY)
+		get_node("RespawnTimer").start()
 
 
 # Called when the player respawns

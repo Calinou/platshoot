@@ -40,7 +40,7 @@ func _physics_process(delta):
 
 	if hurt_player:
 		if get_node("Timer").get_time_left() == 0 and Game.health > 0:
-			get_node("/root/Level/Players/1").damage(15)
+			get_node("/root/Level/Players/1").rpc("damage", get_tree().get_network_unique_id(), 15)
 			get_node("Timer").set_wait_time(MELEE_REFIRE)
 			get_node("Timer").start()
 
