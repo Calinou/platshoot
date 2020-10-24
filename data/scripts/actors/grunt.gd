@@ -15,24 +15,24 @@ const AGGRO_RANGE = 320
 # Number of credits given when killing a grunt
 const GRUNT_KILL_CREDITS = 5
 
-onready var velocity = Vector2(0, 0)
-onready var hurt_player = false
+onready var velocity := Vector2(0, 0)
+onready var hurt_player := false
 # This variable is set to false when the monster dies, so that they can't
 # damage the player
-onready var dangerous = true
+onready var dangerous := true
 
 # The health each grunt has
-onready var health = 75
+onready var health := 75
 
-var death_particles_scene = preload("res://data/scenes/misc/death_particles.tscn")
+const death_particles_scene := preload("res://data/scenes/misc/death_particles.tscn")
 
 
-func _ready():
+func _ready() -> void:
 	# Desynchronize the animation of each grunt
 	get_node("AnimationPlayer").seek(randf())
 
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	get_node("ProgressBar").set_value(health)
 	velocity = get_linear_velocity()
 	var player_pos = get_node("/root/Level/Players/1").get_position()
@@ -59,7 +59,7 @@ func _physics_process(delta):
 		get_node("Smoothing2D/Sprite").set_flip_h(true)
 
 
-func damage(dmg):
+func damage(dmg: int) -> void:
 	health -= dmg
 	if health <= 0:
 		die()
@@ -67,7 +67,7 @@ func damage(dmg):
 		Sound.play(Sound.Type.POSITIONAL_2D, self, preload("res://data/sounds/player_hurt.wav"), 3, rand_range(0.9, 1.05))
 
 
-func die():
+func die() -> void:
 	dangerous = false
 	var death_particles = death_particles_scene.instance()
 	death_particles.set_global_position(get_node("CollisionShape2D").get_position())
@@ -78,17 +78,17 @@ func die():
 
 
 # Remove grunt after death animation
-func _on_AnimationPlayer_finished():
+func _on_AnimationPlayer_finished() -> void:
 	Game.kills += 1
 	Game.credits += GRUNT_KILL_CREDITS
 	queue_free()
 
 
-func _on_Area2D_body_enter(body):
+func _on_Area2D_body_enter(body: Node2D) -> void:
 	if body.get_name() == "Player" and dangerous:
 		hurt_player = true
 
 
-func _on_Area2D_body_exit(body):
+func _on_Area2D_body_exit(body: Node2D) -> void:
 	if body.get_name() == "Player":
 		hurt_player = false

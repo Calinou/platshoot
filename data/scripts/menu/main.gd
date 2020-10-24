@@ -4,21 +4,21 @@
 extends Control
 
 
-func _ready():
+func _ready() -> void:
 	# Hide HUD when entering main menu
 	Game.hide_hud()
 
 
-func _on_PlayButton_pressed():
+func _on_PlayButton_pressed() -> void:
 	get_tree().change_scene_to(load("res://data/scenes/levels/%d.tscn" % Game.level_to_play))
 	Game.start_server()
 
-func _on_SpinBox_value_changed(value):
+func _on_SpinBox_value_changed(value: float) -> void:
 	Game.level_to_play = int(value)
 
 
 # Change the sound volume when the slider value is changed
-func _on_VolumeSlider_value_changed(value):
+func _on_VolumeSlider_value_changed(value: float) -> void:
 	AudioServer.set_fx_global_volume_scale(float(value))
 
 

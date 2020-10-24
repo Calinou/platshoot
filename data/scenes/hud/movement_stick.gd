@@ -8,7 +8,7 @@ extends TextureRect
 onready var stick := $MovementStick as TextureRect
 
 
-func _ready():
+func _ready() -> void:
 	# Hide the movement stick if there's no touchscreen.
 	visible = OS.has_touchscreen_ui_hint()
 

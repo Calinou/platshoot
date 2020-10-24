@@ -3,10 +3,10 @@
 
 extends Node2D
 
-var picked = false
+var picked := false
 
 
-func _on_Area2D_body_enter(body):
+func _on_Area2D_body_enter(body: Node2D) -> void:
 	# Only the player can pick up items
 	if body.get_name() == "Player" and not picked:
 		# Don't pick up item if ammo >= 100 or if dead
@@ -14,11 +14,11 @@ func _on_Area2D_body_enter(body):
 			return
 
 		picked = true
-		Game.ammo = min(Game.ammo + 15, 100)
+		Game.ammo = int(min(Game.ammo + 15, 100))
 		Game.items += 1
 		get_node("AnimationPlayer").play("Pickup")
 		Sound.play(Sound.Type.NON_POSITIONAL, self, preload("res://data/sounds/pickup.wav"), 0.0, 1.1)
 
 
-func _on_AnimationPlayer_finished():
+func _on_AnimationPlayer_finished() -> void:
 	queue_free()

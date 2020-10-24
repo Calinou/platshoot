@@ -33,6 +33,8 @@ const FALL_DAMAGE_THRESHOLD = 700
 # Lower factors deal more damage
 const FALL_DAMAGE_FACTOR = 6
 
+const BULLET_SCENE := preload("res://data/scenes/misc/bullet.tscn")
+
 # Using a timer for double-tap shooting fixes issues related to "lingering" input
 # while allowing full-auto shooting. I don't know why.
 var double_tap_shoot_timer := 0.0
@@ -41,12 +43,11 @@ puppet var puppet_position := Vector2()
 puppet var puppet_linear_velocity := Vector2()
 puppet var puppet_using_jetpack := false
 
-onready var velocity = Vector2(0, 0)
-onready var velocity_new = Vector2(0, 0)
-onready var speed = 0
-onready var bullet_scene = preload("res://data/scenes/misc/bullet.tscn")
-onready var offset = Vector2(0, 0)
-onready var relative_mouse_pos = Vector2(0, 0)
+var velocity := Vector2(0, 0)
+var velocity_new := Vector2(0, 0)
+var speed := 0.0
+var offset := Vector2(0, 0)
+var relative_mouse_pos := Vector2(0, 0)
 onready var player := $Player as RigidBody2D
 onready var camera := $Player/Camera2D as Camera2D
 onready var crosshair := $Crosshair as Sprite
@@ -58,8 +59,11 @@ onready var sprite_base_offset := player_sprite.position.y
 
 
 func _ready() -> void:
+	set_process_input(is_network_master())
+
 	# Make our camera active, but not other players'
 	camera.current = is_network_master()
+
 
 	puppet_position = player.position
 
@@ -95,7 +99,7 @@ func hide_hardware_mouse_cursor() -> void:
 	Input.set_custom_mouse_cursor(preload("res://data/textures/transparent.png"))
 
 
-func _process(delta):
+func _process(delta) -> void:
 	if is_network_master():
 		double_tap_shoot_timer += delta
 		# Mouse position/offset computations (for gun and crosshair)
@@ -107,15 +111,15 @@ func _process(delta):
 
 	# Add bobbing to the player sprite when moving and not airborne.
 	if is_touching_ground():
-		var velocity := player.linear_velocity.x if is_network_master() else puppet_linear_velocity.x
-		player_sprite.position.y = sprite_base_offset - abs(sin(OS.get_ticks_msec() * 0.01) * velocity * 0.024)
+		var player_velocity := player.linear_velocity.x if is_network_master() else puppet_linear_velocity.x
+		player_sprite.position.y = sprite_base_offset - abs(sin(OS.get_ticks_msec() * 0.01) * player_velocity * 0.024)
 
 
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	if animation_player.current_animation == "walk":
-		var velocity := player.linear_velocity.x if is_network_master() else puppet_linear_velocity.x
+		var player_velocity := player.linear_velocity.x if is_network_master() else puppet_linear_velocity.x
 		# Don't change the animation speed if currently displaying a shoot or pain animation.
-		animation_player.set_speed_scale(min(abs(velocity) * 0.009, 2))
+		animation_player.set_speed_scale(min(abs(player_velocity) * 0.009, 2))
 
 	if is_network_master():
 		# Move the camera to partially follow the crosshair.
@@ -194,8 +198,6 @@ func _physics_process(delta):
 
 			# Firing weapons
 			if Input.is_action_pressed("attack") and Game.ammo >= 1 and get_node("BulletTimer").get_time_left() == 0:
-				animation_player.play("shoot")
-				animation_player.playback_speed = 1.0
 				var bullet_position: Vector2 = get_node("Player/Gun").get_global_position()
 				var bullet_velocity := Vector2(BULLET_SPEED, 0).rotated(get_node("Player/Gun").get_rotation() - deg2rad(BULLET_SPREAD / 2.0 + randf() * BULLET_SPREAD))
 				rpc("fire_bullet", get_tree().get_network_unique_id(), bullet_position, bullet_velocity)
@@ -222,12 +224,16 @@ func _physics_process(delta):
 		player.position = puppet_position
 		get_node("Player/JetpackParticles").set_emitting(puppet_using_jetpack)
 
-remotesync func fire_bullet(player_id: int, pos: Vector2, velocity: Vector2) -> void:
+remotesync func fire_bullet(player_id: int, bullet_position: Vector2, bullet_velocity: Vector2) -> void:
+	var remote_animation_player := get_node("/root/Level/Players/%d/Player/AnimationPlayer" % player_id)
+	remote_animation_player.play("shoot")
+	remote_animation_player.playback_speed = 1
+
 	# Bullet will be owned by the server.
-	var bullet = bullet_scene.instance()
-	bullet.set_position(pos)
+	var bullet := BULLET_SCENE.instance()
+	bullet.set_position(bullet_position)
 	add_child(bullet)
-	bullet.get_node("RigidBody2D").set_linear_velocity(velocity)
+	bullet.get_node("RigidBody2D").set_linear_velocity(bullet_velocity)
 
 	# Play the sound positionally only when it's our client firing.
 	# This prevents the sound from being located in only one of the player's ears.
@@ -247,9 +253,8 @@ remotesync func fire_bullet(player_id: int, pos: Vector2, velocity: Vector2) -> 
 			get_node("BulletTimer").set_wait_time(BULLET_REFIRE / 3)
 		get_node("BulletTimer").start()
 
-func _input(event):
-	if not is_network_master():
-		return
+func _input(event) -> void:
+	# Input processing is disabled for non-master players.
 
 	if OS.has_touchscreen_ui_hint() and event is InputEventMouseButton:
 		var mb := event as InputEventMouseButton
@@ -289,14 +294,14 @@ func _input(event):
 
 
 # Returns true if the player is touching ground
-func is_touching_ground():
+func is_touching_ground() -> bool:
 	return get_node("Player/RayCast2D").is_colliding()
 
 
-remotesync func damage(player_id: int, points: int):
-	var ap := get_node("/root/Level/Players/%d/Player/AnimationPlayer" % player_id)
-	ap.play("pain")
-	ap.playback_speed = 1
+remotesync func damage(player_id: int, points: int) -> void:
+	var remote_animation_player := get_node("/root/Level/Players/%d/Player/AnimationPlayer" % player_id)
+	remote_animation_player.play("pain")
+	remote_animation_player.playback_speed = 1
 
 	var positional: int = Sound.Type.NON_POSITIONAL if is_network_master() else Sound.Type.POSITIONAL_2D
 	if Game.health <= 0:
@@ -307,15 +312,15 @@ remotesync func damage(player_id: int, points: int):
 	if is_network_master():
 		# If player has armor, divide damage by half on health and deplete armor
 		if Game.armor > 0:
-			Game.armor = max(0, Game.armor - points / 2)
-			Game.health = max(0, Game.health - points / 2)
+			Game.armor = int(max(0, Game.armor - points / 2.0))
+			Game.health = int(max(0, Game.health - points / 2.0))
 		# If player has no armor, deplete health
 		else:
-			Game.health = max(0, Game.health - points)
+			Game.health = int(max(0, Game.health - points))
 
 
 # Called when the player dies
-func die():
+func die() -> void:
 	if is_network_master():
 		Game.status = Game.STATUS_DEAD
 		get_node("RespawnTimer").set_wait_time(RESPAWN_DELAY)
@@ -323,7 +328,7 @@ func die():
 
 
 # Called when the player respawns
-func respawned():
+func respawned() -> void:
 	Game.health = 100.0
 	Game.armor = 0
 	Game.ammo = 25

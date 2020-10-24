@@ -15,7 +15,7 @@ func _ready() -> void:
 		canvas_layer.layer = -1
 		canvas_layer.follow_viewport_enable = 1
 		canvas_layer.follow_viewport_scale = 0.875 + int(i) * 0.0125
-		var tilemap := duplicate(0)
+		var tilemap := duplicate(0) as TileMap
 		# Fade distant tilemaps to add a basic shading/fake contrast effect.
 		var brightness := 0.5 + int(i) * 0.03
 		tilemap.modulate = Color(brightness, brightness, brightness)

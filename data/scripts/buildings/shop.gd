@@ -6,14 +6,14 @@ extends Node2D
 const AMMO_COST = 70
 const AMMO_PACKAGE = 15
 
-var close_to_shop = false
+var close_to_shop := false
 
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("use") and close_to_shop:
 		if Game.credits >= AMMO_COST and Game.ammo < 100:
-			Game.ammo = min(Game.ammo + AMMO_PACKAGE, 100)
-			Game.credits = max(0, Game.credits - AMMO_COST)
+			Game.ammo = int(min(Game.ammo + AMMO_PACKAGE, 100))
+			Game.credits = int(max(0, Game.credits - AMMO_COST))
 			Sound.play(Sound.Type.NON_POSITIONAL, self, preload("res://data/sounds/pickup.wav"), 0.0, 1.1)
 		# Bought ammo? Re-check if player has non-full ammo supplies, if they do, show a notice
 		elif Game.ammo >= 100:
@@ -23,7 +23,7 @@ func _input(event):
 			get_node("/root/Game/HUD").notice("Not enough credits to buy ammo")
 
 
-func _on_Area2D_body_enter(body):
+func _on_Area2D_body_enter(body: Node2D) -> void:
 	if body.get_name() == "Player":
 		close_to_shop = true
 		# Show a message to display availability of ammo according to credits
@@ -35,7 +35,7 @@ func _on_Area2D_body_enter(body):
 			get_node("/root/Game/HUD").notice("Not enough credits to buy ammo")
 
 
-func _on_Area2D_body_exit(body):
+func _on_Area2D_body_exit(body: Node2D) -> void:
 	if body.get_name() == "Player":
 		close_to_shop = false
 		get_node("/root/Game/HUD").clear_notice()

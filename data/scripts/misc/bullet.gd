@@ -3,10 +3,10 @@
 
 extends Node2D
 
-var kill = false
+var kill := false
 
 
-func _physics_process(delta):
+func _physics_process(_delta: float) -> void:
 	for body in get_node("RigidBody2D").get_colliding_bodies():
 		# Bullets can't hit the player
 		if body.get_name() != "Player":
@@ -16,7 +16,7 @@ func _physics_process(delta):
 			_on_Timer_timeout()
 
 
-func _on_Timer_timeout():
+func _on_Timer_timeout() -> void:
 	# Actually kill the particle
 	if kill:
 		queue_free()

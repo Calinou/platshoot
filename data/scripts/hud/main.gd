@@ -4,7 +4,7 @@
 extends CanvasLayer
 
 
-func _physics_process(delta):
+func _physics_process(_delta: float) -> void:
 	# Inventory
 	get_node("Control/HealthProgressBar").set_value(Game.health)
 	get_node("Control/ArmorProgressBar").set_value(Game.armor)
@@ -19,10 +19,10 @@ func _physics_process(delta):
 
 # Spawn a notice at center of screen
 # Currently used by shops
-func notice(bbcode):
+func notice(bbcode: String) -> void:
 	get_node("Notices/NoticesLabel").set_bbcode("[center]" + bbcode + "[/center]")
 
 
 # Clears the notice by setting empty text to it
-func clear_notice():
+func clear_notice() -> void:
 	get_node("Notices/NoticesLabel").set_bbcode("")

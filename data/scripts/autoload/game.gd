@@ -3,9 +3,6 @@
 
 extends Node
 
-onready var hud_scene = preload("res://data/scenes/hud/main.tscn")
-onready var background_scene = preload("res://data/scenes/misc/background.tscn")
-
 # Consts for status
 const STATUS_ALIVE = 0
 const STATUS_DEAD = 1
@@ -23,28 +20,31 @@ const HEALTH_MAX = 100.0
 const ARMOR_MAX = 100.0
 const AMMO_MAX = 100
 
+const hud_scene := preload("res://data/scenes/hud/main.tscn")
+const background_scene := preload("res://data/scenes/misc/background.tscn")
+
 # Game stats
-onready var health = 100.0
-onready var armor = 0.0
-onready var ammo = 25
-onready var weapon = WEAPON_PISTOL
-onready var fuel = 100.0
+onready var health := 100.0
+onready var armor := 0.0
+onready var ammo := 25
+onready var weapon := WEAPON_PISTOL
+onready var fuel := 100.0
 
 # Level stats
-onready var time = 0.0
-onready var kills = 0
-onready var kills_total = 0
-onready var items = 0
-onready var items_total = 0
-onready var credits = 0
+onready var time := 0.0
+onready var kills := 0
+onready var kills_total := 0
+onready var items := 0
+onready var items_total := 0
+onready var credits := 0
 
 # For menus and respawning
-onready var level_to_play = 1
+onready var level_to_play := 1
 
-onready var status = STATUS_ALIVE
+onready var status := STATUS_ALIVE
 
 
-func _ready():
+func _ready() -> void:
 	randomize()
 	print("Platshoot [0.1.0]")
 
@@ -55,13 +55,13 @@ func _ready():
 	add_child(background)
 
 
-func _physics_process(delta):
+func _physics_process(_delta: float) -> void:
 	# Prevent health from going below 0
 	if Game.health <= 0:
 		Game.health = 0
 
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_fullscreen"):
 		OS.window_fullscreen = not OS.is_window_fullscreen()
 
@@ -70,11 +70,11 @@ func _input(event):
 
 
 # Makes a number (like 80) into a string like "1:20"
-func time_string(game_time):
+func time_string(game_time: float) -> String:
 	return str(floor(game_time / 60)) + ":" + str(int(game_time) % 60).pad_zeros(2)
 
 
-func get_weapon_name(weap):
+func get_weapon_name(weap: int) -> String:
 	if weap == WEAPON_FIST:
 		return "FIST"
 	elif weap == WEAPON_PISTOL:
@@ -82,10 +82,12 @@ func get_weapon_name(weap):
 	elif weap == WEAPON_CHAINGUN:
 		return "CHAINGUN"
 
+	return "UNKNOWN"
+
 
 # Hides the HUD (for menu, and the "hide HUD" key)
 # The HUD elements are hidden individually because CanvasLayer can't be hidden
-func hide_hud():
+func hide_hud() -> void:
 	get_node("/root/Game/HUD/Notices").hide()
 	get_node("/root/Game/HUD/FPS").hide()
 	get_node("/root/Game/HUD/Stats").hide()
@@ -94,7 +96,7 @@ func hide_hud():
 
 # Shows the HUD (when the player enters game, or uses the "hide HUD" key while
 # the HUD is hidden
-func show_hud():
+func show_hud() -> void:
 	get_node("/root/Game/HUD/Notices").show()
 	get_node("/root/Game/HUD/FPS").show()
 	get_node("/root/Game/HUD/Stats").show()
