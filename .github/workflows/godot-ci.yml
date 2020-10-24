@@ -1,0 +1,107 @@
+
+name: Continuous integration
+on: push
+
+env:
+  GODOT_VERSION: 3.2.3
+  EXPORT_NAME: platshoot
+
+jobs:
+  export-windows:
+    name: Export (Windows)
+    runs-on: ubuntu-20.04
+    container:
+      image: barichello/godot-ci:3.2.3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup
+        run: |
+          mkdir -p ~/.local/share/godot/templates/
+          mv /root/.local/share/godot/templates/$GODOT_VERSION.stable ~/.local/share/godot/templates/$GODOT_VERSION.stable
+      - name: Export (Windows)
+        run: |
+          mkdir -p dist/
+          godot -v --export "Windows Desktop" dist/$EXPORT_NAME.exe
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ env.EXPORT_NAME }}-windows
+          path: dist
+
+  export-macos:
+    name: Export (macOS)
+    runs-on: ubuntu-20.04
+    container:
+      image: barichello/godot-ci:3.2.3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup
+        run: |
+          mkdir -p ~/.local/share/godot/templates/
+          mv /root/.local/share/godot/templates/$GODOT_VERSION.stable ~/.local/share/godot/templates/$GODOT_VERSION.stable
+      - name: Export (macOS)
+        run: |
+          mkdir -p dist/
+          godot -v --export "Mac OSX" dist/$EXPORT_NAME.zip
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ env.EXPORT_NAME }}-macos
+          path: dist
+
+  export-linux:
+    name: Export (Linux)
+    runs-on: ubuntu-20.04
+    container:
+      image: barichello/godot-ci:3.2.3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup
+        run: |
+          mkdir -p ~/.local/share/godot/templates/
+          mv /root/.local/share/godot/templates/$GODOT_VERSION.stable ~/.local/share/godot/templates/$GODOT_VERSION.stable
+      - name: Export (Linux)
+        run: |
+          mkdir -p dist/
+          godot -v --export "Linux/X11" dist/$EXPORT_NAME.x86_64
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ env.EXPORT_NAME }}-linux
+          path: dist
+
+  export-html5:
+    name: Export (HTML5)
+    runs-on: ubuntu-20.04
+    container:
+      image: barichello/godot-ci:3.2.3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup
+        run: |
+          mkdir -p ~/.local/share/godot/templates/
+          mv /root/.local/share/godot/templates/$GODOT_VERSION.stable ~/.local/share/godot/templates/$GODOT_VERSION.stable
+      - name: Export (HTML5)
+        run: |
+          mkdir -p dist/
+          godot -v --export "HTML5" dist/index.html
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ env.EXPORT_NAME }}-html5
+          path: dist
+
+      # Installing rsync is needed in order to deploy to GitHub Pages. Without it, the build will fail.
+      - name: Install rsync 📚
+        run: |
+          apt-get update && apt-get install -y rsync
+      - name: Deploy to GitHub Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: dist # The folder the action should deploy.
