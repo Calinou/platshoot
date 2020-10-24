@@ -52,17 +52,22 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -640.0
 margin_top = -360.0
-margin_right = -608.0
-margin_bottom = -328.0
+margin_right = 640.0
+margin_bottom = 360.0
 theme = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="NoticesLabel" type="RichTextLabel" parent="Notices"]
-margin_top = 112.0
-margin_right = 1280.0
-margin_bottom = 432.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = -160.0
+margin_right = 640.0
+margin_bottom = 160.0
 bbcode_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -70,8 +75,14 @@ __meta__ = {
 
 [node name="FPS" type="Control" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
-margin_right = 224.0
-margin_bottom = 64.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = -360.0
+margin_right = 640.0
+margin_bottom = 360.0
 theme = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -89,32 +100,38 @@ __meta__ = {
 
 [node name="Stats" type="Control" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -256.0
-margin_bottom = 336.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = -360.0
+margin_right = 640.0
+margin_bottom = 360.0
 theme = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="StatsLabel" type="RichTextLabel" parent="Stats"]
-margin_left = 16.0
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -240.0
 margin_top = 16.0
-margin_right = 240.0
+margin_right = -16.0
 margin_bottom = 320.0
 mouse_filter = 1
 bbcode_enabled = true
 
 [node name="Control" type="Control" parent="."]
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
+anchor_bottom = 0.5
 margin_left = -640.0
-margin_top = -720.0
-margin_right = -640.0
-margin_bottom = -720.0
+margin_top = -360.0
+margin_right = 640.0
+margin_bottom = 360.0
 theme = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
