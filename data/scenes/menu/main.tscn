@@ -18,6 +18,26 @@ margin_right = 840.0
 margin_bottom = 560.0
 text = "PLAY"
 
+[node name="JoinServerButton" type="Button" parent="."]
+margin_left = 864.0
+margin_top = 480.0
+margin_right = 1064.0
+margin_bottom = 560.0
+text = "Join Server"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HostServerButton" type="Button" parent="."]
+margin_left = 864.0
+margin_top = 379.0
+margin_right = 1064.0
+margin_bottom = 459.0
+text = "Host Server"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="SpinBox" type="SpinBox" parent="."]
 margin_left = 480.0
 margin_top = 520.0
@@ -44,6 +64,11 @@ margin_bottom = 360.0
 mouse_filter = 1
 text = "Sound Volume"
 align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="PlayButton" to="." method="_on_PlayButton_pressed"]
+[connection signal="pressed" from="JoinServerButton" to="." method="_on_join_server_button_pressed"]
+[connection signal="pressed" from="HostServerButton" to="." method="_on_host_server_button_pressed"]
 [connection signal="value_changed" from="SpinBox" to="." method="_on_SpinBox_value_changed"]
 [connection signal="value_changed" from="VolumeSlider" to="." method="_on_VolumeSlider_value_changed"]

@@ -35,12 +35,12 @@ func _ready():
 func _physics_process(delta):
 	get_node("ProgressBar").set_value(health)
 	velocity = get_linear_velocity()
-	var player_pos = get_node("/root/Level/Player/Player").get_position()
+	var player_pos = get_node("/root/Level/Players/1").get_position()
 	var grunt_pos = get_position()
 
 	if hurt_player:
 		if get_node("Timer").get_time_left() == 0 and Game.health > 0:
-			get_node("/root/Level/Player").damage(15)
+			get_node("/root/Level/Players/1").damage(15)
 			get_node("Timer").set_wait_time(MELEE_REFIRE)
 			get_node("Timer").start()
 
@@ -64,7 +64,6 @@ func damage(dmg):
 	if health <= 0:
 		die()
 	else:
-		pass
 		Sound.play(Sound.Type.POSITIONAL_2D, self, preload("res://data/sounds/player_hurt.wav"), 3, rand_range(0.9, 1.05))
 
 
