@@ -19,6 +19,7 @@ var players_done := []
 var player_count := 1
 
 onready var player_count_label := $VBoxContainer/PlayerCount as Label
+onready var start_button := $VBoxContainer/Start as Button
 
 
 func start_server() -> void:
@@ -146,6 +147,7 @@ remote func post_configure_game() -> void:
 
 
 func _on_start_pressed() -> void:
+	start_button.disabled = true
 	assert(get_tree().is_network_server())
 	print("Starting game...")
 
