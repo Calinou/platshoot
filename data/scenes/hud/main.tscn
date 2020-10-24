@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://data/scripts/hud/main.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://data/textures/circle.png" type="Texture" id=3]
 [ext_resource path="res://data/scenes/hud/movement_stick.gd" type="Script" id=4]
+[ext_resource path="res://data/resources/themes/default.tres" type="Theme" id=5]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 0.25098, 0.25098, 0.752941 )
@@ -53,6 +54,7 @@ margin_left = -640.0
 margin_top = -360.0
 margin_right = -608.0
 margin_bottom = -328.0
+theme = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -70,6 +72,7 @@ __meta__ = {
 self_modulate = Color( 1, 1, 1, 0 )
 margin_right = 224.0
 margin_bottom = 64.0
+theme = ExtResource( 5 )
 
 [node name="FPSLabel" type="Label" parent="FPS"]
 margin_left = 16.0
@@ -87,6 +90,7 @@ anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -256.0
 margin_bottom = 336.0
+theme = ExtResource( 5 )
 
 [node name="StatsLabel" type="RichTextLabel" parent="Stats"]
 margin_left = 16.0
@@ -105,6 +109,7 @@ margin_left = -640.0
 margin_top = -720.0
 margin_right = -640.0
 margin_bottom = -720.0
+theme = ExtResource( 5 )
 
 [node name="HealthLabel" type="Label" parent="Control"]
 margin_left = 64.0
@@ -191,6 +196,7 @@ anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = 1.0
 margin_right = 1.0
+theme = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

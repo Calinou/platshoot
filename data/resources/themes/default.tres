@@ -1,7 +1,13 @@
-[gd_resource type="Theme" load_steps=1 format=2]
+[gd_resource type="Theme" load_steps=3 format=2]
 
-[ext_resource path="res://data/fonts/noto_sans-regular.font" type="Font" id=1]
+[ext_resource path="res://fonts/red_hat_display_bold.tres" type="DynamicFontData" id=1]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+outline_size = 2
+outline_color = Color( 0, 0, 0, 0.501961 )
+extra_spacing_space = 3
+font_data = ExtResource( 1 )
 
 [resource]
-
-default_font = ExtResource( 1 )
+default_font = SubResource( 1 )
