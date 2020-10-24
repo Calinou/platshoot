@@ -73,6 +73,9 @@ self_modulate = Color( 1, 1, 1, 0 )
 margin_right = 224.0
 margin_bottom = 64.0
 theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="FPSLabel" type="Label" parent="FPS"]
 margin_left = 16.0
@@ -91,6 +94,9 @@ anchor_right = 1.0
 margin_left = -256.0
 margin_bottom = 336.0
 theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="StatsLabel" type="RichTextLabel" parent="Stats"]
 margin_left = 16.0
@@ -110,6 +116,9 @@ margin_top = -720.0
 margin_right = -640.0
 margin_bottom = -720.0
 theme = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="HealthLabel" type="Label" parent="Control"]
 margin_left = 64.0
@@ -158,7 +167,7 @@ margin_right = 334.0
 margin_bottom = 669.0
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
-step = 1.0
+step = 0.0
 value = 1.0
 
 [node name="ArmorProgressBar" type="ProgressBar" parent="Control"]
@@ -168,7 +177,7 @@ margin_right = 334.0
 margin_bottom = 701.0
 custom_styles/fg = SubResource( 3 )
 custom_styles/bg = SubResource( 4 )
-step = 1.0
+step = 0.0
 value = 1.0
 
 [node name="AmmoProgressBar" type="ProgressBar" parent="Control"]
@@ -178,7 +187,7 @@ margin_right = 1262.0
 margin_bottom = 701.0
 custom_styles/fg = SubResource( 5 )
 custom_styles/bg = SubResource( 6 )
-step = 1.0
+step = 0.0
 value = 1.0
 
 [node name="FuelProgressBar" type="ProgressBar" parent="Control"]
@@ -188,7 +197,7 @@ margin_right = 1262.0
 margin_bottom = 669.0
 custom_styles/fg = SubResource( 7 )
 custom_styles/bg = SubResource( 8 )
-step = 1.0
+step = 0.0
 value = 1.0
 
 [node name="TouchScreenButtons" type="Control" parent="."]
