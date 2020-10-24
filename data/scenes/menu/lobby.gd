@@ -26,6 +26,7 @@ func start_server() -> void:
 	print("Starting server...")
 	visible = true
 	var peer := NetworkedMultiplayerENet.new()
+	peer.compression_mode = NetworkedMultiplayerENet.COMPRESS_ZSTD
 	peer.create_server(PORT, 16)
 	get_tree().network_peer = peer
 
@@ -34,6 +35,7 @@ func join_server() -> void:
 	print("Starting client...")
 	visible = true
 	var peer := NetworkedMultiplayerENet.new()
+	peer.compression_mode = NetworkedMultiplayerENet.COMPRESS_ZSTD
 	peer.create_client("localhost", PORT)
 	get_tree().network_peer = peer
 
