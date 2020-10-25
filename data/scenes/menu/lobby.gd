@@ -54,12 +54,12 @@ func _ready() -> void:
 
 	if "--server" in OS.get_cmdline_args():
 		# Hide the main menu.
-		$"/root/Control".visible = false
+		$"/root/Menu".visible = false
 		start_server()
 
 	if "--client" in OS.get_cmdline_args():
 		# Hide the main menu.
-		$"/root/Control".visible = false
+		$"/root/Menu".visible = false
 		join_server()
 
 
@@ -147,6 +147,7 @@ remote func post_configure_game() -> void:
 	# Only the server is allowed to tell a client to unpause.
 	if get_tree().is_network_server() or get_tree().get_rpc_sender_id() == 1:
 		get_tree().paused = false
+		visible = false
 		# Game starts now!
 
 

@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://data/scenes/menu/singleplayer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://data/scenes/menu/main.tscn" type="PackedScene" id=2]
+[ext_resource path="res://data/scenes/menu/options.tscn" type="PackedScene" id=3]
+[ext_resource path="res://data/scenes/menu/multiplayer.tscn" type="PackedScene" id=4]
+[ext_resource path="res://data/scenes/menu/video_options.tscn" type="PackedScene" id=5]
+[ext_resource path="res://data/scenes/menu/control_options.tscn" type="PackedScene" id=6]
+[ext_resource path="res://data/scenes/menu/audio_options.tscn" type="PackedScene" id=7]
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Main" parent="." instance=ExtResource( 2 )]
+
+[node name="Singleplayer" parent="." instance=ExtResource( 1 )]
+visible = false
+
+[node name="Multiplayer" parent="." instance=ExtResource( 4 )]
+visible = false
+
+[node name="Options" parent="." instance=ExtResource( 3 )]
+visible = false
+
+[node name="ControlOptions" parent="." instance=ExtResource( 6 )]
+visible = false
+
+[node name="AudioOptions" parent="." instance=ExtResource( 7 )]
+visible = false
+
+[node name="VideoOptions" parent="." instance=ExtResource( 5 )]
+visible = false
+[connection signal="multiplayer_selected" from="Main" to="Multiplayer" method="show"]
+[connection signal="options_selected" from="Main" to="Options" method="show"]
+[connection signal="singleplayer_selected" from="Main" to="Singleplayer" method="show"]
+[connection signal="back_pressed" from="Singleplayer" to="Main" method="show"]
+[connection signal="back_pressed" from="Multiplayer" to="Main" method="show"]
+[connection signal="audio_options_pressed" from="Options" to="AudioOptions" method="show"]
+[connection signal="back_pressed" from="Options" to="Main" method="show"]
+[connection signal="control_options_pressed" from="Options" to="ControlOptions" method="show"]
+[connection signal="video_options_pressed" from="Options" to="VideoOptions" method="show"]
+[connection signal="back_pressed" from="ControlOptions" to="Options" method="show"]
+[connection signal="back_pressed" from="AudioOptions" to="Options" method="show"]
+[connection signal="back_pressed" from="VideoOptions" to="Options" method="show"]

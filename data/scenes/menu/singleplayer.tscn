@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://data/resources/themes/default.tres" type="Theme" id=1]
+[ext_resource path="res://data/scenes/menu/singleplayer.gd" type="Script" id=2]
+
+[node name="Singleplayer" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = -144.0
+margin_right = 125.0
+margin_bottom = 144.0
+rect_min_size = Vector2( 250, 0 )
+custom_constants/separation = 20
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="VBoxContainer"]
+margin_right = 250.0
+margin_bottom = 28.0
+text = "Singleplayer"
+align = 1
+valign = 1
+
+[node name="NewGame" type="Button" parent="VBoxContainer"]
+margin_top = 48.0
+margin_right = 250.0
+margin_bottom = 108.0
+rect_min_size = Vector2( 0, 60 )
+text = "New Game"
+
+[node name="LoadGame" type="Button" parent="VBoxContainer"]
+margin_top = 128.0
+margin_right = 250.0
+margin_bottom = 188.0
+rect_min_size = Vector2( 0, 60 )
+disabled = true
+text = "Load Game"
+
+[node name="Spacer" type="Control" parent="VBoxContainer"]
+margin_top = 208.0
+margin_right = 250.0
+margin_bottom = 208.0
+
+[node name="Back" type="Button" parent="VBoxContainer"]
+margin_top = 228.0
+margin_right = 250.0
+margin_bottom = 288.0
+rect_min_size = Vector2( 0, 60 )
+text = "Back"
+[connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

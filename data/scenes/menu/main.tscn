@@ -1,9 +1,14 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://data/resources/themes/default.tres" type="Theme" id=1]
 [ext_resource path="res://data/scripts/menu/main.gd" type="Script" id=2]
+[ext_resource path="res://fonts/red_hat_display_bold_italic.tres" type="DynamicFontData" id=3]
 
-[node name="Control" type="Control"]
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 3 )
+
+[node name="Main" type="Control"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -19,56 +24,61 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="JoinServerButton" type="Button" parent="."]
-margin_left = 640.0
-margin_top = 480.0
-margin_right = 840.0
-margin_bottom = 560.0
-text = "Join Server"
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -125.0
+margin_top = -187.0
+margin_right = 125.0
+margin_bottom = 187.0
+rect_min_size = Vector2( 250, 0 )
+custom_constants/separation = 20
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HostServerButton" type="Button" parent="."]
-margin_left = 640.0
-margin_top = 379.0
-margin_right = 840.0
-margin_bottom = 459.0
-text = "Host Server"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Title" type="Label" parent="VBoxContainer"]
+margin_right = 250.0
+margin_bottom = 54.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 0.509804, 0.431373, 1 )
+custom_colors/font_color_shadow = Color( 0.5, 0.166333, 0.115, 1 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 2
+text = "Platshoot"
+align = 1
+valign = 1
 
-[node name="SpinBox" type="SpinBox" parent="."]
-margin_left = 480.0
-margin_top = 520.0
-margin_right = 600.0
-margin_bottom = 559.0
-min_value = 1.0
-max_value = 2.0
-value = 1.0
-prefix = "Level"
+[node name="Singleplayer" type="Button" parent="VBoxContainer"]
+margin_top = 74.0
+margin_right = 250.0
+margin_bottom = 134.0
+rect_min_size = Vector2( 0, 60 )
+text = "Singleplayer"
 
-[node name="VolumeSlider" type="HSlider" parent="."]
-margin_left = 680.0
-margin_top = 320.0
-margin_right = 840.0
-margin_bottom = 336.0
-max_value = 2.0
-value = 1.0
+[node name="Multiplayer" type="Button" parent="VBoxContainer"]
+margin_top = 154.0
+margin_right = 250.0
+margin_bottom = 214.0
+rect_min_size = Vector2( 0, 60 )
+text = "Multiplayer"
 
-[node name="Label" type="Label" parent="."]
-margin_left = 360.0
-margin_top = 320.0
-margin_right = 645.0
-margin_bottom = 360.0
-mouse_filter = 1
-text = "Sound Volume"
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-[connection signal="pressed" from="JoinServerButton" to="." method="_on_join_server_button_pressed"]
-[connection signal="pressed" from="HostServerButton" to="." method="_on_host_server_button_pressed"]
-[connection signal="value_changed" from="SpinBox" to="." method="_on_SpinBox_value_changed"]
-[connection signal="value_changed" from="VolumeSlider" to="." method="_on_VolumeSlider_value_changed"]
+[node name="Options" type="Button" parent="VBoxContainer"]
+margin_top = 234.0
+margin_right = 250.0
+margin_bottom = 294.0
+rect_min_size = Vector2( 0, 60 )
+text = "Options"
+
+[node name="QuitGame" type="Button" parent="VBoxContainer"]
+margin_top = 314.0
+margin_right = 250.0
+margin_bottom = 374.0
+rect_min_size = Vector2( 0, 60 )
+text = "Quit Game"
+[connection signal="pressed" from="VBoxContainer/Singleplayer" to="." method="_on_singleplayer_pressed"]
+[connection signal="pressed" from="VBoxContainer/Multiplayer" to="." method="_on_multiplayer_pressed"]
+[connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitGame" to="." method="_on_quit_game_pressed"]

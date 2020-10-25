@@ -1,0 +1,5 @@
+[gd_resource type="DynamicFontData" format=2]
+
+[resource]
+hinting = 1
+font_path = "res://fonts/red_hat_display_bold_italic.ttf"

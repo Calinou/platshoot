@@ -3,30 +3,38 @@
 
 extends Control
 
+signal singleplayer_selected
+signal multiplayer_selected
+signal options_selected
 
 func _ready() -> void:
 	# Hide HUD when entering main menu
 	Game.hide_hud()
 
 
-func _on_PlayButton_pressed() -> void:
-	get_tree().change_scene_to(load("res://data/scenes/levels/%d.tscn" % Game.level_to_play))
-	Game.start_server()
+#func _on_join_server_button_pressed() -> void:
+#	visible = false
+#	Lobby.join_server()
+#
+#
+#func _on_host_server_button_pressed() -> void:
+#	visible = false
+#	Lobby.start_server()
 
-func _on_SpinBox_value_changed(value: float) -> void:
-	Game.level_to_play = int(value)
-
-
-# Change the sound volume when the slider value is changed
-func _on_VolumeSlider_value_changed(value: float) -> void:
-	AudioServer.set_fx_global_volume_scale(float(value))
-
-
-func _on_join_server_button_pressed() -> void:
+func _on_singleplayer_pressed() -> void:
+	emit_signal("singleplayer_selected")
 	visible = false
-	Lobby.join_server()
 
 
-func _on_host_server_button_pressed() -> void:
+func _on_multiplayer_pressed() -> void:
+	emit_signal("multiplayer_selected")
 	visible = false
-	Lobby.start_server()
+
+
+func _on_options_pressed() -> void:
+	emit_signal("options_selected")
+	visible = false
+
+
+func _on_quit_game_pressed() -> void:
+	get_tree().quit()
