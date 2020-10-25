@@ -8,6 +8,7 @@ signal multiplayer_pressed
 signal options_pressed
 
 onready var multiplayer_button := $VBoxContainer/Multiplayer as Button
+onready var quit_button := $VBoxContainer/QuitGame as Button
 
 
 func _ready() -> void:
@@ -18,6 +19,8 @@ func _ready() -> void:
 	if OS.has_feature("HTML5"):
 		multiplayer_button.disabled = true
 		multiplayer_button.hint_tooltip = tr("Multiplayer isn't supported in the HTML5 export.\nDownload a native version of Platshoot to play online!")
+		# Quitting the game on HTML5 using the button currently freezes the tab.
+		quit_button.visible = false
 
 
 func _on_singleplayer_pressed() -> void:
