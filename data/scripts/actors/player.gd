@@ -42,6 +42,7 @@ var double_tap_shoot_timer := 0.0
 puppet var puppet_position := Vector2.ZERO
 puppet var puppet_linear_velocity := Vector2.ZERO
 puppet var puppet_using_jetpack := false
+remotesync var crosshair_position := Vector2.ZERO
 
 var velocity := Vector2(0, 0)
 var velocity_new := Vector2(0, 0)
@@ -64,6 +65,7 @@ func _ready() -> void:
 
 	# Make our camera active, but not other players'
 	camera.current = is_network_master()
+	crosshair.visible = is_network_master()
 
 	if not is_network_master():
 		# Distinguish other players to avoid confusing them with our player.
@@ -123,6 +125,10 @@ func _physics_process(delta) -> void:
 		# Don't change the animation speed if currently displaying a shoot or pain animation.
 		animation_player.set_speed_scale(min(abs(player_velocity) * 0.009, 2.1))
 
+	# Flip player sprite if the crosshair is at the right of the player (player faces right),
+	# else don't flip it (player faces left).
+	get_node("Smoothing2D/Sprite").set_flip_h(crosshair_position.x > player.position.x)
+
 	if is_network_master():
 		# Move the camera to partially follow the crosshair.
 		# This helps the player get a better view on their surroundings.
@@ -130,6 +136,9 @@ func _physics_process(delta) -> void:
 
 		# Increase time (shown on HUD)
 		Game.time += delta
+
+		# Synchronize crosshair postion so that player sprite flipping can also be synchronized.
+		rset("crosshair_position", crosshair.position)
 
 		if Game.health <= 0 and Game.status == Game.STATUS_ALIVE:
 			die()
@@ -139,13 +148,6 @@ func _physics_process(delta) -> void:
 		else:
 			get_node("Crosshair").set_visible(false)
 		get_node("Crosshair/ProgressBar").set_value(Game.ammo)
-
-		# Flip player sprite if the crosshair is at the right of the player (player faces right),
-		# else don't flip it (player faces left)
-		if get_node("Crosshair").get_position().x > get_node("Player").get_position().x:
-			get_node("Smoothing2D/Sprite").set_flip_h(true)
-		else:
-			get_node("Smoothing2D/Sprite").set_flip_h(false)
 
 		if Game.status == Game.STATUS_ALIVE:
 			# Health regeneration (1 per second)
@@ -221,6 +223,7 @@ func _physics_process(delta) -> void:
 			rset_unreliable("puppet_linear_velocity", player.linear_velocity)
 	else:
 		player.position = puppet_position
+		crosshair.position = crosshair_position
 		get_node("Player/JetpackParticles").set_emitting(puppet_using_jetpack)
 
 remotesync func fire_bullet(bullet_position: Vector2, bullet_velocity: Vector2) -> void:
