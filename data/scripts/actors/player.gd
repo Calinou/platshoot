@@ -39,8 +39,8 @@ const BULLET_SCENE := preload("res://data/scenes/misc/bullet.tscn")
 # while allowing full-auto shooting. I don't know why.
 var double_tap_shoot_timer := 0.0
 
-puppet var puppet_position := Vector2()
-puppet var puppet_linear_velocity := Vector2()
+puppet var puppet_position := Vector2.ZERO
+puppet var puppet_linear_velocity := Vector2.ZERO
 puppet var puppet_using_jetpack := false
 
 var velocity := Vector2(0, 0)
@@ -288,7 +288,7 @@ func _input(event) -> void:
 
 	# Respawn when clicking, if dead, after a delay of 2.5 seconds
 	if Game.status == Game.STATUS_DEAD and event.is_action_pressed("attack") and get_node("RespawnTimer").get_time_left() == 0:
-		get_tree().change_scene("res://data/scenes/levels/" + str(Game.level_to_play) + ".tscn")
+		respawned()
 
 	# Suicide (default key: Ctrl+K)
 	if event.is_action_pressed("suicide") and Game.status == Game.STATUS_ALIVE:
@@ -329,19 +329,23 @@ func die() -> void:
 		get_node("RespawnTimer").start()
 
 
-# Called when the player respawns
+# Called when the player respawns.
 func respawned() -> void:
-	Game.health = 100.0
-	Game.armor = 0
-	Game.ammo = 25
-	Game.weapon = Game.WEAPON_PISTOL
-	Game.fuel = 100.0
+	if is_network_master():
+		Game.health = 100.0
+		Game.armor = 0
+		Game.ammo = 25
+		Game.weapon = Game.WEAPON_PISTOL
+		Game.fuel = 100.0
 
-	Game.time = 0.0
-	Game.kills = 0
-	Game.items = 0
-	Game.credits = 0
-	Game.status = Game.STATUS_ALIVE
+		Game.time = 0.0
+		Game.kills = 0
+		Game.items = 0
+		Game.credits = 0
+		Game.status = Game.STATUS_ALIVE
+
+		# Wait for a frame to make position setting work more reliably.
+		player.set_deferred("position", Vector2.ZERO)
 
 
 func _animation_finished(anim_name: String) -> void:
