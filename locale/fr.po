@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: platshoot\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-10-24 22:57+0200\n"
-"PO-Revision-Date: 2020-10-24 22:57+0200\n"
+"POT-Creation-Date: 2020-10-25 22:27+0100\n"
+"PO-Revision-Date: 2020-10-25 22:27+0200\n"
 "Last-Translator: Hugo Locurcio <hugo.locurcio@hugo.pro>\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -18,71 +18,121 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Generated-By: Babel 2.8.0\n"
 
-#: data/scenes/hud/main.tscn:123
+#: data/scenes/hud/main.tscn:181
 msgid "Health"
 msgstr "Santé"
 
-#: data/scenes/hud/main.tscn:133
+#: data/scenes/hud/main.tscn:191
 msgid "Armor"
 msgstr "Armure"
 
-#: data/scenes/hud/main.tscn:143
+#: data/scenes/hud/main.tscn:201
 msgid "Ammo"
 msgstr "Munitions"
 
-#: data/scenes/hud/main.tscn:153
+#: data/scenes/hud/main.tscn:211
 msgid "Fuel"
 msgstr "Carburant"
 
-#: data/scenes/menu/lobby.gd:92 data/scenes/menu/lobby.tscn:38
+#: data/scenes/menu/audio_options.tscn:33 data/scenes/menu/options.tscn:49
+msgid "Audio Options"
+msgstr "Paramètres du son"
+
+#: data/scenes/menu/audio_options.tscn:47
+#: data/scenes/menu/control_options.tscn:47
+#: data/scenes/menu/multiplayer.tscn:82
+#: data/scenes/menu/multiplayer_lobby.tscn:73 data/scenes/menu/options.tscn:68
+#: data/scenes/menu/singleplayer.tscn:63 data/scenes/menu/video_options.tscn:47
+msgid "Back"
+msgstr "Retour"
+
+#: data/scenes/menu/control_options.tscn:33 data/scenes/menu/options.tscn:42
+msgid "Control Options"
+msgstr "Contrôles"
+
+#: data/scenes/menu/main.tscn:50
+msgid "Platshoot"
+msgstr ""
+
+#: data/scenes/menu/main.tscn:59 data/scenes/menu/singleplayer.tscn:33
+msgid "Singleplayer"
+msgstr "Partie solo"
+
+#: data/scenes/menu/main.tscn:66 data/scenes/menu/multiplayer.tscn:33
+msgid "Multiplayer"
+msgstr "Multijoueur"
+
+#: data/scenes/menu/main.tscn:73 data/scenes/menu/options.tscn:33
+msgid "Options"
+msgstr "Paramètres"
+
+#: data/scenes/menu/main.tscn:80
+msgid "Quit Game"
+msgstr "Quitter le jeu"
+
+#: data/scenes/menu/multiplayer.tscn:60
+msgid "Join Game"
+msgstr "Rejoindre une partie"
+
+#: data/scenes/menu/multiplayer.tscn:67
+msgid "Host Game"
+msgstr "Héberger une partie"
+
+#: data/scenes/menu/multiplayer_lobby.gd:65
+#: data/scenes/menu/multiplayer_lobby.gd:107
+#: data/scenes/menu/multiplayer_lobby.tscn:47
 #, python-format
 msgid "%d players"
 msgstr "%d joueurs"
 
-#: data/scenes/menu/lobby.tscn:30
+#: data/scenes/menu/multiplayer_lobby.tscn:39
 msgid "Waiting for players…"
 msgstr "En attente de joueurs…"
 
-#: data/scenes/menu/lobby.tscn:49
+#: data/scenes/menu/multiplayer_lobby.tscn:60
 msgid "Start Game"
 msgstr "Démarrer la partie"
 
-#: data/scenes/menu/main.tscn:19
-msgid "Join Server"
-msgstr "Rejoindre un serveur"
+#: data/scenes/menu/options.tscn:56 data/scenes/menu/video_options.tscn:33
+msgid "Video Options"
+msgstr "Paramètres vidéo"
 
-#: data/scenes/menu/main.tscn:29
-msgid "Host Server"
-msgstr "Héberger un serveur"
+#: data/scenes/menu/singleplayer.tscn:42
+msgid "New Game"
+msgstr "Nouvelle partie"
 
-#: data/scenes/menu/main.tscn:58
-msgid "Sound Volume"
-msgstr "Volume du son"
+#: data/scenes/menu/singleplayer.tscn:51
+msgid "Load Game"
+msgstr "Charger une partie"
 
-#: data/scripts/autoload/game.gd:79
+#: data/scripts/autoload/game.gd:78
 msgid "Fist"
 msgstr "Poing"
 
-#: data/scripts/autoload/game.gd:81
+#: data/scripts/autoload/game.gd:80
 msgid "Pistol"
 msgstr "Pistolet"
 
-#: data/scripts/autoload/game.gd:83
+#: data/scripts/autoload/game.gd:82
 msgid "Chaingun"
 msgstr "Mitrailleuse"
 
-#: data/scripts/autoload/game.gd:85
+#: data/scripts/autoload/game.gd:84
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: data/scripts/hud/main.gd:17
+#: data/scripts/hud/main.gd:22
 msgid "Kills"
 msgstr "Tués"
 
-#: data/scripts/hud/main.gd:17
+#: data/scripts/hud/main.gd:22
 msgid "Items"
 msgstr "Objets"
 
-#: data/scripts/hud/main.gd:17
-msgid "Credits"
-msgstr "Crédits"
+#: data/scripts/menu/main.gd:20
+msgid ""
+"Multiplayer isn't supported in the HTML5 export.\n"
+"Download a native version of Platshoot to play online!"
+msgstr ""
+"Le multijoueur n'est pas pris en charge dans la version HTML5 du jeu.\n"
+"Téléchargez une version native de Platshoot pour jouer en ligne !"

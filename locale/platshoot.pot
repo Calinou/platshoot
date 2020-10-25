@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-10-24 22:57+0200\n"
+"POT-Creation-Date: 2020-10-25 22:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,72 +17,120 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 
-#: data/scenes/hud/main.tscn:123
+#: data/scenes/hud/main.tscn:181
 msgid "Health"
 msgstr ""
 
-#: data/scenes/hud/main.tscn:133
+#: data/scenes/hud/main.tscn:191
 msgid "Armor"
 msgstr ""
 
-#: data/scenes/hud/main.tscn:143
+#: data/scenes/hud/main.tscn:201
 msgid "Ammo"
 msgstr ""
 
-#: data/scenes/hud/main.tscn:153
+#: data/scenes/hud/main.tscn:211
 msgid "Fuel"
 msgstr ""
 
-#: data/scenes/menu/lobby.gd:92 data/scenes/menu/lobby.tscn:38
+#: data/scenes/menu/audio_options.tscn:33 data/scenes/menu/options.tscn:49
+msgid "Audio Options"
+msgstr ""
+
+#: data/scenes/menu/audio_options.tscn:47
+#: data/scenes/menu/control_options.tscn:47
+#: data/scenes/menu/multiplayer.tscn:82
+#: data/scenes/menu/multiplayer_lobby.tscn:73 data/scenes/menu/options.tscn:68
+#: data/scenes/menu/singleplayer.tscn:63 data/scenes/menu/video_options.tscn:47
+msgid "Back"
+msgstr ""
+
+#: data/scenes/menu/control_options.tscn:33 data/scenes/menu/options.tscn:42
+msgid "Control Options"
+msgstr ""
+
+#: data/scenes/menu/main.tscn:50
+msgid "Platshoot"
+msgstr ""
+
+#: data/scenes/menu/main.tscn:59 data/scenes/menu/singleplayer.tscn:33
+msgid "Singleplayer"
+msgstr ""
+
+#: data/scenes/menu/main.tscn:66 data/scenes/menu/multiplayer.tscn:33
+msgid "Multiplayer"
+msgstr ""
+
+#: data/scenes/menu/main.tscn:73 data/scenes/menu/options.tscn:33
+msgid "Options"
+msgstr ""
+
+#: data/scenes/menu/main.tscn:80
+msgid "Quit Game"
+msgstr ""
+
+#: data/scenes/menu/multiplayer.tscn:60
+msgid "Join Game"
+msgstr ""
+
+#: data/scenes/menu/multiplayer.tscn:67
+msgid "Host Game"
+msgstr ""
+
+#: data/scenes/menu/multiplayer_lobby.gd:65
+#: data/scenes/menu/multiplayer_lobby.gd:107
+#: data/scenes/menu/multiplayer_lobby.tscn:47
 #, python-format
 msgid "%d players"
 msgstr ""
 
-#: data/scenes/menu/lobby.tscn:30
+#: data/scenes/menu/multiplayer_lobby.tscn:39
 msgid "Waiting for players…"
 msgstr ""
 
-#: data/scenes/menu/lobby.tscn:49
+#: data/scenes/menu/multiplayer_lobby.tscn:60
 msgid "Start Game"
 msgstr ""
 
-#: data/scenes/menu/main.tscn:19
-msgid "Join Server"
+#: data/scenes/menu/options.tscn:56 data/scenes/menu/video_options.tscn:33
+msgid "Video Options"
 msgstr ""
 
-#: data/scenes/menu/main.tscn:29
-msgid "Host Server"
+#: data/scenes/menu/singleplayer.tscn:42
+msgid "New Game"
 msgstr ""
 
-#: data/scenes/menu/main.tscn:58
-msgid "Sound Volume"
+#: data/scenes/menu/singleplayer.tscn:51
+msgid "Load Game"
 msgstr ""
 
-#: data/scripts/autoload/game.gd:79
+#: data/scripts/autoload/game.gd:78
 msgid "Fist"
 msgstr ""
 
-#: data/scripts/autoload/game.gd:81
+#: data/scripts/autoload/game.gd:80
 msgid "Pistol"
 msgstr ""
 
-#: data/scripts/autoload/game.gd:83
+#: data/scripts/autoload/game.gd:82
 msgid "Chaingun"
 msgstr ""
 
-#: data/scripts/autoload/game.gd:85
+#: data/scripts/autoload/game.gd:84
 msgid "Unknown"
 msgstr ""
 
-#: data/scripts/hud/main.gd:17
+#: data/scripts/hud/main.gd:22
 msgid "Kills"
 msgstr ""
 
-#: data/scripts/hud/main.gd:17
+#: data/scripts/hud/main.gd:22
 msgid "Items"
 msgstr ""
 
-#: data/scripts/hud/main.gd:17
-msgid "Credits"
+#: data/scripts/menu/main.gd:20
+msgid ""
+"Multiplayer isn't supported in the HTML5 export.\n"
+"Download a native version of Platshoot to play online!"
 msgstr ""
 
