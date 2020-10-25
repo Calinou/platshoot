@@ -49,12 +49,12 @@ func start_server(start_immediately = false) -> void:
 		_on_start_pressed()
 
 
-func join_server() -> void:
+func join_server(server_address: String) -> void:
 	print("Joining multiplayer server...")
 	visible = true
 	var peer := NetworkedMultiplayerENet.new()
 	peer.compression_mode = NetworkedMultiplayerENet.COMPRESS_ZSTD
-	peer.create_client("localhost", PORT)
+	peer.create_client(server_address, PORT)
 	get_tree().network_peer = peer
 
 

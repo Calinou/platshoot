@@ -23,5 +23,5 @@ func _ready() -> void:
 
 	if "--client" in OS.get_cmdline_args():
 		main.visible = false
-		multiplayer_lobby.join_server()
+		multiplayer_lobby.join_server("localhost")
 		return
