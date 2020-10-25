@@ -89,7 +89,7 @@ jobs:
         run: |
           mkdir -p dist/
           godot -v --export-pack "Linux/X11" "dist/$EXPORT_NAME-server.pck"
-          curl -L "https://downloads.tuxfamily.org/godotengine/$GODOT_VERSION/Godot_v$GODOT_VERSION-stable_linux_server.64.zip" -o /tmp/godot_server.zip
+          wget "https://downloads.tuxfamily.org/godotengine/$GODOT_VERSION/Godot_v$GODOT_VERSION-stable_linux_server.64.zip" -O /tmp/godot_server.zip
           unzip /tmp/godot_server.zip
           mv -f Godot_v3.2.3-stable_linux_server.64 "dist/$EXPORT_NAME-server.x86_64"
       - name: Upload Artifact
