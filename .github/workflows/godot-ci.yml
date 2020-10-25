@@ -22,7 +22,7 @@ jobs:
       - name: Export (Windows)
         run: |
           mkdir -p dist/
-          godot -v --export "Windows Desktop" dist/$EXPORT_NAME.exe
+          godot -v --export "Windows Desktop" "dist/$EXPORT_NAME.exe"
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
@@ -44,15 +44,15 @@ jobs:
       - name: Export (macOS)
         run: |
           mkdir -p dist/
-          godot -v --export "Mac OSX" dist/$EXPORT_NAME.zip
+          godot -v --export "Mac OSX" "dist/$EXPORT_NAME.zip"
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
           name: ${{ env.EXPORT_NAME }}-macos
           path: dist
 
-  export-linux:
-    name: Export (Linux)
+  export-linux-desktop:
+    name: Export (Linux Desktop)
     runs-on: ubuntu-20.04
     container:
       image: barichello/godot-ci:3.2.3
@@ -66,11 +66,36 @@ jobs:
       - name: Export (Linux)
         run: |
           mkdir -p dist/
-          godot -v --export "Linux/X11" dist/$EXPORT_NAME.x86_64
+          godot -v --export "Linux/X11" "dist/$EXPORT_NAME.x86_64"
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: ${{ env.EXPORT_NAME }}-linux
+          name: ${{ env.EXPORT_NAME }}-linux-desktop
+          path: dist
+
+  export-linux-server:
+    name: Export (Linux Server)
+    runs-on: ubuntu-20.04
+    container:
+      image: barichello/godot-ci:3.2.3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Setup
+        run: |
+          mkdir -p ~/.local/share/godot/templates/
+          mv /root/.local/share/godot/templates/$GODOT_VERSION.stable ~/.local/share/godot/templates/$GODOT_VERSION.stable
+      - name: Export (Linux)
+        run: |
+          mkdir -p dist/
+          godot -v --export-pack "Linux/X11" "dist/$EXPORT_NAME-server.pck"
+          curl -L "https://downloads.tuxfamily.org/godotengine/$GODOT_VERSION/Godot_v$GODOT_VERSION-stable_linux_server.64.zip" -o /tmp/godot_server.zip
+          unzip /tmp/godot_server.zip
+          mv -f Godot_v3.2.3-stable_linux_server.64 "dist/$EXPORT_NAME-server.x86_64"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: ${{ env.EXPORT_NAME }}-linux-server
           path: dist
 
   export-html5:
