@@ -128,5 +128,9 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@releases/v3
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: dist # The folder the action should deploy.
+          # The branch the action should deploy to.
+          BRANCH: gh-pages
+          # The folder the action should deploy.
+          FOLDER: dist
+          # Artifacts are large, don't keep the branch's history
+          SINGLE_COMMIT: true
