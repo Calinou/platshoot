@@ -93,29 +93,27 @@ remote func pre_configure_game() -> void:
 	# all players are ready.
 	get_tree().paused = true
 
-	var my_peer_id := get_tree().get_network_unique_id()
-
-	# Load world
+	# Load world. The world scene's root node name must be "Level".
 	var world = load("res://data/scenes/levels/1.tscn").instance()
 	$"/root".add_child(world)
 
-	# Load my player
+	# Load my player.
 	var my_player := preload("res://data/scenes/actors/player.tscn").instance()
-	my_player.set_name(str(my_peer_id))
-	my_player.set_network_master(my_peer_id)
+	my_player.set_name(str(get_tree().get_network_unique_id()))
+	my_player.set_network_master(get_tree().get_network_unique_id())
 	$"/root/Level/Players".add_child(my_player)
 
-	# Load other players
-	for p in player_info:
+	# Load other players.
+	for other_player in player_info:
 		var player := preload("res://data/scenes/actors/player.tscn").instance()
-		player.set_name(str(p))
-		player.set_network_master(p)
+		player.set_name(str(other_player))
+		player.set_network_master(other_player)
 		$"/root/Level/Players".add_child(player)
 
-	# Tell server (remember, server is always ID=1) that this peer is done pre-configuring.
-	# The server can call get_tree().get_rpc_sender_id() to find out who said they were done.
+	# Tell server that this peer is done pre-configuring.
+	# The server can call `get_tree().get_rpc_sender_id()` to find out who said they were done.
 	if not get_tree().is_network_server():
-		rpc_id(1, "done_preconfiguring")
+		rpc_id(NetworkedMultiplayerPeer.TARGET_PEER_SERVER, "done_preconfiguring")
 	else:
 		post_configure_game()
 
@@ -137,7 +135,10 @@ remote func done_preconfiguring() -> void:
 
 remote func post_configure_game() -> void:
 	# Only the server is allowed to tell a client to unpause.
-	if get_tree().is_network_server() or get_tree().get_rpc_sender_id() == 1:
+	if (
+			get_tree().is_network_server()
+			or get_tree().get_rpc_sender_id() == NetworkedMultiplayerPeer.TARGET_PEER_SERVER
+	):
 		get_tree().paused = false
 		visible = false
 		# Game starts now!
@@ -148,8 +149,8 @@ func _on_start_pressed() -> void:
 	assert(get_tree().is_network_server())
 	print("Starting game...")
 
-	for player in player_info:
-		rpc_id(player, "pre_configure_game")
+	for other_player in player_info:
+		rpc_id(other_player, "pre_configure_game")
 
 	pre_configure_game()
 
