@@ -24,13 +24,16 @@ onready var player_count_label := $VBoxContainer/PlayerCount as Label
 onready var start_button := $VBoxContainer/StartGame as Button
 
 
-func start_server() -> void:
+func start_server(start_immediately = false) -> void:
 	print("Starting server...")
 	visible = true
 	var peer := NetworkedMultiplayerENet.new()
 	peer.compression_mode = NetworkedMultiplayerENet.COMPRESS_ZSTD
 	peer.create_server(PORT, 16)
 	get_tree().network_peer = peer
+
+	if start_immediately:
+		_on_start_pressed()
 
 
 func join_server() -> void:

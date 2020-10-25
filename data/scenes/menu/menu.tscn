@@ -44,6 +44,7 @@ visible = false
 [connection signal="options_pressed" from="Main" to="Options" method="show"]
 [connection signal="singleplayer_pressed" from="Main" to="Singleplayer" method="show"]
 [connection signal="back_pressed" from="Singleplayer" to="Main" method="show"]
+[connection signal="new_game_pressed" from="Singleplayer" to="MultiplayerLobby" method="start_server" binds= [ true ]]
 [connection signal="back_pressed" from="Multiplayer" to="Main" method="show"]
 [connection signal="host_game_pressed" from="Multiplayer" to="MultiplayerLobby" method="show"]
 [connection signal="host_game_pressed" from="Multiplayer" to="MultiplayerLobby" method="start_server"]
