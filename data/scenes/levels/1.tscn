@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://data/resources/tilesets/base.tres" type="TileSet" id=2]
 [ext_resource path="res://data/scenes/items/ammo.tscn" type="PackedScene" id=3]
@@ -6,7 +6,6 @@
 [ext_resource path="res://data/scenes/items/health.tscn" type="PackedScene" id=5]
 [ext_resource path="res://data/scenes/items/credit.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/scenes/actors/grunt.tscn" type="PackedScene" id=7]
-[ext_resource path="res://data/scenes/buildings/shop.tscn" type="PackedScene" id=8]
 [ext_resource path="res://data/scenes/level/exit.tscn" type="PackedScene" id=9]
 [ext_resource path="res://data/scenes/levels/tilemap_pseudo_3d.gd" type="Script" id=10]
 
@@ -535,11 +534,6 @@ physics_material_override = SubResource( 55 )
 [node name="Grunt55" parent="Enemies" instance=ExtResource( 7 )]
 position = Vector2( 2272, 800 )
 physics_material_override = SubResource( 56 )
-
-[node name="Buildings" type="Node" parent="."]
-
-[node name="Shop" parent="Buildings" instance=ExtResource( 8 )]
-position = Vector2( 2080, -160 )
 
 [node name="Level" type="Node" parent="."]
 

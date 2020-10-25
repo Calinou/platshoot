@@ -17,8 +17,7 @@ func _physics_process(_delta: float) -> void:
 	get_node("Stats/StatsLabel").set_bbcode("[right][b]" + str(Game.time_string(Game.time)) + "\n\n" + tr("Kills") + "[/b]\n" + str(Game.kills) + " / " + str(Game.kills_total) + "\n\n[b]" + tr("Items") + "[/b]\n" + str(Game.items) + " / " + str(Game.items_total) + "\n\n[b]" + tr("Credits") + "[/b]\n" + str(Game.credits) + "[/right]")
 
 
-# Spawn a notice at center of screen
-# Currently used by shops
+# Spawn a notice at center of screen.
 func notice(bbcode: String) -> void:
 	get_node("Notices/NoticesLabel").set_bbcode("[center]" + bbcode + "[/center]")
 
