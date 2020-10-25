@@ -48,6 +48,8 @@ visible = false
 [connection signal="back_pressed" from="Multiplayer" to="Main" method="show"]
 [connection signal="host_game_pressed" from="Multiplayer" to="MultiplayerLobby" method="show"]
 [connection signal="host_game_pressed" from="Multiplayer" to="MultiplayerLobby" method="start_server"]
+[connection signal="join_game_pressed" from="Multiplayer" to="MultiplayerLobby" method="show"]
+[connection signal="join_game_pressed" from="Multiplayer" to="MultiplayerLobby" method="join_server"]
 [connection signal="audio_options_pressed" from="Options" to="AudioOptions" method="show"]
 [connection signal="back_pressed" from="Options" to="Main" method="show"]
 [connection signal="control_options_pressed" from="Options" to="ControlOptions" method="show"]

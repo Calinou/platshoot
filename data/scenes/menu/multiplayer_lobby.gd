@@ -29,7 +29,14 @@ onready var start_button := $VBoxContainer/StartGame as Button
 
 
 func start_server(start_immediately = false) -> void:
-	print("Starting server...")
+	if dedicated:
+		print("Starting dedicated server...")
+	else:
+		if start_immediately:
+			print('Starting "listen" server for singleplayer...')
+		else:
+			print('Starting "listen" server...')
+
 	visible = true
 	var peer := NetworkedMultiplayerENet.new()
 	peer.compression_mode = NetworkedMultiplayerENet.COMPRESS_ZSTD
@@ -43,7 +50,7 @@ func start_server(start_immediately = false) -> void:
 
 
 func join_server() -> void:
-	print("Starting client...")
+	print("Joining multiplayer server...")
 	visible = true
 	var peer := NetworkedMultiplayerENet.new()
 	peer.compression_mode = NetworkedMultiplayerENet.COMPRESS_ZSTD
@@ -176,3 +183,4 @@ func _on_start_pressed() -> void:
 func _on_back_pressed() -> void:
 	emit_signal("back_pressed")
 	visible = false
+

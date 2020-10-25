@@ -6,7 +6,7 @@
 [ext_resource path="res://data/scenes/hud/movement_stick.gd" type="Script" id=4]
 [ext_resource path="res://data/resources/themes/default.tres" type="Theme" id=5]
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=1]
 resource_name = "fade"
 length = 5.0
 tracks/0/type = "value"
@@ -22,7 +22,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=2]
 resource_name = "reset"
 tracks/0/type = "value"
 tracks/0/path = NodePath("NoticesLabel:modulate")
@@ -37,35 +37,35 @@ tracks/0/keys = {
 "values": [ Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="StyleBoxFlat" id=1]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 1, 0.25098, 0.25098, 0.752941 )
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 1, 0.25098, 0.25098, 0.25098 )
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.752941, 0.752941, 0.752941, 0.752941 )
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.752941, 0.752941, 0.752941, 0.25098 )
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 1, 1, 0.25098, 0.752941 )
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 1, 1, 0.25098, 0.25098 )
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=9]
 bg_color = Color( 0.25098, 0.752941, 1, 0.752941 )
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.25098, 0.752941, 1, 0.25098 )
 border_blend = true
 
@@ -105,8 +105,8 @@ __meta__ = {
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Notices"]
-anims/fade = SubResource( 9 )
-anims/reset = SubResource( 10 )
+anims/fade = SubResource( 1 )
+anims/reset = SubResource( 2 )
 
 [node name="FPS" type="Control" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )
@@ -217,8 +217,8 @@ margin_left = 194.0
 margin_top = 640.0
 margin_right = 334.0
 margin_bottom = 669.0
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )
 step = 0.0
 value = 1.0
 
@@ -227,8 +227,8 @@ margin_left = 194.0
 margin_top = 672.0
 margin_right = 334.0
 margin_bottom = 701.0
-custom_styles/fg = SubResource( 3 )
-custom_styles/bg = SubResource( 4 )
+custom_styles/fg = SubResource( 5 )
+custom_styles/bg = SubResource( 6 )
 step = 0.0
 value = 1.0
 
@@ -237,8 +237,8 @@ margin_left = 1122.0
 margin_top = 672.0
 margin_right = 1262.0
 margin_bottom = 701.0
-custom_styles/fg = SubResource( 5 )
-custom_styles/bg = SubResource( 6 )
+custom_styles/fg = SubResource( 7 )
+custom_styles/bg = SubResource( 8 )
 step = 0.0
 value = 1.0
 
@@ -247,8 +247,8 @@ margin_left = 1122.0
 margin_top = 640.0
 margin_right = 1262.0
 margin_bottom = 669.0
-custom_styles/fg = SubResource( 7 )
-custom_styles/bg = SubResource( 8 )
+custom_styles/fg = SubResource( 9 )
+custom_styles/bg = SubResource( 10 )
 step = 0.0
 value = 1.0
 
