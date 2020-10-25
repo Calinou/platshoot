@@ -33,6 +33,9 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	# TODO: Reimplement player chasing to work with multiple players.
+	return
+
 	get_node("ProgressBar").set_value(health)
 	velocity = get_linear_velocity()
 	var player_pos = get_node("/root/Level/Players/1").get_position()

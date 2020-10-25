@@ -20,6 +20,10 @@ var players_done := []
 
 var player_count := 1
 
+# If `true`, dedicated server mode is enabled. Any client can start the game, and the host won't be a player.
+# If `false`, "listen" server mode is used instead. Only the host can start the game, and the host will be a player.
+remote var dedicated := false
+
 onready var player_count_label := $VBoxContainer/PlayerCount as Label
 onready var start_button := $VBoxContainer/StartGame as Button
 
@@ -32,7 +36,9 @@ func start_server(start_immediately = false) -> void:
 	peer.create_server(PORT, 16)
 	get_tree().network_peer = peer
 
+
 	if start_immediately:
+		# This is used for singleplayer mode.
 		_on_start_pressed()
 
 
@@ -60,6 +66,11 @@ func _ready() -> void:
 
 func _player_connected(id: int) -> void:
 	# Called on both clients and server when a peer connects. Send my info to it.
+	if dedicated:
+		# Inform clients that we are a dedicated server, so they don't add us
+		# as a player when starting the game.
+		rset("dedicated", true)
+
 	rpc_id(id, "register_player", my_info)
 
 
@@ -100,14 +111,19 @@ remote func pre_configure_game() -> void:
 	var world = load("res://data/scenes/levels/1.tscn").instance()
 	$"/root".add_child(world)
 
-	# Load my player.
-	var my_player := preload("res://data/scenes/actors/player.tscn").instance()
-	my_player.set_name(str(get_tree().get_network_unique_id()))
-	my_player.set_network_master(get_tree().get_network_unique_id())
-	$"/root/Level/Players".add_child(my_player)
+	if not (dedicated and get_tree().get_network_unique_id() == NetworkedMultiplayerPeer.TARGET_PEER_SERVER):
+		# Load my player.
+		var my_player := preload("res://data/scenes/actors/player.tscn").instance()
+		my_player.set_name(str(get_tree().get_network_unique_id()))
+		my_player.set_network_master(get_tree().get_network_unique_id())
+		$"/root/Level/Players".add_child(my_player)
 
 	# Load other players.
 	for other_player in player_info:
+		if dedicated and other_player == NetworkedMultiplayerPeer.TARGET_PEER_SERVER:
+			# Don't add a player for the server.
+			continue
+
 		var player := preload("res://data/scenes/actors/player.tscn").instance()
 		player.set_name(str(other_player))
 		player.set_network_master(other_player)
@@ -149,7 +165,6 @@ remote func post_configure_game() -> void:
 
 func _on_start_pressed() -> void:
 	start_button.disabled = true
-	assert(get_tree().is_network_server())
 	print("Starting game...")
 
 	for other_player in player_info:
