@@ -3,8 +3,8 @@
 
 extends Node2D
 
-# Maximal running speed
-const MAX_SPEED = 275 * 60
+# Maximum per-frame acceleration when running.
+const ACCELERATION = 3000 * 60
 
 # Jump speed (velocity set when jumping)
 const JUMP_SPEED = 350 * 60
@@ -154,13 +154,10 @@ func _physics_process(delta) -> void:
 
 			velocity = get_node("Player").get_linear_velocity()
 
-			if Input.is_action_pressed("move_left"):
-				speed = clamp(speed - MAX_SPEED * 6 * delta, -MAX_SPEED, MAX_SPEED)
-			elif Input.is_action_pressed("move_right"):
-				speed = clamp(speed + MAX_SPEED * 6 * delta, -MAX_SPEED, MAX_SPEED)
-			else:
-				# Friction (when the player doesn't press any movement key)
-				speed *= 0.85
+			var movement := Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+			speed += ACCELERATION * movement * delta
+			# Apply Doom-style constant friction.
+			speed *= 0.85
 
 			# Set the new velocity
 			get_node("Player").set_linear_velocity(Vector2(speed * delta, velocity.y))
