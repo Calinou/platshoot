@@ -167,7 +167,7 @@ func _physics_process(delta) -> void:
 
 			# Falling damage
 			if velocity_new.y - velocity.y >= FALL_DAMAGE_THRESHOLD:
-				rpc("damage", get_tree().get_network_unique_id(), (velocity_new.y - velocity.y - FALL_DAMAGE_THRESHOLD) / FALL_DAMAGE_FACTOR)
+				rpc("damage", (velocity_new.y - velocity.y - FALL_DAMAGE_THRESHOLD) / FALL_DAMAGE_FACTOR)
 
 			# Jumping
 			if Input.is_action_pressed("move_up") and is_touching_ground():
@@ -202,7 +202,7 @@ func _physics_process(delta) -> void:
 			if Input.is_action_pressed("attack") and Game.ammo >= 1 and get_node("BulletTimer").get_time_left() == 0:
 				var bullet_position: Vector2 = get_node("Player/Gun").get_global_position()
 				var bullet_velocity := Vector2(BULLET_SPEED, 0).rotated(get_node("Player/Gun").get_rotation() - deg2rad(BULLET_SPREAD / 2.0 + randf() * BULLET_SPREAD))
-				rpc("fire_bullet", get_tree().get_network_unique_id(), bullet_position, bullet_velocity)
+				rpc("fire_bullet", bullet_position, bullet_velocity)
 
 			elif Input.is_action_pressed("attack") and get_node("BulletTimer").get_time_left() == 0:
 				Sound.play(Sound.Type.NON_POSITIONAL, self, preload("res://data/sounds/no_ammo.wav"), -12, rand_range(0.95, 1.05))
@@ -214,7 +214,7 @@ func _physics_process(delta) -> void:
 
 			# Falling very fast kills the player
 			if velocity.y >= 2000:
-				rpc("damage", get_tree().get_network_unique_id(), 1000)
+				rpc("damage", 1000)
 
 			velocity_new = get_node("Player").get_linear_velocity()
 
@@ -226,8 +226,8 @@ func _physics_process(delta) -> void:
 		player.position = puppet_position
 		get_node("Player/JetpackParticles").set_emitting(puppet_using_jetpack)
 
-remotesync func fire_bullet(player_id: int, bullet_position: Vector2, bullet_velocity: Vector2) -> void:
-	var remote_animation_player := get_node("/root/Level/Players/%d/Player/AnimationPlayer" % player_id)
+remotesync func fire_bullet(bullet_position: Vector2, bullet_velocity: Vector2) -> void:
+	var remote_animation_player := get_node("/root/Level/Players/%d/Player/AnimationPlayer" % get_tree().get_rpc_sender_id())
 	remote_animation_player.play("shoot")
 	remote_animation_player.playback_speed = 1
 
@@ -292,7 +292,7 @@ func _input(event) -> void:
 
 	# Suicide (default key: Ctrl+K)
 	if event.is_action_pressed("suicide") and Game.status == Game.STATUS_ALIVE:
-		rpc("damage", get_tree().get_network_unique_id(), 1000)
+		rpc("damage", 1000)
 
 
 # Returns true if the player is touching ground
@@ -300,8 +300,8 @@ func is_touching_ground() -> bool:
 	return get_node("Player/RayCast2D").is_colliding()
 
 
-remotesync func damage(player_id: int, points: int) -> void:
-	var remote_animation_player := get_node("/root/Level/Players/%d/Player/AnimationPlayer" % player_id)
+remotesync func damage(points: int) -> void:
+	var remote_animation_player := get_node("/root/Level/Players/%d/Player/AnimationPlayer" % get_tree().get_rpc_sender_id())
 	remote_animation_player.play("pain")
 	remote_animation_player.playback_speed = 1
 
