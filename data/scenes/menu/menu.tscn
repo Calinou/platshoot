@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://data/scenes/menu/singleplayer.tscn" type="PackedScene" id=1]
 [ext_resource path="res://data/scenes/menu/main.tscn" type="PackedScene" id=2]
@@ -7,10 +7,13 @@
 [ext_resource path="res://data/scenes/menu/video_options.tscn" type="PackedScene" id=5]
 [ext_resource path="res://data/scenes/menu/control_options.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/scenes/menu/audio_options.tscn" type="PackedScene" id=7]
+[ext_resource path="res://data/scenes/menu/multiplayer_lobby.tscn" type="PackedScene" id=8]
+[ext_resource path="res://data/scenes/menu/menu.gd" type="Script" id=9]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -34,11 +37,16 @@ visible = false
 
 [node name="VideoOptions" parent="." instance=ExtResource( 5 )]
 visible = false
-[connection signal="multiplayer_selected" from="Main" to="Multiplayer" method="show"]
-[connection signal="options_selected" from="Main" to="Options" method="show"]
-[connection signal="singleplayer_selected" from="Main" to="Singleplayer" method="show"]
+
+[node name="MultiplayerLobby" parent="." instance=ExtResource( 8 )]
+visible = false
+[connection signal="multiplayer_pressed" from="Main" to="Multiplayer" method="show"]
+[connection signal="options_pressed" from="Main" to="Options" method="show"]
+[connection signal="singleplayer_pressed" from="Main" to="Singleplayer" method="show"]
 [connection signal="back_pressed" from="Singleplayer" to="Main" method="show"]
 [connection signal="back_pressed" from="Multiplayer" to="Main" method="show"]
+[connection signal="host_game_pressed" from="Multiplayer" to="MultiplayerLobby" method="show"]
+[connection signal="host_game_pressed" from="Multiplayer" to="MultiplayerLobby" method="start_server"]
 [connection signal="audio_options_pressed" from="Options" to="AudioOptions" method="show"]
 [connection signal="back_pressed" from="Options" to="Main" method="show"]
 [connection signal="control_options_pressed" from="Options" to="ControlOptions" method="show"]
@@ -46,3 +54,4 @@ visible = false
 [connection signal="back_pressed" from="ControlOptions" to="Options" method="show"]
 [connection signal="back_pressed" from="AudioOptions" to="Options" method="show"]
 [connection signal="back_pressed" from="VideoOptions" to="Options" method="show"]
+[connection signal="back_pressed" from="MultiplayerLobby" to="Main" method="show"]

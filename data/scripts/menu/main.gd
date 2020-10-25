@@ -3,9 +3,9 @@
 
 extends Control
 
-signal singleplayer_selected
-signal multiplayer_selected
-signal options_selected
+signal singleplayer_pressed
+signal multiplayer_pressed
+signal options_pressed
 
 func _ready() -> void:
 	# Hide HUD when entering main menu
@@ -22,17 +22,17 @@ func _ready() -> void:
 #	Lobby.start_server()
 
 func _on_singleplayer_pressed() -> void:
-	emit_signal("singleplayer_selected")
+	emit_signal("singleplayer_pressed")
 	visible = false
 
 
 func _on_multiplayer_pressed() -> void:
-	emit_signal("multiplayer_selected")
+	emit_signal("multiplayer_pressed")
 	visible = false
 
 
 func _on_options_pressed() -> void:
-	emit_signal("options_selected")
+	emit_signal("options_pressed")
 	visible = false
 
 

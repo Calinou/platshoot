@@ -3,6 +3,8 @@
 
 extends Control
 
+signal back_pressed
+
 # The server port to use.
 const PORT = 33233
 
@@ -19,7 +21,7 @@ var players_done := []
 var player_count := 1
 
 onready var player_count_label := $VBoxContainer/PlayerCount as Label
-onready var start_button := $VBoxContainer/Start as Button
+onready var start_button := $VBoxContainer/StartGame as Button
 
 
 func start_server() -> void:
@@ -51,16 +53,6 @@ func _ready() -> void:
 	get_tree().connect("connected_to_server", self, "_connected_ok")
 	get_tree().connect("connection_failed", self, "_connected_fail")
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
-
-	if "--server" in OS.get_cmdline_args():
-		# Hide the main menu.
-		$"/root/Menu".visible = false
-		start_server()
-
-	if "--client" in OS.get_cmdline_args():
-		# Hide the main menu.
-		$"/root/Menu".visible = false
-		join_server()
 
 
 func _player_connected(id: int) -> void:
@@ -160,3 +152,8 @@ func _on_start_pressed() -> void:
 		rpc_id(player, "pre_configure_game")
 
 	pre_configure_game()
+
+
+func _on_back_pressed() -> void:
+	emit_signal("back_pressed")
+	visible = false

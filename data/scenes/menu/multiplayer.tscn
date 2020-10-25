@@ -62,4 +62,6 @@ margin_right = 250.0
 margin_bottom = 288.0
 rect_min_size = Vector2( 0, 60 )
 text = "Back"
+[connection signal="pressed" from="VBoxContainer/JoinGame" to="." method="_on_join_game_pressed"]
+[connection signal="pressed" from="VBoxContainer/HostGame" to="." method="_on_host_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]
