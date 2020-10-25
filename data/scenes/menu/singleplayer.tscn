@@ -46,6 +46,7 @@ margin_top = 128.0
 margin_right = 250.0
 margin_bottom = 188.0
 rect_min_size = Vector2( 0, 60 )
+hint_tooltip = "Not yet implemented."
 disabled = true
 text = "Load Game"
 
