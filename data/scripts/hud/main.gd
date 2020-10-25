@@ -19,7 +19,7 @@ func _physics_process(_delta: float) -> void:
 
 	# Stats
 	get_node("FPS/FPSLabel").set_text("FPS: %d" % Engine.get_frames_per_second())
-	get_node("Stats/StatsLabel").set_bbcode("[right][b]" + str(Game.time_string(Game.time)) + "\n\n" + tr("Kills") + "[/b]\n" + str(Game.kills) + " / " + str(Game.kills_total) + "\n\n[b]" + tr("Items") + "[/b]\n" + str(Game.items) + " / " + str(Game.items_total) + "\n\n[b]" + tr("Credits") + "[/b]\n" + str(Game.credits) + "[/right]")
+	get_node("Stats/StatsLabel").set_bbcode("[right][b]" + str(Game.time_string(Game.time)) + "\n\n" + tr("Kills") + "[/b]\n" + str(Game.kills) + " / " + str(Game.kills_total) + "\n\n[b]" + tr("Items") + "[/b]\n" + str(Game.items) + " / " + str(Game.items_total) + "[/right]")
 
 
 # Spawn a notice at center of screen.

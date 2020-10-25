@@ -12,9 +12,6 @@ const MELEE_REFIRE = 0.4
 # Range above which grunts won't hunt the player
 const AGGRO_RANGE = 320
 
-# Number of credits given when killing a grunt
-const GRUNT_KILL_CREDITS = 5
-
 onready var velocity := Vector2(0, 0)
 onready var hurt_player := false
 # This variable is set to false when the monster dies, so that they can't
@@ -83,7 +80,6 @@ func die() -> void:
 # Remove grunt after death animation
 func _on_AnimationPlayer_finished() -> void:
 	Game.kills += 1
-	Game.credits += GRUNT_KILL_CREDITS
 	queue_free()
 
 

@@ -36,7 +36,6 @@ onready var kills := 0
 onready var kills_total := 0
 onready var items := 0
 onready var items_total := 0
-onready var credits := 0
 
 # For menus and respawning
 onready var level_to_play := 1

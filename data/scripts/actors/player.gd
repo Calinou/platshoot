@@ -343,10 +343,9 @@ func respawned() -> void:
 		Game.time = 0.0
 		Game.kills = 0
 		Game.items = 0
-		Game.credits = 0
 		Game.status = Game.STATUS_ALIVE
 
-		# Wait for a frame to make position setting work more reliably.
+		# Wait for a frame to make position resetting work more reliably.
 		player.set_deferred("position", Vector2.ZERO)
 
 

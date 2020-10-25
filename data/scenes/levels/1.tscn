@@ -1,10 +1,9 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://data/resources/tilesets/base.tres" type="TileSet" id=2]
 [ext_resource path="res://data/scenes/items/ammo.tscn" type="PackedScene" id=3]
 [ext_resource path="res://data/scenes/items/armor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://data/scenes/items/health.tscn" type="PackedScene" id=5]
-[ext_resource path="res://data/scenes/items/credit.tscn" type="PackedScene" id=6]
 [ext_resource path="res://data/scenes/actors/grunt.tscn" type="PackedScene" id=7]
 [ext_resource path="res://data/scenes/level/exit.tscn" type="PackedScene" id=9]
 [ext_resource path="res://data/scenes/levels/tilemap_pseudo_3d.gd" type="Script" id=10]
@@ -282,32 +281,11 @@ position = Vector2( 992, 864 )
 [node name="Ammo25" parent="Items" instance=ExtResource( 4 )]
 position = Vector2( 2656, 416 )
 
-[node name="Ammo 4" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( -96, -96 )
-
-[node name="Ammo3 2" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 1120, 224 )
-
-[node name="Ammo110" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 1440, 96 )
-
-[node name="Ammo111" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 2336, -96 )
-
-[node name="Ammo112" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 2464, -96 )
-
-[node name="Ammo113" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 2656, -160 )
-
 [node name="Ammo26" parent="Items" instance=ExtResource( 5 )]
 position = Vector2( 1952, 800 )
 
 [node name="Ammo27" parent="Items" instance=ExtResource( 4 )]
 position = Vector2( 2080, 800 )
-
-[node name="Ammo114" parent="Items" instance=ExtResource( 6 )]
-position = Vector2( 2208, 800 )
 
 [node name="Enemies" type="Node" parent="."]
 
