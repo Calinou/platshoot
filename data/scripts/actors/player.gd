@@ -323,6 +323,8 @@ remotesync func damage(points: int) -> void:
 
 # Called when the player dies
 func die() -> void:
+	Game.get_node("HUD").rpc("builtin_notice", Game.get_node("HUD").BuiltinNoticeType.PLAYER_DEATH)
+
 	if is_network_master():
 		Game.status = Game.STATUS_DEAD
 		get_node("RespawnTimer").set_wait_time(RESPAWN_DELAY)

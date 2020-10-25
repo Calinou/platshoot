@@ -3,6 +3,11 @@
 
 extends CanvasLayer
 
+onready var notices_animation_player := $Notices/AnimationPlayer as AnimationPlayer
+
+enum BuiltinNoticeType {
+	PLAYER_DEATH,
+}
 
 func _physics_process(_delta: float) -> void:
 	# Inventory
@@ -20,6 +25,18 @@ func _physics_process(_delta: float) -> void:
 # Spawn a notice at center of screen.
 func notice(bbcode: String) -> void:
 	get_node("Notices/NoticesLabel").set_bbcode("[center]" + bbcode + "[/center]")
+	notices_animation_player.play("fade")
+
+# Spawn a predefined notice at center of screen.
+# Use this method in RPCs to prevent arbitrary notices from appearing on screen
+# from a modified client.
+remotesync func builtin_notice(type: int) -> void:
+	match type:
+		BuiltinNoticeType.PLAYER_DEATH:
+			if get_tree().get_rpc_sender_id() == get_tree().get_network_unique_id():
+				notice("You died.")
+			else:
+				notice("Another player died.")
 
 
 # Clears the notice by setting empty text to it

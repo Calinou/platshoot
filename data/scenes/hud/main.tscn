@@ -1,10 +1,41 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://data/scripts/hud/main.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
 [ext_resource path="res://data/textures/circle.png" type="Texture" id=3]
 [ext_resource path="res://data/scenes/hud/movement_stick.gd" type="Script" id=4]
 [ext_resource path="res://data/resources/themes/default.tres" type="Theme" id=5]
+
+[sub_resource type="Animation" id=9]
+resource_name = "fade"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("NoticesLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 4, 5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "reset"
+tracks/0/type = "value"
+tracks/0/path = NodePath("NoticesLabel:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 1, 0.25098, 0.25098, 0.752941 )
@@ -72,6 +103,10 @@ bbcode_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Notices"]
+anims/fade = SubResource( 9 )
+anims/reset = SubResource( 10 )
 
 [node name="FPS" type="Control" parent="."]
 self_modulate = Color( 1, 1, 1, 0 )

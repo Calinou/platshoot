@@ -1,119 +1,69 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://data/scripts/items/ammo.gd" type="Script" id=1]
 [ext_resource path="res://data/textures/items/ammo.png" type="Texture" id=2]
-[ext_resource path="res://data/resources/sample_libraries/game.tres" type="SampleLibrary" id=3]
 [ext_resource path="res://data/textures/white.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-
-custom_solver_bias = 0.0
 radius = 16.0
 
 [sub_resource type="Animation" id=2]
-
 resource_name = "Pickup"
 length = 3.0
-loop = false
 step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:modulate:a")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/keys = {
-"cont": true,
 "times": PoolRealArray( 0, 0.2 ),
 "transitions": PoolRealArray( 1, 1 ),
+"update": 0,
 "values": [ 1.0, 0.0 ]
 }
 tracks/1/type = "value"
 tracks/1/path = NodePath("Particles2D:emitting")
 tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/keys = {
-"cont": false,
 "times": PoolRealArray( 0, 0.05, 0.1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
 "values": [ false, true, false ]
 }
 
 [node name="Ammo" type="Node2D"]
-
 script = ExtResource( 1 )
 __meta__ = {
 "__editor_plugin_screen__": "2D"
 }
 
 [node name="Sprite" type="Sprite" parent="."]
-
 texture = ExtResource( 2 )
 offset = Vector2( 0, 22 )
 
 [node name="SamplePlayer2D" type="AudioStreamPlayer2D" parent="."]
 
-volume_db = 0.0
-pitch_scale = 1.0
-attenuation_min_distance = 1.0
-attenuation_max_distance = 2048.0
-attenuation_distance_exp = 1.0
-config/polyphony = 10
-config/samples = ExtResource( 3 )
-config/pitch_random = 0.0
-
 [node name="Particles2D" type="Particles2D" parent="."]
-
 position = Vector2( 0, 16 )
 amount = 64
 lifetime = 0.5
 preprocess = 0.5
-emitting = false
 local_coords = false
 texture = ExtResource( 4 )
-params/direction = 0.0
-params/spread = 180.0
-params/linear_velocity = -256.0
-params/spin_velocity = 0.0
-params/orbit_velocity = 0.0
-params/gravity_direction = 0.0
-params/gravity_strength = 9.8
-params/radial_accel = 0.0
-params/tangential_accel = 0.0
-params/damping = 0.0
-params/initial_angle = 0.0
-params/initial_size = 0.25
-params/final_size = 0.0
-params/hue_variation = 0.0
-params/anim_speed_scale = 1.0
-params/anim_initial_pos = 0.0
-color/color = Color( 1, 1, 1, 0.501961 )
 
 [node name="Area2D" type="Area2D" parent="."]
-
 input_pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Transform2D( 1, 0, 0, 1, 0, 16 )
-shapes/0/trigger = false
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-
 position = Vector2( 0, 16 )
 shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-root_node = NodePath("..")
 anims/Pickup = SubResource( 2 )
-playback_active = true
-playback_speed = 1.0
-blend_times = [  ]
-autoplay = ""
-
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_enter" binds=[  ]]
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_finished" binds=[  ]]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_enter"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_finished"]
