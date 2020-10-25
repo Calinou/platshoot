@@ -121,7 +121,7 @@ func _physics_process(delta) -> void:
 	if animation_player.current_animation == "walk":
 		var player_velocity := player.linear_velocity.x if is_network_master() else puppet_linear_velocity.x
 		# Don't change the animation speed if currently displaying a shoot or pain animation.
-		animation_player.set_speed_scale(min(abs(player_velocity) * 0.009, 2))
+		animation_player.set_speed_scale(min(abs(player_velocity) * 0.009, 2.1))
 
 	if is_network_master():
 		# Move the camera to partially follow the crosshair.
