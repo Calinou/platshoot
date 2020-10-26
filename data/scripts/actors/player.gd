@@ -51,6 +51,7 @@ var offset := Vector2(0, 0)
 var relative_mouse_pos := Vector2(0, 0)
 onready var player := $Player as RigidBody2D
 onready var camera := $Player/Camera2D as Camera2D
+onready var default_zoom := camera.zoom
 onready var crosshair := $Crosshair as Sprite
 onready var player_sprite := $Smoothing2D/Sprite as Sprite
 onready var preloader := $ResourcePreloader as ResourcePreloader
@@ -72,10 +73,10 @@ func _ready() -> void:
 		player_sprite.modulate = Color(0.8, 1.2, 1.4)
 
 	# Set the number of enemies present in the level
-	Game.kills_total = get_node("/root/Level/Enemies").get_child_count()
+	Game.kills_total = $"/root/Level/Enemies".get_child_count()
 
 	# Set the number of items present in the level
-	Game.items_total = get_node("/root/Level/Items").get_child_count()
+	Game.items_total = $"/root/Level/Items".get_child_count()
 
 	respawned()
 
@@ -107,11 +108,11 @@ func _process(delta) -> void:
 	if is_network_master():
 		double_tap_shoot_timer += delta
 		# Mouse position/offset computations (for gun and crosshair)
-		offset = -get_viewport().get_canvas_transform().origin * get_node("Player/Camera2D").get_zoom()  # Get the offset
-		relative_mouse_pos = get_viewport().get_mouse_position() * get_node("Player/Camera2D").get_zoom() + offset  # And add it to the mouse position
-		get_node("Player/Gun").look_at(relative_mouse_pos)
+		offset = -get_viewport().get_canvas_transform().origin * $"Player/Camera2D".zoom  # Get the offset
+		relative_mouse_pos = get_viewport().get_mouse_position() * $"Player/Camera2D".zoom + offset  # And add it to the mouse position
+		$"Player/Gun".look_at(relative_mouse_pos)
 		# Move crosshair at mouse position
-		get_node("Crosshair").set_position(relative_mouse_pos)
+		crosshair.position = relative_mouse_pos
 
 	# Add bobbing to the player sprite when moving and not airborne.
 	if is_touching_ground():
@@ -121,13 +122,13 @@ func _process(delta) -> void:
 func _physics_process(delta) -> void:
 	if animation_player.current_animation == "walk":
 		# Don't change the animation speed if currently displaying a shoot or pain animation.
-		animation_player.set_speed_scale(min(abs(player_linear_velocity.x) * 0.009, 2.1))
+		animation_player.playback_speed = min(abs(player_linear_velocity.x) * 0.009, 2.1)
 
 	# Flip player sprite if the crosshair is at the right of the player (player faces right),
 	# else don't flip it (player faces left).
-	get_node("Smoothing2D/Sprite").set_flip_h(crosshair_position.x > player.position.x)
+	$"Smoothing2D/Sprite".flip_h = crosshair_position.x > player.position.x
 
-	get_node("Player/JetpackParticles").set_emitting(using_jetpack)
+	$"Player/JetpackParticles".emitting = using_jetpack
 
 	if is_network_master():
 		# Move the camera to partially follow the crosshair.
@@ -137,86 +138,87 @@ func _physics_process(delta) -> void:
 		# Increase time (shown on HUD)
 		Game.time += delta
 
-		# Synchronize crosshair postion so that player sprite flipping can also be synchronized.
-		rset("crosshair_position", crosshair.position)
-
 		if Game.health <= 0 and Game.status == Game.STATUS_ALIVE:
 			die()
-		# Change crosshair color depending on health, and ammo bar value depending on ammo
+
+		# Change crosshair color depending on health, and ammo bar value depending on ammo.
+		# This helps the player see their status immediately without having to look at the HUD
+		# every so often.
 		if Game.health > 0:
-			get_node("Crosshair").set_modulate(crosshair_color_gradient.interpolate(Game.health / 100.0))
+			$Crosshair.modulate = crosshair_color_gradient.interpolate(Game.health / 100.0)
 		else:
-			get_node("Crosshair").set_visible(false)
-		get_node("Crosshair/ProgressBar").set_value(Game.ammo)
+			$Crosshair.visible = false
+		$"Crosshair/ProgressBar".value = Game.ammo
 
 		if Game.status == Game.STATUS_ALIVE:
 			# Health regeneration (1 per second)
 			if Game.health > 0:
 				Game.health = min(Game.health + delta, 100)
 
-			velocity = get_node("Player").get_linear_velocity()
+			velocity = player.linear_velocity
 
 			var movement := Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 			speed += ACCELERATION * movement * delta
 			# Apply Doom-style constant friction.
 			speed *= 0.85
 
-			# Set the new velocity
-			get_node("Player").set_linear_velocity(Vector2(speed * delta, velocity.y))
+			# Set the new velocity.
+			player.linear_velocity = Vector2(speed * delta, velocity.y)
 
-			# Falling damage
 			if velocity_new.y - velocity.y >= FALL_DAMAGE_THRESHOLD:
+				# Apply falling damage.
 				rpc("damage", (velocity_new.y - velocity.y - FALL_DAMAGE_THRESHOLD) / FALL_DAMAGE_FACTOR)
 
-			# Jumping
 			if Input.is_action_pressed("move_up") and is_touching_ground():
-				get_node("Player").set_linear_velocity(Vector2(velocity.x, -JUMP_SPEED * delta))
+				# Jump.
+				player.linear_velocity = Vector2(velocity.x, -JUMP_SPEED * delta)
 
-			# Jetpack (uses fuel)
+			# Jetpack (uses fuel).
 			if Input.is_action_pressed("jetpack") and Game.fuel > 0:
 				# Jump automatically if the player can jump.
 				# This way, the player can benefit from the jetpack more.
 				if is_touching_ground():
-					get_node("Player").set_linear_velocity(Vector2(velocity.x, -JUMP_SPEED * delta))
+					player.linear_velocity = Vector2(velocity.x, -JUMP_SPEED * delta)
 				else:
-					get_node("Player").set_linear_velocity(Vector2(JETPACK_BONUS * speed * delta, velocity.y - JETPACK_SPEED * delta))
+					player.linear_velocity = Vector2(JETPACK_BONUS * speed * delta, velocity.y - JETPACK_SPEED * delta)
 					Game.fuel = max(0, Game.fuel - 50 * delta)
 					rset("using_jetpack", true)
 
-			# Fuel regeneration
+			# Fuel regeneration.
 			if not Input.is_action_pressed("jetpack"):
 				Game.fuel = min(100, Game.fuel + 6 * delta)
 				rset("using_jetpack", false)
 
-
-			# Disable jetpack particles if having no fuel (even when pressing the key)
+			# Disable jetpack particles if having no fuel (even when pressing the key).
 			if Game.fuel <= 1:
 				rset("using_jetpack", false)
 
-			# Firing weapons
-			if Input.is_action_pressed("attack") and Game.ammo >= 1 and get_node("BulletTimer").get_time_left() == 0:
-				var bullet_position: Vector2 = get_node("Player/Gun").get_global_position()
-				var bullet_velocity := Vector2(BULLET_SPEED, 0).rotated(get_node("Player/Gun").get_rotation() - deg2rad(BULLET_SPREAD / 2.0 + randf() * BULLET_SPREAD))
+			# Firing weapons.
+			if Input.is_action_pressed("attack") and Game.ammo >= 1 and is_zero_approx($BulletTimer.time_left):
+				var bullet_position: Vector2 = $"Player/Gun".global_position
+				var bullet_velocity := Vector2(BULLET_SPEED, 0).rotated(get_node("Player/Gun").rotation - deg2rad(BULLET_SPREAD / 2.0 + randf() * BULLET_SPREAD))
 				rpc("fire_bullet", bullet_position, bullet_velocity)
 
-			elif Input.is_action_pressed("attack") and get_node("BulletTimer").get_time_left() == 0:
+			elif Input.is_action_pressed("attack") and is_zero_approx($"BulletTimer".time_left):
 				Sound.play(Sound.Type.NON_POSITIONAL, self, preload("res://data/sounds/no_ammo.wav"), -12, rand_range(0.95, 1.05))
 				if Game.weapon == Game.WEAPON_PISTOL:
-					get_node("BulletTimer").set_wait_time(BULLET_REFIRE)
+					$BulletTimer.wait_time = BULLET_REFIRE
 				elif Game.weapon == Game.WEAPON_CHAINGUN:
-					get_node("BulletTimer").set_wait_time(BULLET_REFIRE / 3)
-				get_node("BulletTimer").start()
+					$BulletTimer.wait_time = BULLET_REFIRE / 3.0
+				$BulletTimer.start()
 
-			# Falling very fast kills the player
+			# Falling at a very high speed kills the player.
 			if velocity.y >= 2000:
 				rpc("damage", 1000)
 
-			velocity_new = get_node("Player").get_linear_velocity()
+			velocity_new = player.linear_velocity
 
-			# Synchronize my player's position to other players.
+			# Synchronize my player's position and velocity to other players.
+			# The velocity is used for animating other players.
 			rset_unreliable("player_position", player.position)
-			# For animation purposes only.
 			rset_unreliable("player_linear_velocity", player.linear_velocity)
+			# Synchronize crosshair postion so that player sprite flipping can also be synchronized.
+			rset("crosshair_position", crosshair.position)
 	else:
 		player.position = player_position
 		crosshair.position = crosshair_position
@@ -228,9 +230,9 @@ remotesync func fire_bullet(bullet_position: Vector2, bullet_velocity: Vector2) 
 
 	# Bullet will be owned by the server.
 	var bullet := BULLET_SCENE.instance()
-	bullet.set_position(bullet_position)
+	bullet.position = bullet_position
 	add_child(bullet)
-	bullet.get_node("RigidBody2D").set_linear_velocity(bullet_velocity)
+	bullet.get_node("RigidBody2D").linear_velocity = bullet_velocity
 
 	# Play the sound positionally only when it's our client firing.
 	# This prevents the sound from being located in only one of the player's ears.
@@ -245,15 +247,16 @@ remotesync func fire_bullet(bullet_position: Vector2, bullet_velocity: Vector2) 
 	if is_network_master():
 		Game.ammo -= 1
 		if Game.weapon == Game.WEAPON_PISTOL:
-			get_node("BulletTimer").set_wait_time(BULLET_REFIRE)
+			$BulletTimer.wait_time = BULLET_REFIRE
 		elif Game.weapon == Game.WEAPON_CHAINGUN:
-			get_node("BulletTimer").set_wait_time(BULLET_REFIRE / 3)
-		get_node("BulletTimer").start()
+			$BulletTimer.wait_time = BULLET_REFIRE / 3
+		$BulletTimer.start()
 
 func _input(event) -> void:
 	# Input processing is disabled for non-master players.
 
 	if OS.has_touchscreen_ui_hint() and event is InputEventMouseButton:
+		# Double-tap to attack.
 		var mb := event as InputEventMouseButton
 		if mb.doubleclick:
 			var action := InputEventAction.new()
@@ -263,36 +266,35 @@ func _input(event) -> void:
 			double_tap_shoot_timer = 0.0
 
 		if not mb.pressed and double_tap_shoot_timer > 0.0:
+			# Release the attack.
 			var action := InputEventAction.new()
 			action.action = "attack"
 			Input.parse_input_event(action)
 
-	var zoom = get_node("Player/Camera2D").get_zoom().x
+	var zoom: float = $"Player/Camera2D".zoom.x
 	if event.is_action_pressed("zoom_in"):
-		get_node("Player/Camera2D").set_zoom(Vector2(max(0.25, zoom - 0.125), max(0.25, zoom - 0.125)))
+		$"Player/Camera2D".zoom = Vector2.ONE * max(0.25, zoom - 0.125)
 	if event.is_action_pressed("zoom_out"):
-		get_node("Player/Camera2D").set_zoom(Vector2(min(2, zoom + 0.125), min(2, zoom + 0.125)))
+		$"Player/Camera2D".zoom = Vector2.ONE * min(2, zoom + 0.125)
 	if event.is_action_pressed("zoom_reset"):
-		get_node("Player/Camera2D").set_zoom(Vector2(0.5, 0.5))
+		$"Player/Camera2D".zoom = Vector2.ONE * default_zoom.x
 
-	# Change weapon
 	if event.is_action_pressed("weapon_previous"):
 		Game.weapon = wrapi(Game.weapon - 1, 1, 3)
 	if event.is_action_pressed("weapon_next"):
 		Game.weapon = wrapi(Game.weapon + 1, 1, 3)
 
-	# Respawn when clicking, if dead, after a delay of 2.5 seconds
-	if Game.status == Game.STATUS_DEAD and event.is_action_pressed("attack") and get_node("RespawnTimer").get_time_left() == 0:
+	# Respawn when clicking after a certain delay has passed.
+	if Game.status == Game.STATUS_DEAD and event.is_action_pressed("attack") and is_zero_approx($RespawnTimer.time_left):
 		respawned()
 
-	# Suicide (default key: Ctrl+K)
 	if event.is_action_pressed("suicide") and Game.status == Game.STATUS_ALIVE:
 		rpc("damage", 1000)
 
 
-# Returns true if the player is touching ground
+# Returns `true` if the player is touching the floor, `false` otherwise.
 func is_touching_ground() -> bool:
-	return get_node("Player/RayCast2D").is_colliding()
+	return $"Player/RayCast2D".is_colliding()
 
 
 remotesync func damage(points: int) -> void:
@@ -307,23 +309,21 @@ remotesync func damage(points: int) -> void:
 		Sound.play(positional, self, preload("res://data/sounds/player_hurt.wav"), 0, rand_range(0.95, 1.05))
 
 	if is_network_master():
-		# If player has armor, divide damage by half on health and deplete armor
 		if Game.armor > 0:
 			Game.armor = int(max(0, Game.armor - points / 2.0))
 			Game.health = int(max(0, Game.health - points / 2.0))
-		# If player has no armor, deplete health
 		else:
 			Game.health = int(max(0, Game.health - points))
 
 
-# Called when the player dies
+# Called when the player dies.
 func die() -> void:
 	Game.get_node("HUD").rpc("builtin_notice", Game.get_node("HUD").BuiltinNoticeType.PLAYER_DEATH)
 
 	if is_network_master():
 		Game.status = Game.STATUS_DEAD
-		get_node("RespawnTimer").set_wait_time(RESPAWN_DELAY)
-		get_node("RespawnTimer").start()
+		$RespawnTimer.wait_time = RESPAWN_DELAY
+		$RespawnTimer.start()
 
 
 # Called when the player respawns.

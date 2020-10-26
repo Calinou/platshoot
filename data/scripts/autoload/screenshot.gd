@@ -7,7 +7,7 @@ var screenshots_dir := OS.get_system_dir(OS.SYSTEM_DIR_PICTURES) + "/" + Project
 
 
 func _ready() -> void:
-	# Make it possible to take screenshots while paused
+	# Make it possible to take screenshots while paused.
 	pause_mode = PAUSE_MODE_PROCESS
 
 
@@ -19,12 +19,12 @@ func _input(event: InputEvent) -> void:
 		get_viewport().set_clear_mode(Viewport.CLEAR_MODE_ONLY_NEXT_FRAME)
 		var image := get_viewport().get_texture().get_data()
 
-		# The viewport must be flipped to match the rendered window
+		# The viewport must be flipped to match the rendered window.
 		image.flip_y()
 
 		get_viewport().set_clear_mode(Viewport.CLEAR_MODE_ALWAYS)
 
-		# Screenshot file name with ISO 8601-like date
+		# Screenshot file name with ISO 8601-like date.
 		var datetime := OS.get_datetime()
 		for key in datetime:
 			datetime[key] = str(datetime[key]).pad_zeros(2)

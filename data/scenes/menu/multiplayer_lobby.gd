@@ -121,7 +121,7 @@ remote func pre_configure_game() -> void:
 	if not (dedicated and get_tree().get_network_unique_id() == NetworkedMultiplayerPeer.TARGET_PEER_SERVER):
 		# Load my player.
 		var my_player := preload("res://data/scenes/actors/player.tscn").instance()
-		my_player.set_name(str(get_tree().get_network_unique_id()))
+		my_player.name = str(get_tree().get_network_unique_id())
 		my_player.set_network_master(get_tree().get_network_unique_id())
 		$"/root/Level/Players".add_child(my_player)
 
@@ -132,7 +132,7 @@ remote func pre_configure_game() -> void:
 			continue
 
 		var player := preload("res://data/scenes/actors/player.tscn").instance()
-		player.set_name(str(other_player))
+		player.name = str(other_player)
 		player.set_network_master(other_player)
 		$"/root/Level/Players".add_child(player)
 
@@ -183,4 +183,3 @@ func _on_start_pressed() -> void:
 func _on_back_pressed() -> void:
 	emit_signal("back_pressed")
 	visible = false
-

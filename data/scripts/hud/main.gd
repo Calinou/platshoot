@@ -4,30 +4,28 @@
 extends CanvasLayer
 
 onready var notices_animation_player := $Notices/AnimationPlayer as AnimationPlayer
+onready var notices_label := $Notices/NoticesLabel as RichTextLabel
 
 enum BuiltinNoticeType {
 	PLAYER_DEATH,
 }
 
 func _physics_process(_delta: float) -> void:
-	# Inventory
-	get_node("Control/HealthProgressBar").set_value(Game.health)
-	get_node("Control/ArmorProgressBar").set_value(Game.armor)
-	get_node("Control/AmmoProgressBar").set_value(Game.ammo)
-	get_node("Control/FuelProgressBar").set_value(Game.fuel)
-	get_node("Control/AmmoLabel").set_text(tr(Game.get_weapon_name(Game.weapon)))
-
-	# Stats
-	get_node("FPS/FPSLabel").set_text("FPS: %d" % Engine.get_frames_per_second())
-	get_node("Stats/StatsLabel").set_bbcode("[right][b]" + str(Game.time_string(Game.time)) + "\n\n" + tr("Kills") + "[/b]\n" + str(Game.kills) + " / " + str(Game.kills_total) + "\n\n[b]" + tr("Items") + "[/b]\n" + str(Game.items) + " / " + str(Game.items_total) + "[/right]")
+	$"Control/HealthProgressBar".value = Game.health
+	$"Control/ArmorProgressBar".value = Game.armor
+	$"Control/AmmoProgressBar".value = Game.ammo
+	$"Control/FuelProgressBar".value = Game.fuel
+	$"Control/AmmoLabel".text = Game.get_weapon_name(Game.weapon)
+	$"FPS/FPSLabel".text = "FPS: %d" % Engine.get_frames_per_second()
+	$"Stats/StatsLabel".bbcode_text = "[right][b]" + str(Game.time_string(Game.time)) + "\n\n" + tr("Kills") + "[/b]\n" + str(Game.kills) + " / " + str(Game.kills_total) + "\n\n[b]" + tr("Items") + "[/b]\n" + str(Game.items) + " / " + str(Game.items_total) + "[/right]"
 
 
-# Spawn a notice at center of screen.
+# Spawns a notice at the center of the screen.
 func notice(bbcode: String) -> void:
-	get_node("Notices/NoticesLabel").set_bbcode("[center]" + bbcode + "[/center]")
+	notices_label.bbcode_text = "[center]" + bbcode + "[/center]"
 	notices_animation_player.play("fade")
 
-# Spawn a predefined notice at center of screen.
+# Spawns a predefined notice at center of screen.
 # Use this method in RPCs to prevent arbitrary notices from appearing on screen
 # from a modified client.
 remotesync func builtin_notice(type: int) -> void:
@@ -39,6 +37,6 @@ remotesync func builtin_notice(type: int) -> void:
 				notice("Another player died.")
 
 
-# Clears the notice by setting empty text to it
+# Clears the existing notice.
 func clear_notice() -> void:
-	get_node("Notices/NoticesLabel").set_bbcode("")
+	notices_label.bbcode_text = ""

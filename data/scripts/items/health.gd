@@ -8,7 +8,7 @@ var picked := false
 
 func _on_Area2D_body_enter(body: Node2D) -> void:
 	# Only the player can pick up items
-	if body.get_name() == "Player" and not picked:
+	if body.name == "Player" and not picked:
 		# Don't pick up item if health >= 100 or if dead
 		if Game.health >= 100 or Game.status == Game.STATUS_DEAD:
 			return
@@ -16,9 +16,9 @@ func _on_Area2D_body_enter(body: Node2D) -> void:
 		picked = true
 		Game.health = min(Game.health + 20, 100)
 		Game.items += 1
-		get_node("AnimationPlayer").play("Pickup")
+		$AnimationPlayer.play("Pickup")
 		Sound.play(Sound.Type.NON_POSITIONAL, self, preload("res://data/sounds/pickup.wav"), 0.0, 1.1)
 
 
-func _on_AnimationPlayer_finished() -> void:
+func _on_AnimationPlayer_finished(_anim_name: String) -> void:
 	queue_free()

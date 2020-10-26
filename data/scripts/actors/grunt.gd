@@ -3,60 +3,58 @@
 
 extends RigidBody2D
 
-# Maximal movement speed
+# Maximal movement speed.
 const MAX_SPEED = 140 * 60
 
-# Minimum time between punches
+# Minimum time between punches.
 const MELEE_REFIRE = 0.4
 
-# Range above which grunts won't hunt the player
+# Range above which grunts won't hunt the player.
 const AGGRO_RANGE = 320
 
 onready var velocity := Vector2(0, 0)
 onready var hurt_player := false
 # This variable is set to false when the monster dies, so that they can't
-# damage the player
+# damage the player.
 onready var dangerous := true
 
-# The health each grunt has
+# The health each grunt has.
 onready var health := 75
 
 const death_particles_scene := preload("res://data/scenes/misc/death_particles.tscn")
 
 
 func _ready() -> void:
-	# Desynchronize the animation of each grunt
-	get_node("AnimationPlayer").seek(randf())
+	# Desynchronize the animation of each grunt.
+	$AnimationPlayer.seek(randf())
 
 
 func _physics_process(delta: float) -> void:
 	# TODO: Reimplement player chasing to work with multiple players.
 	return
 
-	get_node("ProgressBar").set_value(health)
-	velocity = get_linear_velocity()
-	var player_pos = get_node("/root/Level/Players/1").get_position()
-	var grunt_pos = get_position()
+	$ProgressBar.value = health
+	var player_pos: Vector2 = $"/root/Level/Players/1".position
 
 	if hurt_player:
-		if get_node("Timer").get_time_left() == 0 and Game.health > 0:
-			get_node("/root/Level/Players/1").rpc("damage", 15)
-			get_node("Timer").set_wait_time(MELEE_REFIRE)
-			get_node("Timer").start()
+		if is_zero_approx($Timer.time_left) and Game.health > 0:
+			$"/root/Level/Players/1".rpc("damage", 15)
+			$Timer.wait_time = MELEE_REFIRE
+			$Timer.start()
 
-	# Move the grunt according to X position of player (difference)
-	# If the player is at the left, move the grunt towards the left
-	# Else, move the grunt towards the right
-	var difference = grunt_pos.x - player_pos.x
-	# If the grunt is outside of the aggro range, don't change movement
+	# Move the grunt according to X position of player (difference).
+	# If the player is at the left, move the grunt towards the left.
+	# Else, move the grunt towards the right.
+	var difference := position.x - player_pos.x
+	# If the grunt is outside of the aggro range, don't change movement.
 	if abs(difference) >= AGGRO_RANGE:
 		return
 	if difference > 0:
-		set_linear_velocity(Vector2(-MAX_SPEED * delta, velocity.y))
-		get_node("Smoothing2D/Sprite").set_flip_h(false)
+		linear_velocity = Vector2(-MAX_SPEED * delta, linear_velocity.y)
+		$"Smoothing2D/Sprite".flip_h = false
 	else:
-		set_linear_velocity(Vector2(MAX_SPEED * delta, velocity.y))
-		get_node("Smoothing2D/Sprite").set_flip_h(true)
+		linear_velocity = Vector2(MAX_SPEED * delta, linear_velocity.y)
+		$"Smoothing2D/Sprite".flip_h = true
 
 
 func damage(dmg: int) -> void:
@@ -69,25 +67,25 @@ func damage(dmg: int) -> void:
 
 func die() -> void:
 	dangerous = false
-	var death_particles = death_particles_scene.instance()
-	death_particles.set_global_position(get_node("CollisionShape2D").get_position())
+	var death_particles := death_particles_scene.instance()
+	death_particles.global_position = $CollisionShape2D.position
 	add_child(death_particles)
-	get_node("CollisionShape2D").queue_free()
+	$CollisionShape2D.queue_free()
 	Sound.play(Sound.Type.POSITIONAL_2D, self, preload("res://data/sounds/grunt_death.wav"), 3, rand_range(0.9, 1.05))
-	get_node("AnimationPlayer").play("Die")
+	$AnimationPlayer.play("Die")
 
 
-# Remove grunt after death animation
-func _on_AnimationPlayer_finished() -> void:
+# Remove grunt after death animation.
+func _on_AnimationPlayer_finished(_anim_name: String) -> void:
 	Game.kills += 1
 	queue_free()
 
 
 func _on_Area2D_body_enter(body: Node2D) -> void:
-	if body.get_name() == "Player" and dangerous:
+	if body.name == "Player" and dangerous:
 		hurt_player = true
 
 
 func _on_Area2D_body_exit(body: Node2D) -> void:
-	if body.get_name() == "Player":
+	if body.name == "Player":
 		hurt_player = false

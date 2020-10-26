@@ -7,9 +7,9 @@ var kill := false
 
 
 func _physics_process(_delta: float) -> void:
-	for body in get_node("RigidBody2D").get_colliding_bodies():
+	for body in $RigidBody2D.get_colliding_bodies():
 		# Bullets can't hit the player
-		if body.get_name() != "Player":
+		if body.name != "Player":
 			_on_Timer_timeout()
 		if body.has_method("damage"):
 			body.damage(25)
@@ -22,8 +22,8 @@ func _on_Timer_timeout() -> void:
 		queue_free()
 	# Only make it stop emitting
 	else:
-		get_node("Smoothing2D/CPUParticles2D").set_emitting(false)
-		get_node("Smoothing2D/Light2D").set_enabled(false)
-		get_node("Timer").set_wait_time(2)
-		get_node("Timer").start()
+		$"Smoothing2D/CPUParticles2D".emitting = false
+		$"Smoothing2D/Light2D".enabled = false
+		$Timer.wait_time = 2
+		$Timer.start()
 		kill = true

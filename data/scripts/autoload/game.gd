@@ -65,7 +65,7 @@ func _input(event: InputEvent) -> void:
 		OS.window_fullscreen = not OS.is_window_fullscreen()
 
 	if event.is_action_pressed("toggle_hud"):
-		get_node("/root/Game/HUD/Control").visible = not get_node("/root/Game/HUD/Control").visible
+		$"/root/Game/HUD/Control".visible = not $"/root/Game/HUD/Control".visible
 
 
 # Makes a number (like 80) into a string like "1:20"
@@ -87,16 +87,16 @@ func get_weapon_name(weap: int) -> String:
 # Hides the HUD (for menu, and the "hide HUD" key)
 # The HUD elements are hidden individually because CanvasLayer can't be hidden
 func hide_hud() -> void:
-	get_node("/root/Game/HUD/Notices").hide()
-	get_node("/root/Game/HUD/FPS").hide()
-	get_node("/root/Game/HUD/Stats").hide()
-	get_node("/root/Game/HUD/Control").hide()
+	$"/root/Game/HUD/Notices".hide()
+	$"/root/Game/HUD/FPS".hide()
+	$"/root/Game/HUD/Stats".hide()
+	$"/root/Game/HUD/Control".hide()
 
 
 # Shows the HUD (when the player enters game, or uses the "hide HUD" key while
 # the HUD is hidden
 func show_hud() -> void:
-	get_node("/root/Game/HUD/Notices").show()
-	get_node("/root/Game/HUD/FPS").show()
-	get_node("/root/Game/HUD/Stats").show()
-	get_node("/root/Game/HUD/Control").show()
+	$"/root/Game/HUD/Notices".show()
+	$"/root/Game/HUD/FPS".show()
+	$"/root/Game/HUD/Stats".show()
+	$"/root/Game/HUD/Control".show()

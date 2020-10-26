@@ -4,6 +4,6 @@
 extends Node2D
 
 
-func _on_Area2D_body_enter(body: Node2D) -> void:
+func _on_Area2D_body_enter(_body: Node2D) -> void:
 	# TODO: Exiting levels isn't implemented yet.
 	return
