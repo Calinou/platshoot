@@ -39,9 +39,9 @@ const BULLET_SCENE := preload("res://data/scenes/misc/bullet.tscn")
 # while allowing full-auto shooting. I don't know why.
 var double_tap_shoot_timer := 0.0
 
-puppet var puppet_position := Vector2.ZERO
-puppet var puppet_linear_velocity := Vector2.ZERO
-puppet var puppet_using_jetpack := false
+remotesync var player_position := Vector2.ZERO
+remotesync var player_linear_velocity := Vector2.ZERO
+remotesync var using_jetpack := false
 remotesync var crosshair_position := Vector2.ZERO
 
 var velocity := Vector2(0, 0)
@@ -61,7 +61,7 @@ onready var sprite_base_offset := player_sprite.position.y
 
 func _ready() -> void:
 	set_process_input(is_network_master())
-	puppet_position = player.position
+	player_position = player.position
 
 	# Make our camera active, but not other players'
 	camera.current = is_network_master()
@@ -115,19 +115,19 @@ func _process(delta) -> void:
 
 	# Add bobbing to the player sprite when moving and not airborne.
 	if is_touching_ground():
-		var player_velocity := player.linear_velocity.x if is_network_master() else puppet_linear_velocity.x
-		player_sprite.position.y = sprite_base_offset - abs(sin(OS.get_ticks_msec() * 0.01) * player_velocity * 0.024)
+		player_sprite.position.y = sprite_base_offset - abs(sin(OS.get_ticks_msec() * 0.01) * player_linear_velocity.x * 0.024)
 
 
 func _physics_process(delta) -> void:
 	if animation_player.current_animation == "walk":
-		var player_velocity := player.linear_velocity.x if is_network_master() else puppet_linear_velocity.x
 		# Don't change the animation speed if currently displaying a shoot or pain animation.
-		animation_player.set_speed_scale(min(abs(player_velocity) * 0.009, 2.1))
+		animation_player.set_speed_scale(min(abs(player_linear_velocity.x) * 0.009, 2.1))
 
 	# Flip player sprite if the crosshair is at the right of the player (player faces right),
 	# else don't flip it (player faces left).
 	get_node("Smoothing2D/Sprite").set_flip_h(crosshair_position.x > player.position.x)
+
+	get_node("Player/JetpackParticles").set_emitting(using_jetpack)
 
 	if is_network_master():
 		# Move the camera to partially follow the crosshair.
@@ -181,21 +181,17 @@ func _physics_process(delta) -> void:
 				else:
 					get_node("Player").set_linear_velocity(Vector2(JETPACK_BONUS * speed * delta, velocity.y - JETPACK_SPEED * delta))
 					Game.fuel = max(0, Game.fuel - 50 * delta)
-					get_node("Player/JetpackParticles").set_emitting(true)
-					rset("puppet_using_jetpack", true)
+					rset("using_jetpack", true)
 
 			# Fuel regeneration
 			if not Input.is_action_pressed("jetpack"):
 				Game.fuel = min(100, Game.fuel + 6 * delta)
-				# Disable jetpack particles
-				get_node("Player/JetpackParticles").set_emitting(false)
-				rset("puppet_using_jetpack", false)
+				rset("using_jetpack", false)
 
 
 			# Disable jetpack particles if having no fuel (even when pressing the key)
 			if Game.fuel <= 1:
-				get_node("Player/JetpackParticles").set_emitting(false)
-				rset("puppet_using_jetpack", false)
+				rset("using_jetpack", false)
 
 			# Firing weapons
 			if Input.is_action_pressed("attack") and Game.ammo >= 1 and get_node("BulletTimer").get_time_left() == 0:
@@ -218,13 +214,12 @@ func _physics_process(delta) -> void:
 			velocity_new = get_node("Player").get_linear_velocity()
 
 			# Synchronize my player's position to other players.
-			rset_unreliable("puppet_position", player.position)
+			rset_unreliable("player_position", player.position)
 			# For animation purposes only.
-			rset_unreliable("puppet_linear_velocity", player.linear_velocity)
+			rset_unreliable("player_linear_velocity", player.linear_velocity)
 	else:
-		player.position = puppet_position
+		player.position = player_position
 		crosshair.position = crosshair_position
-		get_node("Player/JetpackParticles").set_emitting(puppet_using_jetpack)
 
 remotesync func fire_bullet(bullet_position: Vector2, bullet_velocity: Vector2) -> void:
 	var remote_animation_player := get_node("/root/Level/Players/%d/Player/AnimationPlayer" % get_tree().get_rpc_sender_id())
