@@ -4,9 +4,13 @@
 extends Control
 
 signal back_pressed
+signal game_started
 
 # The server port to use.
 const PORT = 33233
+
+# The remote server address.
+var server_address := ""
 
 # Player info, associate ID to data
 var player_info := {}
@@ -30,6 +34,9 @@ onready var start_button := $VBoxContainer/StartGame as Button
 
 
 func start_server(start_immediately = false) -> void:
+	# Since this can be invoked from a CLI argument, make the lobby visible explicitly.
+	visible = true
+
 	if dedicated:
 		print("Starting dedicated server...")
 	else:
@@ -38,7 +45,6 @@ func start_server(start_immediately = false) -> void:
 		else:
 			print('Starting "listen" server...')
 
-	visible = true
 	var peer := NetworkedMultiplayerENet.new()
 	peer.compression_mode = NetworkedMultiplayerENet.COMPRESS_ZSTD
 	peer.create_server(PORT, 16)
@@ -52,9 +58,12 @@ func start_server(start_immediately = false) -> void:
 		_on_start_pressed()
 
 
-func join_server(server_address: String) -> void:
-	print("Joining multiplayer server...")
+func join_server(p_server_address: String) -> void:
+	# Since this can be invoked from a CLI argument, make the lobby visible explicitly.
 	visible = true
+
+	server_address = p_server_address
+	print("Connecting to server: %s..." % server_address)
 	var peer := NetworkedMultiplayerENet.new()
 	peer.compression_mode = NetworkedMultiplayerENet.COMPRESS_ZSTD
 	peer.create_client(server_address, PORT)
@@ -64,9 +73,6 @@ func join_server(server_address: String) -> void:
 
 
 func _ready() -> void:
-	# Hide the lobby until we request it.
-	visible = false
-
 	player_count_label.text = tr("%d players") % player_count
 
 	get_tree().connect("network_peer_connected", self, "_player_connected")
@@ -76,14 +82,14 @@ func _ready() -> void:
 	get_tree().connect("server_disconnected", self, "_server_disconnected")
 
 
-func _player_connected(id: int) -> void:
+func _player_connected(player_id: int) -> void:
 	# Called on both clients and server when a peer connects. Send my info to it.
 	if dedicated:
 		# Inform clients that we are a dedicated server, so they don't add us
 		# as a player when starting the game.
 		rset("dedicated", true)
 
-	rpc_id(id, "register_player", my_info)
+	rpc_id(player_id, "register_player", my_info)
 
 
 func _player_disconnected(id: int) -> void:
@@ -92,15 +98,15 @@ func _player_disconnected(id: int) -> void:
 
 
 func _connected_ok() -> void:
-	print("Connected to server.")
+	print("Connected to server: %s" % server_address)
 
 
 func _server_disconnected() -> void:
-	push_error("Disconnected from the server.")
+	push_error("Disconnected from the server: %s" % server_address)
 
 
 func _connected_fail() -> void:
-	push_error("Couldn't connect to the server.")
+	push_error("Couldn't connect to the server: %s" % server_address)
 
 
 remote func register_player(info: Dictionary) -> void:
@@ -161,7 +167,7 @@ remote func done_preconfiguring() -> void:
 		# All players are done loading scenes, start!
 		rpc("post_configure_game")
 
-	visible = false
+	emit_signal("game_started")
 
 
 remote func post_configure_game() -> void:
@@ -171,7 +177,7 @@ remote func post_configure_game() -> void:
 			or get_tree().get_rpc_sender_id() == NetworkedMultiplayerPeer.TARGET_PEER_SERVER
 	):
 		get_tree().paused = false
-		visible = false
+		emit_signal("game_started")
 		# Game starts now!
 
 

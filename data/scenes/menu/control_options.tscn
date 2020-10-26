@@ -3,7 +3,9 @@
 [ext_resource path="res://data/resources/themes/default.tres" type="Theme" id=1]
 [ext_resource path="res://data/scenes/menu/control_options.gd" type="Script" id=2]
 
-[node name="ControlOptions" type="Control"]
+[node name="ControlOptions" type="Control" groups=[
+"menu",
+]]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
