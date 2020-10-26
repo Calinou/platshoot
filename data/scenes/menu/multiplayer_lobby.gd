@@ -25,6 +25,7 @@ var player_count := 1
 remote var dedicated := false
 
 onready var player_count_label := $VBoxContainer/PlayerCount as Label
+onready var server_name_label := $VBoxContainer/ServerName as Label
 onready var start_button := $VBoxContainer/StartGame as Button
 
 
@@ -41,6 +42,8 @@ func start_server(start_immediately = false) -> void:
 	var peer := NetworkedMultiplayerENet.new()
 	peer.compression_mode = NetworkedMultiplayerENet.COMPRESS_ZSTD
 	peer.create_server(PORT, 16)
+	server_name_label.text = tr("Hosting a server")
+	server_name_label.add_color_override("font_color", Color(0.6, 0.9, 1))
 	get_tree().network_peer = peer
 
 
@@ -55,6 +58,8 @@ func join_server(server_address: String) -> void:
 	var peer := NetworkedMultiplayerENet.new()
 	peer.compression_mode = NetworkedMultiplayerENet.COMPRESS_ZSTD
 	peer.create_client(server_address, PORT)
+	server_name_label.text = tr("Connected to: %s") % server_address
+	server_name_label.add_color_override("font_color", Color(1, 0.9, 0.6))
 	get_tree().network_peer = peer
 
 
