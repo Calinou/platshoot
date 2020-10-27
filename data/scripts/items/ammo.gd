@@ -15,6 +15,7 @@ func _on_Area2D_body_enter(body: Node2D) -> void:
 	if body.name == "Player" and body.is_network_master() and not picked:
 		rpc("pickup")
 		Game.ammo = int(min(Game.ammo + 15, 100))
+		Statistics.items_picked_up += 1
 
 
 func _on_AnimationPlayer_finished(_anim_name: String) -> void:

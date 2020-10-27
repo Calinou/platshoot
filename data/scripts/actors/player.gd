@@ -35,21 +35,23 @@ const FALL_DAMAGE_FACTOR = 6
 
 const BULLET_SCENE := preload("res://data/scenes/misc/bullet.tscn")
 
-# Using a timer for double-tap shooting fixes issues related to "lingering" input
-# while allowing full-auto shooting. I don't know why.
-var double_tap_shoot_timer := 0.0
-
 remotesync var player_position := Vector2.ZERO
 remotesync var player_linear_velocity := Vector2.ZERO
 remotesync var using_jetpack := false
 remotesync var crosshair_position := Vector2.ZERO
 
+# Using a timer for double-tap shooting fixes issues related to "lingering" input
+# while allowing full-auto shooting. I don't know why.
+var double_tap_shoot_timer := 0.0
 var velocity := Vector2(0, 0)
 var velocity_new := Vector2(0, 0)
 var speed := 0.0
 var offset := Vector2(0, 0)
 var relative_mouse_pos := Vector2(0, 0)
+
 onready var player := $Player as RigidBody2D
+# For tracking distance in statistics.
+onready var previous_position := player.position
 onready var camera := $Player/Camera2D as Camera2D
 onready var default_zoom := camera.zoom
 onready var crosshair := $Crosshair as Sprite
@@ -131,6 +133,7 @@ func _physics_process(delta) -> void:
 	$"Player/JetpackParticles".emitting = using_jetpack
 
 	if is_network_master():
+		Statistics.distance_travelled += int(abs(player.position.x - previous_position.x))
 		# Move the camera to partially follow the crosshair.
 		# This helps the player get a better view on their surroundings.
 		camera.global_position = lerp(player.global_position, crosshair.global_position, 0.25)
@@ -198,6 +201,7 @@ func _physics_process(delta) -> void:
 				var bullet_position: Vector2 = $"Player/Gun".global_position
 				var bullet_velocity := Vector2(BULLET_SPEED, 0).rotated(get_node("Player/Gun").rotation - deg2rad(BULLET_SPREAD / 2.0 + randf() * BULLET_SPREAD))
 				rpc("fire_bullet", bullet_position, bullet_velocity)
+				Statistics.bullets_fired += 1
 
 			elif Input.is_action_pressed("attack") and is_zero_approx($"BulletTimer".time_left):
 				Sound.play(Sound.Type.NON_POSITIONAL, self, preload("res://data/sounds/no_ammo.wav"), -12, rand_range(0.95, 1.05))
@@ -219,6 +223,8 @@ func _physics_process(delta) -> void:
 			rset_unreliable("player_linear_velocity", player.linear_velocity)
 			# Synchronize crosshair postion so that player sprite flipping can also be synchronized.
 			rset("crosshair_position", crosshair.position)
+
+			previous_position = player.position
 	else:
 		player.position = player_position
 		crosshair.position = crosshair_position
@@ -324,6 +330,7 @@ func die() -> void:
 		Game.status = Game.STATUS_DEAD
 		$RespawnTimer.wait_time = RESPAWN_DELAY
 		$RespawnTimer.start()
+		Statistics.times_died += 1
 
 
 # Called when the player respawns.

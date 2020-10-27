@@ -27,9 +27,10 @@ config/custom_user_dir_name.OSX="platshoot"
 
 [autoload]
 
-Game="*res://data/scenes/autoload/game.tscn"
-Screenshot="*res://data/scripts/autoload/screenshot.gd"
-Sound="*res://data/scripts/autoload/sound.gd"
+Game="*res://autoload/game.tscn"
+Screenshot="*res://autoload/screenshot.gd"
+Sound="*res://autoload/sound.gd"
+Statistics="*res://autoload/statistics.gd"
 
 [debug]
 

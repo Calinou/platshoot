@@ -73,6 +73,7 @@ func die() -> void:
 	$CollisionShape2D.queue_free()
 	Sound.play(Sound.Type.POSITIONAL_2D, self, preload("res://data/sounds/grunt_death.wav"), 3, rand_range(0.9, 1.05))
 	$AnimationPlayer.play("Die")
+	Statistics.enemies_killed += 1
 
 
 # Remove grunt after death animation.

@@ -6,6 +6,7 @@ extends Control
 signal singleplayer_pressed
 signal multiplayer_pressed
 signal options_pressed
+signal statistics_pressed
 
 onready var multiplayer_button := $VBoxContainer/Multiplayer as Button
 onready var quit_button := $VBoxContainer/QuitGame as Button
@@ -35,6 +36,11 @@ func _on_multiplayer_pressed() -> void:
 
 func _on_options_pressed() -> void:
 	emit_signal("options_pressed")
+	visible = false
+
+
+func _on_statistics_pressed() -> void:
+	emit_signal("statistics_pressed")
 	visible = false
 
 
