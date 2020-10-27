@@ -133,4 +133,3 @@ msgid ""
 "Multiplayer isn't supported in the HTML5 export.\n"
 "Download a native version of Platshoot to play online!"
 msgstr ""
-
