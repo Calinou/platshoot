@@ -24,7 +24,7 @@ jobs:
           mkdir -p dist/
           godot -v --export "Windows Desktop" "dist/$EXPORT_NAME.exe"
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2.2.1
+        uses: actions/upload-artifact@v2.2.2
         with:
           name: ${{ env.EXPORT_NAME }}-windows
           path: dist
@@ -46,7 +46,7 @@ jobs:
           mkdir -p dist/
           godot -v --export "Mac OSX" "dist/$EXPORT_NAME.zip"
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2.2.1
+        uses: actions/upload-artifact@v2.2.2
         with:
           name: ${{ env.EXPORT_NAME }}-macos
           path: dist
@@ -68,7 +68,7 @@ jobs:
           mkdir -p dist/
           godot -v --export "Linux/X11" "dist/$EXPORT_NAME.x86_64"
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2.2.1
+        uses: actions/upload-artifact@v2.2.2
         with:
           name: ${{ env.EXPORT_NAME }}-linux-desktop
           path: dist
@@ -93,7 +93,7 @@ jobs:
           unzip /tmp/godot_server.zip
           mv -f Godot_v3.2.3-stable_linux_server.64 "dist/$EXPORT_NAME-server.x86_64"
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2.2.1
+        uses: actions/upload-artifact@v2.2.2
         with:
           name: ${{ env.EXPORT_NAME }}-linux-server
           path: dist
@@ -115,7 +115,7 @@ jobs:
           mkdir -p dist/
           godot -v --export "HTML5" dist/index.html
       - name: Upload Artifact
-        uses: actions/upload-artifact@v2.2.1
+        uses: actions/upload-artifact@v2.2.2
         with:
           name: ${{ env.EXPORT_NAME }}-html5
           path: dist
