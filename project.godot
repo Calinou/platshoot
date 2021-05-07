@@ -10,7 +10,6 @@ config_version=4
 
 _global_script_classes=[  ]
 _global_script_class_icons={
-
 }
 
 [application]
@@ -176,6 +175,7 @@ locale_filter=[ 0, [  ] ]
 
 [physics]
 
+common/physics_jitter_fix=0.0
 2d/default_gravity=800
 
 [rendering]
