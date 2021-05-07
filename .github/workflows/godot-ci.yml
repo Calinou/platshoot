@@ -3,7 +3,7 @@ name: Continuous integration
 on: push
 
 env:
-  GODOT_VERSION: 3.2.3
+  GODOT_VERSION: 3.3
   EXPORT_NAME: platshoot
 
 jobs:
@@ -11,7 +11,7 @@ jobs:
     name: Export (Windows)
     runs-on: ubuntu-20.04
     container:
-      image: barichello/godot-ci:3.2.3
+      image: barichello/godot-ci:3.3
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.4
@@ -33,7 +33,7 @@ jobs:
     name: Export (macOS)
     runs-on: ubuntu-20.04
     container:
-      image: barichello/godot-ci:3.2.3
+      image: barichello/godot-ci:3.3
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.4
@@ -55,7 +55,7 @@ jobs:
     name: Export (Linux Desktop)
     runs-on: ubuntu-20.04
     container:
-      image: barichello/godot-ci:3.2.3
+      image: barichello/godot-ci:3.3
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.4
@@ -77,7 +77,7 @@ jobs:
     name: Export (Linux Server)
     runs-on: ubuntu-20.04
     container:
-      image: barichello/godot-ci:3.2.3
+      image: barichello/godot-ci:3.3
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.4
@@ -91,7 +91,7 @@ jobs:
           godot -v --export-pack "Linux/X11" "dist/$EXPORT_NAME-server.pck"
           wget "https://downloads.tuxfamily.org/godotengine/$GODOT_VERSION/Godot_v$GODOT_VERSION-stable_linux_server.64.zip" -O /tmp/godot_server.zip
           unzip /tmp/godot_server.zip
-          mv -f Godot_v3.2.3-stable_linux_server.64 "dist/$EXPORT_NAME-server.x86_64"
+          mv -f "Godot_v$GODOT_VERSION-stable_linux_server.64" "dist/$EXPORT_NAME-server.x86_64"
       - name: Upload Artifact
         uses: actions/upload-artifact@v2.2.3
         with:
@@ -102,7 +102,7 @@ jobs:
     name: Export (HTML5)
     runs-on: ubuntu-20.04
     container:
-      image: barichello/godot-ci:3.2.3
+      image: barichello/godot-ci:3.3
     steps:
       - name: Checkout
         uses: actions/checkout@v2.3.4

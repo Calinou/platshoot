@@ -47,4 +47,5 @@ margin_right = 250.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 0, 60 )
 text = "Back"
+
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

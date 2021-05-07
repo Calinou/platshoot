@@ -70,6 +70,7 @@ visible = false
 
 [node name="Statistics" parent="Menus" instance=ExtResource( 10 )]
 visible = false
+
 [connection signal="multiplayer_pressed" from="Menus/Main" to="Menus/Multiplayer" method="show"]
 [connection signal="options_pressed" from="Menus/Main" to="Menus/Options" method="show"]
 [connection signal="singleplayer_pressed" from="Menus/Main" to="Menus/Singleplayer" method="show"]

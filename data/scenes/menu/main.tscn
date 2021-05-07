@@ -89,6 +89,7 @@ rect_min_size = Vector2( 0, 60 )
 text = "Quit Game"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
 [connection signal="pressed" from="VBoxContainer/Singleplayer" to="." method="_on_singleplayer_pressed"]
 [connection signal="pressed" from="VBoxContainer/Multiplayer" to="." method="_on_multiplayer_pressed"]
 [connection signal="pressed" from="VBoxContainer/Options" to="." method="_on_options_pressed"]
