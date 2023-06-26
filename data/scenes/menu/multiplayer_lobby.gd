@@ -50,6 +50,9 @@ func start_server(start_immediately = false) -> void:
 	peer.create_server(PORT, 16)
 	server_name_label.text = tr("Hosting a server")
 	server_name_label.add_color_override("font_color", Color(0.6, 0.9, 1))
+	# Restore previous start button state if we were joining a server beforehand.
+	start_button.disabled = false
+	start_button.text = "Start Game"
 	get_tree().network_peer = peer
 
 
@@ -70,6 +73,8 @@ func join_server(p_server_address: String) -> void:
 	server_name_label.text = tr("Connected to: %s") % server_address
 	server_name_label.add_color_override("font_color", Color(1, 0.9, 0.6))
 	get_tree().network_peer = peer
+	start_button.disabled = true
+	start_button.text = "Wait for host to start"
 
 
 func _ready() -> void:
