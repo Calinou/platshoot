@@ -66,8 +66,10 @@ func _ready() -> void:
 	set_process_input(is_network_master())
 	player_position = player.position
 
-	# Make our camera active, but not other players'
-	camera.current = is_network_master()
+	# Make our camera active, but not other players'.
+	if is_network_master():
+		camera.make_current()
+
 	crosshair.visible = is_network_master()
 
 	if not is_network_master():

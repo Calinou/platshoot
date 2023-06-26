@@ -106,7 +106,6 @@ position = Vector2( 0, -32 )
 shape = SubResource( 2 )
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-current = true
 zoom = Vector2( 0.75, 0.75 )
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true
@@ -180,4 +179,5 @@ __meta__ = {
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
 resources = [ PoolStringArray( "crosshair_color_gradient" ), [ ExtResource( 7 ) ] ]
+
 [connection signal="animation_finished" from="Player/AnimationPlayer" to="." method="_animation_finished"]
