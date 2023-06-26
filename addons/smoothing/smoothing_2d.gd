@@ -39,10 +39,9 @@ const SF_ROTATE = 1 << 2
 const SF_SCALE = 1 << 3
 const SF_GLOBAL_IN = 1 << 4
 const SF_GLOBAL_OUT = 1 << 5
-const SF_DIRTY = 1 << 6
-const SF_INVISIBLE = 1 << 7
+const SF_INVISIBLE = 1 << 6
 
-export (int, FLAGS, "enabled", "translate", "rotate", "scale", "global in", "global out") var flags: int = SF_ENABLED | SF_TRANSLATE setget _set_flags, _get_flags
+export (int, FLAGS, "enabled", "translate", "rotate", "scale", "global in", "global out") var flags: int = SF_ENABLED | SF_TRANSLATE | SF_ROTATE | SF_SCALE | SF_GLOBAL_IN | SF_GLOBAL_OUT setget _set_flags, _get_flags
 
 ##########################################################################################
 # USER FUNCS
@@ -81,7 +80,8 @@ func is_enabled():
 func _ready():
 	m_Angle_curr = 0
 	m_Angle_prev = 0
-	pass
+	set_process_priority(100)
+	Engine.set_physics_jitter_fix(0.0)
 
 
 func set_target(new_value):
@@ -111,13 +111,13 @@ func _SetProcessing():
 
 	set_process(bEnable)
 	set_physics_process(bEnable)
-	pass
+	
+	set_as_toplevel(_TestFlags(SF_GLOBAL_OUT))
 
 
 func _enter_tree():
 	# might have been moved
 	_FindTarget()
-	pass
 
 
 func _notification(what):
@@ -129,7 +129,6 @@ func _notification(what):
 
 
 func _RefreshTransform():
-	_ClearFlags(SF_DIRTY)
 
 	if _HasTarget() == false:
 		return
@@ -159,21 +158,15 @@ func _RefreshTransform():
 			m_Scale_prev = m_Scale_curr
 			m_Scale_curr = _m_Target.get_scale()
 
-
-func _IsTargetParent(node):
-	if node == _m_Target:
-		return true  # disallow
-
-	var parent = node.get_parent()
-	if parent:
-		return _IsTargetParent(parent)
-
-	return false
-
-
 func _FindTarget():
 	_m_Target = null
+	
+	# If no target has been assigned in the property,
+	# default to using the parent as the target.
 	if target.is_empty():
+		var parent = get_parent()
+		if parent and (parent is Node2D):
+			_m_Target = parent
 		return
 
 	var targ = get_node(target)
@@ -190,23 +183,6 @@ func _FindTarget():
 	# if we got to here targ is correct type
 	_m_Target = targ
 
-	# hard coded to off in 2d to allow this for now
-	# but I'm still not sure it should be allowed...
-
-	# do a final check
-	# is the target a parent or grandparent of the smoothing node?
-	# if so, disallow
-
-
-#	if _IsTargetParent(self):
-#		var msg = _m_Target.get_name() + " assigned to " + self.get_name() + "]"
-#		printerr("ERROR SmoothingNode2D : Target should not be a parent or grandparent [", msg)
-#
-#		# error message
-#		_m_Target = null
-#		target = ""
-#		return
-
 
 func _HasTarget() -> bool:
 	if _m_Target == null:
@@ -221,47 +197,30 @@ func _HasTarget() -> bool:
 
 
 func _process(_delta):
-	if _TestFlags(SF_DIRTY):
-		_RefreshTransform()
 
 	var f = Engine.get_physics_interpolation_fraction()
 
-	if _TestFlags(SF_GLOBAL_OUT):
-		# translate
-		if _TestFlags(SF_TRANSLATE):
-			set_global_position(m_Pos_prev.linear_interpolate(m_Pos_curr, f))
+	# We can always use local position rather than set_global_position
+	# because even in global mode we are set_as_top_level, and the result
+	# will be the same.
+	
+	# translate
+	if _TestFlags(SF_TRANSLATE):
+		set_position(m_Pos_prev.linear_interpolate(m_Pos_curr, f))
 
-		# rotate
-		if _TestFlags(SF_ROTATE):
-			var r = _LerpAngle(m_Angle_prev, m_Angle_curr, f)
-			set_global_rotation(r)
+	# rotate
+	if _TestFlags(SF_ROTATE):
+		var r = _LerpAngle(m_Angle_prev, m_Angle_curr, f)
+		set_rotation(r)
 
-		if _TestFlags(SF_SCALE):
-			set_global_scale(m_Scale_prev.linear_interpolate(m_Scale_curr, f))
-	else:
-		# translate
-		if _TestFlags(SF_TRANSLATE):
-			set_position(m_Pos_prev.linear_interpolate(m_Pos_curr, f))
-
-		# rotate
-		if _TestFlags(SF_ROTATE):
-			var r = _LerpAngle(m_Angle_prev, m_Angle_curr, f)
-			set_rotation(r)
-
-		if _TestFlags(SF_SCALE):
-			set_scale(m_Scale_prev.linear_interpolate(m_Scale_curr, f))
+	if _TestFlags(SF_SCALE):
+		set_scale(m_Scale_prev.linear_interpolate(m_Scale_curr, f))
 
 	pass
 
 
 func _physics_process(_delta):
-	# take care of the special case where multiple physics ticks
-	# occur before a frame .. the data must flow!
-	if _TestFlags(SF_DIRTY):
-		_RefreshTransform()
-
-	_SetFlags(SF_DIRTY)
-	pass
+	_RefreshTransform()
 
 
 func _LerpAngle(from: float, to: float, weight: float) -> float:

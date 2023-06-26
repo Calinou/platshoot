@@ -31,8 +31,7 @@ const SF_ENABLED = 1 << 0
 const SF_TRANSLATE = 1 << 1
 const SF_BASIS = 1 << 2
 const SF_SLERP = 1 << 3
-const SF_DIRTY = 1 << 4
-const SF_INVISIBLE = 1 << 5
+const SF_INVISIBLE = 1 << 4
 
 export (int, FLAGS, "enabled", "translate", "basis", "slerp") var flags: int = SF_ENABLED | SF_TRANSLATE | SF_BASIS setget _set_flags, _get_flags
 
@@ -71,6 +70,9 @@ func is_enabled():
 func _ready():
 	_m_trCurr = Transform()
 	_m_trPrev = Transform()
+	set_process_priority(100)
+	set_as_toplevel(true)
+	Engine.set_physics_jitter_fix(0.0)
 
 
 func set_target(new_value):
@@ -118,29 +120,21 @@ func _notification(what):
 
 
 func _RefreshTransform():
-	_ClearFlags(SF_DIRTY)
-
 	if _HasTarget() == false:
 		return
 
 	_m_trPrev = _m_trCurr
-	_m_trCurr = _m_Target.transform
-
-
-func _IsTargetParent(node):
-	if node == _m_Target:
-		return true  # disallow
-
-	var parent = node.get_parent()
-	if parent:
-		return _IsTargetParent(parent)
-
-	return false
-
+	_m_trCurr = _m_Target.global_transform
 
 func _FindTarget():
 	_m_Target = null
+	
+	# If no target has been assigned in the property,
+	# default to using the parent as the target.
 	if target.is_empty():
+		var parent = get_parent_spatial()
+		if parent:
+			_m_Target = parent
 		return
 
 	var targ = get_node(target)
@@ -158,11 +152,10 @@ func _FindTarget():
 	_m_Target = targ
 
 	# do a final check
-	# is the target a parent or grandparent of the smoothing node?
-	# if so, disallow
-	if _IsTargetParent(self):
+	# certain targets are disallowed
+	if _m_Target == self:
 		var msg = _m_Target.get_name() + " assigned to " + self.get_name() + "]"
-		printerr("ERROR SmoothingNode : Target should not be a parent or grandparent [", msg)
+		printerr("ERROR SmoothingNode : Target should not be self [", msg)
 
 		# error message
 		#OS.alert("Target cannot be a parent or grandparent in the scene tree.", "SmoothingNode")
@@ -184,11 +177,8 @@ func _HasTarget() -> bool:
 
 
 func _process(_delta):
-	if _TestFlags(SF_DIRTY):
-		_RefreshTransform()
 
 	var f = Engine.get_physics_interpolation_fraction()
-
 	var tr: Transform = Transform()
 
 	# translate
@@ -205,17 +195,9 @@ func _process(_delta):
 
 	transform = tr
 
-	pass
-
 
 func _physics_process(_delta):
-	# take care of the special case where multiple physics ticks
-	# occur before a frame .. the data must flow!
-	if _TestFlags(SF_DIRTY):
-		_RefreshTransform()
-
-	_SetFlags(SF_DIRTY)
-	pass
+	_RefreshTransform()
 
 
 func _LerpBasis(from: Basis, to: Basis, f: float) -> Basis:
