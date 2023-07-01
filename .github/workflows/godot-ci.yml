@@ -23,7 +23,7 @@ jobs:
           mkdir -p dist/
           godot -v --export "Windows Desktop" "dist/$EXPORT_NAME.exe"
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: ${{ env.EXPORT_NAME }}-windows
           path: dist
@@ -45,7 +45,7 @@ jobs:
           mkdir -p dist/
           godot -v --export "Mac OSX" "dist/$EXPORT_NAME.zip"
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: ${{ env.EXPORT_NAME }}-macos
           path: dist
@@ -67,7 +67,7 @@ jobs:
           mkdir -p dist/
           godot -v --export "Linux/X11" "dist/$EXPORT_NAME.x86_64"
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: ${{ env.EXPORT_NAME }}-linux-desktop
           path: dist
@@ -92,7 +92,7 @@ jobs:
           unzip /tmp/godot_server.zip
           mv -f "Godot_v$GODOT_VERSION-stable_linux_server.64" "dist/$EXPORT_NAME-server.x86_64"
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: ${{ env.EXPORT_NAME }}-linux-server
           path: dist
@@ -119,7 +119,7 @@ jobs:
           tar xf minify_linux_amd64.tar.gz minify
           ./minify --recursive dist --output .
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3.1.1
+        uses: actions/upload-artifact@v3.1.2
         with:
           name: ${{ env.EXPORT_NAME }}-html5
           path: dist
