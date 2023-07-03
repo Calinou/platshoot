@@ -51,10 +51,10 @@ func _physics_process(delta: float) -> void:
 		return
 	if difference > 0:
 		linear_velocity = Vector2(-MAX_SPEED * delta, linear_velocity.y)
-		$"Smoothing2D/Sprite".flip_h = false
+		$"Sprite".flip_h = false
 	else:
 		linear_velocity = Vector2(MAX_SPEED * delta, linear_velocity.y)
-		$"Smoothing2D/Sprite".flip_h = true
+		$"Sprite".flip_h = true
 
 
 func damage(dmg: int) -> void:

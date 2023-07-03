@@ -111,7 +111,7 @@ func _SetProcessing():
 
 	set_process(bEnable)
 	set_physics_process(bEnable)
-	
+
 	set_as_toplevel(_TestFlags(SF_GLOBAL_OUT))
 
 
@@ -160,7 +160,7 @@ func _RefreshTransform():
 
 func _FindTarget():
 	_m_Target = null
-	
+
 	# If no target has been assigned in the property,
 	# default to using the parent as the target.
 	if target.is_empty():
@@ -203,7 +203,7 @@ func _process(_delta):
 	# We can always use local position rather than set_global_position
 	# because even in global mode we are set_as_top_level, and the result
 	# will be the same.
-	
+
 	# translate
 	if _TestFlags(SF_TRANSLATE):
 		set_position(m_Pos_prev.linear_interpolate(m_Pos_curr, f))

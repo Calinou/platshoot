@@ -1,15 +1,14 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://data/scripts/misc/bullet.gd" type="Script" id=1]
 [ext_resource path="res://data/textures/circle.png" type="Texture" id=2]
 [ext_resource path="res://data/textures/light.png" type="Texture" id=3]
-[ext_resource path="res://addons/smoothing/smoothing_2d.gd" type="Script" id=4]
-
-[sub_resource type="Curve" id=1]
-_data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
 
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 4, 4 )
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
 
 [node name="Bullet" type="Node2D"]
 script = ExtResource( 1 )
@@ -17,27 +16,11 @@ __meta__ = {
 "__editor_plugin_screen__": "2D"
 }
 
-[node name="Smoothing2D" type="Node2D" parent="."]
-script = ExtResource( 4 )
-target = NodePath("../RigidBody2D")
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Smoothing2D"]
-amount = 50
-local_coords = false
-texture = ExtResource( 2 )
-scale_amount = 0.02
-scale_amount_curve = SubResource( 1 )
-
-[node name="Light2D" type="Light2D" parent="Smoothing2D"]
-texture = ExtResource( 3 )
-color = Color( 1, 0.941176, 0.784314, 1 )
-energy = 2.5
-
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 collision_layer = 8
 collision_mask = 5
 gravity_scale = 0.0
-continuous_cd = 2
+continuous_cd = 1
 contacts_reported = 2
 contact_monitor = true
 can_sleep = false
@@ -45,8 +28,21 @@ can_sleep = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource( 2 )
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="RigidBody2D"]
+amount = 50
+local_coords = false
+texture = ExtResource( 2 )
+scale_amount = 0.02
+scale_amount_curve = SubResource( 1 )
+
+[node name="Light2D" type="Light2D" parent="RigidBody2D"]
+texture = ExtResource( 3 )
+color = Color( 1, 0.941176, 0.784314, 1 )
+energy = 2.5
+
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 autostart = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

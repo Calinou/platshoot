@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://data/scripts/actors/grunt.gd" type="Script" id=1]
 [ext_resource path="res://data/textures/grunt.png" type="Texture" id=2]
-[ext_resource path="res://addons/smoothing/smoothing_2d.gd" type="Script" id=3]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -18,7 +17,7 @@ length = 1.5
 loop = true
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("Smoothing2D/Sprite:frame")
+tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -71,12 +70,7 @@ step = 1.0
 value = 1.0
 percent_visible = false
 
-[node name="Smoothing2D" type="Node2D" parent="."]
-script = ExtResource( 3 )
-target = NodePath("..")
-flags = 35
-
-[node name="Sprite" type="Sprite" parent="Smoothing2D"]
+[node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 hframes = 4
 frame = 3
@@ -90,6 +84,7 @@ shape = SubResource( 7 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.01
 one_shot = true
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_enter"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exit"]

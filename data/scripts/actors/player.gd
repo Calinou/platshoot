@@ -4,10 +4,10 @@
 extends Node2D
 
 # Maximum per-frame acceleration when running.
-const ACCELERATION = 3000 * 60
+const ACCELERATION = 3000 * 20
 
 # Jump speed (velocity set when jumping)
-const JUMP_SPEED = 350 * 60
+const JUMP_SPEED = 350 * 20
 
 # Jetpack speed
 const JETPACK_SPEED = 17.5 * 60
@@ -55,7 +55,7 @@ onready var previous_position := player.position
 onready var camera := $Player/Camera2D as Camera2D
 onready var default_zoom := camera.zoom
 onready var crosshair := $Crosshair as Sprite
-onready var player_sprite := $Smoothing2D/Sprite as Sprite
+onready var player_sprite := $Player/Sprite as Sprite
 onready var preloader := $ResourcePreloader as ResourcePreloader
 onready var animation_player := $Player/AnimationPlayer as AnimationPlayer
 onready var crosshair_color_gradient := preloader.get_resource("crosshair_color_gradient") as Gradient
@@ -130,7 +130,7 @@ func _physics_process(delta) -> void:
 
 	# Flip player sprite if the crosshair is at the right of the player (player faces right),
 	# else don't flip it (player faces left).
-	$"Smoothing2D/Sprite".flip_h = crosshair_position.x > player.position.x
+	$"Player/Sprite".flip_h = crosshair_position.x > player.position.x
 
 	$"Player/JetpackParticles".emitting = using_jetpack
 
@@ -165,7 +165,7 @@ func _physics_process(delta) -> void:
 			var movement := Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 			speed += ACCELERATION * movement * delta
 			# Apply Doom-style constant friction.
-			speed *= 0.85
+			speed *= 0.65
 
 			# Set the new velocity.
 			player.linear_velocity = Vector2(speed * delta, velocity.y)
