@@ -90,6 +90,7 @@ shape = SubResource( 7 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.01
 one_shot = true
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_finished"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_enter"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exit"]
