@@ -7,9 +7,9 @@ extends CanvasLayer
 # If `false`, the player is in the in-game menu (pause menu).
 var in_main_menu := true
 
-onready var menus := $Menus as Control
-onready var main := $Menus/Main as Control
-onready var multiplayer_lobby := $Menus/MultiplayerLobby as Control
+@onready var menus := $Menus as Control
+@onready var main := $Menus/Main as Control
+@onready var multiplayer_lobby := $Menus/MultiplayerLobby as Control
 
 
 func _ready() -> void:

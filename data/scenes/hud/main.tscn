@@ -1,91 +1,91 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=16 format=3 uid="uid://cpeburdkjaa7"]
 
-[ext_resource path="res://data/scripts/hud/main.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://data/textures/circle.png" type="Texture" id=3]
-[ext_resource path="res://data/scenes/hud/movement_stick.gd" type="Script" id=4]
-[ext_resource path="res://data/resources/themes/default.tres" type="Theme" id=5]
+[ext_resource type="Script" uid="uid://dye55c3ju66v1" path="res://data/scripts/hud/main.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://ced7f5ki5r70g" path="res://icon.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bniiv06e82x5c" path="res://data/textures/circle.png" id="3"]
+[ext_resource type="Script" uid="uid://cykn0j65gvd6m" path="res://data/scenes/hud/movement_stick.gd" id="4"]
+[ext_resource type="Theme" path="res://data/resources/themes/default.tres" id="5"]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id="1"]
 resource_name = "fade"
 length = 5.0
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("NoticesLabel:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2, 4, 5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.2, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 resource_name = "reset"
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("NoticesLabel:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Color( 1, 1, 1, 1 ) ]
+"values": [Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 1, 0.25098, 0.25098, 0.752941 )
+[sub_resource type="StyleBoxFlat" id="3"]
+bg_color = Color(1, 0.25098, 0.25098, 0.752941)
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 1, 0.25098, 0.25098, 0.25098 )
+[sub_resource type="StyleBoxFlat" id="4"]
+bg_color = Color(1, 0.25098, 0.25098, 0.25098)
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 0.752941, 0.752941, 0.752941, 0.752941 )
+[sub_resource type="StyleBoxFlat" id="5"]
+bg_color = Color(0.752941, 0.752941, 0.752941, 0.752941)
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=6]
-bg_color = Color( 0.752941, 0.752941, 0.752941, 0.25098 )
+[sub_resource type="StyleBoxFlat" id="6"]
+bg_color = Color(0.752941, 0.752941, 0.752941, 0.25098)
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=7]
-bg_color = Color( 1, 1, 0.25098, 0.752941 )
+[sub_resource type="StyleBoxFlat" id="7"]
+bg_color = Color(1, 1, 0.25098, 0.752941)
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 1, 1, 0.25098, 0.25098 )
+[sub_resource type="StyleBoxFlat" id="8"]
+bg_color = Color(1, 1, 0.25098, 0.25098)
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=9]
-bg_color = Color( 0.25098, 0.752941, 1, 0.752941 )
+[sub_resource type="StyleBoxFlat" id="9"]
+bg_color = Color(0.25098, 0.752941, 1, 0.752941)
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=10]
-bg_color = Color( 0.25098, 0.752941, 1, 0.25098 )
+[sub_resource type="StyleBoxFlat" id="10"]
+bg_color = Color(0.25098, 0.752941, 1, 0.25098)
 border_blend = true
 
 [node name="HUD" type="CanvasLayer"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 __meta__ = {
 "__editor_plugin_screen__": "2D"
 }
 
 [node name="Notices" type="Control" parent="."]
-self_modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color(1, 1, 1, 0)
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -640.0
-margin_top = -360.0
-margin_right = 640.0
-margin_bottom = 360.0
-theme = ExtResource( 5 )
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+theme = ExtResource("5")
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -95,55 +95,55 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -640.0
-margin_top = -160.0
-margin_right = 640.0
-margin_bottom = 160.0
+offset_left = -640.0
+offset_top = -160.0
+offset_right = 640.0
+offset_bottom = 160.0
 bbcode_enabled = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Notices"]
-anims/fade = SubResource( 1 )
-anims/reset = SubResource( 2 )
+anims/fade = SubResource("1")
+anims/reset = SubResource("2")
 
 [node name="FPS" type="Control" parent="."]
-self_modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color(1, 1, 1, 0)
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -640.0
-margin_top = -360.0
-margin_right = 640.0
-margin_bottom = 360.0
-theme = ExtResource( 5 )
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+theme = ExtResource("5")
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="FPSLabel" type="Label" parent="FPS"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 69.0
-margin_bottom = 45.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 69.0
+offset_bottom = 45.0
 mouse_filter = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Stats" type="Control" parent="."]
-self_modulate = Color( 1, 1, 1, 0 )
+self_modulate = Color(1, 1, 1, 0)
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -640.0
-margin_top = -360.0
-margin_right = 640.0
-margin_bottom = 360.0
-theme = ExtResource( 5 )
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+theme = ExtResource("5")
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -151,10 +151,10 @@ __meta__ = {
 [node name="StatsLabel" type="RichTextLabel" parent="Stats"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -240.0
-margin_top = 16.0
-margin_right = -16.0
-margin_bottom = 320.0
+offset_left = -240.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = 320.0
 mouse_filter = 1
 bbcode_enabled = true
 
@@ -163,138 +163,139 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -640.0
-margin_top = -360.0
-margin_right = 640.0
-margin_bottom = 360.0
-theme = ExtResource( 5 )
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+theme = ExtResource("5")
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HealthLabel" type="Label" parent="Control"]
-margin_left = 64.0
-margin_top = 640.0
-margin_right = 174.0
-margin_bottom = 669.0
+offset_left = 64.0
+offset_top = 640.0
+offset_right = 174.0
+offset_bottom = 669.0
 mouse_filter = 1
 text = "Health"
 align = 2
 valign = 1
 
 [node name="ArmorLabel" type="Label" parent="Control"]
-margin_left = 64.0
-margin_top = 672.0
-margin_right = 174.0
-margin_bottom = 701.0
+offset_left = 64.0
+offset_top = 672.0
+offset_right = 174.0
+offset_bottom = 701.0
 mouse_filter = 1
 text = "Armor"
 align = 2
 valign = 1
 
 [node name="AmmoLabel" type="Label" parent="Control"]
-margin_left = 704.0
-margin_top = 672.0
-margin_right = 1102.0
-margin_bottom = 701.0
+offset_left = 704.0
+offset_top = 672.0
+offset_right = 1102.0
+offset_bottom = 701.0
 mouse_filter = 1
 text = "Ammo"
 align = 2
 valign = 1
 
 [node name="FuelLabel" type="Label" parent="Control"]
-margin_left = 704.0
-margin_top = 640.0
-margin_right = 1102.0
-margin_bottom = 669.0
+offset_left = 704.0
+offset_top = 640.0
+offset_right = 1102.0
+offset_bottom = 669.0
 mouse_filter = 1
 text = "Fuel"
 align = 2
 valign = 1
 
 [node name="HealthProgressBar" type="ProgressBar" parent="Control"]
-margin_left = 194.0
-margin_top = 640.0
-margin_right = 334.0
-margin_bottom = 669.0
-custom_styles/fg = SubResource( 3 )
-custom_styles/bg = SubResource( 4 )
+offset_left = 194.0
+offset_top = 640.0
+offset_right = 334.0
+offset_bottom = 669.0
+theme_override_styles/fg = SubResource("3")
+theme_override_styles/bg = SubResource("4")
 step = 0.0
 value = 1.0
 
 [node name="ArmorProgressBar" type="ProgressBar" parent="Control"]
-margin_left = 194.0
-margin_top = 672.0
-margin_right = 334.0
-margin_bottom = 701.0
-custom_styles/fg = SubResource( 5 )
-custom_styles/bg = SubResource( 6 )
+offset_left = 194.0
+offset_top = 672.0
+offset_right = 334.0
+offset_bottom = 701.0
+theme_override_styles/fg = SubResource("5")
+theme_override_styles/bg = SubResource("6")
 step = 0.0
 value = 1.0
 
 [node name="AmmoProgressBar" type="ProgressBar" parent="Control"]
-margin_left = 1122.0
-margin_top = 672.0
-margin_right = 1262.0
-margin_bottom = 701.0
-custom_styles/fg = SubResource( 7 )
-custom_styles/bg = SubResource( 8 )
+offset_left = 1122.0
+offset_top = 672.0
+offset_right = 1262.0
+offset_bottom = 701.0
+theme_override_styles/fg = SubResource("7")
+theme_override_styles/bg = SubResource("8")
 step = 0.0
 value = 1.0
 
 [node name="FuelProgressBar" type="ProgressBar" parent="Control"]
-margin_left = 1122.0
-margin_top = 640.0
-margin_right = 1262.0
-margin_bottom = 669.0
-custom_styles/fg = SubResource( 9 )
-custom_styles/bg = SubResource( 10 )
+offset_left = 1122.0
+offset_top = 640.0
+offset_right = 1262.0
+offset_bottom = 669.0
+theme_override_styles/fg = SubResource("9")
+theme_override_styles/bg = SubResource("10")
 step = 0.0
 value = 1.0
 
 [node name="TouchScreenButtons" type="Control" parent="."]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 1.0
-margin_right = 1.0
-theme = ExtResource( 5 )
+offset_left = 1.0
+offset_right = 1.0
+theme = ExtResource("5")
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MoveUp" type="TouchScreenButton" parent="TouchScreenButtons"]
-position = Vector2( 144, -192 )
-normal = ExtResource( 2 )
+position = Vector2(144, -192)
+normal = ExtResource("2")
 action = "move_up"
 visibility_mode = 1
 
 [node name="MovementStickBackground" type="TextureRect" parent="TouchScreenButtons"]
-self_modulate = Color( 0, 0, 0, 0.25098 )
+self_modulate = Color(0, 0, 0, 0.25098)
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_left = 48.0
-margin_top = -128.0
-margin_right = 304.0
-margin_bottom = 128.0
-texture = ExtResource( 3 )
-script = ExtResource( 4 )
+offset_left = 48.0
+offset_top = -128.0
+offset_right = 304.0
+offset_bottom = 128.0
+texture = ExtResource("3")
+script = ExtResource("4")
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MovementStick" type="TextureRect" parent="TouchScreenButtons/MovementStickBackground"]
-self_modulate = Color( 1, 1, 1, 0.752941 )
+self_modulate = Color(1, 1, 1, 0.752941)
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -32.0
-margin_top = -32.0
-margin_right = 224.0
-margin_bottom = 224.0
-rect_scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 224.0
+offset_bottom = 224.0
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3")
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="gui_input" from="TouchScreenButtons/MovementStickBackground/MovementStick" to="TouchScreenButtons/MovementStickBackground/MovementStick" method="_gui_input"]

@@ -1,49 +1,54 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=3 uid="uid://dm3urogedfkbi"]
 
-[ext_resource path="res://data/scripts/misc/bullet.gd" type="Script" id=1]
-[ext_resource path="res://data/textures/circle.png" type="Texture" id=2]
-[ext_resource path="res://data/textures/light.png" type="Texture" id=3]
-[ext_resource path="res://addons/smoothing/smoothing_2d.gd" type="Script" id=4]
+[ext_resource type="Script" uid="uid://jnt8rqqw6j23" path="res://data/scripts/misc/bullet.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bniiv06e82x5c" path="res://data/textures/circle.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bvgw32oh3ufcy" path="res://data/textures/light.png" id="3"]
 
-[sub_resource type="Curve" id=1]
-_data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
+[sub_resource type="Curve" id="1"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 4, 4 )
+[sub_resource type="CurveTexture" id="CurveTexture_o5ah3"]
+curve = SubResource("1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_dcnj1"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 980, 0)
+scale_min = 0.02
+scale_max = 0.02
+scale_curve = SubResource("CurveTexture_o5ah3")
+
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(8, 8)
 
 [node name="Bullet" type="Node2D"]
-script = ExtResource( 1 )
-__meta__ = {
-"__editor_plugin_screen__": "2D"
-}
+script = ExtResource("1")
 
-[node name="Smoothing2D" type="Node2D" parent="."]
-script = ExtResource( 4 )
-target = NodePath("../RigidBody2D")
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Smoothing2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+texture_filter = 4
 amount = 50
-local_coords = false
-texture = ExtResource( 2 )
-scale_amount = 0.02
-scale_amount_curve = SubResource( 1 )
+texture = ExtResource("2")
+fixed_fps = 0
+interpolate = false
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_dcnj1")
 
-[node name="Light2D" type="Light2D" parent="Smoothing2D"]
-texture = ExtResource( 3 )
-color = Color( 1, 0.941176, 0.784314, 1 )
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(1, 0.941176, 0.784314, 1)
 energy = 2.5
+texture = ExtResource("3")
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 collision_layer = 8
 collision_mask = 5
 gravity_scale = 0.0
-continuous_cd = 2
-contacts_reported = 2
-contact_monitor = true
 can_sleep = false
+continuous_cd = 2
+contact_monitor = true
+max_contacts_reported = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-shape = SubResource( 2 )
+shape = SubResource("2")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0

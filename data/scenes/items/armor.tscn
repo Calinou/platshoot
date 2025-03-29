@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=4 format=3 uid="uid://cflld4dgixsap"]
 
-[ext_resource path="res://data/scenes/items/ammo.tscn" type="PackedScene" id=1]
-[ext_resource path="res://data/scripts/items/armor.gd" type="Script" id=2]
-[ext_resource path="res://data/textures/items/armor.png" type="Texture" id=3]
+[ext_resource type="PackedScene" uid="uid://cupxspshvhjsx" path="res://data/scenes/items/ammo.tscn" id="1"]
+[ext_resource type="Script" uid="uid://cgem08285rcry" path="res://data/scripts/items/armor.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://cjtj6akowie3w" path="res://data/textures/items/armor.png" id="3"]
 
-[node name="Ammo" instance=ExtResource( 1 )]
-script = ExtResource( 2 )
+[node name="Ammo" instance=ExtResource("1")]
+script = ExtResource("2")
 
-[node name="Sprite" parent="." index="0"]
-texture = ExtResource( 3 )
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("3")

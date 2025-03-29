@@ -1,69 +1,96 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=3 uid="uid://cupxspshvhjsx"]
 
-[ext_resource path="res://data/scripts/items/ammo.gd" type="Script" id=1]
-[ext_resource path="res://data/textures/items/ammo.png" type="Texture" id=2]
-[ext_resource path="res://data/textures/white.png" type="Texture" id=4]
+[ext_resource type="Script" uid="uid://bor8hqiqfgs45" path="res://data/scripts/items/ammo.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dlfek3xj2g6ly" path="res://data/textures/items/ammo.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bniiv06e82x5c" path="res://data/textures/circle.png" id="2_f7nr0"]
 
-[sub_resource type="CircleShape2D" id=1]
+[sub_resource type="Curve" id="Curve_f7nr0"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ltsu3"]
+curve = SubResource("Curve_f7nr0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h16hg"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(4, 0, 4)
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 25.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 98, 0)
+scale_min = 0.02
+scale_max = 0.02
+scale_curve = SubResource("CurveTexture_ltsu3")
+color = Color(1, 1, 0.698039, 0.12549)
+
+[sub_resource type="CircleShape2D" id="1"]
 radius = 16.0
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 resource_name = "Pickup"
 length = 3.0
 step = 0.01
 tracks/0/type = "value"
-tracks/0/path = NodePath("Sprite:modulate:a")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [ 1.0, 0.0 ]
+"values": [1.0, 0.0]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Particles2D:emitting")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.05, 0.1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ false, true, false ]
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t6h5c"]
+_data = {
+&"Pickup": SubResource("2")
 }
 
 [node name="Ammo" type="Node2D"]
-script = ExtResource( 1 )
-__meta__ = {
-"__editor_plugin_screen__": "2D"
-}
+script = ExtResource("1")
 
-[node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
-offset = Vector2( 0, 22 )
-
-[node name="SamplePlayer2D" type="AudioStreamPlayer2D" parent="."]
-
-[node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( 0, 16 )
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, 24)
 amount = 64
+texture = ExtResource("2_f7nr0")
 lifetime = 0.5
 preprocess = 0.5
-local_coords = false
-texture = ExtResource( 4 )
+fixed_fps = 0
+interpolate = false
+process_material = SubResource("ParticleProcessMaterial_h16hg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2")
+offset = Vector2(0, 22)
+
+[node name="SamplePlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [node name="Area2D" type="Area2D" parent="."]
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( 0, 16 )
-shape = SubResource( 1 )
+position = Vector2(0, 16)
+shape = SubResource("1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/Pickup = SubResource( 2 )
+libraries = {
+&"": SubResource("AnimationLibrary_t6h5c")
+}
+
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_enter"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_finished"]

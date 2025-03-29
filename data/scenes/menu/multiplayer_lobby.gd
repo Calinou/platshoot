@@ -26,11 +26,13 @@ var player_count := 1
 
 # If `true`, dedicated server mode is enabled. Any client can start the game, and the host won't be a player.
 # If `false`, "listen" server mode is used instead. Only the host can start the game, and the host will be a player.
-remote var dedicated := false
+# TODO: How to replace `remote` in 4.x?
+# remote
+var dedicated := false
 
-onready var player_count_label := $VBoxContainer/PlayerCount as Label
-onready var server_name_label := $VBoxContainer/ServerName as Label
-onready var start_button := $VBoxContainer/StartGame as Button
+@onready var player_count_label := $VBoxContainer/PlayerCount as Label
+@onready var server_name_label := $VBoxContainer/ServerName as Label
+@onready var start_button := $VBoxContainer/StartGame as Button
 
 
 func start_server(start_immediately = false) -> void:
@@ -45,15 +47,14 @@ func start_server(start_immediately = false) -> void:
 		else:
 			print('Starting "listen" server...')
 
-	var peer := NetworkedMultiplayerENet.new()
-	peer.compression_mode = NetworkedMultiplayerENet.COMPRESS_ZSTD
-	peer.create_server(PORT, 16)
+	var peer := ENetMultiplayerPeer.new()
+	peer.create_server(PORT)
 	server_name_label.text = tr("Hosting a server")
-	server_name_label.add_color_override("font_color", Color(0.6, 0.9, 1))
+	server_name_label.add_theme_color_override("font_color", Color(0.6, 0.9, 1))
 	# Restore previous start button state if we were joining a server beforehand.
 	start_button.disabled = false
 	start_button.text = "Start Game"
-	get_tree().network_peer = peer
+	get_tree().get_multiplayer().multiplayer_peer = peer
 
 
 	if start_immediately:
@@ -67,12 +68,11 @@ func join_server(p_server_address: String) -> void:
 
 	server_address = p_server_address
 	print("Connecting to server: %s..." % server_address)
-	var peer := NetworkedMultiplayerENet.new()
-	peer.compression_mode = NetworkedMultiplayerENet.COMPRESS_ZSTD
+	var peer := ENetMultiplayerPeer.new()
 	peer.create_client(server_address, PORT)
 	server_name_label.text = tr("Connected to: %s") % server_address
-	server_name_label.add_color_override("font_color", Color(1, 0.9, 0.6))
-	get_tree().network_peer = peer
+	server_name_label.add_theme_color_override("font_color", Color(1, 0.9, 0.6))
+	get_tree().get_multiplayer().multiplayer_peer = peer
 	start_button.disabled = true
 	start_button.text = "Wait for host to start"
 
@@ -80,11 +80,11 @@ func join_server(p_server_address: String) -> void:
 func _ready() -> void:
 	player_count_label.text = tr("%d players") % player_count
 
-	get_tree().connect("network_peer_connected", self, "_player_connected")
-	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
-	get_tree().connect("connected_to_server", self, "_connected_ok")
-	get_tree().connect("connection_failed", self, "_connected_fail")
-	get_tree().connect("server_disconnected", self, "_server_disconnected")
+	get_tree().get_multiplayer().peer_connected.connect(_player_connected)
+	get_tree().get_multiplayer().peer_disconnected.connect(_player_disconnected)
+	get_tree().get_multiplayer().connected_to_server.connect(_connected_ok)
+	get_tree().get_multiplayer().connection_failed.connect(_connected_fail)
+	get_tree().get_multiplayer().server_disconnected.connect(_server_disconnected)
 
 
 func _player_connected(player_id: int) -> void:
@@ -92,7 +92,8 @@ func _player_connected(player_id: int) -> void:
 	if dedicated:
 		# Inform clients that we are a dedicated server, so they don't add us
 		# as a player when starting the game.
-		rset("dedicated", true)
+		#rset("dedicated", true)
+		dedicated = true
 
 	rpc_id(player_id, "register_player", my_info)
 
@@ -114,8 +115,8 @@ func _connected_fail() -> void:
 	push_error("Couldn't connect to the server: %s" % server_address)
 
 
-remote func register_player(info: Dictionary) -> void:
-	var id := get_tree().get_rpc_sender_id()
+@rpc("any_peer") func register_player(info: Dictionary) -> void:
+	var id := get_tree().get_multiplayer().get_remote_sender_id()
 	player_info[id] = info
 
 	# Update the lobby UI here.
@@ -123,7 +124,7 @@ remote func register_player(info: Dictionary) -> void:
 	player_count_label.text = tr("%d players") % player_count
 
 
-remote func pre_configure_game() -> void:
+@rpc("any_peer") func pre_configure_game() -> void:
 	# Setting up players might take different amounts of time for every peer
 	# due to lag, different hardware, or other reasons. To make sure the game
 	# will actually start when everyone is ready, pause the game until
@@ -131,38 +132,38 @@ remote func pre_configure_game() -> void:
 	get_tree().paused = true
 
 	# Load world. The world scene's root node name must be "Level".
-	var world = load("res://data/scenes/levels/1.tscn").instance()
+	var world = load("res://data/scenes/levels/1.tscn").instantiate()
 	$"/root".add_child(world)
 
-	if not (dedicated and get_tree().get_network_unique_id() == NetworkedMultiplayerPeer.TARGET_PEER_SERVER):
+	if not (dedicated and get_tree().get_unique_id() == MultiplayerPeer.TARGET_PEER_SERVER):
 		# Load my player.
-		var my_player := preload("res://data/scenes/actors/player.tscn").instance()
-		my_player.name = str(get_tree().get_network_unique_id())
-		my_player.set_network_master(get_tree().get_network_unique_id())
+		var my_player := preload("res://data/scenes/actors/player.tscn").instantiate()
+		my_player.name = str(get_tree().get_multiplayer().get_unique_id())
+		my_player.set_multiplayer_authority(get_tree().get_multiplayer().get_unique_id())
 		$"/root/Level/Players".add_child(my_player)
 
 	# Load other players.
 	for other_player in player_info:
-		if dedicated and other_player == NetworkedMultiplayerPeer.TARGET_PEER_SERVER:
+		if dedicated and other_player == MultiplayerPeer.TARGET_PEER_SERVER:
 			# Don't add a player for the server.
 			continue
 
-		var player := preload("res://data/scenes/actors/player.tscn").instance()
+		var player := preload("res://data/scenes/actors/player.tscn").instantiate()
 		player.name = str(other_player)
-		player.set_network_master(other_player)
+		player.set_multiplayer_authority(other_player)
 		$"/root/Level/Players".add_child(player)
 
 	# Tell server that this peer is done pre-configuring.
-	# The server can call `get_tree().get_rpc_sender_id()` to find out who said they were done.
-	if not get_tree().is_network_server():
-		rpc_id(NetworkedMultiplayerPeer.TARGET_PEER_SERVER, "done_preconfiguring")
+	# The server can call `get_tree().get_multiplayer().get_rpc_sender_id()` to find out who said they were done.
+	if not get_tree().get_multiplayer().is_server():
+		rpc_id(MultiplayerPeer.TARGET_PEER_SERVER, "done_preconfiguring")
 	else:
 		post_configure_game()
 
 
-remote func done_preconfiguring() -> void:
-	var who := get_tree().get_rpc_sender_id()
-	assert(get_tree().is_network_server())
+@rpc("any_peer") func done_preconfiguring() -> void:
+	var who := get_tree().get_multiplayer().get_remote_sender_id()
+	assert(get_tree().is_server())
 	assert(who in player_info)
 	assert(not who in players_done)
 
@@ -175,11 +176,11 @@ remote func done_preconfiguring() -> void:
 	emit_signal("game_started")
 
 
-remote func post_configure_game() -> void:
+@rpc("any_peer") func post_configure_game() -> void:
 	# Only the server is allowed to tell a client to unpause.
 	if (
-			get_tree().is_network_server()
-			or get_tree().get_rpc_sender_id() == NetworkedMultiplayerPeer.TARGET_PEER_SERVER
+			get_tree().get_multiplayer().is_server()
+			or get_tree().get_multiplayer().get_remote_sender_id() == MultiplayerPeer.TARGET_PEER_SERVER
 	):
 		get_tree().paused = false
 		emit_signal("game_started")

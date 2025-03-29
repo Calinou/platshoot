@@ -7,7 +7,7 @@ signal join_game_pressed(server_address)
 signal host_game_pressed
 signal back_pressed
 
-onready var server_address := $VBoxContainer/HBoxContainer/ServerAddress as LineEdit
+@onready var server_address := $VBoxContainer/HBoxContainer/ServerAddress as LineEdit
 
 
 func _ready() -> void:

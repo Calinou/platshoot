@@ -24,9 +24,6 @@ const BULLET_SPREAD = 8
 # Time in seconds between each bullet fire
 const BULLET_REFIRE = 0.4
 
-# Delay after dying required to wait before being allowed to respawn
-const RESPAWN_DELAY = 2.5
-
 # The speed at which higher falling speeds will deal damage to the player
 const FALL_DAMAGE_THRESHOLD = 700
 
@@ -35,10 +32,15 @@ const FALL_DAMAGE_FACTOR = 6
 
 const BULLET_SCENE := preload("res://data/scenes/misc/bullet.tscn")
 
-remotesync var player_position := Vector2.ZERO
-remotesync var player_linear_velocity := Vector2.ZERO
-remotesync var using_jetpack := false
-remotesync var crosshair_position := Vector2.ZERO
+# TODO: How to replace `remotesync` in 4.x?
+# remotesync
+var player_position := Vector2.ZERO
+# remotesync
+var player_linear_velocity := Vector2.ZERO
+# remotesync
+var using_jetpack := false
+# remotesync
+var crosshair_position := Vector2.ZERO
 
 # Using a timer for double-tap shooting fixes issues related to "lingering" input
 # while allowing full-auto shooting. I don't know why.
@@ -49,30 +51,30 @@ var speed := 0.0
 var offset := Vector2(0, 0)
 var relative_mouse_pos := Vector2(0, 0)
 
-onready var player := $Player as RigidBody2D
+@onready var player := $Player as RigidBody2D
 # For tracking distance in statistics.
-onready var previous_position := player.position
-onready var camera := $Player/Camera2D as Camera2D
-onready var default_zoom := camera.zoom
-onready var crosshair := $Crosshair as Sprite
-onready var player_sprite := $Smoothing2D/Sprite as Sprite
-onready var preloader := $ResourcePreloader as ResourcePreloader
-onready var animation_player := $Player/AnimationPlayer as AnimationPlayer
-onready var crosshair_color_gradient := preloader.get_resource("crosshair_color_gradient") as Gradient
-onready var sprite_base_offset := player_sprite.position.y
+@onready var previous_position := player.position
+@onready var camera := $Player/Camera2D as Camera2D
+@onready var default_zoom := camera.zoom
+@onready var crosshair := $Crosshair as Sprite2D
+@onready var player_sprite := $Player/Sprite2D as Sprite2D
+@onready var preloader := $ResourcePreloader as ResourcePreloader
+@onready var animation_player := $Player/AnimationPlayer as AnimationPlayer
+@onready var crosshair_color_gradient := preloader.get_resource("crosshair_color_gradient") as Gradient
+@onready var sprite_base_offset := player_sprite.position.y
 
 
 func _ready() -> void:
-	set_process_input(is_network_master())
+	set_process_input(is_multiplayer_authority())
 	player_position = player.position
 
 	# Make our camera active, but not other players'.
-	if is_network_master():
+	if is_multiplayer_authority():
 		camera.make_current()
 
-	crosshair.visible = is_network_master()
+	crosshair.visible = is_multiplayer_authority()
 
-	if not is_network_master():
+	if not is_multiplayer_authority():
 		# Distinguish other players to avoid confusing them with our player.
 		player_sprite.modulate = Color(0.8, 1.2, 1.4)
 
@@ -93,12 +95,12 @@ func _ready() -> void:
 
 func _notification(what: int) -> void:
 	match what:
-		NOTIFICATION_WM_FOCUS_IN:
-			call_deferred("hide_hardware_mouse_cursor")
+		NOTIFICATION_APPLICATION_FOCUS_IN:
+			hide_hardware_mouse_cursor.call_deferred()
 
 
 func hide_hardware_mouse_cursor() -> void:
-	if not is_network_master():
+	if not is_multiplayer_authority():
 		return
 
 	# Revert back to the default cursor. This is required; otherwise, the cursor will only change once.
@@ -109,32 +111,32 @@ func hide_hardware_mouse_cursor() -> void:
 
 
 func _process(delta) -> void:
-	if is_network_master():
+	if is_multiplayer_authority():
 		double_tap_shoot_timer += delta
 		# Mouse position/offset computations (for gun and crosshair)
-		offset = -get_viewport().get_canvas_transform().origin * $"Player/Camera2D".zoom  # Get the offset
-		relative_mouse_pos = get_viewport().get_mouse_position() * $"Player/Camera2D".zoom + offset  # And add it to the mouse position
+		offset = -get_viewport().get_canvas_transform().origin / $"Player/Camera2D".zoom  # Get the offset
+		relative_mouse_pos = get_viewport().get_mouse_position() / $"Player/Camera2D".zoom + offset  # And add it to the mouse position
 		$"Player/Gun".look_at(relative_mouse_pos)
 		# Move crosshair at mouse position
 		crosshair.position = relative_mouse_pos
 
 	# Add bobbing to the player sprite when moving and not airborne.
 	if is_touching_ground():
-		player_sprite.position.y = sprite_base_offset - abs(sin(OS.get_ticks_msec() * 0.01) * player_linear_velocity.x * 0.024)
+		player_sprite.position.y = sprite_base_offset - abs(sin(Time.get_ticks_msec() * 0.01) * player_linear_velocity.x * 0.024)
 
 
 func _physics_process(delta) -> void:
 	if animation_player.current_animation == "walk":
 		# Don't change the animation speed if currently displaying a shoot or pain animation.
-		animation_player.playback_speed = min(abs(player_linear_velocity.x) * 0.009, 2.1)
+		animation_player.speed_scale = minf(absf(player_linear_velocity.x) * 0.009, 2.1)
 
 	# Flip player sprite if the crosshair is at the right of the player (player faces right),
 	# else don't flip it (player faces left).
-	$"Smoothing2D/Sprite".flip_h = crosshair_position.x > player.position.x
+	player_sprite.flip_h = crosshair_position.x > player.position.x
 
 	$"Player/JetpackParticles".emitting = using_jetpack
 
-	if is_network_master():
+	if is_multiplayer_authority():
 		Statistics.distance_travelled += int(abs(player.position.x - previous_position.x))
 		# Move the camera to partially follow the crosshair.
 		# This helps the player get a better view on their surroundings.
@@ -150,7 +152,7 @@ func _physics_process(delta) -> void:
 		# This helps the player see their status immediately without having to look at the HUD
 		# every so often.
 		if Game.health > 0:
-			$Crosshair.modulate = crosshair_color_gradient.interpolate(Game.health / 100.0)
+			$Crosshair.modulate = crosshair_color_gradient.sample(Game.health / 100.0)
 		else:
 			$Crosshair.visible = false
 		$"Crosshair/ProgressBar".value = Game.ammo
@@ -187,26 +189,29 @@ func _physics_process(delta) -> void:
 				else:
 					player.linear_velocity = Vector2(JETPACK_BONUS * speed * delta, velocity.y - JETPACK_SPEED * delta)
 					Game.fuel = max(0, Game.fuel - 50 * delta)
-					rset("using_jetpack", true)
+					#rset("using_jetpack", true)
+					using_jetpack = true
 
 			# Fuel regeneration.
 			if not Input.is_action_pressed("jetpack"):
 				Game.fuel = min(100, Game.fuel + 6 * delta)
-				rset("using_jetpack", false)
+				#rset("using_jetpack", false)
+				using_jetpack = false
 
 			# Disable jetpack particles if having no fuel (even when pressing the key).
 			if Game.fuel <= 1:
-				rset("using_jetpack", false)
+				#rset("using_jetpack", false)
+				using_jetpack = false
 
 			# Firing weapons.
 			if Input.is_action_pressed("attack") and Game.ammo >= 1 and is_zero_approx($BulletTimer.time_left):
 				var bullet_position: Vector2 = $"Player/Gun".global_position
-				var bullet_velocity := Vector2(BULLET_SPEED, 0).rotated(get_node("Player/Gun").rotation - deg2rad(BULLET_SPREAD / 2.0 + randf() * BULLET_SPREAD))
+				var bullet_velocity := Vector2(BULLET_SPEED, 0).rotated(get_node("Player/Gun").rotation - deg_to_rad(BULLET_SPREAD / 2.0 + randf() * BULLET_SPREAD))
 				rpc("fire_bullet", bullet_position, bullet_velocity)
 				Statistics.bullets_fired += 1
 
 			elif Input.is_action_pressed("attack") and is_zero_approx($"BulletTimer".time_left):
-				Sound.play(Sound.Type.NON_POSITIONAL, self, preload("res://data/sounds/no_ammo.wav"), -12, rand_range(0.95, 1.05))
+				Sound.play(Sound.Type.NON_POSITIONAL, self, preload("res://data/sounds/no_ammo.wav"), -12, randf_range(0.95, 1.05))
 				if Game.weapon == Game.WEAPON_PISTOL:
 					$BulletTimer.wait_time = BULLET_REFIRE
 				elif Game.weapon == Game.WEAPON_CHAINGUN:
@@ -221,23 +226,26 @@ func _physics_process(delta) -> void:
 
 			# Synchronize my player's position and velocity to other players.
 			# The velocity is used for animating other players.
-			rset_unreliable("player_position", player.position)
-			rset_unreliable("player_linear_velocity", player.linear_velocity)
+			#rset_unreliable("player_position", player.position)
+			player_position = player.position
+			#rset_unreliable("player_linear_velocity", player.linear_velocity)
+			player_linear_velocity = player.linear_velocity
 			# Synchronize crosshair postion so that player sprite flipping can also be synchronized.
-			rset("crosshair_position", crosshair.position)
+			#rset("crosshair_position", crosshair.position)
+			crosshair_position = crosshair.position
 
 			previous_position = player.position
 	else:
 		player.position = player_position
 		crosshair.position = crosshair_position
 
-remotesync func fire_bullet(bullet_position: Vector2, bullet_velocity: Vector2) -> void:
-	var remote_animation_player := get_node("/root/Level/Players/%d/Player/AnimationPlayer" % get_tree().get_rpc_sender_id())
+@rpc("any_peer", "call_local") func fire_bullet(bullet_position: Vector2, bullet_velocity: Vector2) -> void:
+	var remote_animation_player := get_node("/root/Level/Players/%d/Player/AnimationPlayer" % get_tree().get_multiplayer().get_remote_sender_id())
 	remote_animation_player.play("shoot")
-	remote_animation_player.playback_speed = 1
+	remote_animation_player.speed_scale = 1
 
 	# Bullet will be owned by the server.
-	var bullet := BULLET_SCENE.instance()
+	var bullet := BULLET_SCENE.instantiate()
 	bullet.position = bullet_position
 	add_child(bullet)
 	bullet.get_node("RigidBody2D").linear_velocity = bullet_velocity
@@ -245,14 +253,14 @@ remotesync func fire_bullet(bullet_position: Vector2, bullet_velocity: Vector2) 
 	# Play the sound positionally only when it's our client firing.
 	# This prevents the sound from being located in only one of the player's ears.
 	Sound.play(
-			Sound.Type.NON_POSITIONAL if is_network_master() else Sound.Type.POSITIONAL_2D,
+			Sound.Type.NON_POSITIONAL if is_multiplayer_authority() else Sound.Type.POSITIONAL_2D,
 			self,
 			preload("res://data/sounds/pistol.wav"),
 			-12,
-			rand_range(0.95, 1.05)
+			randf_range(0.95, 1.05)
 	)
 
-	if is_network_master():
+	if is_multiplayer_authority():
 		Game.ammo -= 1
 		if Game.weapon == Game.WEAPON_PISTOL:
 			$BulletTimer.wait_time = BULLET_REFIRE
@@ -263,13 +271,13 @@ remotesync func fire_bullet(bullet_position: Vector2, bullet_velocity: Vector2) 
 func _input(event) -> void:
 	# Input processing is disabled for non-master players.
 
-	if OS.has_touchscreen_ui_hint() and event is InputEventMouseButton:
+	if DisplayServer.is_touchscreen_available() and event is InputEventMouseButton:
 		# Double-tap to attack.
 		var mb := event as InputEventMouseButton
 		if mb.doubleclick:
 			var action := InputEventAction.new()
 			action.action = "attack"
-			action.pressed = true
+			action.button_pressed = true
 			Input.parse_input_event(action)
 			double_tap_shoot_timer = 0.0
 
@@ -281,9 +289,9 @@ func _input(event) -> void:
 
 	var zoom: float = $"Player/Camera2D".zoom.x
 	if event.is_action_pressed("zoom_in"):
-		$"Player/Camera2D".zoom = Vector2.ONE * max(0.25, zoom - 0.125)
-	if event.is_action_pressed("zoom_out"):
 		$"Player/Camera2D".zoom = Vector2.ONE * min(2, zoom + 0.125)
+	if event.is_action_pressed("zoom_out"):
+		$"Player/Camera2D".zoom = Vector2.ONE * max(0.25, zoom - 0.125)
 	if event.is_action_pressed("zoom_reset"):
 		$"Player/Camera2D".zoom = Vector2.ONE * default_zoom.x
 
@@ -305,18 +313,18 @@ func is_touching_ground() -> bool:
 	return $"Player/RayCast2D".is_colliding()
 
 
-remotesync func damage(points: int) -> void:
-	var remote_animation_player := get_node("/root/Level/Players/%d/Player/AnimationPlayer" % get_tree().get_rpc_sender_id())
+@rpc("any_peer", "call_local") func damage(points: int) -> void:
+	var remote_animation_player := get_node("/root/Level/Players/%d/Player/AnimationPlayer" % get_tree().get_multiplayer().get_remote_sender_id())
 	remote_animation_player.play("pain")
-	remote_animation_player.playback_speed = 1
+	remote_animation_player.speed_scale = 1
 
-	var positional: int = Sound.Type.NON_POSITIONAL if is_network_master() else Sound.Type.POSITIONAL_2D
+	var positional: int = Sound.Type.NON_POSITIONAL if is_multiplayer_authority() else Sound.Type.POSITIONAL_2D
 	if Game.health <= 0:
 		Sound.play(positional, self, preload("res://data/sounds/player_death.wav"), 0.5, 1.15)
 	else:
-		Sound.play(positional, self, preload("res://data/sounds/player_hurt.wav"), 0, rand_range(0.95, 1.05))
+		Sound.play(positional, self, preload("res://data/sounds/player_hurt.wav"), 0, randf_range(0.95, 1.05))
 
-	if is_network_master():
+	if is_multiplayer_authority():
 		if Game.armor > 0:
 			Game.armor = int(max(0, Game.armor - points / 2.0))
 			Game.health = int(max(0, Game.health - points / 2.0))
@@ -328,16 +336,15 @@ remotesync func damage(points: int) -> void:
 func die() -> void:
 	Game.get_node("HUD").rpc("builtin_notice", Game.get_node("HUD").BuiltinNoticeType.PLAYER_DEATH)
 
-	if is_network_master():
+	if is_multiplayer_authority():
 		Game.status = Game.STATUS_DEAD
-		$RespawnTimer.wait_time = RESPAWN_DELAY
 		$RespawnTimer.start()
 		Statistics.times_died += 1
 
 
 # Called when the player respawns.
 func respawned() -> void:
-	if is_network_master():
+	if is_multiplayer_authority():
 		Game.health = 100.0
 		Game.armor = 0
 		Game.ammo = 25

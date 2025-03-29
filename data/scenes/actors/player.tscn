@@ -1,183 +1,184 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=3 uid="uid://bhihvbhydtgps"]
 
-[ext_resource path="res://data/scripts/actors/player.gd" type="Script" id=1]
-[ext_resource path="res://data/textures/player.png" type="Texture" id=2]
-[ext_resource path="res://icon.png" type="Texture" id=3]
-[ext_resource path="res://data/textures/circle.png" type="Texture" id=4]
-[ext_resource path="res://addons/smoothing/smoothing_2d.gd" type="Script" id=5]
-[ext_resource path="res://data/textures/crosshair.png" type="Texture" id=6]
-[ext_resource path="res://data/scenes/actors/player_crosshair_color_gradient.tres" type="Gradient" id=7]
+[ext_resource type="Script" uid="uid://basd4xsbslfsc" path="res://data/scripts/actors/player.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dppnetsb5onxf" path="res://data/textures/player.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://ced7f5ki5r70g" path="res://icon.png" id="3"]
+[ext_resource type="Texture2D" uid="uid://bniiv06e82x5c" path="res://data/textures/circle.png" id="4"]
+[ext_resource type="Texture2D" uid="uid://dcjkuwems6nbq" path="res://data/textures/crosshair.png" id="6"]
+[ext_resource type="Gradient" path="res://data/scenes/actors/player_crosshair_color_gradient.tres" id="7"]
 
-[sub_resource type="PhysicsMaterial" id=1]
+[sub_resource type="PhysicsMaterial" id="1"]
 friction = 0.0
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id="2"]
 radius = 16.0
-height = 32.0
+height = 64.0
 
-[sub_resource type="Curve" id=3]
-_data = [ Vector2( 0, 1 ), 0.0, -1.0, 0, 1, Vector2( 1, 0 ), -1.0, 0.0, 1, 0 ]
+[sub_resource type="Gradient" id="4"]
+offsets = PackedFloat32Array(0, 0.0397351, 1)
+colors = PackedColorArray(0, 1, 1, 0, 0, 1, 1, 1, 0.03125, 0, 1, 0)
 
-[sub_resource type="Gradient" id=4]
-offsets = PoolRealArray( 0, 0.0397351, 1 )
-colors = PoolColorArray( 0, 1, 1, 0, 0, 1, 1, 1, 0.03125, 0, 1, 0 )
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qcdxd"]
+gradient = SubResource("4")
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Curve" id="3"]
+_data = [Vector2(0, 1), 0.0, -1.0, 0, 1, Vector2(1, 0), -1.0, 0.0, 1, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_njwct"]
+curve = SubResource("3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i5438"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(10, 0, 0)
+gravity = Vector3(0, 980, 0)
+scale_min = 0.02
+scale_max = 0.02
+scale_curve = SubResource("CurveTexture_njwct")
+color_ramp = SubResource("GradientTexture1D_qcdxd")
+
+[sub_resource type="Animation" id="5"]
 resource_name = "pain"
 length = 0.3
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Smoothing2D/Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ 6 ]
+"values": [6]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id="6"]
 resource_name = "shoot"
 length = 0.25
 step = 0.05
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Smoothing2D/Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.15 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ 4, 5 ]
+"values": [4, 5]
 }
 
-[sub_resource type="Animation" id=7]
-loop = true
+[sub_resource type="Animation" id="7"]
+loop_mode = 1
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("../Smoothing2D/Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [0, 1, 2, 3]
 }
 
-[sub_resource type="StyleBoxFlat" id=8]
-bg_color = Color( 1, 1, 1, 0.752941 )
-border_blend = true
-
-[sub_resource type="StyleBoxEmpty" id=9]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qcdxd"]
+_data = {
+&"pain": SubResource("5"),
+&"shoot": SubResource("6"),
+&"walk": SubResource("7")
+}
 
 [node name="Player" type="Node2D"]
 z_index = 2
-script = ExtResource( 1 )
-__meta__ = {
-"__editor_plugin_screen__": "Script"
-}
-
-[node name="Smoothing2D" type="Node2D" parent="."]
-script = ExtResource( 5 )
-target = NodePath("../Player")
-
-[node name="Sprite" type="Sprite" parent="Smoothing2D"]
-position = Vector2( 0, -32 )
-texture = ExtResource( 2 )
-flip_h = true
-hframes = 7
+script = ExtResource("1")
 
 [node name="Player" type="RigidBody2D" parent="."]
 collision_layer = 2
 collision_mask = 7
-mode = 2
-physics_material_override = SubResource( 1 )
+physics_material_override = SubResource("1")
 can_sleep = false
+lock_rotation = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-position = Vector2( 0, -32 )
-shape = SubResource( 2 )
+position = Vector2(0, -32)
+shape = SubResource("2")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2( 0.75, 0.75 )
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = true
-smoothing_speed = 8.0
-drag_margin_left = 0.0
-drag_margin_top = 0.0
-drag_margin_right = 0.0
-drag_margin_bottom = 0.0
+zoom = Vector2(1.5, 1.5)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+drag_left_margin = 0.0
+drag_top_margin = 0.0
+drag_right_margin = 0.0
+drag_bottom_margin = 0.0
 
 [node name="RayCast2D" type="RayCast2D" parent="Player"]
-position = Vector2( 0, 2 )
-enabled = true
-cast_to = Vector2( 0, 5 )
+position = Vector2(0, -2)
+target_position = Vector2(0, 5)
 
-[node name="Gun" type="Sprite" parent="Player"]
-modulate = Color( 1, 1, 1, 0 )
-position = Vector2( 18, -42 )
-scale = Vector2( 0.25, 0.25 )
-texture = ExtResource( 3 )
+[node name="Gun" type="Sprite2D" parent="Player"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(18, -42)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3")
 
 [node name="SamplePlayer2D" type="AudioStreamPlayer2D" parent="Player"]
 
-[node name="JetpackParticles" type="CPUParticles2D" parent="Player"]
+[node name="JetpackParticles" type="GPUParticles2D" parent="Player"]
+texture_filter = 4
 emitting = false
 amount = 64
+texture = ExtResource("4")
 lifetime = 2.0
-local_coords = false
-texture = ExtResource( 4 )
-emission_shape = 2
-emission_rect_extents = Vector2( 10, 1 )
-scale_amount = 0.03
-scale_amount_curve = SubResource( 3 )
-color_ramp = SubResource( 4 )
+fixed_fps = 0
+draw_order = 0
+process_material = SubResource("ParticleProcessMaterial_i5438")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
+libraries = {
+&"": SubResource("AnimationLibrary_qcdxd")
+}
 autoplay = "walk"
-playback_speed = 1.5
-anims/pain = SubResource( 5 )
-anims/shoot = SubResource( 6 )
-anims/walk = SubResource( 7 )
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+position = Vector2(0, -32)
+texture = ExtResource("2")
+flip_h = true
+hframes = 7
+frame = 6
 
 [node name="BulletTimer" type="Timer" parent="."]
-process_mode = 0
-wait_time = 0.01
 one_shot = true
 autostart = true
 
 [node name="RespawnTimer" type="Timer" parent="."]
-wait_time = 0.01
+wait_time = 2.5
 one_shot = true
 
-[node name="Crosshair" type="Sprite" parent="."]
-scale = Vector2( 0.125, 0.125 )
+[node name="Crosshair" type="Sprite2D" parent="."]
 z_index = 4096
-texture = ExtResource( 6 )
+scale = Vector2(0.125, 0.125)
+texture = ExtResource("6")
 
 [node name="ProgressBar" type="ProgressBar" parent="Crosshair"]
-margin_left = -160.0
-margin_top = 160.0
-margin_right = 160.0
-margin_bottom = 173.0
-custom_styles/fg = SubResource( 8 )
-custom_styles/bg = SubResource( 9 )
+offset_left = -160.0
+offset_top = 160.0
+offset_right = 160.0
+offset_bottom = 173.0
 step = 1.0
 value = 1.0
-percent_visible = false
-__meta__ = {
-"_edit_use_anchors_": false
-}
+show_percentage = false
 
 [node name="ResourcePreloader" type="ResourcePreloader" parent="."]
-resources = [ PoolStringArray( "crosshair_color_gradient" ), [ ExtResource( 7 ) ] ]
+resources = [PackedStringArray("crosshair_color_gradient"), [ExtResource("7")]]
 
 [connection signal="animation_finished" from="Player/AnimationPlayer" to="." method="_animation_finished"]

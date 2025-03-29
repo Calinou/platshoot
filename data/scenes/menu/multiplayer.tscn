@@ -1,15 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://cedoa1e4044ow"]
 
-[ext_resource path="res://data/resources/themes/default.tres" type="Theme" id=1]
-[ext_resource path="res://data/scenes/menu/multiplayer.gd" type="Script" id=2]
+[ext_resource type="Theme" path="res://data/resources/themes/default.tres" id="1"]
+[ext_resource type="Script" uid="uid://b0adomlctwdix" path="res://data/scenes/menu/multiplayer.gd" id="2"]
 
-[node name="Multiplayer" type="Control" groups=[
-"menu",
-]]
+[node name="Multiplayer" type="Control" groups=["menu"]]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
+theme = ExtResource("1")
+script = ExtResource("2")
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -19,70 +17,71 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -125.0
-margin_top = -144.0
-margin_right = 125.0
-margin_bottom = 144.0
-rect_min_size = Vector2( 250, 0 )
-custom_constants/separation = 20
+offset_left = -125.0
+offset_top = -144.0
+offset_right = 125.0
+offset_bottom = 144.0
+custom_minimum_size = Vector2(250, 0)
+theme_override_constants/separation = 20
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="Label" parent="VBoxContainer"]
-margin_right = 300.0
-margin_bottom = 28.0
+offset_right = 300.0
+offset_bottom = 28.0
 text = "Multiplayer"
 align = 1
 valign = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_top = 48.0
-margin_right = 300.0
-margin_bottom = 108.0
+offset_top = 48.0
+offset_right = 300.0
+offset_bottom = 108.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ServerAddress" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
-margin_top = 11.0
-margin_right = 150.0
-margin_bottom = 49.0
-rect_min_size = Vector2( 150, 0 )
+offset_top = 11.0
+offset_right = 150.0
+offset_bottom = 49.0
+custom_minimum_size = Vector2(150, 0)
 size_flags_vertical = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="JoinGame" type="Button" parent="VBoxContainer/HBoxContainer"]
-margin_left = 154.0
-margin_right = 300.0
-margin_bottom = 60.0
-rect_min_size = Vector2( 0, 60 )
+offset_left = 154.0
+offset_right = 300.0
+offset_bottom = 60.0
+custom_minimum_size = Vector2(0, 60)
 text = "Join Game"
 
 [node name="HostGame" type="Button" parent="VBoxContainer"]
-margin_top = 128.0
-margin_right = 300.0
-margin_bottom = 188.0
-rect_min_size = Vector2( 0, 60 )
+offset_top = 128.0
+offset_right = 300.0
+offset_bottom = 188.0
+custom_minimum_size = Vector2(0, 60)
 text = "Host Game"
 
 [node name="Spacer" type="Control" parent="VBoxContainer"]
-margin_top = 208.0
-margin_right = 300.0
-margin_bottom = 208.0
+offset_top = 208.0
+offset_right = 300.0
+offset_bottom = 208.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Back" type="Button" parent="VBoxContainer"]
-margin_top = 228.0
-margin_right = 300.0
-margin_bottom = 288.0
-rect_min_size = Vector2( 0, 60 )
+offset_top = 228.0
+offset_right = 300.0
+offset_bottom = 288.0
+custom_minimum_size = Vector2(0, 60)
 text = "Back"
-[connection signal="text_entered" from="VBoxContainer/HBoxContainer/ServerAddress" to="." method="_on_join_game_pressed"]
+
+[connection signal="text_submitted" from="VBoxContainer/HBoxContainer/ServerAddress" to="." method="_on_join_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/JoinGame" to="." method="_on_join_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/HostGame" to="." method="_on_host_game_pressed"]
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

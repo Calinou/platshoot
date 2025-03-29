@@ -1,9 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=2 format=3 uid="uid://dn12sk3fonovi"]
 
-[ext_resource path="res://autoload/game.gd" type="Script" id=1]
+[ext_resource type="Script" uid="uid://bx55ami4m8jho" path="res://autoload/game.gd" id="1"]
 
 [node name="Game" type="Node"]
-script = ExtResource( 1 )
-__meta__ = {
-"__editor_plugin_screen__": "Script"
-}
+script = ExtResource("1")

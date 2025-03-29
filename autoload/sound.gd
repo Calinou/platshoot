@@ -25,4 +25,4 @@ func play(type: int, parent: Node, stream: AudioStream, volume_db: float = 0.0, 
 	audio_stream_player.volume_db = volume_db
 	audio_stream_player.pitch_scale = pitch_scale
 	audio_stream_player.play()
-	audio_stream_player.connect("finished", audio_stream_player, "queue_free")
+	audio_stream_player.connect("finished", Callable(audio_stream_player, "queue_free"))

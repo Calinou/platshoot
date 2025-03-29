@@ -2,7 +2,7 @@ extends Control
 
 signal back_pressed
 
-onready var tree := $VBoxContainer/Tree as Tree
+@onready var tree := $VBoxContainer/Tree as Tree
 
 
 func _ready() -> void:

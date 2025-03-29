@@ -1,7 +1,7 @@
+@tool
 # Copyright © 2016-2020 Hugo Locurcio and contributors - MIT License
 # See `LICENSE.md` included in the source distribution for details.
 
-tool
 extends TileMap
 
 # Higher number of iterations looks better, but is slower.
@@ -14,7 +14,7 @@ func _ready() -> void:
 		var canvas_layer := CanvasLayer.new()
 		# Make the TileMap draw in front of the background but behind the HUD and entities.
 		canvas_layer.layer = -1
-		canvas_layer.follow_viewport_enable = 1
+		canvas_layer.follow_viewport_enabled = 1
 		canvas_layer.follow_viewport_scale = 0.875 + int(i) * 0.0125
 		var tilemap := duplicate(0) as TileMap
 		# Fade distant tilemaps to add a basic shading/fake contrast effect.

@@ -1,13 +1,14 @@
 [remap]
 
 importer="wav"
-type="AudioStreamSample"
-path="res://.import/grunt_death.wav-bb8ba129a709b8b762fd0e7e8b303196.sample"
+type="AudioStreamWAV"
+uid="uid://cyg1mpcg2ouph"
+path="res://.godot/imported/grunt_death.wav-bb8ba129a709b8b762fd0e7e8b303196.sample"
 
 [deps]
 
 source_file="res://data/sounds/grunt_death.wav"
-dest_files=[ "res://.import/grunt_death.wav-bb8ba129a709b8b762fd0e7e8b303196.sample" ]
+dest_files=["res://.godot/imported/grunt_death.wav-bb8ba129a709b8b762fd0e7e8b303196.sample"]
 
 [params]
 

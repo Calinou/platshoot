@@ -1,27 +1,23 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://b0wk2iwa7adb8"]
 
-[ext_resource path="res://data/scripts/level/exit.gd" type="Script" id=1]
-[ext_resource path="res://data/textures/white.png" type="Texture" id=2]
-[ext_resource path="res://data/textures/light.png" type="Texture" id=3]
+[ext_resource type="Script" uid="uid://c2mm8eubhqsa3" path="res://data/scripts/level/exit.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://blx30pdkk8l6x" path="res://data/textures/white.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://bvgw32oh3ufcy" path="res://data/textures/light.png" id="3"]
 
-[sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
-extents = Vector2( 32, 32 )
+[sub_resource type="RectangleShape2D" id="1"]
+size = Vector2(64, 64)
 
 [node name="Node2D" type="Node2D"]
-
-script = ExtResource( 1 )
+script = ExtResource("1")
 __meta__ = {
 "__editor_plugin_screen__": "2D"
 }
 
-[node name="Particles2D" type="Particles2D" parent="."]
-
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 amount = 96
 lifetime = 1.0
-config/half_extents = Vector2( 32, 32 )
-texture = ExtResource( 2 )
+config/half_extents = Vector2(32, 32)
+texture = ExtResource("2")
 params/direction = 0.0
 params/spread = 180.0
 params/linear_velocity = 20.0
@@ -38,15 +34,14 @@ params/final_size = 0.0
 params/hue_variation = 0.0
 params/anim_speed_scale = 1.0
 params/anim_initial_pos = 0.0
-color/color = Color( 1, 0.25098, 0.25098, 0.752941 )
+color/color = Color(1, 0.25098, 0.25098, 0.752941)
 
-[node name="Light2D" type="Light2D" parent="."]
-
+[node name="PointLight2D" type="PointLight2D" parent="."]
 enabled = true
-texture = ExtResource( 3 )
-offset = Vector2( 0, 0 )
+texture = ExtResource("3")
+offset = Vector2(0, 0)
 scale = 1.5
-color = Color( 1, 0.25098, 0.25098, 1 )
+color = Color(1, 0.25098, 0.25098, 1)
 energy = 1.0
 mode = 0
 range_height = 0.0
@@ -56,26 +51,24 @@ range_layer_min = 0
 range_layer_max = 0
 range_item_cull_mask = 1
 shadow_enabled = false
-shadow_color = Color( 0, 0, 0, 0 )
+shadow_color = Color(0, 0, 0, 0)
 shadow_buffer_size = 2048
 shadow/esm_multiplier = 80.0
 shadow_item_cull_mask = 1
 
 [node name="Area2D" type="Area2D" parent="."]
-
 input_pickable = true
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+shapes/0/shape = SubResource("1")
+shapes/0/transform = Transform2D(1, 0, 0, 1, 0, 0)
 shapes/0/trigger = false
-gravity_vec = Vector2( 0, 1 )
+gravity_direction = Vector2(0, 1)
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-
-shape = SubResource( 1 )
+shape = SubResource("1")
 trigger = false
 _update_shape_index = 0
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_enter" binds=[  ]]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_enter"]

@@ -22,8 +22,8 @@ func _on_Timer_timeout() -> void:
 		queue_free()
 	# Only make it stop emitting
 	else:
-		$"Smoothing2D/CPUParticles2D".emitting = false
-		$"Smoothing2D/Light2D".enabled = false
+		$GPUParticles2D.emitting = false
+		$PointLight2D.enabled = false
 		$Timer.wait_time = 2
 		$Timer.start()
 		kill = true

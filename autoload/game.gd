@@ -24,33 +24,33 @@ const hud_scene := preload("res://data/scenes/hud/main.tscn")
 const background_scene := preload("res://data/scenes/misc/background.tscn")
 
 # Game stats
-onready var health := 100.0
-onready var armor := 0.0
-onready var ammo := 25
-onready var weapon := WEAPON_PISTOL
-onready var fuel := 100.0
+@onready var health := 100.0
+@onready var armor := 0.0
+@onready var ammo := 25
+@onready var weapon := WEAPON_PISTOL
+@onready var fuel := 100.0
 
 # Level stats
-onready var time := 0.0
-onready var kills := 0
-onready var kills_total := 0
-onready var items := 0
-onready var items_total := 0
+@onready var time := 0.0
+@onready var kills := 0
+@onready var kills_total := 0
+@onready var items := 0
+@onready var items_total := 0
 
 # For menus and respawning
-onready var level_to_play := 1
+@onready var level_to_play := 1
 
-onready var status := STATUS_ALIVE
+@onready var status := STATUS_ALIVE
 
 
 func _ready() -> void:
 	randomize()
 	print("Platshoot [0.1.0]")
 
-	var hud = hud_scene.instance()
+	var hud = hud_scene.instantiate()
 	add_child(hud)
 
-	var background = background_scene.instance()
+	var background = background_scene.instantiate()
 	add_child(background)
 
 
@@ -62,7 +62,7 @@ func _physics_process(_delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_fullscreen"):
-		OS.window_fullscreen = not OS.is_window_fullscreen()
+		get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN if (not ((get_window().mode == Window.MODE_EXCLUSIVE_FULLSCREEN) or (get_window().mode == Window.MODE_FULLSCREEN))) else Window.MODE_WINDOWED
 
 	if event.is_action_pressed("toggle_hud"):
 		$"/root/Game/HUD/Control".visible = not $"/root/Game/HUD/Control".visible

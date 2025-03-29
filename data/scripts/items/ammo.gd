@@ -12,7 +12,7 @@ func _on_Area2D_body_enter(body: Node2D) -> void:
 		return
 
 	# Only the player can pick up items.
-	if body.name == "Player" and body.is_network_master() and not picked:
+	if body.name == "Player" and body.is_multiplayer_authority() and not picked:
 		rpc("pickup")
 		Game.ammo = int(min(Game.ammo + 15, 100))
 		Statistics.items_picked_up += 1
@@ -21,11 +21,11 @@ func _on_Area2D_body_enter(body: Node2D) -> void:
 func _on_AnimationPlayer_finished(_anim_name: String) -> void:
 	queue_free()
 
-remotesync func pickup() -> void:
+@rpc("any_peer", "call_local") func pickup() -> void:
 	picked = true
 	$AnimationPlayer.play("Pickup")
 	var positional: int = (
-			Sound.Type.NON_POSITIONAL if get_tree().get_rpc_sender_id() == get_tree().get_network_unique_id()
+			Sound.Type.NON_POSITIONAL if get_tree().get_remote_sender_id() == get_tree().get_unique_id()
 			else Sound.Type.POSITIONAL_2D
 	)
 	Sound.play(positional, self, preload("res://data/sounds/pickup.wav"), 0.0, 1.1)

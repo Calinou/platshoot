@@ -1,525 +1,518 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=64 format=3 uid="uid://dfwjkfh2ykp62"]
 
-[ext_resource path="res://data/resources/tilesets/base.tres" type="TileSet" id=2]
-[ext_resource path="res://data/scenes/items/ammo.tscn" type="PackedScene" id=3]
-[ext_resource path="res://data/scenes/items/armor.tscn" type="PackedScene" id=4]
-[ext_resource path="res://data/scenes/items/health.tscn" type="PackedScene" id=5]
-[ext_resource path="res://data/scenes/actors/grunt.tscn" type="PackedScene" id=7]
-[ext_resource path="res://data/scenes/level/exit.tscn" type="PackedScene" id=9]
-[ext_resource path="res://data/scenes/levels/tilemap_pseudo_3d.gd" type="Script" id=10]
+[ext_resource type="TileSet" uid="uid://birbob7o1mgep" path="res://data/resources/tilesets/base.tres" id="2"]
+[ext_resource type="PackedScene" uid="uid://cupxspshvhjsx" path="res://data/scenes/items/ammo.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://cflld4dgixsap" path="res://data/scenes/items/armor.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://dia5ukshchc5o" path="res://data/scenes/items/health.tscn" id="5"]
+[ext_resource type="PackedScene" uid="uid://64t035eyn7c2" path="res://data/scenes/actors/grunt.tscn" id="7"]
+[ext_resource type="PackedScene" uid="uid://b0wk2iwa7adb8" path="res://data/scenes/level/exit.tscn" id="9"]
+[ext_resource type="Script" uid="uid://rrnjmobndh2s" path="res://data/scenes/levels/tilemap_pseudo_3d.gd" id="10"]
 
-[sub_resource type="PhysicsMaterial" id=1]
+[sub_resource type="PhysicsMaterial" id="1"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=2]
+[sub_resource type="PhysicsMaterial" id="2"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=3]
+[sub_resource type="PhysicsMaterial" id="3"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=4]
+[sub_resource type="PhysicsMaterial" id="4"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=5]
+[sub_resource type="PhysicsMaterial" id="5"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=6]
+[sub_resource type="PhysicsMaterial" id="6"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=7]
+[sub_resource type="PhysicsMaterial" id="7"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=8]
+[sub_resource type="PhysicsMaterial" id="8"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=9]
+[sub_resource type="PhysicsMaterial" id="9"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=10]
+[sub_resource type="PhysicsMaterial" id="10"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=11]
+[sub_resource type="PhysicsMaterial" id="11"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=12]
+[sub_resource type="PhysicsMaterial" id="12"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=13]
+[sub_resource type="PhysicsMaterial" id="13"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=14]
+[sub_resource type="PhysicsMaterial" id="14"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=15]
+[sub_resource type="PhysicsMaterial" id="15"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=16]
+[sub_resource type="PhysicsMaterial" id="16"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=17]
+[sub_resource type="PhysicsMaterial" id="17"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=18]
+[sub_resource type="PhysicsMaterial" id="18"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=19]
+[sub_resource type="PhysicsMaterial" id="19"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=20]
+[sub_resource type="PhysicsMaterial" id="20"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=21]
+[sub_resource type="PhysicsMaterial" id="21"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=22]
+[sub_resource type="PhysicsMaterial" id="22"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=23]
+[sub_resource type="PhysicsMaterial" id="23"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=24]
+[sub_resource type="PhysicsMaterial" id="24"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=25]
+[sub_resource type="PhysicsMaterial" id="25"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=26]
+[sub_resource type="PhysicsMaterial" id="26"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=27]
+[sub_resource type="PhysicsMaterial" id="27"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=28]
+[sub_resource type="PhysicsMaterial" id="28"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=29]
+[sub_resource type="PhysicsMaterial" id="29"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=30]
+[sub_resource type="PhysicsMaterial" id="30"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=31]
+[sub_resource type="PhysicsMaterial" id="31"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=32]
+[sub_resource type="PhysicsMaterial" id="32"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=33]
+[sub_resource type="PhysicsMaterial" id="33"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=34]
+[sub_resource type="PhysicsMaterial" id="34"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=35]
+[sub_resource type="PhysicsMaterial" id="35"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=36]
+[sub_resource type="PhysicsMaterial" id="36"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=37]
+[sub_resource type="PhysicsMaterial" id="37"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=38]
+[sub_resource type="PhysicsMaterial" id="38"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=39]
+[sub_resource type="PhysicsMaterial" id="39"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=40]
+[sub_resource type="PhysicsMaterial" id="40"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=41]
+[sub_resource type="PhysicsMaterial" id="41"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=42]
+[sub_resource type="PhysicsMaterial" id="42"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=43]
+[sub_resource type="PhysicsMaterial" id="43"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=44]
+[sub_resource type="PhysicsMaterial" id="44"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=45]
+[sub_resource type="PhysicsMaterial" id="45"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=46]
+[sub_resource type="PhysicsMaterial" id="46"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=47]
+[sub_resource type="PhysicsMaterial" id="47"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=48]
+[sub_resource type="PhysicsMaterial" id="48"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=49]
+[sub_resource type="PhysicsMaterial" id="49"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=50]
+[sub_resource type="PhysicsMaterial" id="50"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=51]
+[sub_resource type="PhysicsMaterial" id="51"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=52]
+[sub_resource type="PhysicsMaterial" id="52"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=53]
+[sub_resource type="PhysicsMaterial" id="53"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=54]
+[sub_resource type="PhysicsMaterial" id="54"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=55]
+[sub_resource type="PhysicsMaterial" id="55"]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=56]
+[sub_resource type="PhysicsMaterial" id="56"]
 friction = 0.0
 
 [node name="Level" type="Node2D"]
-__meta__ = {
-"__editor_plugin_screen__": "2D"
-}
 
-[node name="Players" type="Position2D" parent="."]
+[node name="Players" type="Marker2D" parent="."]
 
 [node name="TileMap" type="TileMap" parent="."]
-position = Vector2( 128, 0 )
 z_as_relative = false
-tile_set = ExtResource( 2 )
-cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-format = 1
-tile_data = PoolIntArray( -524286, 0, 0, -524285, 0, 0, -524284, 5, 0, -524283, 0, 0, -524282, 0, 0, -524281, 5, 0, -524280, 0, 0, -524279, 0, 0, -524278, 5, 0, -524277, 0, 0, -524276, 0, 0, -524275, 5, 0, -524274, 0, 0, -524273, 0, 0, -524272, 5, 0, -524271, 0, 0, -524270, 0, 0, -524269, 5, 0, -524268, 0, 0, -524267, 0, 0, -524266, 5, 0, -524265, 0, 0, -524264, 0, 0, -524263, 0, 0, -524262, 0, 0, -524261, 0, 0, -524260, 0, 0, -524259, 0, 0, -524258, 0, 0, -524257, 0, 0, -524256, 0, 0, -524255, 0, 0, -524254, 0, 0, -458752, 0, 0, -458751, 0, 0, -458750, 0, 0, -458718, 0, 0, -458717, 0, 0, -458716, 0, 0, -458715, 0, 0, -458714, 0, 0, -327685, 6, 0, -327684, 6, 0, -327683, 6, 0, -327682, 6, 0, -327681, 6, 0, -393178, 0, 0, -262150, 6, 0, -262149, 6, 0, -327642, 0, 0, -327641, 0, 0, -327640, 0, 0, -196614, 6, 0, -262136, 1, 0, -262135, 0, 0, -262134, 0, 0, -262133, 0, 0, -262132, 0, 0, -131078, 6, 0, -196602, 1, 0, -196601, 0, 0, -196600, 0, 0, -196599, 0, 0, -196596, 0, 0, -196595, 0, 0, -196594, 0, 0, -196593, 0, 0, -65542, 6, 0, -65541, 6, 0, -131067, 0, 0, -131066, 0, 0, -131065, 0, 0, -131057, 0, 0, -131056, 0, 0, -131055, 0, 0, -131053, 0, 0, -131052, 0, 0, -131051, 0, 0, -131048, 0, 0, -131047, 4, 0, -131046, 4, 0, -131045, 4, 0, -131044, 4, 0, -131043, 4, 0, -131042, 4, 0, -131041, 4, 0, -131040, 0, 0, -131034, 1, 0, -131033, 0, 0, -131032, 0, 0, -5, 6, 0, -4, 6, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65515, 0, 0, -65512, 0, 0, -65504, 0, 0, -65503, 0, 0, -65502, 0, 0, -65501, 0, 0, -65500, 0, 0, -65499, 0, 0, -65498, 0, 0, -65497, 1610612737, 0, 65532, 6, 0, 65533, 6, 0, 65534, 6, 0, 65535, 6, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, 21, 5, 0, 24, 5, 0, 38, 0, 0, 131069, 4, 0, 65557, 0, 0, 65560, 0, 0, 65574, 0, 0, 196605, 4, 0, 131091, 0, 0, 131092, 0, 0, 131093, 0, 0, 131096, 0, 0, 131110, 5, 0, 262141, 4, 0, 196627, 0, 0, 196632, 0, 0, 196646, 0, 0, 327677, 5, 0, 327679, 6, 0, 262158, 0, 0, 262159, 0, 0, 262160, 0, 0, 262161, 0, 0, 262162, 0, 0, 262163, 0, 0, 262168, 0, 0, 393213, 4, 0, 393215, 6, 0, 327680, 6, 0, 327704, 0, 0, 458749, 4, 0, 393216, 6, 0, 393217, 6, 0, 393218, 6, 0, 393237, 2, 0, 393238, 3, 0, 393239, 0, 0, 393240, 0, 0, 393252, 2, 0, 393253, 3, 0, 393254, 10, 0, 524285, 4, 0, 458754, 6, 0, 458755, 6, 0, 458756, 6, 0, 458770, 2, 0, 458771, 3, 0, 458772, 0, 0, 458773, 0, 0, 458774, 0, 0, 458775, 0, 0, 458783, 0, 0, 458784, 0, 0, 458785, 0, 0, 458786, 0, 0, 458787, 11, 0, 458788, 10, 0, 458789, 10, 0, 458790, 10, 0, 458791, 10, 0, 458792, 10, 0, 589821, 4, 0, 524292, 6, 0, 524293, 6, 0, 524294, 6, 0, 524306, 0, 0, 524307, 0, 0, 524308, 0, 0, 524318, 0, 0, 524319, 0, 0, 524328, 10, 0, 655357, 4, 0, 655358, 6, 0, 589830, 6, 0, 589831, 6, 0, 589832, 6, 0, 589833, 536870915, 0, 589834, 536870914, 0, 589835, 2, 0, 589836, 3, 0, 589837, 0, 0, 589838, 0, 0, 589839, 0, 0, 589840, 0, 0, 589841, 0, 0, 589842, 0, 0, 589851, 0, 0, 589852, 0, 0, 589853, 0, 0, 589854, 0, 0, 589864, 10, 0, 720894, 6, 0, 655368, 6, 0, 655369, 5, 0, 655370, 7, 0, 655371, 7, 0, 655372, 5, 0, 655373, 0, 0, 655386, 0, 0, 655387, 0, 0, 655400, 10, 0, 786430, 6, 0, 786431, 6, 0, 720921, 0, 0, 720922, 5, 0, 851967, 6, 0, 786456, 0, 0, 786457, 5, 0, 786468, 8, 0, 786469, 536870920, 0, 786508, 0, 0, 786509, 0, 0, 786510, 0, 0, 786511, 0, 0, 786512, 5, 0, 786513, 0, 0, 786514, 0, 0, 786515, 0, 0, 917503, 6, 0, 851968, 6, 0, 851969, 6, 0, 851978, 2, 0, 851979, 536870914, 0, 851984, 2, 0, 851985, 536870914, 0, 851991, 0, 0, 851992, 0, 0, 851993, 536870912, 0, 851994, 5, 0, 851995, 9, 0, 851996, 9, 0, 851997, 9, 0, 851998, 9, 0, 851999, 9, 0, 852000, 9, 0, 852001, 9, 0, 852002, 9, 0, 852003, 9, 0, 852004, 536870918, 0, 852005, 536870918, 0, 852006, 536870912, 0, 852007, 536870912, 0, 852008, 0, 0, 852043, 0, 0, 852044, 0, 0, 852045, 1610612737, 0, 852050, 1073741825, 0, 852051, 0, 0, 852052, 6, 0, 852053, 6, 0, 852054, 6, 0, 852055, 6, 0, 852056, 6, 0, 852057, 6, 0, 917505, 7, 0, 917507, 7, 0, 917509, 7, 0, 917510, 6, 0, 917511, 6, 0, 917512, 6, 0, 917513, 5, 0, 917514, 7, 0, 917515, 7, 0, 917516, 5, 0, 917517, 0, 0, 917518, 0, 0, 917519, 0, 0, 917520, 0, 0, 917521, 0, 0, 917522, 0, 0, 917523, 0, 0, 917524, 0, 0, 917525, 0, 0, 917526, 0, 0, 917527, 0, 0, 917544, 0, 0, 917545, 11, 0, 917577, 0, 0, 917578, 0, 0, 917579, 0, 0, 917580, 1610612737, 0, 917593, 6, 0, 983041, 7, 0, 983042, 7, 0, 983043, 7, 0, 983044, 7, 0, 983045, 7, 0, 983081, 0, 0, 983100, 1073741825, 0, 983101, 0, 0, 983102, 0, 0, 983103, 5, 0, 983104, 7, 0, 983105, 7, 0, 983106, 7, 0, 983107, 7, 0, 983108, 7, 0, 983109, 7, 0, 983110, 5, 0, 983111, 0, 0, 983112, 0, 0, 983113, 0, 0, 983114, 1610612737, 0, 983129, 6, 0, 1048617, 0, 0, 1048618, 11, 0, 1048665, 6, 0, 1114154, 0, 0, 1114194, 1, 0, 1114195, 0, 0, 1114196, 6, 0, 1114197, 6, 0, 1114198, 6, 0, 1114199, 6, 0, 1114200, 6, 0, 1114201, 6, 0, 1179690, 0, 0, 1179691, 11, 0, 1179700, 1, 0, 1179701, 0, 0, 1179702, 0, 0, 1179703, 0, 0, 1179704, 0, 0, 1179705, 0, 0, 1179709, 0, 0, 1179710, 0, 0, 1179711, 5, 0, 1179712, 7, 0, 1179713, 7, 0, 1179714, 7, 0, 1179715, 7, 0, 1179716, 7, 0, 1179717, 7, 0, 1179718, 5, 0, 1179719, 0, 0, 1179720, 0, 0, 1179722, 4, 0, 1179724, 4, 0, 1179726, 11, 0, 1179727, 0, 0, 1179728, 5, 0, 1179729, 0, 0, 1179730, 0, 0, 1179731, 0, 0, 1245227, 0, 0, 1245235, 1, 0, 1245236, 0, 0, 1245237, 0, 0, 1245241, 0, 0, 1245242, 0, 0, 1245258, 4, 0, 1245260, 4, 0, 1245262, 0, 0, 1310763, 0, 0, 1310764, 11, 0, 1310770, 1, 0, 1310771, 0, 0, 1310772, 0, 0, 1310778, 0, 0, 1310779, 0, 0, 1310798, 0, 0, 1376300, 0, 0, 1376306, 0, 0, 1376307, 0, 0, 1376315, 0, 0, 1376316, 0, 0, 1376317, 0, 0, 1376334, 0, 0, 1441836, 0, 0, 1441837, 0, 0, 1441838, 5, 0, 1441839, 7, 0, 1441840, 5, 0, 1441841, 0, 0, 1441842, 0, 0, 1441853, 0, 0, 1441854, 0, 0, 1441855, 0, 0, 1441856, 0, 0, 1441857, 0, 0, 1441858, 0, 0, 1441859, 0, 0, 1441860, 0, 0, 1441861, 0, 0, 1441862, 0, 0, 1441863, 0, 0, 1441864, 0, 0, 1441865, 0, 0, 1441866, 0, 0, 1441867, 0, 0, 1441868, 0, 0, 1441869, 0, 0, 1441870, 11, 0 )
-script = ExtResource( 10 )
-__meta__ = {
-"_edit_lock_": true
-}
+position = Vector2(128, 0)
+tile_set = ExtResource("2")
+format = 2
+layer_0/tile_data = PackedInt32Array(131065, 0, 0, 131066, 0, 0, 131067, 0, 0, 131068, 0, 0, 131069, 0, 0, 131070, 0, 0, 131071, 0, 0, 65536, 0, 0, 65537, 0, 0, 65538, 0, 0, 65539, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0)
+script = ExtResource("10")
 
 [node name="Items" type="Node" parent="."]
 
-[node name="Ammo" parent="Items" instance=ExtResource( 3 )]
-position = Vector2( 352, -96 )
+[node name="Ammo" parent="Items" instance=ExtResource("3")]
+position = Vector2(352, -96)
 
-[node name="Ammo1" parent="Items" instance=ExtResource( 3 )]
-position = Vector2( 416, -96 )
+[node name="Ammo1" parent="Items" instance=ExtResource("3")]
+position = Vector2(416, -96)
 
-[node name="Ammo2" parent="Items" instance=ExtResource( 3 )]
-position = Vector2( 1184, -160 )
+[node name="Ammo2" parent="Items" instance=ExtResource("3")]
+position = Vector2(1184, -160)
 
-[node name="Ammo3" parent="Items" instance=ExtResource( 3 )]
-position = Vector2( 2272, -96 )
+[node name="Ammo3" parent="Items" instance=ExtResource("3")]
+position = Vector2(2272, -96)
 
-[node name="Ammo 2" parent="Items" instance=ExtResource( 4 )]
-position = Vector2( 224, -32 )
+[node name="Ammo 2" parent="Items" instance=ExtResource("4")]
+position = Vector2(224, -32)
 
-[node name="Ammo 3" parent="Items" instance=ExtResource( 5 )]
-position = Vector2( 160, -32 )
+[node name="Ammo 3" parent="Items" instance=ExtResource("5")]
+position = Vector2(160, -32)
 
-[node name="Ammo4" parent="Items" instance=ExtResource( 3 )]
-position = Vector2( 288, 352 )
+[node name="Ammo4" parent="Items" instance=ExtResource("3")]
+position = Vector2(288, 352)
 
-[node name="Ammo5" parent="Items" instance=ExtResource( 3 )]
-position = Vector2( 1632, 352 )
+[node name="Ammo5" parent="Items" instance=ExtResource("3")]
+position = Vector2(1632, 352)
 
-[node name="Ammo6" parent="Items" instance=ExtResource( 3 )]
-position = Vector2( 1568, 864 )
+[node name="Ammo6" parent="Items" instance=ExtResource("3")]
+position = Vector2(1568, 864)
 
-[node name="Ammo7" parent="Items" instance=ExtResource( 3 )]
-position = Vector2( 416, 928 )
+[node name="Ammo7" parent="Items" instance=ExtResource("3")]
+position = Vector2(416, 928)
 
-[node name="Ammo8" parent="Items" instance=ExtResource( 4 )]
-position = Vector2( 288, 928 )
+[node name="Ammo8" parent="Items" instance=ExtResource("4")]
+position = Vector2(288, 928)
 
-[node name="Ammo9" parent="Items" instance=ExtResource( 4 )]
-position = Vector2( 352, 864 )
+[node name="Ammo9" parent="Items" instance=ExtResource("4")]
+position = Vector2(352, 864)
 
-[node name="Ammo10" parent="Items" instance=ExtResource( 5 )]
-position = Vector2( 96, 224 )
+[node name="Ammo10" parent="Items" instance=ExtResource("5")]
+position = Vector2(96, 224)
 
-[node name="Ammo11" parent="Items" instance=ExtResource( 5 )]
-position = Vector2( 1824, -160 )
+[node name="Ammo11" parent="Items" instance=ExtResource("5")]
+position = Vector2(1824, -160)
 
-[node name="Ammo12" parent="Items" instance=ExtResource( 5 )]
-position = Vector2( 2144, -160 )
+[node name="Ammo12" parent="Items" instance=ExtResource("5")]
+position = Vector2(2144, -160)
 
-[node name="Ammo13" parent="Items" instance=ExtResource( 5 )]
-position = Vector2( 1888, 544 )
+[node name="Ammo13" parent="Items" instance=ExtResource("5")]
+position = Vector2(1888, 544)
 
-[node name="Ammo14" parent="Items" instance=ExtResource( 3 )]
-position = Vector2( 2592, 352 )
+[node name="Ammo14" parent="Items" instance=ExtResource("3")]
+position = Vector2(2592, 352)
 
-[node name="Ammo15" parent="Items" instance=ExtResource( 3 )]
-position = Vector2( 3040, 1376 )
+[node name="Ammo15" parent="Items" instance=ExtResource("3")]
+position = Vector2(3040, 1376)
 
-[node name="Ammo16" parent="Items" instance=ExtResource( 3 )]
-position = Vector2( 3936, 1248 )
+[node name="Ammo16" parent="Items" instance=ExtResource("3")]
+position = Vector2(3936, 1248)
 
-[node name="Ammo17" parent="Items" instance=ExtResource( 3 )]
-position = Vector2( 5344, 1120 )
+[node name="Ammo17" parent="Items" instance=ExtResource("3")]
+position = Vector2(5344, 1120)
 
-[node name="Ammo18" parent="Items" instance=ExtResource( 3 )]
-position = Vector2( 5280, 1120 )
+[node name="Ammo18" parent="Items" instance=ExtResource("3")]
+position = Vector2(5280, 1120)
 
-[node name="Ammo19" parent="Items" instance=ExtResource( 3 )]
-position = Vector2( 5216, 1120 )
+[node name="Ammo19" parent="Items" instance=ExtResource("3")]
+position = Vector2(5216, 1120)
 
-[node name="Ammo20" parent="Items" instance=ExtResource( 5 )]
-position = Vector2( 1056, 864 )
+[node name="Ammo20" parent="Items" instance=ExtResource("5")]
+position = Vector2(1056, 864)
 
-[node name="Ammo21" parent="Items" instance=ExtResource( 5 )]
-position = Vector2( 4064, 1120 )
+[node name="Ammo21" parent="Items" instance=ExtResource("5")]
+position = Vector2(4064, 1120)
 
-[node name="Ammo22" parent="Items" instance=ExtResource( 5 )]
-position = Vector2( 4064, 1312 )
+[node name="Ammo22" parent="Items" instance=ExtResource("5")]
+position = Vector2(4064, 1312)
 
-[node name="Ammo23" parent="Items" instance=ExtResource( 4 )]
-position = Vector2( 1120, 864 )
+[node name="Ammo23" parent="Items" instance=ExtResource("4")]
+position = Vector2(1120, 864)
 
-[node name="Ammo24" parent="Items" instance=ExtResource( 4 )]
-position = Vector2( 992, 864 )
+[node name="Ammo24" parent="Items" instance=ExtResource("4")]
+position = Vector2(992, 864)
 
-[node name="Ammo25" parent="Items" instance=ExtResource( 4 )]
-position = Vector2( 2656, 416 )
+[node name="Ammo25" parent="Items" instance=ExtResource("4")]
+position = Vector2(2656, 416)
 
-[node name="Ammo26" parent="Items" instance=ExtResource( 5 )]
-position = Vector2( 1952, 800 )
+[node name="Ammo26" parent="Items" instance=ExtResource("5")]
+position = Vector2(1952, 800)
 
-[node name="Ammo27" parent="Items" instance=ExtResource( 4 )]
-position = Vector2( 2080, 800 )
+[node name="Ammo27" parent="Items" instance=ExtResource("4")]
+position = Vector2(2080, 800)
 
 [node name="Enemies" type="Node" parent="."]
 
-[node name="Grunt" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 736, -288 )
-physics_material_override = SubResource( 1 )
+[node name="Grunt" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(736, -288)
+physics_material_override = SubResource("1")
 
-[node name="Grunt1" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 480, -160 )
-physics_material_override = SubResource( 2 )
+[node name="Grunt1" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(480, -160)
+physics_material_override = SubResource("2")
 
-[node name="Grunt2" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 800, -288 )
-physics_material_override = SubResource( 3 )
+[node name="Grunt2" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(800, -288)
+physics_material_override = SubResource("3")
 
-[node name="Grunt3" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 864, -288 )
-physics_material_override = SubResource( 4 )
+[node name="Grunt3" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(864, -288)
+physics_material_override = SubResource("4")
 
-[node name="Grunt4" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 1056, -224 )
-physics_material_override = SubResource( 5 )
+[node name="Grunt4" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(1056, -224)
+physics_material_override = SubResource("5")
 
-[node name="Grunt5" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 1440, -160 )
-physics_material_override = SubResource( 6 )
+[node name="Grunt5" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(1440, -160)
+physics_material_override = SubResource("6")
 
-[node name="Grunt6" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 2016, -160 )
-physics_material_override = SubResource( 7 )
+[node name="Grunt6" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(2016, -160)
+physics_material_override = SubResource("7")
 
-[node name="Grunt7" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 2528, -96 )
-physics_material_override = SubResource( 8 )
+[node name="Grunt7" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(2528, -96)
+physics_material_override = SubResource("8")
 
-[node name="Grunt8" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 2400, -96 )
-physics_material_override = SubResource( 9 )
+[node name="Grunt8" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(2400, -96)
+physics_material_override = SubResource("9")
 
-[node name="Grunt9" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 1056, 544 )
-physics_material_override = SubResource( 10 )
+[node name="Grunt9" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(1056, 544)
+physics_material_override = SubResource("10")
 
-[node name="Grunt10" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 1184, 544 )
-physics_material_override = SubResource( 11 )
+[node name="Grunt10" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(1184, 544)
+physics_material_override = SubResource("11")
 
-[node name="Grunt11" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 800, 608 )
-physics_material_override = SubResource( 12 )
+[node name="Grunt11" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(800, 608)
+physics_material_override = SubResource("12")
 
-[node name="Grunt12" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 416, 416 )
-physics_material_override = SubResource( 13 )
+[node name="Grunt12" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(416, 416)
+physics_material_override = SubResource("13")
 
-[node name="Grunt13" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 160, 288 )
-physics_material_override = SubResource( 14 )
+[node name="Grunt13" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(160, 288)
+physics_material_override = SubResource("14")
 
-[node name="Grunt14" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 32, 544 )
-physics_material_override = SubResource( 15 )
+[node name="Grunt14" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(32, 544)
+physics_material_override = SubResource("15")
 
-[node name="Grunt15" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 96, 672 )
-physics_material_override = SubResource( 16 )
+[node name="Grunt15" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(96, 672)
+physics_material_override = SubResource("16")
 
-[node name="Grunt16" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 160, 800 )
-physics_material_override = SubResource( 17 )
+[node name="Grunt16" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(160, 800)
+physics_material_override = SubResource("17")
 
-[node name="Grunt17" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 736, 864 )
-physics_material_override = SubResource( 18 )
+[node name="Grunt17" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(736, 864)
+physics_material_override = SubResource("18")
 
-[node name="Grunt18" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 1440, 864 )
-physics_material_override = SubResource( 19 )
+[node name="Grunt18" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(1440, 864)
+physics_material_override = SubResource("19")
 
-[node name="Grunt19" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 1760, 672 )
-physics_material_override = SubResource( 20 )
+[node name="Grunt19" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(1760, 672)
+physics_material_override = SubResource("20")
 
-[node name="Grunt20" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 1952, 544 )
-physics_material_override = SubResource( 21 )
+[node name="Grunt20" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(1952, 544)
+physics_material_override = SubResource("21")
 
-[node name="Grunt21" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 2208, 416 )
-physics_material_override = SubResource( 22 )
+[node name="Grunt21" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(2208, 416)
+physics_material_override = SubResource("22")
 
-[node name="Grunt22" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 2400, 416 )
-physics_material_override = SubResource( 23 )
+[node name="Grunt22" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(2400, 416)
+physics_material_override = SubResource("23")
 
-[node name="Grunt23" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 2080, 480 )
-physics_material_override = SubResource( 24 )
+[node name="Grunt23" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(2080, 480)
+physics_material_override = SubResource("24")
 
-[node name="Grunt24" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 608, 544 )
-physics_material_override = SubResource( 25 )
+[node name="Grunt24" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(608, 544)
+physics_material_override = SubResource("25")
 
-[node name="Grunt25" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 2720, 416 )
-physics_material_override = SubResource( 26 )
+[node name="Grunt25" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(2720, 416)
+physics_material_override = SubResource("26")
 
-[node name="Grunt26" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 2848, 992 )
-physics_material_override = SubResource( 27 )
+[node name="Grunt26" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(2848, 992)
+physics_material_override = SubResource("27")
 
-[node name="Grunt27" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 2976, 1248 )
-physics_material_override = SubResource( 28 )
+[node name="Grunt27" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(2976, 1248)
+physics_material_override = SubResource("28")
 
-[node name="Grunt28" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 2912, 1120 )
-physics_material_override = SubResource( 29 )
+[node name="Grunt28" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(2912, 1120)
+physics_material_override = SubResource("29")
 
-[node name="Grunt29" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 2784, 864 )
-physics_material_override = SubResource( 30 )
+[node name="Grunt29" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(2784, 864)
+physics_material_override = SubResource("30")
 
-[node name="Grunt30" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 3296, 1376 )
-physics_material_override = SubResource( 31 )
+[node name="Grunt30" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(3296, 1376)
+physics_material_override = SubResource("31")
 
-[node name="Grunt31" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 3680, 1120 )
-physics_material_override = SubResource( 32 )
+[node name="Grunt31" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(3680, 1120)
+physics_material_override = SubResource("32")
 
-[node name="Grunt32" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 3744, 1120 )
-physics_material_override = SubResource( 33 )
+[node name="Grunt32" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(3744, 1120)
+physics_material_override = SubResource("33")
 
-[node name="Grunt33" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 3808, 1120 )
-physics_material_override = SubResource( 34 )
+[node name="Grunt33" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(3808, 1120)
+physics_material_override = SubResource("34")
 
-[node name="Grunt34" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 3616, 1120 )
-physics_material_override = SubResource( 35 )
+[node name="Grunt34" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(3616, 1120)
+physics_material_override = SubResource("35")
 
-[node name="Grunt35" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 3552, 1120 )
-physics_material_override = SubResource( 36 )
+[node name="Grunt35" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(3552, 1120)
+physics_material_override = SubResource("36")
 
-[node name="Grunt36" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 4128, 1120 )
-physics_material_override = SubResource( 37 )
+[node name="Grunt36" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(4128, 1120)
+physics_material_override = SubResource("37")
 
-[node name="Grunt37" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 4192, 1376 )
-physics_material_override = SubResource( 38 )
+[node name="Grunt37" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(4192, 1376)
+physics_material_override = SubResource("38")
 
-[node name="Grunt38" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 4256, 1120 )
-physics_material_override = SubResource( 39 )
+[node name="Grunt38" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(4256, 1120)
+physics_material_override = SubResource("39")
 
-[node name="Grunt39" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 4320, 1376 )
-physics_material_override = SubResource( 40 )
+[node name="Grunt39" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(4320, 1376)
+physics_material_override = SubResource("40")
 
-[node name="Grunt40" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 4384, 1120 )
-physics_material_override = SubResource( 41 )
+[node name="Grunt40" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(4384, 1120)
+physics_material_override = SubResource("41")
 
-[node name="Grunt41" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 4448, 1376 )
-physics_material_override = SubResource( 42 )
+[node name="Grunt41" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(4448, 1376)
+physics_material_override = SubResource("42")
 
-[node name="Grunt42" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 4512, 1120 )
-physics_material_override = SubResource( 43 )
+[node name="Grunt42" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(4512, 1120)
+physics_material_override = SubResource("43")
 
-[node name="Grunt43" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 4576, 1376 )
-physics_material_override = SubResource( 44 )
+[node name="Grunt43" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(4576, 1376)
+physics_material_override = SubResource("44")
 
-[node name="Grunt44" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 4640, 1120 )
-physics_material_override = SubResource( 45 )
+[node name="Grunt44" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(4640, 1120)
+physics_material_override = SubResource("45")
 
-[node name="Grunt45" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 4704, 1376 )
-physics_material_override = SubResource( 46 )
+[node name="Grunt45" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(4704, 1376)
+physics_material_override = SubResource("46")
 
-[node name="Grunt46" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 4768, 1120 )
-physics_material_override = SubResource( 47 )
+[node name="Grunt46" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(4768, 1120)
+physics_material_override = SubResource("47")
 
-[node name="Grunt47" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 4832, 1376 )
-physics_material_override = SubResource( 48 )
+[node name="Grunt47" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(4832, 1376)
+physics_material_override = SubResource("48")
 
-[node name="Grunt48" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 4896, 1120 )
-physics_material_override = SubResource( 49 )
+[node name="Grunt48" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(4896, 1120)
+physics_material_override = SubResource("49")
 
-[node name="Grunt49" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 4960, 1376 )
-physics_material_override = SubResource( 50 )
+[node name="Grunt49" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(4960, 1376)
+physics_material_override = SubResource("50")
 
-[node name="Grunt50" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 5024, 1120 )
-physics_material_override = SubResource( 51 )
+[node name="Grunt50" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(5024, 1120)
+physics_material_override = SubResource("51")
 
-[node name="Grunt51" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 5088, 1376 )
-physics_material_override = SubResource( 52 )
+[node name="Grunt51" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(5088, 1376)
+physics_material_override = SubResource("52")
 
-[node name="Grunt52" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 1888, 800 )
-physics_material_override = SubResource( 53 )
+[node name="Grunt52" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(1888, 800)
+physics_material_override = SubResource("53")
 
-[node name="Grunt53" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 2016, 800 )
-physics_material_override = SubResource( 54 )
+[node name="Grunt53" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(2016, 800)
+physics_material_override = SubResource("54")
 
-[node name="Grunt54" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 2144, 800 )
-physics_material_override = SubResource( 55 )
+[node name="Grunt54" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(2144, 800)
+physics_material_override = SubResource("55")
 
-[node name="Grunt55" parent="Enemies" instance=ExtResource( 7 )]
-position = Vector2( 2272, 800 )
-physics_material_override = SubResource( 56 )
+[node name="Grunt55" parent="Enemies" instance=ExtResource("7")]
+position = Vector2(2272, 800)
+physics_material_override = SubResource("56")
 
 [node name="Level" type="Node" parent="."]
 
-[node name="Exit" parent="Level" instance=ExtResource( 9 )]
-position = Vector2( 5792, 992 )
+[node name="Exit" parent="Level" instance=ExtResource("9")]
+position = Vector2(5792, 992)
 
-[node name="Exit1" parent="Level" instance=ExtResource( 9 )]
-position = Vector2( 5792, 928 )
+[node name="Exit1" parent="Level" instance=ExtResource("9")]
+position = Vector2(5792, 928)
 
-[node name="Exit2" parent="Level" instance=ExtResource( 9 )]
-position = Vector2( 5792, 1056 )
+[node name="Exit2" parent="Level" instance=ExtResource("9")]
+position = Vector2(5792, 1056)

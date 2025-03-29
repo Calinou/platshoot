@@ -1,15 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=3 format=3 uid="uid://i031vwqie5wx"]
 
-[ext_resource path="res://data/resources/themes/default.tres" type="Theme" id=1]
-[ext_resource path="res://data/scenes/menu/control_options.gd" type="Script" id=2]
+[ext_resource type="Theme" path="res://data/resources/themes/default.tres" id="1"]
+[ext_resource type="Script" uid="uid://drtcc2s1d0y6m" path="res://data/scenes/menu/control_options.gd" id="2"]
 
-[node name="ControlOptions" type="Control" groups=[
-"menu",
-]]
+[node name="ControlOptions" type="Control" groups=["menu"]]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
+theme = ExtResource("1")
+script = ExtResource("2")
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -19,32 +17,33 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -125.0
-margin_top = -64.0
-margin_right = 125.0
-margin_bottom = 64.0
-rect_min_size = Vector2( 250, 0 )
-custom_constants/separation = 20
+offset_left = -125.0
+offset_top = -64.0
+offset_right = 125.0
+offset_bottom = 64.0
+custom_minimum_size = Vector2(250, 0)
+theme_override_constants/separation = 20
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Title" type="Label" parent="VBoxContainer"]
-margin_right = 250.0
-margin_bottom = 28.0
+offset_right = 250.0
+offset_bottom = 28.0
 text = "Control Options"
 align = 1
 valign = 1
 
 [node name="Spacer" type="Control" parent="VBoxContainer"]
-margin_top = 48.0
-margin_right = 250.0
-margin_bottom = 48.0
+offset_top = 48.0
+offset_right = 250.0
+offset_bottom = 48.0
 
 [node name="Back" type="Button" parent="VBoxContainer"]
-margin_top = 68.0
-margin_right = 250.0
-margin_bottom = 128.0
-rect_min_size = Vector2( 0, 60 )
+offset_top = 68.0
+offset_right = 250.0
+offset_bottom = 128.0
+custom_minimum_size = Vector2(0, 60)
 text = "Back"
+
 [connection signal="pressed" from="VBoxContainer/Back" to="." method="_on_back_pressed"]

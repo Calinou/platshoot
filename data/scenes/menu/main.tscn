@@ -1,91 +1,108 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=5 format=3 uid="uid://c1j85slkde000"]
 
-[ext_resource path="res://data/resources/themes/default.tres" type="Theme" id=1]
-[ext_resource path="res://data/scripts/menu/main.gd" type="Script" id=2]
-[ext_resource path="res://fonts/red_hat_display_bold_italic.tres" type="DynamicFontData" id=3]
+[ext_resource type="Theme" uid="uid://cw1tvfu07bpq0" path="res://data/resources/themes/default.tres" id="1"]
+[ext_resource type="Script" uid="uid://dbw65mncxnax" path="res://data/scripts/menu/main.gd" id="2"]
+[ext_resource type="FontFile" path="res://fonts/red_hat_display_bold_italic.tres" id="3"]
 
-[sub_resource type="DynamicFont" id=1]
-size = 40
-font_data = ExtResource( 3 )
+[sub_resource type="FontFile" id="1"]
+fallbacks = Array[Font]([ExtResource("3")])
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/32/0/ascent = 0.0
+cache/0/32/0/descent = 0.0
+cache/0/32/0/underline_position = 0.0
+cache/0/32/0/underline_thickness = 0.0
+cache/0/32/0/scale = 1.0
+cache/0/48/0/ascent = 0.0
+cache/0/48/0/descent = 0.0
+cache/0/48/0/underline_position = 0.0
+cache/0/48/0/underline_thickness = 0.0
+cache/0/48/0/scale = 1.0
+cache/0/40/0/ascent = 0.0
+cache/0/40/0/descent = 0.0
+cache/0/40/0/underline_position = 0.0
+cache/0/40/0/underline_thickness = 0.0
+cache/0/40/0/scale = 1.0
+cache/0/64/0/ascent = 0.0
+cache/0/64/0/descent = 0.0
+cache/0/64/0/underline_position = 0.0
+cache/0/64/0/underline_thickness = 0.0
+cache/0/64/0/scale = 1.0
 
-[node name="Main" type="Control" groups=[
-"menu",
-]]
+[node name="Main" type="Control" groups=["menu"]]
+layout_mode = 3
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -640.0
-margin_top = -360.0
-margin_right = 640.0
-margin_bottom = 360.0
-theme = ExtResource( 1 )
-script = ExtResource( 2 )
-__meta__ = {
-"__editor_plugin_screen__": "2D",
-"_edit_use_anchors_": false
-}
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+theme = ExtResource("1")
+script = ExtResource("2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -125.0
-margin_top = -227.0
-margin_right = 125.0
-margin_bottom = 227.0
-rect_min_size = Vector2( 250, 0 )
-custom_constants/separation = 20
-__meta__ = {
-"_edit_use_anchors_": false
-}
+offset_left = -145.5
+offset_top = -253.0
+offset_right = 145.5
+offset_bottom = 253.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
 
 [node name="Title" type="Label" parent="VBoxContainer"]
-margin_right = 250.0
-margin_bottom = 54.0
-custom_fonts/font = SubResource( 1 )
-custom_colors/font_color = Color( 1, 0.509804, 0.431373, 1 )
-custom_colors/font_color_shadow = Color( 0.5, 0.166333, 0.115, 1 )
-custom_constants/shadow_offset_x = 2
-custom_constants/shadow_offset_y = 2
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.509804, 0.431373, 1)
+theme_override_colors/font_shadow_color = Color(0.5, 0.166333, 0.115, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = SubResource("1")
+theme_override_font_sizes/font_size = 64
 text = "Platshoot"
-align = 1
-valign = 1
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="VBoxContainer"]
+layout_mode = 2
 
 [node name="Singleplayer" type="Button" parent="VBoxContainer"]
-margin_top = 74.0
-margin_right = 250.0
-margin_bottom = 134.0
-rect_min_size = Vector2( 0, 60 )
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
 text = "Singleplayer"
 
 [node name="Multiplayer" type="Button" parent="VBoxContainer"]
-margin_top = 154.0
-margin_right = 250.0
-margin_bottom = 214.0
-rect_min_size = Vector2( 0, 60 )
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
 text = "Multiplayer"
 
 [node name="Options" type="Button" parent="VBoxContainer"]
-margin_top = 234.0
-margin_right = 250.0
-margin_bottom = 294.0
-rect_min_size = Vector2( 0, 60 )
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
 text = "Options"
 
 [node name="Statistics" type="Button" parent="VBoxContainer"]
-margin_top = 314.0
-margin_right = 250.0
-margin_bottom = 374.0
-rect_min_size = Vector2( 0, 60 )
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
 text = "Statistics"
 
 [node name="QuitGame" type="Button" parent="VBoxContainer"]
-margin_top = 394.0
-margin_right = 250.0
-margin_bottom = 454.0
-rect_min_size = Vector2( 0, 60 )
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
 text = "Quit Game"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]

@@ -1,91 +1,79 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://64t035eyn7c2"]
 
-[ext_resource path="res://data/scripts/actors/grunt.gd" type="Script" id=1]
-[ext_resource path="res://data/textures/grunt.png" type="Texture" id=2]
-[ext_resource path="res://addons/smoothing/smoothing_2d.gd" type="Script" id=3]
+[ext_resource type="Script" uid="uid://buxkbyqwrccw2" path="res://data/scripts/actors/grunt.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://xd45q3gsai5e" path="res://data/textures/grunt.png" id="2"]
 
-[sub_resource type="PhysicsMaterial" id=1]
+[sub_resource type="PhysicsMaterial" id="1"]
 friction = 0.0
 
-[sub_resource type="CapsuleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id="2"]
 radius = 16.0
 height = 32.0
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 length = 1.5
 
-[sub_resource type="Animation" id=4]
-loop = true
+[sub_resource type="Animation" id="4"]
+loop_mode = 1
 step = 0.25
 tracks/0/type = "value"
-tracks/0/path = NodePath("Smoothing2D/Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3 ]
+"values": [0, 1, 2, 3]
 }
 
-[sub_resource type="StyleBoxFlat" id=5]
-bg_color = Color( 1, 0.25098, 0.25098, 0.25098 )
-border_blend = true
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ts4ua"]
+_data = {
+&"Die": SubResource("3"),
+&"Walk": SubResource("4")
+}
 
-[sub_resource type="StyleBoxEmpty" id=6]
-
-[sub_resource type="CircleShape2D" id=7]
+[sub_resource type="CircleShape2D" id="7"]
 radius = 28.0
 
 [node name="Grunt" type="RigidBody2D"]
 collision_layer = 4
 collision_mask = 15
-mode = 2
-physics_material_override = SubResource( 1 )
-script = ExtResource( 1 )
-__meta__ = {
-"__editor_plugin_screen__": "2D"
-}
+physics_material_override = SubResource("1")
+script = ExtResource("1")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource("2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ts4ua")
+}
 autoplay = "Walk"
-anims/Die = SubResource( 3 )
-anims/Walk = SubResource( 4 )
 
 [node name="SamplePlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-margin_left = -32.0
-margin_top = -36.0
-margin_right = 32.0
-margin_bottom = -32.0
-custom_styles/fg = SubResource( 5 )
-custom_styles/bg = SubResource( 6 )
+offset_left = -32.0
+offset_top = -36.0
+offset_right = 32.0
+offset_bottom = -32.0
 max_value = 75.0
 step = 1.0
 value = 1.0
-percent_visible = false
 
-[node name="Smoothing2D" type="Node2D" parent="."]
-script = ExtResource( 3 )
-target = NodePath("..")
-flags = 35
-
-[node name="Sprite" type="Sprite" parent="Smoothing2D"]
-texture = ExtResource( 2 )
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2")
 hframes = 4
 frame = 3
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2( -1, -1 )
-shape = SubResource( 7 )
+position = Vector2(-1, -1)
+shape = SubResource("7")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.01
